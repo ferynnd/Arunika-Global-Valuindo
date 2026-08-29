@@ -30,7 +30,14 @@ export default function AuthenticatedLayout({ header, children }) {
                                 >
                                     Dashboard
                                 </NavLink>
+                                <NavLink
+                                    href={route('admin.articles.index')}
+                                    active={route().current('admin.articles.*')}
+                                >
+                                    Artikel Blog
+                                </NavLink>
                             </div>
+
                         </div>
 
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
@@ -134,7 +141,14 @@ export default function AuthenticatedLayout({ header, children }) {
                         >
                             Dashboard
                         </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route('admin.articles.index')}
+                            active={route().current('admin.articles.*')}
+                        >
+                            Artikel Blog
+                        </ResponsiveNavLink>
                     </div>
+
 
                     <div className="border-t border-gray-200 pb-1 pt-4">
                         <div className="px-4">
