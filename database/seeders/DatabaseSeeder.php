@@ -77,5 +77,8 @@ class DatabaseSeeder extends Seeder
         ]
     );
     $adminUser->assignRole($admin);
+
+    $this->call(AdminSeeder::class);
     }
 }
+
