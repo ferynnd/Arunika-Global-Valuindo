@@ -17,7 +17,7 @@ export default function Show({ article }) {
                     <div className="flex items-center gap-3">
                         <Link
                             href={route('admin.articles.edit', article.id)}
-                            className="px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 text-white hover:bg-indigo-500 transition-colors shadow-sm"
+                            className="px-4 py-2 rounded-xl text-xs font-semibold bg-[#1B544D] text-white hover:bg-[#143F39] transition-colors shadow-sm"
                         >
                             ✏️ Edit Artikel
                         </Link>
@@ -33,13 +33,13 @@ export default function Show({ article }) {
         >
             <Head title={`Detail: ${article.title} - Admin`} />
 
-            <div className="py-8 bg-slate-50/50 min-h-[calc(100vh-8rem)]">
+            <div className="py-8 bg-[#FAF8F5]/60 min-h-[calc(100vh-8rem)]">
                 <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-6">
                     <div className="bg-white rounded-2xl border border-slate-200/80 p-8 shadow-sm">
 
                         {/* Status & Kategori Badge */}
                         <div className="flex items-center gap-3 mb-4">
-                            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200 uppercase">
+                            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#1B544D]/10 text-[#1B544D] border border-[#1B544D]/20 uppercase">
                                 {article.category ? article.category.name : 'Tanpa Kategori'}
                             </span>
                             <span className="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 uppercase">
@@ -68,17 +68,15 @@ export default function Show({ article }) {
 
                         {/* Excerpt */}
                         {article.excerpt && (
-                            <div className="p-4 rounded-xl bg-slate-50 border-l-4 border-indigo-500 text-slate-700 italic text-sm mb-6">
+                            <div className="p-4 rounded-xl bg-[#FAF8F5] border-l-4 border-[#1B544D] text-slate-700 italic text-sm mb-6">
                                 {article.excerpt}
                             </div>
                         )}
 
                         {/* Content */}
-                        <div className="prose max-w-none text-slate-800 text-base leading-relaxed space-y-4">
+                        <div className="article-content max-w-none text-slate-800 text-base leading-relaxed">
                             {article.content ? (
-                                article.content.split('\n').map((paragraph, index) => (
-                                    <p key={index}>{paragraph}</p>
-                                ))
+                                <div dangerouslySetInnerHTML={{ __html: article.content }} />
                             ) : (
                                 <p className="text-slate-400 italic">Tidak ada konten teks artikel.</p>
                             )}

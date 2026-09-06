@@ -8,16 +8,21 @@ export default function Edit({ mustVerifyEmail, status }) {
     return (
         <AuthenticatedLayout
             header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Profile
-                </h2>
+                <div>
+                    <h2 className="text-2xl font-bold tracking-tight text-slate-800">
+                        Pengaturan Profil
+                    </h2>
+                    <p className="text-sm text-slate-500 mt-1">
+                        Kelola informasi akun, kata sandi, dan keamanan profil Anda.
+                    </p>
+                </div>
             }
         >
-            <Head title="Profile" />
+            <Head title="Pengaturan Profil - Admin" />
 
-            <div className="py-12">
-                <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
-                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
+            <div className="py-8 bg-[#FAF8F5]/60 min-h-[calc(100vh-8rem)]">
+                <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-6">
+                    <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-sm">
                         <UpdateProfileInformationForm
                             mustVerifyEmail={mustVerifyEmail}
                             status={status}
@@ -25,11 +30,11 @@ export default function Edit({ mustVerifyEmail, status }) {
                         />
                     </div>
 
-                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
+                    <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-sm">
                         <UpdatePasswordForm className="max-w-xl" />
                     </div>
 
-                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
+                    <div className="bg-white p-6 sm:p-8 rounded-2xl border border-rose-100 shadow-sm">
                         <DeleteUserForm className="max-w-xl" />
                     </div>
                 </div>
@@ -37,3 +42,4 @@ export default function Edit({ mustVerifyEmail, status }) {
         </AuthenticatedLayout>
     );
 }
+

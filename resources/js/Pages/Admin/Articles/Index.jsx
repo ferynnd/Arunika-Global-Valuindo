@@ -39,30 +39,30 @@ export default function Index({ articles, categories, filters }) {
             header={
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>
-                        <h2 className="text-2xl font-bold tracking-tight text-slate-800">
+                        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#1B544D]">
                             Manajemen Artikel Blog
                         </h2>
-                        <p className="text-sm text-slate-500 mt-1">
-                            Kelola daftar artikel, konten berita, dan publikasi blog.
+                        <p className="text-xs sm:text-sm text-[#52605E] mt-0.5">
+                            Kelola daftar artikel, konten berita, dan publikasi blog landing page.
                         </p>
                     </div>
                     <Link
                         href={route('admin.articles.create')}
-                        className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 text-white font-semibold text-sm hover:bg-indigo-500 transition-all shadow-md shadow-indigo-600/20"
+                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#1B544D] text-white font-semibold text-xs sm:text-sm hover:bg-[#15433E] transition-all shadow-md shadow-[#1B544D]/20"
                     >
                         <span>+ Tambah Artikel Baru</span>
                     </Link>
                 </div>
             }
         >
-            <Head title="Manajemen Artikel - Admin" />
+            <Head title="Manajemen Artikel - Admin Arunika" />
 
-            <div className="py-8 bg-slate-50/50 min-h-[calc(100vh-8rem)]">
+            <div className="py-8 min-h-[calc(100vh-10rem)]">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6">
 
                     {/* Alert Flash Message */}
                     {flash?.success && (
-                        <div className="rounded-xl bg-emerald-50 border border-emerald-200 p-4 text-sm font-medium text-emerald-800 flex items-center justify-between shadow-sm">
+                        <div className="rounded-2xl bg-emerald-50 border border-emerald-200 p-4 text-xs sm:text-sm font-medium text-emerald-800 flex items-center justify-between shadow-xs">
                             <div className="flex items-center gap-2">
                                 <span>✅</span>
                                 <span>{flash.success}</span>
@@ -71,7 +71,7 @@ export default function Index({ articles, categories, filters }) {
                     )}
 
                     {/* Filter & Search Bar */}
-                    <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm">
+                    <div className="bg-white rounded-3xl border border-[#EAE6DF] p-5 shadow-sm">
                         <form onSubmit={handleSearch} className="grid grid-cols-1 sm:grid-cols-4 gap-4">
                             <div className="sm:col-span-2">
                                 <input
@@ -79,7 +79,7 @@ export default function Index({ articles, categories, filters }) {
                                     placeholder="Cari judul artikel atau ringkasan..."
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
-                                    className="w-full rounded-xl border-slate-300 text-sm focus:border-indigo-500 focus:ring-indigo-500 placeholder-slate-400"
+                                    className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-xs sm:text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D] placeholder-slate-400"
                                 />
                             </div>
 
@@ -87,7 +87,7 @@ export default function Index({ articles, categories, filters }) {
                                 <select
                                     value={statusFilter}
                                     onChange={(e) => setStatusFilter(e.target.value)}
-                                    className="w-full rounded-xl border-slate-300 text-sm focus:border-indigo-500 focus:ring-indigo-500 text-slate-700"
+                                    className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-xs sm:text-sm focus:border-[#1B544D] focus:ring-[#1B544D] text-slate-700"
                                 >
                                     <option value="">Semua Status</option>
                                     <option value="published">Published</option>
@@ -99,7 +99,7 @@ export default function Index({ articles, categories, filters }) {
                             <div className="flex gap-2">
                                 <button
                                     type="submit"
-                                    className="w-full rounded-xl bg-slate-800 text-white font-medium text-sm hover:bg-slate-700 transition-colors py-2.5"
+                                    className="w-full rounded-xl bg-[#1B544D] text-white font-semibold text-xs sm:text-sm hover:bg-[#15433E] transition-colors py-2.5"
                                 >
                                     Cari
                                 </button>
@@ -108,10 +108,10 @@ export default function Index({ articles, categories, filters }) {
                     </div>
 
                     {/* Articles Data Table */}
-                    <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+                    <div className="bg-white rounded-3xl border border-[#EAE6DF] shadow-sm overflow-hidden">
                         <div className="overflow-x-auto">
-                            <table className="w-full text-left text-sm text-slate-600">
-                                <thead className="bg-slate-50 text-slate-700 uppercase font-semibold text-xs border-b border-slate-200">
+                            <table className="w-full text-left text-xs sm:text-sm text-slate-600">
+                                <thead className="bg-[#F8F6F2] text-[#1B544D] uppercase font-bold text-[10px] sm:text-xs border-b border-[#EAE6DF]">
                                     <tr>
                                         <th className="px-6 py-4">Judul Artikel</th>
                                         <th className="px-6 py-4">Kategori</th>
@@ -121,16 +121,16 @@ export default function Index({ articles, categories, filters }) {
                                         <th className="px-6 py-4 text-right">Aksi</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-slate-200">
+                                <tbody className="divide-y divide-[#EAE6DF]/60">
                                     {articles.data.length > 0 ? (
                                         articles.data.map((item) => (
-                                            <tr key={item.id} className="hover:bg-slate-50/80 transition-colors">
+                                            <tr key={item.id} className="hover:bg-[#FAF8F5]/80 transition-colors">
                                                 <td className="px-6 py-4">
-                                                    <div className="font-semibold text-slate-800">{item.title}</div>
-                                                    <div className="text-xs text-slate-400 mt-0.5 truncate max-w-xs">{item.slug}</div>
+                                                    <div className="font-bold text-[#1B544D]">{item.title}</div>
+                                                    <div className="text-[11px] text-[#718783] mt-0.5 truncate max-w-xs">{item.slug}</div>
                                                 </td>
                                                 <td className="px-6 py-4">
-                                                    <span className="inline-flex px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-700">
+                                                    <span className="inline-flex px-2.5 py-1 rounded-full text-xs font-medium bg-[#EFECE6] text-[#1B544D]">
                                                         {item.category ? item.category.name : 'Umum'}
                                                     </span>
                                                 </td>
@@ -147,22 +147,22 @@ export default function Index({ articles, categories, filters }) {
                                                         year: 'numeric'
                                                     })}
                                                 </td>
-                                                <td className="px-6 py-4 text-right space-x-2">
+                                                <td className="px-6 py-4 text-right space-x-1.5">
                                                     <Link
                                                         href={route('admin.articles.show', item.id)}
-                                                        className="inline-flex px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors"
+                                                        className="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-[#EFECE6] text-[#1B544D] hover:bg-[#E3DFD7] transition-colors"
                                                     >
                                                         Detail
                                                     </Link>
                                                     <Link
                                                         href={route('admin.articles.edit', item.id)}
-                                                        className="inline-flex px-2.5 py-1 rounded-lg text-xs font-medium bg-indigo-50 text-indigo-600 hover:bg-indigo-100 transition-colors"
+                                                        className="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-[#1B544D]/10 text-[#1B544D] hover:bg-[#1B544D]/20 transition-colors"
                                                     >
                                                         Edit
                                                     </Link>
                                                     <button
                                                         onClick={() => handleDelete(item.id, item.title)}
-                                                        className="inline-flex px-2.5 py-1 rounded-lg text-xs font-medium bg-rose-50 text-rose-600 hover:bg-rose-100 transition-colors"
+                                                        className="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-rose-50 text-rose-600 hover:bg-rose-100 transition-colors"
                                                     >
                                                         Hapus
                                                     </button>
@@ -172,7 +172,7 @@ export default function Index({ articles, categories, filters }) {
                                     ) : (
                                         <tr>
                                             <td colSpan="6" className="px-6 py-12 text-center text-slate-400">
-                                                Belum ada artikel. Klik tombol <span className="font-semibold text-slate-600">"+ Tambah Artikel Baru"</span> untuk membuat artikel pertama Anda.
+                                                Belum ada artikel. Klik tombol <span className="font-semibold text-[#1B544D]">"+ Tambah Artikel Baru"</span> untuk membuat artikel pertama Anda.
                                             </td>
                                         </tr>
                                     )}
@@ -182,7 +182,7 @@ export default function Index({ articles, categories, filters }) {
 
                         {/* Pagination links */}
                         {articles.links && articles.links.length > 3 && (
-                            <div className="px-6 py-4 border-t border-slate-200 bg-slate-50/50 flex items-center justify-between">
+                            <div className="px-6 py-4 border-t border-[#EAE6DF] bg-[#FAF8F5] flex flex-col sm:flex-row items-center justify-between gap-3">
                                 <div className="text-xs text-slate-500">
                                     Menampilkan {articles.from || 0} hingga {articles.to || 0} dari total {articles.total} artikel
                                 </div>
@@ -193,7 +193,7 @@ export default function Index({ articles, categories, filters }) {
                                             href={link.url || '#'}
                                             dangerouslySetInnerHTML={{ __html: link.label }}
                                             className={`px-3 py-1.5 rounded-lg text-xs font-medium ${link.active
-                                                    ? 'bg-indigo-600 text-white'
+                                                    ? 'bg-[#1B544D] text-white'
                                                     : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
                                                 } ${!link.url ? 'opacity-50 cursor-not-allowed' : ''}`}
                                         />

@@ -7,7 +7,15 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Welcome');
+    $latestArticles = \App\Models\Article::with('category')
+        ->where('status', 'published')
+        ->latest('published_at')
+        ->take(3)
+        ->get();
+
+    return Inertia::render('Welcome', [
+        'latestArticles' => $latestArticles,
+    ]);
 });
 
 

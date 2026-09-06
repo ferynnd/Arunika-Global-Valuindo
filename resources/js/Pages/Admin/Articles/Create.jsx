@@ -1,4 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import RichTextEditor from '@/Components/RichTextEditor';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Create({ categories }) {
@@ -42,7 +43,7 @@ export default function Create({ categories }) {
         >
             <Head title="Tambah Artikel Baru - Admin" />
 
-            <div className="py-8 bg-slate-50/50 min-h-[calc(100vh-8rem)]">
+            <div className="py-8 bg-[#FAF8F5]/60 min-h-[calc(100vh-8rem)]">
                 <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
                     <div className="bg-white rounded-2xl border border-slate-200/80 p-8 shadow-sm">
                         <form onSubmit={submit} className="space-y-6">
@@ -58,7 +59,7 @@ export default function Create({ categories }) {
                                     value={data.title}
                                     placeholder="Masukkan judul artikel yang menarik..."
                                     onChange={(e) => setData('title', e.target.value)}
-                                    className="w-full rounded-xl border-slate-300 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    className="w-full rounded-xl border-slate-300 text-sm focus:border-[#1B544D] focus:ring-[#1B544D]"
                                     required
                                 />
                                 {errors.title && <div className="text-xs text-rose-500 mt-1">{errors.title}</div>}
@@ -74,13 +75,13 @@ export default function Create({ categories }) {
                                         id="category_id"
                                         value={data.category_id}
                                         onChange={(e) => setData('category_id', e.target.value)}
-                                        className="w-full rounded-xl border-slate-300 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        className="w-full rounded-xl border-slate-300 text-sm focus:border-[#1B544D] focus:ring-[#1B544D]"
                                     >
                                         <option value="">Pilih Kategori (Opsional)</option>
                                         {categories.map((cat) => (
-                                            <option key={cat.id} value={cat.id}>
-                                                {cat.name}
-                                            </option>
+                                             <option key={cat.id} value={cat.id}>
+                                                 {cat.name}
+                                             </option>
                                         ))}
                                     </select>
                                     {errors.category_id && <div className="text-xs text-rose-500 mt-1">{errors.category_id}</div>}
@@ -94,7 +95,7 @@ export default function Create({ categories }) {
                                         id="status"
                                         value={data.status}
                                         onChange={(e) => setData('status', e.target.value)}
-                                        className="w-full rounded-xl border-slate-300 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        className="w-full rounded-xl border-slate-300 text-sm focus:border-[#1B544D] focus:ring-[#1B544D]"
                                         required
                                     >
                                         <option value="draft">Draft (Simpan Sementara)</option>
@@ -116,7 +117,7 @@ export default function Create({ categories }) {
                                     value={data.excerpt}
                                     placeholder="Tulis ringkasan singkat artikel untuk preview..."
                                     onChange={(e) => setData('excerpt', e.target.value)}
-                                    className="w-full rounded-xl border-slate-300 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    className="w-full rounded-xl border-slate-300 text-sm focus:border-[#1B544D] focus:ring-[#1B544D]"
                                 ></textarea>
                                 {errors.excerpt && <div className="text-xs text-rose-500 mt-1">{errors.excerpt}</div>}
                             </div>
@@ -126,14 +127,12 @@ export default function Create({ categories }) {
                                 <label htmlFor="content" className="block text-sm font-semibold text-slate-700 mb-1">
                                     Isi Konten Artikel
                                 </label>
-                                <textarea
-                                    id="content"
-                                    rows="10"
+                                <RichTextEditor
                                     value={data.content}
+                                    onChange={(html) => setData('content', html)}
                                     placeholder="Tulis isi lengkap artikel di sini..."
-                                    onChange={(e) => setData('content', e.target.value)}
-                                    className="w-full rounded-xl border-slate-300 text-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                ></textarea>
+                                    error={errors.content}
+                                />
                                 {errors.content && <div className="text-xs text-rose-500 mt-1">{errors.content}</div>}
                             </div>
 
@@ -147,15 +146,15 @@ export default function Create({ categories }) {
                                     type="file"
                                     accept="image/*"
                                     onChange={(e) => setData('thumbnail', e.target.files[0])}
-                                    className="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+                                    className="block w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#1B544D]/10 file:text-[#1B544D] hover:file:bg-[#1B544D]/20 cursor-pointer"
                                 />
                                 {errors.thumbnail && <div className="text-xs text-rose-500 mt-1">{errors.thumbnail}</div>}
                             </div>
 
                             {/* SEO Meta Box */}
-                            <div className="p-5 rounded-xl border border-slate-200 bg-slate-50/50 space-y-4">
+                            <div className="p-5 rounded-xl border border-slate-200 bg-[#FAF8F5]/80 space-y-4">
                                 <h4 className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                                    <span>🔍</span> Pengaturan SEO & Meta Tag
+                                    <span className="text-[#ECAE36]">🔍</span> Pengaturan SEO & Meta Tag
                                 </h4>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div>
@@ -165,7 +164,7 @@ export default function Create({ categories }) {
                                             value={data.meta_title}
                                             placeholder="Judul SEO (maks 60 karakter)"
                                             onChange={(e) => setData('meta_title', e.target.value)}
-                                            className="w-full rounded-lg border-slate-300 text-xs focus:border-indigo-500 focus:ring-indigo-500"
+                                            className="w-full rounded-lg border-slate-300 text-xs focus:border-[#1B544D] focus:ring-[#1B544D]"
                                         />
                                     </div>
                                     <div>
@@ -175,7 +174,7 @@ export default function Create({ categories }) {
                                             value={data.meta_keywords}
                                             placeholder="kata, kunci, artikel"
                                             onChange={(e) => setData('meta_keywords', e.target.value)}
-                                            className="w-full rounded-lg border-slate-300 text-xs focus:border-indigo-500 focus:ring-indigo-500"
+                                            className="w-full rounded-lg border-slate-300 text-xs focus:border-[#1B544D] focus:ring-[#1B544D]"
                                         />
                                     </div>
                                 </div>
@@ -186,7 +185,7 @@ export default function Create({ categories }) {
                                         value={data.meta_description}
                                         placeholder="Deskripsi singkat untuk mesin pencari..."
                                         onChange={(e) => setData('meta_description', e.target.value)}
-                                        className="w-full rounded-lg border-slate-300 text-xs focus:border-indigo-500 focus:ring-indigo-500"
+                                        className="w-full rounded-lg border-slate-300 text-xs focus:border-[#1B544D] focus:ring-[#1B544D]"
                                     ></textarea>
                                 </div>
                             </div>
@@ -202,7 +201,7 @@ export default function Create({ categories }) {
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="px-6 py-2.5 rounded-xl bg-indigo-600 text-white font-semibold text-sm hover:bg-indigo-500 transition-all shadow-md shadow-indigo-600/20 disabled:opacity-50"
+                                    className="px-6 py-2.5 rounded-xl bg-[#1B544D] text-white font-semibold text-sm hover:bg-[#143F39] transition-all shadow-sm shadow-[#1B544D]/20 disabled:opacity-50"
                                 >
                                     {processing ? 'Menyimpan...' : 'Simpan Artikel'}
                                 </button>
