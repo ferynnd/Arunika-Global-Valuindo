@@ -19,9 +19,18 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
-
-        //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
-    })->create();
+        $exceptions->respond(function ($response) {
+            $status = $response->getStatusCode();
+
+            if (in_array($status, [403, 404, 419, 429, 500, 503])) {
+                return inertia('Errors/Error', [
+                    'status' => $status,
+                ])->toResponse(request());
+            }
+
+            return $response;
+        });
+    })
+    ->create();
