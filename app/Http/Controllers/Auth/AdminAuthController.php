@@ -17,7 +17,7 @@ class AdminAuthController extends Controller
     {
         if (Auth::check()) {
             $user = Auth::user();
-            if ($user->role === 'admin' || $user->hasRole('admin')) {
+            if ($user->role === 'admin') {
                 return redirect()->route('admin.dashboard');
             }
             Auth::logout();
@@ -52,7 +52,7 @@ class AdminAuthController extends Controller
         $user = Auth::user();
 
         // Verify if user is an authorized admin
-        if ($user->role !== 'admin' && !$user->hasRole('admin')) {
+        if ($user->role !== 'admin') {
             Auth::logout();
             RateLimiter::hit($throttleKey, 60);
             throw ValidationException::withMessages([

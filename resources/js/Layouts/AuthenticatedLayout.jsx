@@ -69,7 +69,7 @@ export default function AuthenticatedLayout({ header, children }) {
 
                         {/* Dashboard */}
                         <Link
-                            href={route('dashboard')}
+                            href={route('admin.dashboard')}
                             onClick={() => setSidebarOpen(false)}
                             className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
                                 isCurrentRoute('dashboard')
@@ -175,7 +175,7 @@ export default function AuthenticatedLayout({ header, children }) {
                     </div>
 
                     <Link
-                        href={route('logout')}
+                        href={route('admin.logout')}
                         method="post"
                         as="button"
                         className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 transition-colors"
@@ -234,7 +234,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                 <Dropdown.Link href={route('profile.edit')}>
                                     Profil Akun
                                 </Dropdown.Link>
-                                <Dropdown.Link href={route('logout')} method="post" as="button">
+                                <Dropdown.Link href={route('admin.logout')} method="post" as="button">
                                     Log Out
                                 </Dropdown.Link>
                             </Dropdown.Content>

@@ -201,7 +201,7 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
 
                         {/* CTA / Auth Buttons */}
                         <div className="hidden md:flex items-center gap-3">
-                            {auth?.user?.is_admin ? (
+                            {auth?.user?.role === 'admin' ? (
                                 <Link
                                     href={route('admin.dashboard')}
                                     className="px-5 py-2 rounded-full bg-[#1B544D] text-white font-semibold text-xs hover:bg-[#15433E] transition-all shadow-sm flex items-center gap-1.5"
@@ -279,7 +279,7 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                             <div className="pt-3 border-t border-[#EAE6DF]/80">
                                 {auth?.user ? (
                                     <Link
-                                        href={route('dashboard')}
+                                        href={route('admin.dashboard')}
                                         className="block w-full text-center px-5 py-2.5 rounded-full bg-[#1B544D] text-white font-semibold text-xs shadow-sm"
                                     >
                                         Dashboard Admin

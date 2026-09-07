@@ -40,7 +40,7 @@ Route::get('/services/{slug}', [ServicesController::class, 'show'])->name('servi
 $adminPrefix = env('ADMIN_PATH', 'secure-panel-arunika');
 
 // Private Admin Guest Routes (Unauthenticated only)
-Route::prefix($adminPrefix)->middleware('guest')->group(function () {
+Route::prefix($adminPrefix)->group(function () {
     Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
     Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login.store');
 });
@@ -49,7 +49,7 @@ Route::prefix($adminPrefix)->middleware('guest')->group(function () {
 Route::prefix($adminPrefix)->middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Admin/Dashboard');
-    })->name('admin.dashboard')->name('dashboard');
+    })->name('admin.dashboard');
 
     // Admin Articles CRUD (Protected)
     Route::resource('articles', ArticleController::class)->names([
@@ -79,5 +79,5 @@ Route::prefix($adminPrefix)->middleware(['auth', 'admin'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Admin Logout
-    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout')->name('logout');
+    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 });
