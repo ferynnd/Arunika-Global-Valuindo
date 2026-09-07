@@ -14,10 +14,16 @@ class User extends Authenticatable
         'name',
         'username',
         'email',
+        'role',
         'password',
         'is_active',
         'last_login',
     ];
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin' || $this->hasRole('admin');
+    }
 
     protected $hidden = [
         'password',

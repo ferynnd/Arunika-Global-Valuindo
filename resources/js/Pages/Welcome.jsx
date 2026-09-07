@@ -1,10 +1,13 @@
 import { Head, Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 
-export default function Welcome({ auth, latestArticles = [] }) {
+export default function Welcome({ auth, latestArticles = [], services = [] }) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [activeTestimonial, setActiveTestimonial] = useState(0);
+
+    const [selectedService, setSelectedService] = useState(null);
+    const [selectedArticle, setSelectedArticle] = useState(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -20,75 +23,129 @@ export default function Welcome({ auth, latestArticles = [] }) {
 
     const testimonials = [
         {
-            quote: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+            quote: "Layanan valuasi aset dan konsultasi strategi dari Arunika Global Valuindo memberikan kejelasan dan kepastian tinggi untuk keputusan investasi korporasi kami. Sangat profesional dan akurat.",
             author: "Ahmad Fauzi",
             role: "Chief Financial Officer, PT Indo Energi Lestari",
         },
         {
-            quote: "Layanan valuasi aset dan konsultasi strategi dari Arunika Global Valuindo memberikan kejelasan dan kepastian tinggi untuk keputusan investasi korporasi kami. Sangat profesional dan akurat.",
+            quote: "Pendampingan feasibility study yang komprehensif membuat proses audit dan ekspansi bisnis kami berjalan mulus sesuai timeline dan standar keberlanjutan.",
             author: "Siti Rahmawati",
             role: "Managing Director, Global Venture Capital",
         },
         {
-            quote: "Pendampingan feasibility study yang komprehensif membuat proses audit dan ekspansi bisnis kami berjalan mulus sesuai timeline dan standar keberlanjutan.",
+            quote: "Tim konsultan Arunika memiliki dedikasi dan metodologi riset yang mendalam, sangat direkomendasikan untuk analisis finansial korporasi.",
             author: "Budi Santoso",
             role: "VP Operations, Nusantara Infrastructure Group",
+        }
+    ];
+
+    const fallbackServices = [
+        {
+            id: 1,
+            title: 'Business Valuation & Advisory',
+            excerpt: 'Layanan penilai independen dan analisis nilai wajar aset serta penilaian ekuitas perusahaan berstandar internasional.',
+            content: '<p>Layanan penilai independen dan analisis nilai wajar aset serta penilaian ekuitas perusahaan berstandar internasional untuk mendukung merger, akuisisi, dan pendanaan korporasi.</p>',
+            features: ['Penilaian Aset & Ekuitas', 'Kepatuhan Regulasi', 'Analisis Risiko Keuangan'],
+            thumbnail: null,
+        },
+        {
+            id: 2,
+            title: 'Feasibility Study & Strategy',
+            excerpt: 'Studi kelayakan bisnis komprehensif, analisis pasar, dan formulasi strategi ekspansi usaha secara terukur.',
+            content: '<p>Studi kelayakan bisnis komprehensif, analisis pasar, dan formulasi strategi ekspansi usaha secara terukur untuk meminimalkan risiko investasi.</p>',
+            features: ['Analisis Pasar', 'Proyeksi Keuangan', 'Mitigasi Risiko Ekspansi'],
+            thumbnail: null,
+        },
+        {
+            id: 3,
+            title: 'Corporate Restructuring',
+            excerpt: 'Pendampingan restrukturisasi modal, perbaikan tata kelola keuangan, serta optimalisasi portofolio bisnis.',
+            content: '<p>Pendampingan restrukturisasi modal, perbaikan tata kelola keuangan, serta optimalisasi portofolio bisnis korporasi.</p>',
+            features: ['Restrukturisasi Utang & Modal', 'Tata Kelola Keuangan', 'Optimasi Portofolio'],
+            thumbnail: null,
+        },
+        {
+            id: 4,
+            title: 'Sustainability & ESG Advisory',
+            excerpt: 'Konsultasi integrasi prinsip ESG dan keberlanjutan bisnis untuk meningkatkan nilai jangka panjang perusahaan.',
+            content: '<p>Konsultasi integrasi prinsip ESG dan keberlanjutan bisnis untuk meningkatkan nilai jangka panjang perusahaan.</p>',
+            features: ['Audit Berkelanjutan', 'Integrasi ESG', 'Laporan Keberlanjutan'],
+            thumbnail: null,
         }
     ];
 
     const fallbackArticles = [
         {
             id: 1,
-            title: "What They Don't Tell You About Doing Carbon Neutral",
-            date: "24 August 2024",
+            title: "Tantangan & Peluang Valuasi Aset Digital di Era Transformasi",
+            date: "24 Agustus 2026",
             image: "https://images.unsplash.com/photo-1497440001374-f26997328c1b?auto=format&fit=crop&w=800&q=80",
-            category: "Sustainability",
-            slug: "what-they-dont-tell-you-about-doing-carbon-neutral"
+            category: "Finansial",
+            excerpt: "Memahami pentingnya kalkulasi nilai wajar pada era transformasi digital untuk mendukung keputusan akuisisi.",
+            content: "<p>Memahami pentingnya kalkulasi nilai wajar pada era transformasi digital untuk mendukung keputusan akuisisi dan investasi strategis.</p>",
+            slug: "valuasi-aset-digital"
         },
         {
             id: 2,
-            title: "Our Addiction to Concrete Is Wrecking the Planet",
-            date: "18 September 2024",
+            title: "Pentingnya Feasibility Study Sebelum Ekspansi Usaha Korporasi",
+            date: "18 September 2026",
             image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80",
-            category: "Industrial",
-            slug: "our-addiction-to-concrete-is-wrecking-the-planet"
+            category: "Strategi",
+            excerpt: "Studi kelayakan bisnis yang akurat mencegah potensi risiko kegagalan investasi dalam proyek skala besar.",
+            content: "<p>Studi kelayakan bisnis yang akurat mencegah potensi risiko kegagalan investasi dalam proyek skala besar.</p>",
+            slug: "pentingnya-feasibility-study"
         },
         {
             id: 3,
-            title: "The Unseen Price of Your Next Fast Delivery",
-            date: "02 November 2024",
+            title: "Integrasi Prinsip ESG untuk Meningkatkan Nilai Perusahaan",
+            date: "02 November 2026",
             image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80",
-            category: "Logistics",
-            slug: "the-unseen-price-of-your-next-fast-delivery"
+            category: "Sustainability",
+            excerpt: "Bagaimana kriteria lingkungan, sosial, dan tata kelola mempengaruhi kepercayaan investor global.",
+            content: "<p>Bagaimana kriteria lingkungan, sosial, dan tata kelola mempengaruhi kepercayaan investor global.</p>",
+            slug: "integrasi-prinsip-esg"
         }
     ];
+
+    const displayServices = services && services.length > 0
+        ? services.map((srv) => ({
+            id: srv.id,
+            title: srv.title,
+            excerpt: srv.excerpt || (srv.content ? srv.content.replace(/<[^>]+>/g, '').substring(0, 150) + '...' : 'Layanan korporasi dari Arunika Global Valuindo.'),
+            content: srv.content || srv.excerpt || '',
+            thumbnail: srv.thumbnail ? `/storage/${srv.thumbnail}` : null,
+            features: srv.features || [],
+        }))
+        : fallbackServices;
 
     const displayArticles = latestArticles && latestArticles.length > 0
         ? latestArticles.map((art) => ({
             id: art.id,
             title: art.title,
-            date: new Date(art.published_at || art.created_at).toLocaleDateString('en-GB', {
+            date: new Date(art.published_at || art.created_at).toLocaleDateString('id-ID', {
                 day: '2-digit',
                 month: 'long',
                 year: 'numeric',
             }),
             image: art.thumbnail ? `/storage/${art.thumbnail}` : 'https://images.unsplash.com/photo-1497440001374-f26997328c1b?auto=format&fit=crop&w=800&q=80',
             category: art.category ? art.category.name : 'Artikel',
+            excerpt: art.excerpt || '',
+            content: art.content || art.excerpt || '',
             slug: art.slug,
         }))
         : fallbackArticles;
 
     return (
         <div className="min-h-screen bg-[#FAF8F5] text-[#334155] font-sans antialiased selection:bg-[#ECAE36] selection:text-[#1B544D]">
-            <Head title="Arunika Global Valuindo - Strategic Growth Meets Sustainable Impact" />
+            <Head title="Arunika Global Valuindo" />
 
             {/* Floating Navigation Bar */}
             <header className={`fixed top-0 inset-x-0 z-50 pointer-events-none transition-all duration-300 ${scrolled ? 'py-3' : 'py-5 sm:py-6'
                 }`}>
                 <div className="max-w-6xl mx-auto px-4 sm:px-6">
                     <nav className={`pointer-events-auto rounded-full transition-all duration-300 flex items-center justify-between border ${scrolled
-                            ? 'bg-white/85 backdrop-blur-xl border-white/70 shadow-lg shadow-slate-900/5 px-4 sm:px-5 py-2.5'
-                            : 'bg-white/70 backdrop-blur-md border-white/50 shadow-[0_4px_25px_rgba(0,0,0,0.04)] px-5 sm:px-6 py-3'
+                        ? 'bg-white/85 backdrop-blur-xl border-white/70 shadow-lg shadow-slate-900/5 px-4 sm:px-5 py-2.5'
+                        : 'bg-white/70 backdrop-blur-md border-white/50 shadow-[0_4px_25px_rgba(0,0,0,0.04)] px-5 sm:px-6 py-3'
                         }`}>
 
                         {/* Brand Logo */}
@@ -122,18 +179,18 @@ export default function Welcome({ auth, latestArticles = [] }) {
                             >
                                 About Us
                             </a>
-                            <a
-                                href="#services"
+                            <Link
+                                href={route('services.index')}
                                 className="px-3.5 py-1.5 rounded-full hover:text-[#1B544D] hover:bg-[#EFECE6]/60 transition-colors"
                             >
                                 Services
-                            </a>
-                            <a
-                                href="#blog"
+                            </Link>
+                            <Link
+                                href={route('blog.index')}
                                 className="px-3.5 py-1.5 rounded-full hover:text-[#1B544D] hover:bg-[#EFECE6]/60 transition-colors"
                             >
                                 Blog
-                            </a>
+                            </Link>
                             <a
                                 href="#contact"
                                 className="px-3.5 py-1.5 rounded-full hover:text-[#1B544D] hover:bg-[#EFECE6]/60 transition-colors"
@@ -144,9 +201,9 @@ export default function Welcome({ auth, latestArticles = [] }) {
 
                         {/* CTA / Auth Buttons */}
                         <div className="hidden md:flex items-center gap-3">
-                            {auth?.user ? (
+                            {auth?.user?.is_admin ? (
                                 <Link
-                                    href={route('dashboard')}
+                                    href={route('admin.dashboard')}
                                     className="px-5 py-2 rounded-full bg-[#1B544D] text-white font-semibold text-xs hover:bg-[#15433E] transition-all shadow-sm flex items-center gap-1.5"
                                 >
                                     <span>Dashboard</span>
@@ -242,7 +299,7 @@ export default function Welcome({ auth, latestArticles = [] }) {
                 </div>
             </header>
 
-            {/* SECTION 1: FULL-BLEED HERO SECTION */}
+            {/* SECTION 1: HERO SECTION */}
             <section
                 id="home"
                 className="relative min-h-[90vh] lg:min-h-screen flex items-center justify-center bg-cover bg-center overflow-hidden"
@@ -250,35 +307,27 @@ export default function Welcome({ auth, latestArticles = [] }) {
                     backgroundImage: `url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=2000&q=85')`,
                 }}
             >
-                {/* Subtle Washed-Out White/Neutral Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F5]/85 via-[#FAF8F5]/75 to-[#FAF8F5]"></div>
 
-                {/* Hero Content */}
                 <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-32 pb-20 sm:pt-40 sm:pb-28">
-
-
-                    {/* Main Headline */}
                     <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#1B544D] max-w-4xl mx-auto leading-[1.12] sm:leading-[1.15]">
                         Strategic Growth Meets <br className="hidden sm:inline" />
                         Sustainable Impact
                     </h1>
 
-                    {/* CTA Buttons */}
                     <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                         <a
                             href="#services"
                             className="w-full sm:w-auto inline-flex items-center justify-center gap-3 pl-6 pr-2.5 py-2.5 rounded-full bg-[#ECAE36] hover:bg-[#E0A12A] text-white font-semibold text-sm sm:text-base transition-all shadow-md shadow-[#ECAE36]/30 group"
                         >
-                            <span>Book Consultation</span>
+                            <span>Lihat Layanan Kami</span>
                             <span className="w-8 h-8 rounded-full bg-[#1B544D] text-white flex items-center justify-center group-hover:translate-x-1 transition-transform">
                                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                                     <path d="M9 18l6-6-6-6" />
                                 </svg>
                             </span>
                         </a>
-
                     </div>
-
                 </div>
             </section>
 
@@ -298,275 +347,40 @@ export default function Welcome({ auth, latestArticles = [] }) {
                         <span className="font-black text-xl sm:text-2xl text-slate-800 lowercase">
                             blibli
                         </span>
-                        <span className="font-extrabold text-xl sm:text-2xl text-slate-800 tracking-wider">
-                            BLUE DART
-                        </span>
                     </div>
                 </div>
             </section>
 
-            {/* SECTION 3: WHO WE ARE & 3 HIGHLIGHT CARDS */}
+            {/* SECTION 3: ABOUT US & HIGHLIGHT CARDS */}
             <section id="about" className="py-20 sm:py-28">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                     <div className="max-w-3xl">
                         <span className="text-xs font-bold uppercase tracking-widest text-[#1B544D] block mb-3">
-                            Who We Are
+                            Tentang Kami
                         </span>
                         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1B544D] leading-snug">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+                            PT Arunika Global Valuindo adalah perusahaan penilai independen dan penasihat strategi korporasi terpercaya di Indonesia.
                         </h2>
-
-                        <div className="mt-6">
-                            <a
-                                href="#services"
-                                className="inline-flex items-center gap-3 pl-5 pr-2 py-1.5 rounded-full bg-[#ECAE36] hover:bg-[#E0A12A] text-white font-semibold text-xs sm:text-sm transition-all shadow-sm group"
-                            >
-                                <span>About Us</span>
-                                <span className="w-6 h-6 rounded-full bg-[#1B544D] text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-                                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                        <path d="M9 18l6-6-6-6" />
-                                    </svg>
-                                </span>
-                            </a>
-                        </div>
                     </div>
 
                     {/* 3 Service Feature Cards */}
                     <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
-
-                        {/* Card 1 */}
-                        <div className="p-6 rounded-2xl bg-[#EFECE6] border border-[#E3DFD7] flex items-start gap-4 hover:shadow-md transition-shadow">
-                            <div className="w-12 h-12 rounded-full bg-[#1B544D] text-white flex items-center justify-center shrink-0 shadow-sm">
-                                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <rect width="20" height="14" x="2" y="7" rx="2" ry="2" />
-                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 className="text-base font-bold text-[#1B544D]">
-                                    Business Advisory
-                                </h3>
-                                <p className="text-xs text-[#52605E] mt-1 leading-relaxed">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Card 2 */}
-                        <div className="p-6 rounded-2xl bg-[#EFECE6] border border-[#E3DFD7] flex items-start gap-4 hover:shadow-md transition-shadow">
-                            <div className="w-12 h-12 rounded-full bg-[#1B544D] text-white flex items-center justify-center shrink-0 shadow-sm">
-                                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 className="text-base font-bold text-[#1B544D]">
-                                    Business Strategy
-                                </h3>
-                                <p className="text-xs text-[#52605E] mt-1 leading-relaxed">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Card 3 */}
-                        <div className="p-6 rounded-2xl bg-[#EFECE6] border border-[#E3DFD7] flex items-start gap-4 hover:shadow-md transition-shadow">
-                            <div className="w-12 h-12 rounded-full bg-[#1B544D] text-white flex items-center justify-center shrink-0 shadow-sm">
-                                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="m16 10-4 4-2-2" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 className="text-base font-bold text-[#1B544D]">
-                                    Valuation Services
-                                </h3>
-                                <p className="text-xs text-[#52605E] mt-1 leading-relaxed">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </section>
-
-            {/* SECTION 4: LEADERSHIP / FOUNDER SPOTLIGHT */}
-            <section className="py-16 sm:py-24 border-t border-[#EAE6DF]/80">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-
-                        {/* Executive Portrait */}
-                        <div className="lg:col-span-5">
-                            <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white">
-                                <img
-                                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=80"
-                                    alt="Executive leader"
-                                    className="w-full h-80 sm:h-96 object-cover object-top"
-                                />
-                            </div>
-                        </div>
-
-                        {/* Description & Statement */}
-                        <div className="lg:col-span-7">
-                            <span className="text-xs font-bold uppercase tracking-widest text-[#1B544D] block mb-3">
-                                Our Mission
-                            </span>
-                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1B544D] leading-snug">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </h2>
-
-                            <div className="mt-6">
-                                <a
-                                    href="#about"
-                                    className="inline-flex items-center gap-3 pl-5 pr-2 py-1.5 rounded-full bg-[#ECAE36] hover:bg-[#E0A12A] text-white font-semibold text-xs sm:text-sm transition-all shadow-sm group"
-                                >
-                                    <span>About Us</span>
-                                    <span className="w-6 h-6 rounded-full bg-[#1B544D] text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-                                        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                            <path d="M9 18l6-6-6-6" />
-                                        </svg>
-                                    </span>
-                                </a>
-                            </div>
-
-                            <p className="mt-8 text-xs sm:text-sm text-[#52605E] leading-relaxed italic border-l-2 border-[#1B544D]/30 pl-4">
-                                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto."
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-            {/* SECTION 5: WHY CHOOSE US & CHECKLIST */}
-            <section className="py-16 sm:py-24 border-t border-[#EAE6DF]/80">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-
-                        {/* Left: Text & Checkmarks */}
-                        <div className="lg:col-span-6">
-                            <span className="text-xs font-bold uppercase tracking-widest text-[#1B544D] block mb-3">
-                                Why Choose Us
-                            </span>
-                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1B544D] leading-snug">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
-                            </h2>
-
-                            <div className="mt-6">
-                                <a
-                                    href="#about"
-                                    className="inline-flex items-center gap-3 pl-5 pr-2 py-1.5 rounded-full bg-[#ECAE36] hover:bg-[#E0A12A] text-white font-semibold text-xs sm:text-sm transition-all shadow-sm group"
-                                >
-                                    <span>About Us</span>
-                                    <span className="w-6 h-6 rounded-full bg-[#1B544D] text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-                                        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                            <path d="M9 18l6-6-6-6" />
-                                        </svg>
-                                    </span>
-                                </a>
-                            </div>
-
-                            {/* 2-Column Checklist */}
-                            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
-                                {[
-                                    'Business Advisory',
-                                    'Resource Advisory',
-                                    'Business Strategy',
-                                    'Financial Advisory',
-                                    'Business Planning',
-                                    'Valuation Services',
-                                ].map((item, index) => (
-                                    <div key={index} className="flex items-center gap-3">
-                                        <div className="w-6 h-6 rounded-full bg-[#1B544D] text-white flex items-center justify-center shrink-0">
-                                            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                                                <polyline points="20 6 9 17 4 12" />
-                                            </svg>
-                                        </div>
-                                        <span className="text-xs sm:text-sm font-semibold text-[#1B544D]">
-                                            {item}
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Right: Team Photo in Casual Office */}
-                        <div className="lg:col-span-6">
-                            <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white">
-                                <img
-                                    src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1000&q=80"
-                                    alt="Creative team collaboration"
-                                    className="w-full h-80 sm:h-96 object-cover object-center"
-                                />
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-            {/* SECTION 6: DARK GREEN SERVICES SHOWCASE */}
-            <section id="services" className="py-20 sm:py-28 bg-[#205B53] text-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                    {/* Header */}
-                    <div className="text-center max-w-3xl mx-auto">
-                        <span className="text-xs font-bold uppercase tracking-widest text-[#ECAE36] block mb-2">
-                            Services
-                        </span>
-                        <h2 className="text-2xl sm:text-4xl font-bold leading-snug">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
-                        </h2>
-
-                        <div className="mt-6 flex justify-center">
-                            <a
-                                href="#contact"
-                                className="inline-flex items-center gap-3 pl-5 pr-2 py-1.5 rounded-full bg-[#ECAE36] hover:bg-[#E0A12A] text-white font-semibold text-xs sm:text-sm transition-all shadow-md group"
-                            >
-                                <span>View All</span>
-                                <span className="w-6 h-6 rounded-full bg-[#143F39] text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-                                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                        <path d="M9 18l6-6-6-6" />
-                                    </svg>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-
-                    {/* 4 Dark Cards Grid */}
-                    <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {[
-                            {
-                                title: 'Business Advisory',
-                                desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.'
-                            },
-                            {
-                                title: 'Business Strategy',
-                                desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.'
-                            },
-                            {
-                                title: 'Business Planning',
-                                desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.'
-                            },
-                            {
-                                title: 'Valuation Services',
-                                desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.'
-                            }
-                        ].map((srv, idx) => (
+                        {displayServices.slice(0, 3).map((srv, idx) => (
                             <div
-                                key={idx}
-                                className="p-6 rounded-2xl bg-[#143F39] border border-[#2C6B62] hover:border-[#ECAE36]/60 transition-all flex flex-col justify-between min-h-[220px]"
+                                key={srv.id || idx}
+                                onClick={() => setSelectedService(srv)}
+                                className="p-6 rounded-2xl bg-[#EFECE6] border border-[#E3DFD7] flex items-start gap-4 hover:shadow-md cursor-pointer transition-all hover:border-[#1B544D]/30 group"
                             >
+                                <div className="w-12 h-12 rounded-full bg-[#1B544D] text-[#ECAE36] flex items-center justify-center shrink-0 shadow-sm font-bold text-sm group-hover:scale-105 transition-transform">
+                                    0{idx + 1}
+                                </div>
                                 <div>
-                                    <div className="w-2 h-2 rounded-full bg-[#ECAE36] mb-6"></div>
-                                    <h3 className="text-base font-bold text-white mb-2">
+                                    <h3 className="text-base font-bold text-[#1B544D] group-hover:text-[#ECAE36] transition-colors">
                                         {srv.title}
                                     </h3>
-                                    <p className="text-xs text-slate-300 leading-relaxed">
-                                        {srv.desc}
+                                    <p className="text-xs text-[#52605E] mt-1 leading-relaxed line-clamp-2">
+                                        {srv.excerpt}
                                     </p>
                                 </div>
                             </div>
@@ -576,33 +390,139 @@ export default function Welcome({ auth, latestArticles = [] }) {
                 </div>
             </section>
 
-            {/* SECTION 7: TESTIMONIALS & COMMUNITY */}
+            {/* SECTION 5: WHY CHOOSE US */}
+            <section className="py-16 sm:py-24 border-t border-[#EAE6DF]/80">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+                        {/* Left: Text & Checkmarks */}
+                        <div className="lg:col-span-6">
+                            <span className="text-xs font-bold uppercase tracking-widest text-[#1B544D] block mb-3">
+                                Keunggulan Kami
+                            </span>
+                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1B544D] leading-snug">
+                                Solusi Valuasi & Konsultasi Bisnis Terintegrasi Berstandar Global.
+                            </h2>
+
+                            {/* 2-Column Checklist */}
+                            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
+                                {displayServices.map((srv, index) => (
+                                    <div key={index} className="flex items-center gap-3">
+                                        <div className="w-6 h-6 rounded-full bg-[#1B544D] text-[#ECAE36] flex items-center justify-center shrink-0 font-bold text-xs">
+                                            ✓
+                                        </div>
+                                        <span className="text-xs sm:text-sm font-semibold text-[#1B544D]">
+                                            {srv.title}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Right: Office / Team Photo */}
+                        <div className="lg:col-span-6">
+                            <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white">
+                                <img
+                                    src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1000&q=80"
+                                    alt="Kolaborasi tim profesional Arunika"
+                                    className="w-full h-80 sm:h-96 object-cover object-center"
+                                />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            {/* SECTION 6: SERVICES SHOWCASE (Data dari Admin) */}
+            <section id="services" className="py-20 sm:py-28 bg-[#205B53] text-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                    {/* Header */}
+                    <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+                        <div className="max-w-3xl">
+                            <span className="text-xs font-bold uppercase tracking-widest text-[#ECAE36] block mb-2">
+                                Layanan Portofolio Kami
+                            </span>
+                            <h2 className="text-2xl sm:text-4xl font-bold leading-snug">
+                                Layanan Valuasi & Konsultasi Strategi Korporasi
+                            </h2>
+                            <p className="text-xs sm:text-sm text-slate-200 mt-2">
+                                Klik pada layanan untuk melihat perincian lengkap dan fitur keunggulannya.
+                            </p>
+                        </div>
+                        <Link
+                            href={route('services.index')}
+                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#ECAE36] text-[#1B544D] text-xs font-bold hover:bg-[#E0A12A] transition-all shadow-md shrink-0"
+                        >
+                            <span>Lihat Semua Layanan</span>
+                            <span>→</span>
+                        </Link>
+                    </div>
+
+                    {/* Dynamic Services Grid */}
+                    <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {displayServices.map((srv) => (
+                            <div
+                                key={srv.id}
+                                onClick={() => setSelectedService(srv)}
+                                className="p-6 rounded-2xl bg-[#143F39] border border-[#2C6B62] hover:border-[#ECAE36] transition-all flex flex-col justify-between cursor-pointer group hover:-translate-y-1 shadow-md"
+                            >
+                                <div>
+                                    {srv.thumbnail ? (
+                                        <img
+                                            src={srv.thumbnail}
+                                            alt={srv.title}
+                                            className="w-full h-36 object-cover rounded-xl mb-4 border border-[#2C6B62]"
+                                        />
+                                    ) : (
+                                        <div className="w-10 h-10 rounded-xl bg-[#ECAE36]/20 text-[#ECAE36] flex items-center justify-center mb-4 font-bold text-sm border border-[#ECAE36]/30">
+                                            ★
+                                        </div>
+                                    )}
+
+                                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[#ECAE36] transition-colors">
+                                        {srv.title}
+                                    </h3>
+                                    <p className="text-xs text-slate-300 leading-relaxed line-clamp-3">
+                                        {srv.excerpt}
+                                    </p>
+                                </div>
+
+                                {srv.features && srv.features.length > 0 && (
+                                    <div className="mt-4 pt-4 border-t border-[#2C6B62] flex flex-wrap gap-1">
+                                        {srv.features.slice(0, 2).map((feat, idx) => (
+                                            <span key={idx} className="px-2 py-0.5 rounded-md bg-[#205B53] text-[10px] text-[#ECAE36] border border-[#2C6B62]">
+                                                ✓ {feat}
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
+
+                                <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-[#ECAE36] group-hover:translate-x-1 transition-transform">
+                                    <span>Lihat Detail Layanan</span>
+                                    <span>→</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                </div>
+            </section>
+
+            {/* SECTION 7: TESTIMONIALS */}
             <section className="py-20 sm:py-28">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
-                        {/* Left: Testimonial Quote & Slider Controls */}
+                        {/* Testimonial Quote & Slider Controls */}
                         <div className="lg:col-span-6">
                             <span className="text-xs font-bold uppercase tracking-widest text-[#1B544D] block mb-3">
-                                Testimonials
+                                Testimoni Klien
                             </span>
                             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1B544D] leading-snug">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+                                Kepercayaan Klien Adalah Prioritas Utama Kami.
                             </h2>
-
-                            <div className="mt-6">
-                                <a
-                                    href="#contact"
-                                    className="inline-flex items-center gap-3 pl-5 pr-2 py-1.5 rounded-full bg-[#ECAE36] hover:bg-[#E0A12A] text-white font-semibold text-xs sm:text-sm transition-all shadow-sm group"
-                                >
-                                    <span>See All</span>
-                                    <span className="w-6 h-6 rounded-full bg-[#1B544D] text-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-                                        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                            <path d="M9 18l6-6-6-6" />
-                                        </svg>
-                                    </span>
-                                </a>
-                            </div>
 
                             <div className="mt-8 bg-[#EFECE6] rounded-2xl p-6 border border-[#E3DFD7]">
                                 <p className="text-xs sm:text-sm text-[#4A5D5A] leading-relaxed italic">
@@ -618,13 +538,13 @@ export default function Welcome({ auth, latestArticles = [] }) {
                                 </div>
                             </div>
 
-                            {/* Prev / Next Slider Buttons */}
+                            {/* Prev / Next Buttons */}
                             <div className="mt-6 flex items-center gap-3">
                                 <button
                                     type="button"
                                     onClick={() => setActiveTestimonial((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1))}
                                     className="w-9 h-9 rounded-full bg-[#1B544D] text-white flex items-center justify-center hover:bg-[#15433E] transition-colors"
-                                    title="Previous Testimonial"
+                                    title="Sebelumnya"
                                 >
                                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                                         <path d="M15 18l-6-6 6-6" />
@@ -634,7 +554,7 @@ export default function Welcome({ auth, latestArticles = [] }) {
                                     type="button"
                                     onClick={() => setActiveTestimonial((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1))}
                                     className="w-9 h-9 rounded-full bg-[#1B544D] text-white flex items-center justify-center hover:bg-[#15433E] transition-colors"
-                                    title="Next Testimonial"
+                                    title="Berikutnya"
                                 >
                                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                                         <path d="M9 18l6-6-6-6" />
@@ -643,12 +563,12 @@ export default function Welcome({ auth, latestArticles = [] }) {
                             </div>
                         </div>
 
-                        {/* Right: Community Image */}
+                        {/* Community Image */}
                         <div className="lg:col-span-6">
                             <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white">
                                 <img
                                     src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=80"
-                                    alt="Community education and development"
+                                    alt="Mitra strategis Arunika"
                                     className="w-full h-80 sm:h-96 object-cover object-center"
                                 />
                             </div>
@@ -658,25 +578,35 @@ export default function Welcome({ auth, latestArticles = [] }) {
                 </div>
             </section>
 
-            {/* SECTION 8: BLOG / LATEST ARTICLES */}
+            {/* SECTION 8: BLOG / LATEST ARTICLES (Data dari Admin) */}
             <section id="blog" className="py-20 sm:py-28 border-t border-[#EAE6DF]/80">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                    <div className="max-w-3xl mb-12">
-                        <span className="text-xs font-bold uppercase tracking-widest text-[#1B544D] block mb-2">
-                            Our Blog
-                        </span>
-                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1B544D] leading-snug">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
-                        </h2>
+                    <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
+                        <div className="max-w-3xl">
+                            <span className="text-xs font-bold uppercase tracking-widest text-[#1B544D] block mb-2">
+                                Blog & wawasan terbaru
+                            </span>
+                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1B544D] leading-snug">
+                                Wawasan Terkini dari Tim Ahli Arunika
+                            </h2>
+                        </div>
+                        <Link
+                            href={route('blog.index')}
+                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1B544D] text-white text-xs font-semibold hover:bg-[#15433E] transition-all shadow-sm shrink-0"
+                        >
+                            <span>Lihat Semua Artikel</span>
+                            <span>→</span>
+                        </Link>
                     </div>
 
-                    {/* 3 Articles Grid */}
+                    {/* Articles Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {displayArticles.map((article) => (
                             <div
                                 key={article.id}
-                                className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-[#EAE6DF] hover:shadow-xl transition-all duration-300"
+                                onClick={() => setSelectedArticle(article)}
+                                className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-[#EAE6DF] hover:shadow-xl cursor-pointer transition-all duration-300"
                             >
                                 <div className="relative h-48 sm:h-52 overflow-hidden bg-slate-100">
                                     <img
@@ -702,10 +632,15 @@ export default function Welcome({ auth, latestArticles = [] }) {
                                         <h3 className="text-base font-bold text-[#1B544D] group-hover:text-[#ECAE36] transition-colors line-clamp-2">
                                             {article.title}
                                         </h3>
+                                        {article.excerpt && (
+                                            <p className="text-xs text-slate-500 mt-2 line-clamp-2">
+                                                {article.excerpt}
+                                            </p>
+                                        )}
                                     </div>
                                     <div className="mt-6 pt-4 border-t border-[#F0EDE7] flex items-center justify-between">
                                         <span className="text-xs font-bold text-[#1B544D] group-hover:translate-x-1 transition-transform flex items-center gap-1">
-                                            Read More <span>→</span>
+                                            Baca Selengkapnya <span>→</span>
                                         </span>
                                     </div>
                                 </div>
@@ -716,7 +651,7 @@ export default function Welcome({ auth, latestArticles = [] }) {
                 </div>
             </section>
 
-            {/* SECTION 9: CTA BANNER (Ready to Solve Your Problem...) */}
+            {/* SECTION 9: CTA BANNER */}
             <section className="py-20 relative overflow-hidden bg-[#1B544D]">
                 <div className="absolute inset-0 opacity-20 mix-blend-overlay">
                     <img
@@ -728,7 +663,7 @@ export default function Welcome({ auth, latestArticles = [] }) {
 
                 <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
                     <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-tight">
-                        Ready to solve your problem with <br />
+                        Siap Mengakselerasi Keputusan Bisnis Anda Bersama <br />
                         <span className="text-[#ECAE36] italic">Arunika Global Valuindo?</span>
                     </h2>
 
@@ -737,7 +672,7 @@ export default function Welcome({ auth, latestArticles = [] }) {
                             href="#contact"
                             className="inline-flex items-center gap-3 pl-6 pr-2 py-2 rounded-full bg-[#EF4444] hover:bg-[#DC2626] text-white font-semibold text-sm sm:text-base transition-all shadow-lg shadow-rose-900/30 group"
                         >
-                            <span>Schedule a Call</span>
+                            <span>Hubungi Konsultan Kami</span>
                             <span className="w-8 h-8 rounded-full bg-white/20 text-white flex items-center justify-center group-hover:translate-x-1 transition-transform">
                                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                                     <path d="M9 18l6-6-6-6" />
@@ -775,68 +710,47 @@ export default function Welcome({ auth, latestArticles = [] }) {
                             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
                                 Layanan valuasi aset, studi kelayakan, dan konsultasi strategi korporasi berstandar global untuk mengakselerasi pertumbuhan bisnis yang berkelanjutan.
                             </p>
-
-                            {/* Social Media Links */}
-                            <div className="flex items-center gap-3 pt-2">
-                                {['facebook', 'twitter', 'linkedin', 'instagram'].map((social, index) => (
-                                    <a
-                                        key={index}
-                                        href="#"
-                                        className="w-8 h-8 rounded-full border border-slate-700 text-slate-400 hover:text-white hover:border-[#ECAE36] hover:bg-[#ECAE36]/10 flex items-center justify-center transition-all text-xs"
-                                        title={social}
-                                    >
-                                        <span className="capitalize">{social[0]}</span>
-                                    </a>
-                                ))}
-                            </div>
                         </div>
 
-                        {/* Information Column */}
+                        {/* Menu Navigation */}
                         <div>
                             <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-4">
-                                INFORMATION
+                                NAVIGASI
                             </h4>
                             <ul className="space-y-2.5 text-xs text-slate-400">
                                 <li>
-                                    <a href="#about" className="hover:text-[#ECAE36] transition-colors">About Us</a>
+                                    <a href="#about" className="hover:text-[#ECAE36] transition-colors">Tentang Kami</a>
                                 </li>
                                 <li>
-                                    <a href="#services" className="hover:text-[#ECAE36] transition-colors">Services</a>
+                                    <a href="#services" className="hover:text-[#ECAE36] transition-colors">Layanan</a>
                                 </li>
                                 <li>
                                     <a href="#blog" className="hover:text-[#ECAE36] transition-colors">Blog</a>
                                 </li>
                                 <li>
-                                    <a href="#contact" className="hover:text-[#ECAE36] transition-colors">Contact Us</a>
+                                    <a href="#contact" className="hover:text-[#ECAE36] transition-colors">Kontak</a>
                                 </li>
                             </ul>
                         </div>
 
-                        {/* Services Column */}
+                        {/* Layanan */}
                         <div>
                             <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-4">
-                                SERVICES
+                                LAYANAN
                             </h4>
                             <ul className="space-y-2.5 text-xs text-slate-400">
-                                <li>
-                                    <a href="#services" className="hover:text-[#ECAE36] transition-colors">Business Valuation</a>
-                                </li>
-                                <li>
-                                    <a href="#services" className="hover:text-[#ECAE36] transition-colors">Strategic Advisory</a>
-                                </li>
-                                <li>
-                                    <a href="#services" className="hover:text-[#ECAE36] transition-colors">Asset Appraisal</a>
-                                </li>
-                                <li>
-                                    <a href="#services" className="hover:text-[#ECAE36] transition-colors">Company Assessment</a>
-                                </li>
+                                {displayServices.slice(0, 4).map((srv, idx) => (
+                                    <li key={idx}>
+                                        <a href="#services" className="hover:text-[#ECAE36] transition-colors line-clamp-1">{srv.title}</a>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
 
-                        {/* Contact Us Column */}
+                        {/* Kontak Kami */}
                         <div>
                             <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-4">
-                                CONTACT US
+                                KONTAK KAMI
                             </h4>
                             <ul className="space-y-2.5 text-xs text-slate-400">
                                 <li>+62 (21) 555-0198</li>
@@ -853,14 +767,119 @@ export default function Welcome({ auth, latestArticles = [] }) {
                         <div>
                             Copyright © {new Date().getFullYear()} PT Arunika Global Valuindo. All rights reserved.
                         </div>
-                        <div className="flex items-center space-x-6">
-                            <a href="#" className="hover:text-slate-400 transition-colors">Privacy Policy</a>
-                            <a href="#" className="hover:text-slate-400 transition-colors">Terms & Conditions</a>
-                        </div>
                     </div>
 
                 </div>
             </footer>
+
+            {/* MODAL DETAIL LAYANAN */}
+            {selectedService && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+                    <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-8 shadow-2xl border border-[#EAE6DF] relative space-y-5">
+                        <button
+                            onClick={() => setSelectedService(null)}
+                            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 flex items-center justify-center font-bold text-sm transition-colors"
+                        >
+                            ✕
+                        </button>
+
+                        {selectedService.thumbnail && (
+                            <img
+                                src={selectedService.thumbnail}
+                                alt={selectedService.title}
+                                className="w-full h-56 object-cover rounded-2xl border border-[#EAE6DF]"
+                            />
+                        )}
+
+                        <div>
+                            <span className="text-xs font-bold uppercase tracking-wider text-[#1B544D] bg-[#1B544D]/10 px-3 py-1 rounded-full">
+                                Detail Layanan
+                            </span>
+                            <h3 className="text-2xl font-bold text-[#1B544D] mt-2">
+                                {selectedService.title}
+                            </h3>
+                        </div>
+
+                        {selectedService.features && selectedService.features.length > 0 && (
+                            <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#EAE6DF]">
+                                <h4 className="text-xs font-bold uppercase tracking-wider text-[#1B544D] mb-2">
+                                    Poin Keunggulan Utama
+                                </h4>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                    {selectedService.features.map((feat, idx) => (
+                                        <div key={idx} className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+                                            <span className="text-[#1B544D] font-bold">✓</span>
+                                            <span>{feat}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        <div
+                            className="prose prose-slate max-w-none text-sm text-slate-700 leading-relaxed border-t border-[#EAE6DF] pt-4"
+                            dangerouslySetInnerHTML={{ __html: selectedService.content || selectedService.excerpt }}
+                        />
+
+                        <div className="pt-4 border-t border-[#EAE6DF] flex justify-end">
+                            <button
+                                onClick={() => setSelectedService(null)}
+                                className="px-5 py-2 rounded-full bg-[#1B544D] text-white text-xs font-semibold hover:bg-[#15433E] transition-colors"
+                            >
+                                Tutup
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* MODAL DETAIL ARTIKEL BLOG */}
+            {selectedArticle && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+                    <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-8 shadow-2xl border border-[#EAE6DF] relative space-y-5">
+                        <button
+                            onClick={() => setSelectedArticle(null)}
+                            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 flex items-center justify-center font-bold text-sm transition-colors"
+                        >
+                            ✕
+                        </button>
+
+                        <img
+                            src={selectedArticle.image}
+                            alt={selectedArticle.title}
+                            className="w-full h-56 object-cover rounded-2xl border border-[#EAE6DF]"
+                        />
+
+                        <div>
+                            <div className="flex items-center gap-2 mb-1">
+                                <span className="text-xs font-bold uppercase tracking-wider text-white bg-[#1B544D] px-3 py-0.5 rounded-full">
+                                    {selectedArticle.category}
+                                </span>
+                                <span className="text-xs text-slate-400 font-medium">
+                                    {selectedArticle.date}
+                                </span>
+                            </div>
+                            <h3 className="text-2xl font-bold text-[#1B544D] mt-2">
+                                {selectedArticle.title}
+                            </h3>
+                        </div>
+
+                        <div
+                            className="prose prose-slate max-w-none text-sm text-slate-700 leading-relaxed border-t border-[#EAE6DF] pt-4"
+                            dangerouslySetInnerHTML={{ __html: selectedArticle.content || selectedArticle.excerpt }}
+                        />
+
+                        <div className="pt-4 border-t border-[#EAE6DF] flex justify-end">
+                            <button
+                                onClick={() => setSelectedArticle(null)}
+                                className="px-5 py-2 rounded-full bg-[#1B544D] text-white text-xs font-semibold hover:bg-[#15433E] transition-colors"
+                            >
+                                Tutup
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
         </div>
     );

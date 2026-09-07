@@ -23,11 +23,13 @@ class AdminSeeder extends Seeder
             [
                 'name'       => 'Administrator',
                 'username'   => 'admin',
+                'role'       => 'admin',
                 'password'   => Hash::make('password123'),
                 'is_active'  => true,
                 'last_login' => now(),
             ]
         );
+        $admin->update(['role' => 'admin']);
 
         // Assign role admin ke user
         if (!$admin->hasRole('admin')) {
