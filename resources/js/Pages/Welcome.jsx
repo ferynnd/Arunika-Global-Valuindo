@@ -45,7 +45,6 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
             title: 'Business Valuation & Advisory',
             excerpt: 'Layanan penilai independen dan analisis nilai wajar aset serta penilaian ekuitas perusahaan berstandar internasional.',
             content: '<p>Layanan penilai independen dan analisis nilai wajar aset serta penilaian ekuitas perusahaan berstandar internasional untuk mendukung merger, akuisisi, dan pendanaan korporasi.</p>',
-            features: ['Penilaian Aset & Ekuitas', 'Kepatuhan Regulasi', 'Analisis Risiko Keuangan'],
             thumbnail: null,
         },
         {
@@ -53,7 +52,6 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
             title: 'Feasibility Study & Strategy',
             excerpt: 'Studi kelayakan bisnis komprehensif, analisis pasar, dan formulasi strategi ekspansi usaha secara terukur.',
             content: '<p>Studi kelayakan bisnis komprehensif, analisis pasar, dan formulasi strategi ekspansi usaha secara terukur untuk meminimalkan risiko investasi.</p>',
-            features: ['Analisis Pasar', 'Proyeksi Keuangan', 'Mitigasi Risiko Ekspansi'],
             thumbnail: null,
         },
         {
@@ -61,15 +59,6 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
             title: 'Corporate Restructuring',
             excerpt: 'Pendampingan restrukturisasi modal, perbaikan tata kelola keuangan, serta optimalisasi portofolio bisnis.',
             content: '<p>Pendampingan restrukturisasi modal, perbaikan tata kelola keuangan, serta optimalisasi portofolio bisnis korporasi.</p>',
-            features: ['Restrukturisasi Utang & Modal', 'Tata Kelola Keuangan', 'Optimasi Portofolio'],
-            thumbnail: null,
-        },
-        {
-            id: 4,
-            title: 'Sustainability & ESG Advisory',
-            excerpt: 'Konsultasi integrasi prinsip ESG dan keberlanjutan bisnis untuk meningkatkan nilai jangka panjang perusahaan.',
-            content: '<p>Konsultasi integrasi prinsip ESG dan keberlanjutan bisnis untuk meningkatkan nilai jangka panjang perusahaan.</p>',
-            features: ['Audit Berkelanjutan', 'Integrasi ESG', 'Laporan Keberlanjutan'],
             thumbnail: null,
         }
     ];
@@ -81,7 +70,6 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
             date: "24 Agustus 2026",
             image: "https://images.unsplash.com/photo-1497440001374-f26997328c1b?auto=format&fit=crop&w=800&q=80",
             category: "Finansial",
-            excerpt: "Memahami pentingnya kalkulasi nilai wajar pada era transformasi digital untuk mendukung keputusan akuisisi.",
             content: "<p>Memahami pentingnya kalkulasi nilai wajar pada era transformasi digital untuk mendukung keputusan akuisisi dan investasi strategis.</p>",
             slug: "valuasi-aset-digital"
         },
@@ -91,7 +79,6 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
             date: "18 September 2026",
             image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80",
             category: "Strategi",
-            excerpt: "Studi kelayakan bisnis yang akurat mencegah potensi risiko kegagalan investasi dalam proyek skala besar.",
             content: "<p>Studi kelayakan bisnis yang akurat mencegah potensi risiko kegagalan investasi dalam proyek skala besar.</p>",
             slug: "pentingnya-feasibility-study"
         },
@@ -101,7 +88,6 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
             date: "02 November 2026",
             image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80",
             category: "Sustainability",
-            excerpt: "Bagaimana kriteria lingkungan, sosial, dan tata kelola mempengaruhi kepercayaan investor global.",
             content: "<p>Bagaimana kriteria lingkungan, sosial, dan tata kelola mempengaruhi kepercayaan investor global.</p>",
             slug: "integrasi-prinsip-esg"
         }
@@ -114,7 +100,6 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
             excerpt: srv.excerpt || (srv.content ? srv.content.replace(/<[^>]+>/g, '').substring(0, 150) + '...' : 'Layanan korporasi dari Arunika Global Valuindo.'),
             content: srv.content || srv.excerpt || '',
             thumbnail: srv.thumbnail ? `/storage/${srv.thumbnail}` : null,
-            features: srv.features || [],
         }))
         : fallbackServices;
 
@@ -129,108 +114,129 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
             }),
             image: art.thumbnail ? `/storage/${art.thumbnail}` : 'https://images.unsplash.com/photo-1497440001374-f26997328c1b?auto=format&fit=crop&w=800&q=80',
             category: art.category ? art.category.name : 'Artikel',
-            excerpt: art.excerpt || '',
             content: art.content || art.excerpt || '',
             slug: art.slug,
         }))
         : fallbackArticles;
 
+    // Icon set for About Us highlight cards (cycled by index)
+    const aboutIcons = [
+        // graduation cap
+        <svg key="i1" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M22 10L12 5 2 10l10 5 10-5z" />
+            <path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" />
+        </svg>,
+        // briefcase
+        <svg key="i2" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2" />
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+        </svg>,
+        // trending up
+        <svg key="i3" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+            <polyline points="17 6 23 6 23 12" />
+        </svg>,
+    ];
+
     return (
-        <div className="min-h-screen bg-[#FAF8F5] text-[#334155] font-sans antialiased selection:bg-[#ECAE36] selection:text-[#1B544D]">
-            <Head title="Arunika Global Valuindo" />
+        <div className="min-h-screen bg-[#FAF8F5] text-[#334155] font-['Work_Sans'] font-normal tracking-wide antialiased selection:bg-[#ECAE36] selection:text-[#1B544D]">
+            <Head title="Arunika Global Valuindo">
+                    <link rel="icon" type="image/x-icon" href="/logo.ico" />
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500&display=swap"
+                    rel="stylesheet"
+                />
+            </Head>
 
             {/* Floating Navigation Bar */}
             <header className={`fixed top-0 inset-x-0 z-50 pointer-events-none transition-all duration-300 ${scrolled ? 'py-3' : 'py-5 sm:py-6'
                 }`}>
                 <div className="max-w-6xl mx-auto px-4 sm:px-6">
-                    <nav className={`pointer-events-auto rounded-full transition-all duration-300 flex items-center justify-between border ${scrolled
-                        ? 'bg-white/85 backdrop-blur-xl border-white/70 shadow-lg shadow-slate-900/5 px-4 sm:px-5 py-2.5'
-                        : 'bg-white/70 backdrop-blur-md border-white/50 shadow-[0_4px_25px_rgba(0,0,0,0.04)] px-5 sm:px-6 py-3'
-                        }`}>
+                    <nav className="pointer-events-auto flex items-center justify-between gap-4">
 
                         {/* Brand Logo */}
-                        <a href="#" className="flex items-center gap-2.5 group">
-                            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#ECAE36] to-[#D99B26] flex items-center justify-center shadow-md shadow-[#ECAE36]/30 text-white font-black">
-                                <svg className="w-5 h-5 text-[#1B544D]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                                </svg>
-                            </div>
-                            <div className="leading-tight">
-                                <span className="font-extrabold text-sm tracking-wider text-[#1B544D] block uppercase">
-                                    ARUNIKA
-                                </span>
-                                <span className="text-[8px] font-semibold tracking-widest text-[#718783] block uppercase">
-                                    GLOBAL VALUINDO
-                                </span>
-                            </div>
+                        <a href="/" className="flex items-center group shrink-0">
+                            <img
+                                src="/images/logo.png"
+                                alt="Arunika Global Valuindo"
+                                className="h-20 w-auto object-contain"
+                            />
                         </a>
 
-                        {/* Desktop Navigation Links */}
-                        <div className="hidden md:flex items-center space-x-1 lg:space-x-2 text-xs lg:text-sm font-medium text-[#4A5D5A]">
+                        {/* Desktop Navigation Pill */}
+                        <div className={`hidden md:flex items-center gap-1 lg:gap-2 rounded-full transition-all duration-300 ${scrolled
+                            ? 'bg-[#EBEBEB]/90 backdrop-blur-xl shadow-md px-2 py-2'
+                            : 'bg-[#EBEBEB] shadow-[0_4px_20px_rgba(0,0,0,0.05)] px-2 py-2'
+                            }`}>
                             <a
                                 href="#home"
-                                className="px-3.5 py-1.5 rounded-full text-[#1B544D] bg-[#EFECE6]/80 font-semibold transition-colors"
+                                className="px-4 py-2 rounded-full text-[#1B544D] font-medium text-xs lg:text-sm tracking-wide transition-colors"
                             >
                                 Home
                             </a>
+
                             <a
                                 href="#about"
-                                className="px-3.5 py-1.5 rounded-full hover:text-[#1B544D] hover:bg-[#EFECE6]/60 transition-colors"
+                                className="px-4 py-2 rounded-full text-[#4A5D5A] font-normal text-xs lg:text-sm tracking-wide hover:text-[#1B544D] transition-colors"
                             >
-                                About Us
+                                About us
                             </a>
+
                             <Link
                                 href={route('services.index')}
-                                className="px-3.5 py-1.5 rounded-full hover:text-[#1B544D] hover:bg-[#EFECE6]/60 transition-colors"
+                                className="px-4 py-2 rounded-full text-[#4A5D5A] font-normal text-xs lg:text-sm tracking-wide hover:text-[#1B544D] transition-colors"
                             >
                                 Services
                             </Link>
+
                             <Link
                                 href={route('blog.index')}
-                                className="px-3.5 py-1.5 rounded-full hover:text-[#1B544D] hover:bg-[#EFECE6]/60 transition-colors"
+                                className="px-4 py-2 rounded-full text-[#4A5D5A] font-normal text-xs lg:text-sm tracking-wide hover:text-[#1B544D] transition-colors"
                             >
                                 Blog
                             </Link>
+
                             <a
                                 href="#contact"
-                                className="px-3.5 py-1.5 rounded-full hover:text-[#1B544D] hover:bg-[#EFECE6]/60 transition-colors"
+                                className="px-4 py-2 rounded-full text-[#4A5D5A] font-normal text-xs lg:text-sm tracking-wide hover:text-[#1B544D] transition-colors"
                             >
                                 Contact Us
                             </a>
                         </div>
 
                         {/* CTA / Auth Buttons */}
-                        <div className="hidden md:flex items-center gap-3">
+                        <div className="hidden md:flex items-center gap-3 shrink-0">
                             {auth?.user?.role === 'admin' ? (
                                 <Link
                                     href={route('admin.dashboard')}
-                                    className="px-5 py-2 rounded-full bg-[#1B544D] text-white font-semibold text-xs hover:bg-[#15433E] transition-all shadow-sm flex items-center gap-1.5"
+                                    className="px-6 py-2.5 rounded-full bg-[#4E7E77] text-white font-medium text-xs lg:text-sm tracking-wide hover:bg-[#3E6B64] transition-all shadow-sm flex items-center gap-1.5"
                                 >
                                     <span>Dashboard</span>
-                                    <span>→</span>
                                 </Link>
                             ) : (
                                 <a
                                     href="#contact"
-                                    className="px-5 py-2 rounded-full bg-[#1B544D] text-white font-semibold text-xs hover:bg-[#15433E] transition-all shadow-sm"
+                                    className="px-6 py-2.5 rounded-full bg-[#4E7E77] text-white font-medium text-xs lg:text-sm tracking-wide hover:bg-[#3E6B64] transition-all shadow-sm"
                                 >
-                                    Get in touch
+                                    Get In Touch
                                 </a>
                             )}
                         </div>
 
                         {/* Mobile Menu Button */}
-                        <div className="flex md:hidden">
+                        <div className="flex md:hidden ml-auto">
                             <button
                                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                                className="p-1.5 rounded-full text-[#1B544D] hover:bg-black/5 transition-colors"
+                                className="p-2 rounded-full bg-[#EBEBEB] text-[#1B544D] hover:bg-black/5 transition-colors"
                                 aria-label="Toggle navigation menu"
                             >
                                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     {mobileMenuOpen ? (
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" d="M6 18L18 6M6 6l12 12" />
                                     ) : (
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" d="M4 6h16M4 12h16M4 18h16" />
                                     )}
                                 </svg>
                             </button>
@@ -241,46 +247,52 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                     {/* Mobile Menu Dropdown Card */}
                     {mobileMenuOpen && (
                         <div className="pointer-events-auto md:hidden mt-3 rounded-3xl bg-white/95 backdrop-blur-2xl border border-white/60 shadow-xl p-5 space-y-1.5 transition-all">
+
                             <a
                                 href="#home"
                                 onClick={() => setMobileMenuOpen(false)}
-                                className="block px-4 py-2.5 rounded-2xl font-semibold text-[#1B544D] bg-[#EFECE6]/80"
+                                className="block px-4 py-2.5 rounded-2xl font-medium tracking-wide text-[#1B544D] bg-[#EFECE6]/80"
                             >
                                 Home
                             </a>
+
                             <a
                                 href="#about"
                                 onClick={() => setMobileMenuOpen(false)}
-                                className="block px-4 py-2.5 rounded-2xl text-[#4A5D5A] hover:bg-[#EFECE6]/60 transition-colors"
+                                className="block px-4 py-2.5 rounded-2xl font-normal tracking-wide text-[#4A5D5A] hover:bg-[#EFECE6]/60 transition-colors"
                             >
                                 About Us
                             </a>
+
                             <a
                                 href="#services"
                                 onClick={() => setMobileMenuOpen(false)}
-                                className="block px-4 py-2.5 rounded-2xl text-[#4A5D5A] hover:bg-[#EFECE6]/60 transition-colors"
+                                className="block px-4 py-2.5 rounded-2xl font-normal tracking-wide text-[#4A5D5A] hover:bg-[#EFECE6]/60 transition-colors"
                             >
                                 Services
                             </a>
+
                             <a
                                 href="#blog"
                                 onClick={() => setMobileMenuOpen(false)}
-                                className="block px-4 py-2.5 rounded-2xl text-[#4A5D5A] hover:bg-[#EFECE6]/60 transition-colors"
+                                className="block px-4 py-2.5 rounded-2xl font-normal tracking-wide text-[#4A5D5A] hover:bg-[#EFECE6]/60 transition-colors"
                             >
                                 Blog
                             </a>
+
                             <a
                                 href="#contact"
                                 onClick={() => setMobileMenuOpen(false)}
-                                className="block px-4 py-2.5 rounded-2xl text-[#4A5D5A] hover:bg-[#EFECE6]/60 transition-colors"
+                                className="block px-4 py-2.5 rounded-2xl font-normal tracking-wide text-[#4A5D5A] hover:bg-[#EFECE6]/60 transition-colors"
                             >
                                 Contact Us
                             </a>
+
                             <div className="pt-3 border-t border-[#EAE6DF]/80">
                                 {auth?.user ? (
                                     <Link
                                         href={route('admin.dashboard')}
-                                        className="block w-full text-center px-5 py-2.5 rounded-full bg-[#1B544D] text-white font-semibold text-xs shadow-sm"
+                                        className="block w-full text-center px-5 py-2.5 rounded-full bg-[#4E7E77] text-white font-medium tracking-wide text-xs shadow-sm"
                                     >
                                         Dashboard Admin
                                     </Link>
@@ -288,9 +300,9 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                                     <a
                                         href="#contact"
                                         onClick={() => setMobileMenuOpen(false)}
-                                        className="block w-full text-center px-5 py-2.5 rounded-full bg-[#1B544D] text-white font-semibold text-xs shadow-sm"
+                                        className="block w-full text-center px-5 py-2.5 rounded-full bg-[#4E7E77] text-white font-medium tracking-wide text-xs shadow-sm"
                                     >
-                                        Get in touch
+                                        Get In Touch
                                     </a>
                                 )}
                             </div>
@@ -310,7 +322,7 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                 <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F5]/85 via-[#FAF8F5]/75 to-[#FAF8F5]"></div>
 
                 <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-32 pb-20 sm:pt-40 sm:pb-28">
-                    <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#1B544D] max-w-4xl mx-auto leading-[1.12] sm:leading-[1.15]">
+                    <h1 className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-wide text-[#1B544D] max-w-4xl mx-auto leading-[1.15] sm:leading-[1.2]">
                         Strategic Growth Meets <br className="hidden sm:inline" />
                         Sustainable Impact
                     </h1>
@@ -318,11 +330,11 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                     <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                         <a
                             href="#services"
-                            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 pl-6 pr-2.5 py-2.5 rounded-full bg-[#ECAE36] hover:bg-[#E0A12A] text-white font-semibold text-sm sm:text-base transition-all shadow-md shadow-[#ECAE36]/30 group"
+                            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 pl-6 pr-2.5 py-2.5 rounded-full bg-[#ECAE36] hover:bg-[#E0A12A] text-white font-medium tracking-wide text-sm sm:text-base transition-all shadow-md shadow-[#ECAE36]/30 group"
                         >
                             <span>Lihat Layanan Kami</span>
                             <span className="w-8 h-8 rounded-full bg-[#1B544D] text-white flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                     <path d="M9 18l6-6-6-6" />
                                 </svg>
                             </span>
@@ -332,22 +344,69 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
             </section>
 
             {/* SECTION 2: CLIENT / PARTNER LOGOS */}
-            <section className="py-8 border-y border-[#EAE6DF] bg-white/50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex flex-wrap items-center justify-center sm:justify-between gap-8 sm:gap-12 opacity-60 grayscale hover:grayscale-0 transition-all duration-300">
-                        <span className="font-extrabold text-xl sm:text-2xl text-slate-800 tracking-wider">
-                            BLUE DART
-                        </span>
-                        <span className="font-black text-xl sm:text-2xl text-slate-800 lowercase tracking-wide flex items-center gap-1">
-                            <span className="text-[#1B544D]">♥</span> lazada
-                        </span>
-                        <span className="font-bold text-lg sm:text-xl text-slate-800 tracking-wider">
-                            CIMB NIAGA
-                        </span>
-                        <span className="font-black text-xl sm:text-2xl text-slate-800 lowercase">
-                            blibli
-                        </span>
+            <section className="py-8 border-y border-[#EAE6DF] bg-white/50 overflow-hidden">
+                <div className="h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+
+                    <div className="relative overflow-hidden">
+                        <div className="flex w-max animate-logo-slider">
+
+                            {/* Set 1 */}
+                            <div className="flex items-center gap-16 sm:gap-24 pr-16 sm:pr-24">
+                                <img
+                                    src="/images/blibli.png"
+                                    alt="Blibli"
+                                    className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                />
+
+                                <img
+                                    src="/images/lazada.png"
+                                    alt="Lazada"
+                                    className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                />
+
+                                <img
+                                    src="/images/shopee.png"
+                                    alt="Shopee"
+                                    className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                />
+
+                                <img
+                                    src="/images/blibli.png"
+                                    alt="Blibli"
+                                    className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                />
+                            </div>
+
+                            {/* Set 2 - duplikat untuk seamless loop */}
+                            <div className="flex items-center gap-16 sm:gap-24 pr-16 sm:pr-24">
+                                <img
+                                    src="/images/blibli.png"
+                                    alt="Blibli"
+                                    className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                />
+
+                                <img
+                                    src="/images/lazada.png"
+                                    alt="Lazada"
+                                    className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                />
+
+                                <img
+                                    src="/images/shopee.png"
+                                    alt="Shopee"
+                                    className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                />
+
+                                <img
+                                    src="/images/blibli.png"
+                                    alt="Blibli"
+                                    className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                />
+                            </div>
+
+                        </div>
                     </div>
+
                 </div>
             </section>
 
@@ -356,33 +415,31 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                     <div className="max-w-3xl">
-                        <span className="text-xs font-bold uppercase tracking-widest text-[#1B544D] block mb-3">
+                        <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#1B544D] block mb-3">
                             Tentang Kami
                         </span>
-                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1B544D] leading-snug">
+                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-wide text-[#1B544D] leading-snug">
                             PT Arunika Global Valuindo adalah perusahaan penilai independen dan penasihat strategi korporasi terpercaya di Indonesia.
                         </h2>
                     </div>
 
-                    {/* 3 Service Feature Cards */}
+                    {/* 3 About Highlight Cards (matches "About Card" reference) */}
                     <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
                         {displayServices.slice(0, 3).map((srv, idx) => (
                             <div
                                 key={srv.id || idx}
                                 onClick={() => setSelectedService(srv)}
-                                className="p-6 rounded-2xl bg-[#EFECE6] border border-[#E3DFD7] flex items-start gap-4 hover:shadow-md cursor-pointer transition-all hover:border-[#1B544D]/30 group"
+                                className="p-6 rounded-2xl bg-[#EFECE6] border border-[#E3DFD7] hover:shadow-md cursor-pointer transition-all hover:border-[#1B544D]/30 group"
                             >
-                                <div className="w-12 h-12 rounded-full bg-[#1B544D] text-[#ECAE36] flex items-center justify-center shrink-0 shadow-sm font-bold text-sm group-hover:scale-105 transition-transform">
-                                    0{idx + 1}
+                                <div className="w-12 h-12 rounded-full bg-[#1B544D] text-white flex items-center justify-center shrink-0 shadow-sm mb-4 group-hover:scale-105 transition-transform">
+                                    {aboutIcons[idx % aboutIcons.length]}
                                 </div>
-                                <div>
-                                    <h3 className="text-base font-bold text-[#1B544D] group-hover:text-[#ECAE36] transition-colors">
-                                        {srv.title}
-                                    </h3>
-                                    <p className="text-xs text-[#52605E] mt-1 leading-relaxed line-clamp-2">
-                                        {srv.excerpt}
-                                    </p>
-                                </div>
+                                <h3 className="text-base font-normal tracking-wide text-[#1B544D] group-hover:text-[#ECAE36] transition-colors">
+                                    {srv.title}
+                                </h3>
+                                <p className="text-xs font-light text-[#52605E] mt-2 leading-relaxed tracking-wide line-clamp-2">
+                                    {srv.excerpt}
+                                </p>
                             </div>
                         ))}
                     </div>
@@ -397,10 +454,10 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
 
                         {/* Left: Text & Checkmarks */}
                         <div className="lg:col-span-6">
-                            <span className="text-xs font-bold uppercase tracking-widest text-[#1B544D] block mb-3">
+                            <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#1B544D] block mb-3">
                                 Keunggulan Kami
                             </span>
-                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1B544D] leading-snug">
+                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-wide text-[#1B544D] leading-snug">
                                 Solusi Valuasi & Konsultasi Bisnis Terintegrasi Berstandar Global.
                             </h2>
 
@@ -408,10 +465,10 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                             <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
                                 {displayServices.map((srv, index) => (
                                     <div key={index} className="flex items-center gap-3">
-                                        <div className="w-6 h-6 rounded-full bg-[#1B544D] text-[#ECAE36] flex items-center justify-center shrink-0 font-bold text-xs">
+                                        <div className="w-6 h-6 rounded-full bg-[#1B544D] text-[#ECAE36] flex items-center justify-center shrink-0 text-xs">
                                             ✓
                                         </div>
-                                        <span className="text-xs sm:text-sm font-semibold text-[#1B544D]">
+                                        <span className="text-xs sm:text-sm font-normal tracking-wide text-[#1B544D]">
                                             {srv.title}
                                         </span>
                                     </div>
@@ -434,26 +491,26 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                 </div>
             </section>
 
-            {/* SECTION 6: SERVICES SHOWCASE (Data dari Admin) */}
+            {/* SECTION 6: SERVICES SHOWCASE (matches "Service Card" reference) */}
             <section id="services" className="py-20 sm:py-28 bg-[#205B53] text-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                     {/* Header */}
                     <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
                         <div className="max-w-3xl">
-                            <span className="text-xs font-bold uppercase tracking-widest text-[#ECAE36] block mb-2">
+                            <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#ECAE36] block mb-2">
                                 Layanan Portofolio Kami
                             </span>
-                            <h2 className="text-2xl sm:text-4xl font-bold leading-snug">
+                            <h2 className="text-2xl sm:text-4xl font-light tracking-wide leading-snug">
                                 Layanan Valuasi & Konsultasi Strategi Korporasi
                             </h2>
-                            <p className="text-xs sm:text-sm text-slate-200 mt-2">
+                            <p className="text-xs sm:text-sm font-light tracking-wide text-slate-200 mt-2">
                                 Klik pada layanan untuk melihat perincian lengkap dan fitur keunggulannya.
                             </p>
                         </div>
                         <Link
                             href={route('services.index')}
-                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#ECAE36] text-[#1B544D] text-xs font-bold hover:bg-[#E0A12A] transition-all shadow-md shrink-0"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#ECAE36] text-[#1B544D] text-xs font-medium tracking-wide hover:bg-[#E0A12A] transition-all shadow-md shrink-0"
                         >
                             <span>Lihat Semua Layanan</span>
                             <span>→</span>
@@ -462,46 +519,43 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
 
                     {/* Dynamic Services Grid */}
                     <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {displayServices.map((srv) => (
+                        {displayServices.map((srv, idx) => (
                             <div
                                 key={srv.id}
                                 onClick={() => setSelectedService(srv)}
-                                className="p-6 rounded-2xl bg-[#143F39] border border-[#2C6B62] hover:border-[#ECAE36] transition-all flex flex-col justify-between cursor-pointer group hover:-translate-y-1 shadow-md"
+                                className="relative rounded-3xl bg-[#143F39] border border-[#2C6B62] hover:border-[#ECAE36] transition-all cursor-pointer group hover:-translate-y-1 shadow-md min-h-[320px] flex flex-col justify-between p-6 overflow-hidden"
                             >
-                                <div>
-                                    {srv.thumbnail ? (
-                                        <img
-                                            src={srv.thumbnail}
-                                            alt={srv.title}
-                                            className="w-full h-36 object-cover rounded-xl mb-4 border border-[#2C6B62]"
-                                        />
-                                    ) : (
-                                        <div className="w-10 h-10 rounded-xl bg-[#ECAE36]/20 text-[#ECAE36] flex items-center justify-center mb-4 font-bold text-sm border border-[#ECAE36]/30">
-                                            ★
-                                        </div>
-                                    )}
+                                {srv.thumbnail ? (
+                                    <img
+                                        src={srv.thumbnail}
+                                        alt={srv.title}
+                                        className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-40 transition-opacity"
+                                    />
+                                ) : null}
 
-                                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[#ECAE36] transition-colors">
+                                {/* Top-right label */}
+                                <span className="relative z-10 self-end text-[10px] font-light text-slate-300 tracking-wide">
+                                    [{`Service ${idx + 1}`}]
+                                </span>
+
+                                {/* Bottom title + description */}
+                                <div className="relative z-10">
+                                    <h3 className="text-lg font-normal tracking-wide text-white mb-2 group-hover:text-[#ECAE36] transition-colors">
                                         {srv.title}
                                     </h3>
-                                    <p className="text-xs text-slate-300 leading-relaxed line-clamp-3">
+                                    <p className="text-xs sm:text-sm font-light text-slate-300 leading-relaxed tracking-wide line-clamp-3">
                                         {srv.excerpt}
                                     </p>
-                                </div>
 
-                                {srv.features && srv.features.length > 0 && (
-                                    <div className="mt-4 pt-4 border-t border-[#2C6B62] flex flex-wrap gap-1">
-                                        {srv.features.slice(0, 2).map((feat, idx) => (
-                                            <span key={idx} className="px-2 py-0.5 rounded-md bg-[#205B53] text-[10px] text-[#ECAE36] border border-[#2C6B62]">
-                                                ✓ {feat}
-                                            </span>
-                                        ))}
-                                    </div>
-                                )}
-
-                                <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-[#ECAE36] group-hover:translate-x-1 transition-transform">
-                                    <span>Lihat Detail Layanan</span>
-                                    <span>→</span>
+                                    {srv.features && srv.features.length > 0 && (
+                                        <div className="mt-4 pt-4 border-t border-[#2C6B62] flex flex-wrap gap-1">
+                                            {srv.features.slice(0, 2).map((feat, fIdx) => (
+                                                <span key={fIdx} className="px-2 py-0.5 rounded-md bg-[#205B53] text-[10px] font-light text-[#ECAE36] border border-[#2C6B62]">
+                                                    ✓ {feat}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         ))}
@@ -517,22 +571,22 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
 
                         {/* Testimonial Quote & Slider Controls */}
                         <div className="lg:col-span-6">
-                            <span className="text-xs font-bold uppercase tracking-widest text-[#1B544D] block mb-3">
+                            <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#1B544D] block mb-3">
                                 Testimoni Klien
                             </span>
-                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1B544D] leading-snug">
+                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-wide text-[#1B544D] leading-snug">
                                 Kepercayaan Klien Adalah Prioritas Utama Kami.
                             </h2>
 
                             <div className="mt-8 bg-[#EFECE6] rounded-2xl p-6 border border-[#E3DFD7]">
-                                <p className="text-xs sm:text-sm text-[#4A5D5A] leading-relaxed italic">
+                                <p className="text-xs sm:text-sm font-light text-[#4A5D5A] leading-relaxed tracking-wide italic">
                                     "{testimonials[activeTestimonial].quote}"
                                 </p>
                                 <div className="mt-4 pt-4 border-t border-[#E0DBD2]">
-                                    <div className="font-bold text-sm text-[#1B544D]">
+                                    <div className="font-normal tracking-wide text-sm text-[#1B544D]">
                                         {testimonials[activeTestimonial].author}
                                     </div>
-                                    <div className="text-xs text-[#718783]">
+                                    <div className="text-xs font-light tracking-wide text-[#718783]">
                                         {testimonials[activeTestimonial].role}
                                     </div>
                                 </div>
@@ -546,7 +600,7 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                                     className="w-9 h-9 rounded-full bg-[#1B544D] text-white flex items-center justify-center hover:bg-[#15433E] transition-colors"
                                     title="Sebelumnya"
                                 >
-                                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                         <path d="M15 18l-6-6 6-6" />
                                     </svg>
                                 </button>
@@ -556,7 +610,7 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                                     className="w-9 h-9 rounded-full bg-[#1B544D] text-white flex items-center justify-center hover:bg-[#15433E] transition-colors"
                                     title="Berikutnya"
                                 >
-                                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                         <path d="M9 18l6-6-6-6" />
                                     </svg>
                                 </button>
@@ -584,16 +638,16 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
 
                     <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
                         <div className="max-w-3xl">
-                            <span className="text-xs font-bold uppercase tracking-widest text-[#1B544D] block mb-2">
+                            <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#1B544D] block mb-2">
                                 Blog & wawasan terbaru
                             </span>
-                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1B544D] leading-snug">
+                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-wide text-[#1B544D] leading-snug">
                                 Wawasan Terkini dari Tim Ahli Arunika
                             </h2>
                         </div>
                         <Link
                             href={route('blog.index')}
-                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1B544D] text-white text-xs font-semibold hover:bg-[#15433E] transition-all shadow-sm shrink-0"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1B544D] text-white text-xs font-medium tracking-wide hover:bg-[#15433E] transition-all shadow-sm shrink-0"
                         >
                             <span>Lihat Semua Artikel</span>
                             <span>→</span>
@@ -614,13 +668,13 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                                         alt={article.title}
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     />
-                                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#1B544D]/80 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wider">
+                                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#1B544D]/80 backdrop-blur-md text-white text-[10px] font-medium uppercase tracking-wider">
                                         {article.category}
                                     </span>
                                 </div>
                                 <div className="p-6 flex flex-col flex-grow justify-between">
                                     <div>
-                                        <div className="flex items-center gap-1.5 text-xs text-[#718783] mb-2 font-medium">
+                                        <div className="flex items-center gap-1.5 text-xs font-light text-[#718783] mb-2 tracking-wide">
                                             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                                                 <line x1="16" y1="2" x2="16" y2="6" />
@@ -629,17 +683,12 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                                             </svg>
                                             <span>{article.date}</span>
                                         </div>
-                                        <h3 className="text-base font-bold text-[#1B544D] group-hover:text-[#ECAE36] transition-colors line-clamp-2">
+                                        <h3 className="text-base font-normal tracking-wide text-[#1B544D] group-hover:text-[#ECAE36] transition-colors line-clamp-2">
                                             {article.title}
                                         </h3>
-                                        {article.excerpt && (
-                                            <p className="text-xs text-slate-500 mt-2 line-clamp-2">
-                                                {article.excerpt}
-                                            </p>
-                                        )}
                                     </div>
                                     <div className="mt-6 pt-4 border-t border-[#F0EDE7] flex items-center justify-between">
-                                        <span className="text-xs font-bold text-[#1B544D] group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                                        <span className="text-xs font-medium tracking-wide text-[#1B544D] group-hover:translate-x-1 transition-transform flex items-center gap-1">
                                             Baca Selengkapnya <span>→</span>
                                         </span>
                                     </div>
@@ -662,7 +711,7 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                 </div>
 
                 <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-                    <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-tight">
+                    <h2 className="text-2xl sm:text-4xl lg:text-5xl font-light tracking-wide leading-tight">
                         Siap Mengakselerasi Keputusan Bisnis Anda Bersama <br />
                         <span className="text-[#ECAE36] italic">Arunika Global Valuindo?</span>
                     </h2>
@@ -670,11 +719,11 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                     <div className="mt-8 flex justify-center">
                         <a
                             href="#contact"
-                            className="inline-flex items-center gap-3 pl-6 pr-2 py-2 rounded-full bg-[#EF4444] hover:bg-[#DC2626] text-white font-semibold text-sm sm:text-base transition-all shadow-lg shadow-rose-900/30 group"
+                            className="inline-flex items-center gap-3 pl-6 pr-2 py-2 rounded-full bg-[#EF4444] hover:bg-[#DC2626] text-white font-medium tracking-wide text-sm sm:text-base transition-all shadow-lg shadow-rose-900/30 group"
                         >
                             <span>Hubungi Konsultan Kami</span>
                             <span className="w-8 h-8 rounded-full bg-white/20 text-white flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                     <path d="M9 18l6-6-6-6" />
                                 </svg>
                             </span>
@@ -689,35 +738,26 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12 pb-14 border-b border-[#1A3D36]">
 
-                        {/* Company Info & Logo */}
-                        <div className="lg:col-span-2 space-y-4">
-                            <div className="flex items-center gap-3">
-                                <div className="w-9 h-9 rounded-xl bg-[#ECAE36] flex items-center justify-center text-[#1B544D] font-bold">
-                                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                                    </svg>
-                                </div>
-                                <div className="leading-tight">
-                                    <span className="font-bold text-base tracking-wider text-white block uppercase">
-                                        ARUNIKA
-                                    </span>
-                                    <span className="text-[9px] font-medium tracking-widest text-[#8AA29E] block uppercase">
-                                        GLOBAL VALUINDO
-                                    </span>
-                                </div>
-                            </div>
+                        {/* Brand */}
+                        <div>
+                            <a href="/" className="flex items-center group shrink-0 mb-5">
+                                <img
+                                    src="/images/logo-white.png"
+                                    alt="Arunika Global Valuindo"
+                                    className="h-40 w-auto object-contain"
+                                />
+                            </a>
 
-                            <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
+                            <p className="text-xs font-light text-slate-400 leading-relaxed tracking-wide max-w-sm">
                                 Layanan valuasi aset, studi kelayakan, dan konsultasi strategi korporasi berstandar global untuk mengakselerasi pertumbuhan bisnis yang berkelanjutan.
                             </p>
                         </div>
-
                         {/* Menu Navigation */}
                         <div>
-                            <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-4">
+                            <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-white mb-4">
                                 NAVIGASI
                             </h4>
-                            <ul className="space-y-2.5 text-xs text-slate-400">
+                            <ul className="space-y-2.5 text-xs font-light tracking-wide text-slate-400">
                                 <li>
                                     <a href="#about" className="hover:text-[#ECAE36] transition-colors">Tentang Kami</a>
                                 </li>
@@ -735,10 +775,10 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
 
                         {/* Layanan */}
                         <div>
-                            <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-4">
+                            <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-white mb-4">
                                 LAYANAN
                             </h4>
-                            <ul className="space-y-2.5 text-xs text-slate-400">
+                            <ul className="space-y-2.5 text-xs font-light tracking-wide text-slate-400">
                                 {displayServices.slice(0, 4).map((srv, idx) => (
                                     <li key={idx}>
                                         <a href="#services" className="hover:text-[#ECAE36] transition-colors line-clamp-1">{srv.title}</a>
@@ -749,10 +789,10 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
 
                         {/* Kontak Kami */}
                         <div>
-                            <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-4">
+                            <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-white mb-4">
                                 KONTAK KAMI
                             </h4>
-                            <ul className="space-y-2.5 text-xs text-slate-400">
+                            <ul className="space-y-2.5 text-xs font-light tracking-wide text-slate-400">
                                 <li>+62 (21) 555-0198</li>
                                 <li>contact@arunika-valuindo.com</li>
                                 <li>Jakarta Selatan, DKI Jakarta, Indonesia</li>
@@ -763,7 +803,7 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                     </div>
 
                     {/* Sub Footer */}
-                    <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+                    <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs font-light tracking-wide text-slate-500 gap-4">
                         <div>
                             Copyright © {new Date().getFullYear()} PT Arunika Global Valuindo. All rights reserved.
                         </div>
@@ -778,7 +818,7 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                     <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-8 shadow-2xl border border-[#EAE6DF] relative space-y-5">
                         <button
                             onClick={() => setSelectedService(null)}
-                            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 flex items-center justify-center font-bold text-sm transition-colors"
+                            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 flex items-center justify-center text-sm transition-colors"
                         >
                             ✕
                         </button>
@@ -792,23 +832,23 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                         )}
 
                         <div>
-                            <span className="text-xs font-bold uppercase tracking-wider text-[#1B544D] bg-[#1B544D]/10 px-3 py-1 rounded-full">
+                            <span className="text-xs font-medium uppercase tracking-[0.15em] text-[#1B544D] bg-[#1B544D]/10 px-3 py-1 rounded-full">
                                 Detail Layanan
                             </span>
-                            <h3 className="text-2xl font-bold text-[#1B544D] mt-2">
+                            <h3 className="text-2xl font-light tracking-wide text-[#1B544D] mt-2">
                                 {selectedService.title}
                             </h3>
                         </div>
 
                         {selectedService.features && selectedService.features.length > 0 && (
                             <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#EAE6DF]">
-                                <h4 className="text-xs font-bold uppercase tracking-wider text-[#1B544D] mb-2">
+                                <h4 className="text-xs font-medium uppercase tracking-[0.15em] text-[#1B544D] mb-2">
                                     Poin Keunggulan Utama
                                 </h4>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                     {selectedService.features.map((feat, idx) => (
-                                        <div key={idx} className="flex items-center gap-2 text-xs font-semibold text-slate-700">
-                                            <span className="text-[#1B544D] font-bold">✓</span>
+                                        <div key={idx} className="flex items-center gap-2 text-xs font-normal tracking-wide text-slate-700">
+                                            <span className="text-[#1B544D]">✓</span>
                                             <span>{feat}</span>
                                         </div>
                                     ))}
@@ -817,14 +857,14 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                         )}
 
                         <div
-                            className="prose prose-slate max-w-none text-sm text-slate-700 leading-relaxed border-t border-[#EAE6DF] pt-4"
+                            className="prose prose-slate max-w-none text-sm font-light text-slate-700 leading-relaxed tracking-wide border-t border-[#EAE6DF] pt-4"
                             dangerouslySetInnerHTML={{ __html: selectedService.content || selectedService.excerpt }}
                         />
 
                         <div className="pt-4 border-t border-[#EAE6DF] flex justify-end">
                             <button
                                 onClick={() => setSelectedService(null)}
-                                className="px-5 py-2 rounded-full bg-[#1B544D] text-white text-xs font-semibold hover:bg-[#15433E] transition-colors"
+                                className="px-5 py-2 rounded-full bg-[#1B544D] text-white text-xs font-medium tracking-wide hover:bg-[#15433E] transition-colors"
                             >
                                 Tutup
                             </button>
@@ -839,7 +879,7 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                     <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-8 shadow-2xl border border-[#EAE6DF] relative space-y-5">
                         <button
                             onClick={() => setSelectedArticle(null)}
-                            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 flex items-center justify-center font-bold text-sm transition-colors"
+                            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 flex items-center justify-center text-sm transition-colors"
                         >
                             ✕
                         </button>
@@ -852,27 +892,27 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
 
                         <div>
                             <div className="flex items-center gap-2 mb-1">
-                                <span className="text-xs font-bold uppercase tracking-wider text-white bg-[#1B544D] px-3 py-0.5 rounded-full">
+                                <span className="text-xs font-medium uppercase tracking-[0.15em] text-white bg-[#1B544D] px-3 py-0.5 rounded-full">
                                     {selectedArticle.category}
                                 </span>
-                                <span className="text-xs text-slate-400 font-medium">
+                                <span className="text-xs font-light tracking-wide text-slate-400">
                                     {selectedArticle.date}
                                 </span>
                             </div>
-                            <h3 className="text-2xl font-bold text-[#1B544D] mt-2">
+                            <h3 className="text-2xl font-light tracking-wide text-[#1B544D] mt-2">
                                 {selectedArticle.title}
                             </h3>
                         </div>
 
                         <div
-                            className="prose prose-slate max-w-none text-sm text-slate-700 leading-relaxed border-t border-[#EAE6DF] pt-4"
+                            className="prose prose-slate max-w-none text-sm font-light text-slate-700 leading-relaxed tracking-wide border-t border-[#EAE6DF] pt-4"
                             dangerouslySetInnerHTML={{ __html: selectedArticle.content || selectedArticle.excerpt }}
                         />
 
                         <div className="pt-4 border-t border-[#EAE6DF] flex justify-end">
                             <button
                                 onClick={() => setSelectedArticle(null)}
-                                className="px-5 py-2 rounded-full bg-[#1B544D] text-white text-xs font-semibold hover:bg-[#15433E] transition-colors"
+                                className="px-5 py-2 rounded-full bg-[#1B544D] text-white text-xs font-medium tracking-wide hover:bg-[#15433E] transition-colors"
                             >
                                 Tutup
                             </button>
