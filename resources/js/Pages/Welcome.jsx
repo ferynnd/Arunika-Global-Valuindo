@@ -1,5 +1,8 @@
 import { Head, Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
+import CustomButton from '@/Components/CustomButton';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
 
 export default function Welcome({ auth, latestArticles = [], services = [] }) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -140,176 +143,7 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
 
     return (
         <div className="min-h-screen bg-[#FAF8F5] text-[#334155] font-['Work_Sans'] font-normal tracking-wide antialiased selection:bg-[#ECAE36] selection:text-[#1B544D]">
-            <Head title="Arunika Global Valuindo">
-                    <link rel="icon" type="image/x-icon" href="/logo.ico" />
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-                <link
-                    href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500&display=swap"
-                    rel="stylesheet"
-                />
-            </Head>
-
-            {/* Floating Navigation Bar */}
-            <header className={`fixed top-0 inset-x-0 z-50 pointer-events-none transition-all duration-300 ${scrolled ? 'py-3' : 'py-5 sm:py-6'
-                }`}>
-                <div className="max-w-6xl mx-auto px-4 sm:px-6">
-                    <nav className="pointer-events-auto flex items-center justify-between gap-4">
-
-                        {/* Brand Logo */}
-                        <a href="/" className="flex items-center group shrink-0">
-                            <img
-                                src="/images/logo.png"
-                                alt="Arunika Global Valuindo"
-                                className="h-20 w-auto object-contain"
-                            />
-                        </a>
-
-                        {/* Desktop Navigation Pill */}
-                        <div className={`hidden md:flex items-center gap-1 lg:gap-2 rounded-full transition-all duration-300 ${scrolled
-                            ? 'bg-[#EBEBEB]/90 backdrop-blur-xl shadow-md px-2 py-2'
-                            : 'bg-[#EBEBEB] shadow-[0_4px_20px_rgba(0,0,0,0.05)] px-2 py-2'
-                            }`}>
-                            <a
-                                href="#home"
-                                className="px-4 py-2 rounded-full text-[#1B544D] font-medium text-xs lg:text-sm tracking-wide transition-colors"
-                            >
-                                Home
-                            </a>
-
-                            <a
-                                href="#about"
-                                className="px-4 py-2 rounded-full text-[#4A5D5A] font-normal text-xs lg:text-sm tracking-wide hover:text-[#1B544D] transition-colors"
-                            >
-                                About us
-                            </a>
-
-                            <Link
-                                href={route('services.index')}
-                                className="px-4 py-2 rounded-full text-[#4A5D5A] font-normal text-xs lg:text-sm tracking-wide hover:text-[#1B544D] transition-colors"
-                            >
-                                Services
-                            </Link>
-
-                            <Link
-                                href={route('blog.index')}
-                                className="px-4 py-2 rounded-full text-[#4A5D5A] font-normal text-xs lg:text-sm tracking-wide hover:text-[#1B544D] transition-colors"
-                            >
-                                Blog
-                            </Link>
-
-                            <a
-                                href="#contact"
-                                className="px-4 py-2 rounded-full text-[#4A5D5A] font-normal text-xs lg:text-sm tracking-wide hover:text-[#1B544D] transition-colors"
-                            >
-                                Contact Us
-                            </a>
-                        </div>
-
-                        {/* CTA / Auth Buttons */}
-                        <div className="hidden md:flex items-center gap-3 shrink-0">
-                            {auth?.user?.role === 'admin' ? (
-                                <Link
-                                    href={route('admin.dashboard')}
-                                    className="px-6 py-2.5 rounded-full bg-[#4E7E77] text-white font-medium text-xs lg:text-sm tracking-wide hover:bg-[#3E6B64] transition-all shadow-sm flex items-center gap-1.5"
-                                >
-                                    <span>Dashboard</span>
-                                </Link>
-                            ) : (
-                                <a
-                                    href="#contact"
-                                    className="px-6 py-2.5 rounded-full bg-[#4E7E77] text-white font-medium text-xs lg:text-sm tracking-wide hover:bg-[#3E6B64] transition-all shadow-sm"
-                                >
-                                    Get In Touch
-                                </a>
-                            )}
-                        </div>
-
-                        {/* Mobile Menu Button */}
-                        <div className="flex md:hidden ml-auto">
-                            <button
-                                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                                className="p-2 rounded-full bg-[#EBEBEB] text-[#1B544D] hover:bg-black/5 transition-colors"
-                                aria-label="Toggle navigation menu"
-                            >
-                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    {mobileMenuOpen ? (
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" d="M6 18L18 6M6 6l12 12" />
-                                    ) : (
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" d="M4 6h16M4 12h16M4 18h16" />
-                                    )}
-                                </svg>
-                            </button>
-                        </div>
-
-                    </nav>
-
-                    {/* Mobile Menu Dropdown Card */}
-                    {mobileMenuOpen && (
-                        <div className="pointer-events-auto md:hidden mt-3 rounded-3xl bg-white/95 backdrop-blur-2xl border border-white/60 shadow-xl p-5 space-y-1.5 transition-all">
-
-                            <a
-                                href="#home"
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="block px-4 py-2.5 rounded-2xl font-medium tracking-wide text-[#1B544D] bg-[#EFECE6]/80"
-                            >
-                                Home
-                            </a>
-
-                            <a
-                                href="#about"
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="block px-4 py-2.5 rounded-2xl font-normal tracking-wide text-[#4A5D5A] hover:bg-[#EFECE6]/60 transition-colors"
-                            >
-                                About Us
-                            </a>
-
-                            <a
-                                href="#services"
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="block px-4 py-2.5 rounded-2xl font-normal tracking-wide text-[#4A5D5A] hover:bg-[#EFECE6]/60 transition-colors"
-                            >
-                                Services
-                            </a>
-
-                            <a
-                                href="#blog"
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="block px-4 py-2.5 rounded-2xl font-normal tracking-wide text-[#4A5D5A] hover:bg-[#EFECE6]/60 transition-colors"
-                            >
-                                Blog
-                            </a>
-
-                            <a
-                                href="#contact"
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="block px-4 py-2.5 rounded-2xl font-normal tracking-wide text-[#4A5D5A] hover:bg-[#EFECE6]/60 transition-colors"
-                            >
-                                Contact Us
-                            </a>
-
-                            <div className="pt-3 border-t border-[#EAE6DF]/80">
-                                {auth?.user ? (
-                                    <Link
-                                        href={route('admin.dashboard')}
-                                        className="block w-full text-center px-5 py-2.5 rounded-full bg-[#4E7E77] text-white font-medium tracking-wide text-xs shadow-sm"
-                                    >
-                                        Dashboard Admin
-                                    </Link>
-                                ) : (
-                                    <a
-                                        href="#contact"
-                                        onClick={() => setMobileMenuOpen(false)}
-                                        className="block w-full text-center px-5 py-2.5 rounded-full bg-[#4E7E77] text-white font-medium tracking-wide text-xs shadow-sm"
-                                    >
-                                        Get In Touch
-                                    </a>
-                                )}
-                            </div>
-                        </div>
-                    )}
-                </div>
-            </header>
+            <Header auth={auth} title="Arunika Global Valuindo" activePage="home" />
 
             {/* SECTION 1: HERO SECTION */}
             <section
@@ -328,17 +162,14 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                     </h1>
 
                     <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <a
+                        <CustomButton
                             href="#services"
-                            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 pl-6 pr-2.5 py-2.5 rounded-full bg-[#ECAE36] hover:bg-[#E0A12A] text-white font-medium tracking-wide text-sm sm:text-base transition-all shadow-md shadow-[#ECAE36]/30 group"
-                        >
-                            <span>Lihat Layanan Kami</span>
-                            <span className="w-8 h-8 rounded-full bg-[#1B544D] text-white flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <path d="M9 18l6-6-6-6" />
-                                </svg>
-                            </span>
-                        </a>
+                            text="Book Consultation"
+                            bgColor="bg-[#ECAE36] hover:bg-[#E0A12A]"
+                            textColor="text-white"
+                            iconBgColor="bg-[#1B544D]"
+                            iconTextColor="text-white"
+                        />
                     </div>
                 </div>
             </section>
@@ -717,100 +548,19 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                     </h2>
 
                     <div className="mt-8 flex justify-center">
-                        <a
+                        <CustomButton
                             href="#contact"
-                            className="inline-flex items-center gap-3 pl-6 pr-2 py-2 rounded-full bg-[#EF4444] hover:bg-[#DC2626] text-white font-medium tracking-wide text-sm sm:text-base transition-all shadow-lg shadow-rose-900/30 group"
-                        >
-                            <span>Hubungi Konsultan Kami</span>
-                            <span className="w-8 h-8 rounded-full bg-white/20 text-white flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <path d="M9 18l6-6-6-6" />
-                                </svg>
-                            </span>
-                        </a>
+                            text="Consultation Now"
+                            bgColor="bg-[#EF4444] hover:bg-[#DC2626]"
+                            textColor="text-white"
+                            iconBgColor="bg-white/20"
+                            iconTextColor="text-white"
+                        />
                     </div>
                 </div>
             </section>
 
-            {/* SECTION 10: FOOTER */}
-            <footer id="contact" className="bg-[#0A1F1B] text-slate-300 pt-16 pb-8 border-t border-[#16352E]">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12 pb-14 border-b border-[#1A3D36]">
-
-                        {/* Brand */}
-                        <div>
-                            <a href="/" className="flex items-center group shrink-0 mb-5">
-                                <img
-                                    src="/images/logo-white.png"
-                                    alt="Arunika Global Valuindo"
-                                    className="h-40 w-auto object-contain"
-                                />
-                            </a>
-
-                            <p className="text-xs font-light text-slate-400 leading-relaxed tracking-wide max-w-sm">
-                                Layanan valuasi aset, studi kelayakan, dan konsultasi strategi korporasi berstandar global untuk mengakselerasi pertumbuhan bisnis yang berkelanjutan.
-                            </p>
-                        </div>
-                        {/* Menu Navigation */}
-                        <div>
-                            <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-white mb-4">
-                                NAVIGASI
-                            </h4>
-                            <ul className="space-y-2.5 text-xs font-light tracking-wide text-slate-400">
-                                <li>
-                                    <a href="#about" className="hover:text-[#ECAE36] transition-colors">Tentang Kami</a>
-                                </li>
-                                <li>
-                                    <a href="#services" className="hover:text-[#ECAE36] transition-colors">Layanan</a>
-                                </li>
-                                <li>
-                                    <a href="#blog" className="hover:text-[#ECAE36] transition-colors">Blog</a>
-                                </li>
-                                <li>
-                                    <a href="#contact" className="hover:text-[#ECAE36] transition-colors">Kontak</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        {/* Layanan */}
-                        <div>
-                            <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-white mb-4">
-                                LAYANAN
-                            </h4>
-                            <ul className="space-y-2.5 text-xs font-light tracking-wide text-slate-400">
-                                {displayServices.slice(0, 4).map((srv, idx) => (
-                                    <li key={idx}>
-                                        <a href="#services" className="hover:text-[#ECAE36] transition-colors line-clamp-1">{srv.title}</a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Kontak Kami */}
-                        <div>
-                            <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-white mb-4">
-                                KONTAK KAMI
-                            </h4>
-                            <ul className="space-y-2.5 text-xs font-light tracking-wide text-slate-400">
-                                <li>+62 (21) 555-0198</li>
-                                <li>contact@arunika-valuindo.com</li>
-                                <li>Jakarta Selatan, DKI Jakarta, Indonesia</li>
-                                <li>Senin - Jumat: 08.00 - 17.00 WIB</li>
-                            </ul>
-                        </div>
-
-                    </div>
-
-                    {/* Sub Footer */}
-                    <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs font-light tracking-wide text-slate-500 gap-4">
-                        <div>
-                            Copyright © {new Date().getFullYear()} PT Arunika Global Valuindo. All rights reserved.
-                        </div>
-                    </div>
-
-                </div>
-            </footer>
+            <Footer services={services} />
 
             {/* MODAL DETAIL LAYANAN */}
             {selectedService && (

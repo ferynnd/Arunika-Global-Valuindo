@@ -72,7 +72,7 @@
           <h3 class="text-white font-semibold text-xl mb-4">Menu</h3>
           <ul class="space-y-2">
             <li><a href="{{route('home')}}" class="text-gray-400 hover:text-primary">Home</a></li>
-            <li><a href="{{route('about')}}" class="text-gray-400 hover:text-primary">Tentang Kami</a></li>
+            <li><a href="{{route('aboutus')}}" class="text-gray-400 hover:text-primary">Tentang Kami</a></li>
             <li><a href="{{route('trainer')}}" class="text-gray-400 hover:text-primary">Profil Pelatih</a></li>
             <li><a href="{{route('article.page')}}" class="text-gray-400 hover:text-primary">Artikel</a></li>
             <li><a href="{{route('contact')}}" class="text-gray-400 hover:text-primary">Kontak</a></li>

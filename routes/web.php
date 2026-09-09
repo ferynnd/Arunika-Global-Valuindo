@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -35,6 +36,12 @@ Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 // Public Services Routes
 Route::get('/services', [ServicesController::class, 'index'])->name('services.index');
 Route::get('/services/{slug}', [ServicesController::class, 'show'])->name('services.show');
+
+// Public AboutUs Routes
+Route::get('/aboutus', [UserController::class, 'aboutus'])->name('aboutus');
+
+// Public PrivacyPolicy Routes
+Route::get('/privacypolicy', [UserController::class, 'privacypolicy'])->name('privacypolicy');
 
 // PRIVATE ADMIN PORTAL ROUTES
 $adminPrefix = env('ADMIN_PATH', 'secure-panel-arunika');
