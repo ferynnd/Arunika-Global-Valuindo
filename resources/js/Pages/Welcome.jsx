@@ -278,6 +278,52 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                 </div>
             </section>
 
+            {/* SECTION: OUR MISSION */}
+            <section className="py-16 sm:py-24 bg-[#FAF8F5] border-t border-[#EAE6DF]/60">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+
+                        {/* Left: Owner Image */}
+                        <div className="lg:col-span-5 flex justify-center lg:justify-start">
+                            <div className="relative overflow-hidden rounded-3xl sm:rounded-[32px] shadow-sm max-w-md w-full">
+                                <img
+                                    src="/images/owner.png"
+                                    alt="Our Mission - Arunika Global Valuindo"
+                                    className="w-full h-[380px] sm:h-[460px] object-cover object-center"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Right: Content */}
+                        <div className="lg:col-span-7 space-y-6">
+                            <span className="text-sm sm:text-base font-semibold tracking-wide text-[#3D7068] block">
+                                Our Mission
+                            </span>
+
+                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-wide text-[#1B544D] leading-[1.3]">
+                                Memberikan solusi valuasi dan strategi korporasi yang independen, akurat, dan terpercaya untuk mengakselerasi pertumbuhan bisnis di Indonesia.
+                            </h2>
+
+                            <div className="pt-2">
+                                <CustomButton
+                                    href={route('aboutus')}
+                                    text="About Us"
+                                    bgColor="bg-[#ECAE36] hover:bg-[#D99B26]"
+                                    textColor="text-white"
+                                    iconBgColor="bg-[#D99B26]"
+                                    iconTextColor="text-white"
+                                />
+                            </div>
+
+                            <p className="text-xs sm:text-sm text-[#52605E] leading-relaxed tracking-wide pt-4 max-w-xl font-light">
+                                PT Arunika Global Valuindo berkomitmen mendampingi setiap langkah strategis korporasi melalui pendekatan berbasis data, standar penilaian internasional, dan integritas tanpa kompromi.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
             {/* SECTION 5: WHY CHOOSE US */}
             <section className="py-16 sm:py-24 border-t border-[#EAE6DF]/80">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
