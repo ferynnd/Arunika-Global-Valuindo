@@ -32,21 +32,13 @@ export default function AuthenticatedLayout({ header, children }) {
             >
                 <div>
                     {/* Brand Logo Header */}
-                    <div className="h-20 flex items-center justify-between px-6 border-b border-[#1B4F47]">
-                        <Link href="/" className="flex items-center gap-3 group">
+                    <div className="h-20 mt-2 flex items-center justify-center">
+                        <Link href={route('admin.dashboard')} className="flex items-center gap-3 group">
                             <img
-                                src="/images/logo.png"
+                                src="/images/logo-white.png"
                                 alt="Logo Arunika"
-                                className="w-9 h-9 object-contain rounded-xl"
+                                className="w-24 h-24 object-contain"
                             />
-                            <div className="leading-tight">
-                                <span className="font-extrabold text-base tracking-wider text-white block uppercase">
-                                    ARUNIKA
-                                </span>
-                                <span className="text-[9px] font-semibold tracking-widest text-[#ECAE36] block uppercase">
-                                    ADMIN PORTAL
-                                </span>
-                            </div>
                         </Link>
 
                         {/* Mobile close button */}

@@ -22,7 +22,7 @@ export default function Edit({ mustVerifyEmail, status }) {
 
             <div className="py-8 bg-[#FAF8F5]/60 min-h-[calc(100vh-8rem)]">
                 <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-6">
-                    <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-sm">
+                    <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80">
                         <UpdateProfileInformationForm
                             mustVerifyEmail={mustVerifyEmail}
                             status={status}
@@ -30,11 +30,11 @@ export default function Edit({ mustVerifyEmail, status }) {
                         />
                     </div>
 
-                    <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-sm">
+                    <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80">
                         <UpdatePasswordForm className="max-w-xl" />
                     </div>
 
-                    <div className="bg-white p-6 sm:p-8 rounded-2xl border border-rose-100 shadow-sm">
+                    <div className="bg-white p-6 sm:p-8 rounded-2xl border border-rose-100">
                         <DeleteUserForm className="max-w-xl" />
                     </div>
                 </div>

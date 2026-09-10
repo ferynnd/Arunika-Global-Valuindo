@@ -38,7 +38,7 @@ export default function Dashboard() {
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6">
 
                     {/* Welcome Hero Banner */}
-                    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#1B544D] via-[#164943] to-[#0E2C27] p-8 sm:p-10 text-white border border-[#1B544D]">
+                    <div className="relative overflow-hidden rounded-2xl bg-[#1B544D] p-8 sm:p-10 text-white border border-[#1B544D]">
                         <div className="relative z-10 max-w-2xl">
                             <span className="inline-flex items-center gap-1.5 rounded-xl bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#ECAE36] backdrop-blur-md border border-white/10">
                                 Arunika Global Valuindo
@@ -73,10 +73,12 @@ export default function Dashboard() {
                                 <span className="text-xs text-[#718783] font-medium">TipTap Editor Siap</span>
                                 <Link
                                     href={route('admin.articles.index')}
-                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-[#1B544D] text-white hover:bg-[#15433E] transition-colors"
+                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-[#1B544D] text-white hover:bg-[#15433E] transition-colors"
                                 >
                                     <span>Kelola Artikel</span>
-                                    <span>→</span>
+                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
                                 </Link>
                             </div>
                         </div>
@@ -98,10 +100,12 @@ export default function Dashboard() {
                                 <span className="text-xs text-[#718783] font-medium">Testimoni Publik</span>
                                 <Link
                                     href={route('admin.testimonials.index')}
-                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-[#1B544D] text-white hover:bg-[#15433E] transition-colors"
+                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-[#1B544D] text-white hover:bg-[#15433E] transition-colors"
                                 >
                                     <span>Kelola Testimoni</span>
-                                    <span>→</span>
+                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
                                 </Link>
                             </div>
                         </div>
@@ -124,10 +128,12 @@ export default function Dashboard() {
                                 <span className="text-xs text-[#718783] font-medium">Status Terverifikasi</span>
                                 <Link
                                     href={route('profile.edit')}
-                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-[#FAF8F5] text-[#1B544D] border border-[#E3DFD7] hover:bg-[#EFECE6] transition-colors"
+                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-[#FAF8F5] text-[#1B544D] border border-[#E3DFD7] hover:bg-[#EFECE6] transition-colors"
                                 >
                                     <span>Edit Profil</span>
-                                    <span>→</span>
+                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
                                 </Link>
                             </div>
                         </div>

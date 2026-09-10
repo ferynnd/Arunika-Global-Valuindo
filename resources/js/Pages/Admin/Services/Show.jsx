@@ -31,19 +31,25 @@ export default function Show({ service }) {
                     <div className="flex items-center gap-2">
                         <Link
                             href={route('admin.services.index')}
-                            className="px-4 py-2 rounded-full border border-slate-300 text-slate-600 font-semibold text-xs hover:bg-slate-50 transition-colors"
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl border border-slate-300 text-slate-600 font-semibold text-xs sm:text-sm hover:bg-slate-50 transition-colors"
                         >
-                            ← Kembali
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            </svg>
+                            <span>Kembali</span>
                         </Link>
                         <Link
                             href={route('admin.services.edit', service.id)}
-                            className="px-4 py-2 rounded-full bg-[#ECAE36] text-[#1B544D] font-bold text-xs hover:bg-[#d99b26] transition-colors shadow-xs"
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#ECAE36] text-[#1B544D] font-bold text-xs sm:text-sm hover:bg-[#d99b26] transition-colors"
                         >
-                            Edit Layanan
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                            </svg>
+                            <span>Edit Layanan</span>
                         </Link>
                         <button
                             onClick={handleDelete}
-                            className="px-4 py-2 rounded-full bg-rose-50 text-rose-600 border border-rose-200 font-semibold text-xs hover:bg-rose-100 transition-colors"
+                            className="px-4 py-2 rounded-xl bg-rose-50 text-rose-600 border border-rose-200 font-semibold text-xs sm:text-sm hover:bg-rose-100 transition-colors"
                         >
                             Hapus
                         </button>
@@ -57,7 +63,7 @@ export default function Show({ service }) {
                 <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-6">
 
                     {/* Main Card */}
-                    <div className="bg-white rounded-3xl border border-[#EAE6DF] p-6 sm:p-8 shadow-sm space-y-6">
+                    <div className="bg-white rounded-2xl border border-[#EAE6DF] p-6 sm:p-8 space-y-6">
 
                         {/* Header Banner / Image */}
                         {service.thumbnail && (

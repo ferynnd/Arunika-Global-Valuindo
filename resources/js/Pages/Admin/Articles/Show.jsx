@@ -17,15 +17,21 @@ export default function Show({ article }) {
                     <div className="flex items-center gap-3">
                         <Link
                             href={route('admin.articles.edit', article.id)}
-                            className="px-4 py-2 rounded-xl text-xs font-semibold bg-[#1B544D] text-white hover:bg-[#143F39] transition-colors shadow-sm"
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-[#1B544D] text-white hover:bg-[#143F39] transition-colors"
                         >
-                            ✏️ Edit Artikel
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                            </svg>
+                            <span>Edit Artikel</span>
                         </Link>
                         <Link
                             href={route('admin.articles.index')}
-                            className="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-slate-300 transition-colors"
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-200 text-slate-700 hover:bg-slate-300 transition-colors"
                         >
-                            ← Kembali
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            </svg>
+                            <span>Kembali</span>
                         </Link>
                     </div>
                 </div>
@@ -35,7 +41,7 @@ export default function Show({ article }) {
 
             <div className="py-8 bg-[#FAF8F5]/60 min-h-[calc(100vh-8rem)]">
                 <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-6">
-                    <div className="bg-white rounded-2xl border border-slate-200/80 p-8 shadow-sm">
+                    <div className="bg-white rounded-2xl border border-slate-200/80 p-8">
 
                         {/* Status & Kategori Badge */}
                         <div className="flex items-center gap-3 mb-4">
