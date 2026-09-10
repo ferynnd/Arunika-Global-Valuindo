@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import InfoTooltip from '@/Components/InfoTooltip';
 
 /**
  * SeoPanel – reusable SEO input form block with live Google & OG preview.
@@ -78,15 +79,15 @@ export default function SeoPanel({
                 <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
                     Preview di Google Search
                 </p>
-                <div className="bg-white rounded-2xl border border-[#EAE6DF] p-5 shadow-xs">
+                <div className="bg-white rounded-2xl border border-[#EAE6DF] p-5">
                     {/* Favicon + URL bar */}
                     <div className="flex items-center gap-2 mb-1.5">
                         <div className="w-5 h-5 rounded-full bg-[#1B544D] flex items-center justify-center flex-shrink-0">
-                            <span className="text-white text-[8px] font-black">A</span>
+                            <span className="text-white text-[9px] font-black">A</span>
                         </div>
                         <div className="min-w-0">
-                            <p className="text-[11px] text-slate-700 font-medium truncate">{siteName}</p>
-                            <p className="text-[10px] text-slate-400 truncate">{previewUrl}</p>
+                            <p className="text-xs text-slate-700 font-medium truncate">{siteName}</p>
+                            <p className="text-xs text-slate-400 truncate">{previewUrl}</p>
                         </div>
                     </div>
                     {/* Title */}
@@ -94,7 +95,7 @@ export default function SeoPanel({
                         {previewTitle}
                     </p>
                     {/* Description */}
-                    <p className="text-slate-600 text-xs leading-relaxed mt-1 line-clamp-2">
+                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mt-1 line-clamp-2">
                         {previewDesc}
                     </p>
                 </div>
@@ -106,7 +107,7 @@ export default function SeoPanel({
                     <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
                         Preview Saat Dibagikan di Media Sosial (OG)
                     </p>
-                    <div className="bg-[#f0f2f5] rounded-2xl border border-[#DDE1E7] overflow-hidden shadow-xs">
+                    <div className="bg-[#f0f2f5] rounded-2xl border border-[#DDE1E7] overflow-hidden">
                         {ogPreview ? (
                             <img src={ogPreview} alt="OG Preview" className="w-full h-44 object-cover" />
                         ) : (
@@ -122,7 +123,7 @@ export default function SeoPanel({
                             </div>
                         )}
                         <div className="p-3 border-t border-[#DDE1E7] bg-white">
-                            <p className="text-[10px] text-slate-400 uppercase tracking-wider">arunikaglobal.com</p>
+                            <p className="text-xs text-slate-400 uppercase tracking-wider">arunikaglobal.com</p>
                             <p className="text-sm font-semibold text-slate-800 mt-0.5 line-clamp-1">
                                 {rawTitle || data.title || 'Judul Layanan'}
                             </p>
@@ -140,7 +141,7 @@ export default function SeoPanel({
                     <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
                         Preview Saat Dibagikan di Media Sosial (OG)
                     </p>
-                    <div className="bg-[#f0f2f5] rounded-2xl border border-[#DDE1E7] overflow-hidden shadow-xs">
+                    <div className="bg-[#f0f2f5] rounded-2xl border border-[#DDE1E7] overflow-hidden">
                         {data._existingThumbnail ? (
                             <img src={data._existingThumbnail} alt="OG Preview" className="w-full h-44 object-cover" />
                         ) : (
@@ -156,7 +157,7 @@ export default function SeoPanel({
                             </div>
                         )}
                         <div className="p-3 border-t border-[#DDE1E7] bg-white">
-                            <p className="text-[10px] text-slate-400 uppercase tracking-wider">arunikaglobal.com</p>
+                            <p className="text-xs text-slate-400 uppercase tracking-wider">arunikaglobal.com</p>
                             <p className="text-sm font-semibold text-slate-800 mt-0.5 line-clamp-1">
                                 {rawTitle || data.title || 'Judul Artikel'}
                             </p>
@@ -165,19 +166,20 @@ export default function SeoPanel({
                             </p>
                         </div>
                     </div>
-                    <p className="text-[11px] text-slate-400 mt-1.5">
-                        Untuk artikel, gambar OG diambil dari thumbnail yang diunggah di tab Konten.
+                    <p className="text-xs text-slate-400 mt-1.5">
+                        Untuk artikel, gambar OG diambil dari thumbnail yang diunggah di atas.
                     </p>
                 </div>
             )}
 
             {/* ---- SEO Title ---- */}
             <div>
-                <div className="flex items-center justify-between mb-1">
-                    <label htmlFor={titleKey} className="block text-xs sm:text-sm font-semibold text-slate-700">
+                <div className="flex items-center justify-between mb-1.5">
+                    <label htmlFor={titleKey} className="inline-flex items-center text-sm font-semibold text-slate-700">
                         SEO Title (Meta Title)
+                        <InfoTooltip text="Kosongkan jika ingin menggunakan judul utama secara otomatis. Ideal 50–60 karakter." />
                     </label>
-                    <span className={`text-[11px] font-mono font-semibold ${titleColor}`}>
+                    <span className={`text-xs font-mono font-semibold ${titleColor}`}>
                         {titleLen}/60
                     </span>
                 </div>
@@ -188,21 +190,19 @@ export default function SeoPanel({
                     onChange={(e) => setData(titleKey, e.target.value)}
                     maxLength={70}
                     placeholder={`Contoh: ${data.title || 'Nama Halaman'} | ${siteName}`}
-                    className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-xs sm:text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D] placeholder-slate-400"
+                    className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D] placeholder-slate-400 px-4 py-2.5"
                 />
-                <p className="text-[11px] text-slate-400 mt-1">
-                    Kosongkan untuk menggunakan Judul secara otomatis. Ideal: 50–60 karakter.
-                </p>
                 {errors[titleKey] && <p className="text-xs text-rose-500 mt-1">{errors[titleKey]}</p>}
             </div>
 
             {/* ---- SEO Description ---- */}
             <div>
-                <div className="flex items-center justify-between mb-1">
-                    <label htmlFor={descKey} className="block text-xs sm:text-sm font-semibold text-slate-700">
+                <div className="flex items-center justify-between mb-1.5">
+                    <label htmlFor={descKey} className="inline-flex items-center text-sm font-semibold text-slate-700">
                         SEO Description (Meta Description)
+                        <InfoTooltip text="Kosongkan jika ingin menggunakan ringkasan secara otomatis. Ideal 120–160 karakter untuk hasil pencarian Google." />
                     </label>
-                    <span className={`text-[11px] font-mono font-semibold ${descColor}`}>
+                    <span className={`text-xs font-mono font-semibold ${descColor}`}>
                         {descLen}/160
                     </span>
                 </div>
@@ -213,18 +213,16 @@ export default function SeoPanel({
                     onChange={(e) => setData(descKey, e.target.value)}
                     maxLength={180}
                     placeholder="Tuliskan deskripsi singkat yang menarik untuk mesin pencari. Ideal: 120–160 karakter."
-                    className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-xs sm:text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D] placeholder-slate-400"
+                    className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D] placeholder-slate-400 px-4 py-2.5"
                 />
-                <p className="text-[11px] text-slate-400 mt-1">
-                    Kosongkan untuk menggunakan Ringkasan (excerpt) secara otomatis.
-                </p>
                 {errors[descKey] && <p className="text-xs text-rose-500 mt-1">{errors[descKey]}</p>}
             </div>
 
             {/* ---- SEO Keywords ---- */}
             <div>
-                <label htmlFor={kwKey} className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
+                <label htmlFor={kwKey} className="inline-flex items-center text-sm font-semibold text-slate-700 mb-1.5">
                     SEO Keywords
+                    <InfoTooltip text="Pisahkan tiap kata kunci dengan koma. Contoh: valuasi aset, konsultasi korporasi, studi kelayakan." />
                 </label>
                 <input
                     id={kwKey}
@@ -232,38 +230,35 @@ export default function SeoPanel({
                     value={rawKw}
                     onChange={(e) => setData(kwKey, e.target.value)}
                     placeholder="valuasi aset, konsultasi korporasi, feasibility study, ..."
-                    className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-xs sm:text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D] placeholder-slate-400"
+                    className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D] placeholder-slate-400 px-4 py-2.5"
                 />
-                <p className="text-[11px] text-slate-400 mt-1">
-                    Pisahkan tiap kata kunci dengan koma. Contoh: strategi bisnis, konsultan korporasi, studi kelayakan.
-                </p>
                 {errors[kwKey] && <p className="text-xs text-rose-500 mt-1">{errors[kwKey]}</p>}
             </div>
 
             {/* ---- OG Image Upload (Services only) ---- */}
             {hasSeoOgImage && (
                 <div>
-                    <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
+                    <label className="inline-flex items-center text-sm font-semibold text-slate-700 mb-1.5">
                         Open Graph Image (Gambar Share Media Sosial)
+                        <InfoTooltip text="Ukuran ideal: 1200×630 px (rasio 1.91:1). Maksimal 2 MB. Jika dikosongkan, gambar banner layanan akan digunakan." />
                     </label>
-                    <div className="flex items-center gap-4">
+                    <div className="space-y-3">
                         {ogPreview && (
-                            <img
-                                src={ogPreview}
-                                alt="OG Image Preview"
-                                className="w-24 h-14 rounded-xl object-cover border border-[#EAE6DF] flex-shrink-0"
-                            />
+                            <div className="overflow-hidden rounded-xl border border-[#EAE6DF] max-w-md">
+                                <img
+                                    src={ogPreview}
+                                    alt="OG Image Preview"
+                                    className="w-full h-40 object-cover"
+                                />
+                            </div>
                         )}
                         <input
                             type="file"
                             accept="image/*"
                             onChange={handleOgImageChange}
-                            className="block w-full text-xs sm:text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#1B544D]/10 file:text-[#1B544D] hover:file:bg-[#1B544D]/20 cursor-pointer"
+                            className="block w-full text-xs sm:text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#1B544D]/10 file:text-[#1B544D] hover:file:bg-[#1B544D]/20 cursor-pointer"
                         />
                     </div>
-                    <p className="text-[11px] text-slate-400 mt-1">
-                        Ukuran ideal: 1200×630 px (rasio 1.91:1). Maks. 2 MB. Jika kosong, gambar thumbnail akan digunakan.
-                    </p>
                     {errors.og_image && <p className="text-xs text-rose-500 mt-1">{errors.og_image}</p>}
                 </div>
             )}
@@ -271,18 +266,18 @@ export default function SeoPanel({
             {/* ---- Tips Box ---- */}
             <div className="rounded-2xl bg-[#1B544D]/5 border border-[#1B544D]/10 p-4">
                 <p className="text-xs font-bold text-[#1B544D] mb-2 flex items-center gap-1.5">
-                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                         <circle cx="12" cy="12" r="10"/>
                         <line x1="12" y1="8" x2="12" y2="12"/>
                         <line x1="12" y1="16" x2="12.01" y2="16"/>
                     </svg>
                     Tips SEO
                 </p>
-                <ul className="space-y-1 text-[11px] text-[#1B544D]/80 list-disc list-inside">
+                <ul className="space-y-1 text-xs text-[#1B544D]/80 list-disc list-inside">
                     <li>SEO Title ideal antara <strong>50–60 karakter</strong> agar tidak terpotong di Google.</li>
                     <li>Meta Description ideal <strong>120–160 karakter</strong> — buat kalimat yang menarik dan mengandung kata kunci utama.</li>
                     <li>Keywords tidak terlalu berpengaruh pada ranking, namun berguna untuk konteks internal.</li>
-                    <li>Jika kolom dikosongkan, judul dan excerpt akan digunakan sebagai fallback otomatis.</li>
+                    <li>Jika kolom dikosongkan, judul dan ringkasan akan digunakan sebagai fallback otomatis.</li>
                 </ul>
             </div>
 

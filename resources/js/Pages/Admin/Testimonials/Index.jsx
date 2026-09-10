@@ -53,9 +53,12 @@ export default function Index({ testimonials, filters }) {
                     </div>
                     <Link
                         href={route('admin.testimonials.create')}
-                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#1B544D] text-white font-semibold text-xs sm:text-sm hover:bg-[#15433E] transition-all shadow-md shadow-[#1B544D]/20"
+                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#1B544D] text-white font-semibold text-xs sm:text-sm hover:bg-[#15433E] transition-all"
                     >
-                        <span>+ Tambah Testimoni Baru</span>
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                        </svg>
+                        <span>Tambah Testimoni Baru</span>
                     </Link>
                 </div>
             }
@@ -67,16 +70,18 @@ export default function Index({ testimonials, filters }) {
 
                     {/* Alert Flash Message */}
                     {flash?.success && (
-                        <div className="rounded-2xl bg-emerald-50 border border-emerald-200 p-4 text-xs sm:text-sm font-medium text-emerald-800 flex items-center justify-between shadow-xs">
-                            <div className="flex items-center gap-2">
-                                <span>✅</span>
+                        <div className="rounded-2xl bg-emerald-50 border border-emerald-200 p-4 text-xs sm:text-sm font-medium text-emerald-800 flex items-center justify-between">
+                            <div className="flex items-center gap-2.5">
+                                <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
                                 <span>{flash.success}</span>
                             </div>
                         </div>
                     )}
 
                     {/* Filter & Search Bar */}
-                    <div className="bg-white rounded-3xl border border-[#EAE6DF] p-5 shadow-sm">
+                    <div className="bg-white rounded-2xl border border-[#EAE6DF] p-5">
                         <form onSubmit={handleSearch} className="grid grid-cols-1 sm:grid-cols-4 gap-4">
                             <div className="sm:col-span-2">
                                 <input
@@ -84,7 +89,7 @@ export default function Index({ testimonials, filters }) {
                                     placeholder="Cari nama klien, jabatan, atau isi kutipan..."
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
-                                    className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-xs sm:text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D] placeholder-slate-400"
+                                    className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D] placeholder-slate-400 px-4 py-2.5"
                                 />
                             </div>
 
@@ -92,7 +97,7 @@ export default function Index({ testimonials, filters }) {
                                 <select
                                     value={statusFilter}
                                     onChange={(e) => setStatusFilter(e.target.value)}
-                                    className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-xs sm:text-sm focus:border-[#1B544D] focus:ring-[#1B544D] text-slate-700"
+                                    className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-sm focus:border-[#1B544D] focus:ring-[#1B544D] text-slate-700 px-4 py-2.5"
                                 >
                                     <option value="">Semua Status</option>
                                     <option value="active">Aktif</option>
@@ -103,14 +108,17 @@ export default function Index({ testimonials, filters }) {
                             <div className="flex items-center gap-2">
                                 <button
                                     type="submit"
-                                    className="w-full py-2.5 px-4 bg-[#1B544D] text-white rounded-xl text-xs sm:text-sm font-semibold hover:bg-[#15433E] transition-colors"
+                                    className="w-full py-2.5 px-4 bg-[#1B544D] text-white rounded-xl text-sm font-semibold hover:bg-[#15433E] transition-colors flex items-center justify-center gap-2"
                                 >
-                                    Filter
+                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                    <span>Filter</span>
                                 </button>
                                 {(search || statusFilter) && (
                                     <Link
                                         href={route('admin.testimonials.index')}
-                                        className="py-2.5 px-4 bg-slate-100 text-slate-600 rounded-xl text-xs sm:text-sm font-semibold hover:bg-slate-200 transition-colors"
+                                        className="py-2.5 px-4 bg-slate-100 text-slate-600 rounded-xl text-sm font-semibold hover:bg-slate-200 transition-colors flex items-center justify-center"
                                     >
                                         Reset
                                     </Link>
@@ -120,10 +128,10 @@ export default function Index({ testimonials, filters }) {
                     </div>
 
                     {/* Table Container */}
-                    <div className="bg-white rounded-3xl border border-[#EAE6DF] overflow-hidden shadow-sm">
+                    <div className="bg-white rounded-2xl border border-[#EAE6DF] overflow-hidden">
                         <div className="overflow-x-auto">
-                            <table className="w-full text-left text-xs sm:text-sm">
-                                <thead className="bg-[#FAF8F5] border-b border-[#EAE6DF] text-[#1B544D] font-bold uppercase tracking-wider text-[11px]">
+                            <table className="w-full text-left text-sm">
+                                <thead className="bg-[#FAF8F5] border-b border-[#EAE6DF] text-[#1B544D] font-bold uppercase tracking-wider text-xs">
                                     <tr>
                                         <th className="py-4 px-6">Klien</th>
                                         <th className="py-4 px-6">Jabatan & Perusahaan</th>
@@ -151,19 +159,19 @@ export default function Index({ testimonials, filters }) {
                                                             </div>
                                                         )}
                                                         <div>
-                                                            <div className="font-bold text-[#1B544D]">{item.author}</div>
+                                                            <div className="font-bold text-[#1B544D] text-sm">{item.author}</div>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td className="py-4 px-6 text-slate-600 font-medium">
+                                                <td className="py-4 px-6 text-slate-600 font-medium text-sm">
                                                     {item.role || '-'}
                                                 </td>
                                                 <td className="py-4 px-6 text-slate-600 max-w-xs sm:max-w-md">
-                                                    <p className="line-clamp-2 italic text-xs leading-relaxed">
+                                                    <p className="line-clamp-2 italic text-xs sm:text-sm leading-relaxed">
                                                         "{item.quote}"
                                                     </p>
                                                 </td>
-                                                <td className="py-4 px-6 text-center font-mono font-semibold text-slate-600">
+                                                <td className="py-4 px-6 text-center font-mono font-semibold text-slate-600 text-sm">
                                                     {item.sort_order ?? 0}
                                                 </td>
                                                 <td className="py-4 px-6 text-center">
@@ -172,13 +180,13 @@ export default function Index({ testimonials, filters }) {
                                                 <td className="py-4 px-6 text-right space-x-2 whitespace-nowrap">
                                                     <Link
                                                         href={route('admin.testimonials.edit', item.id)}
-                                                        className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#ECAE36]/15 text-[#B8811A] hover:bg-[#ECAE36]/30 transition-colors"
+                                                        className="inline-flex items-center px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#ECAE36]/15 text-[#B8811A] hover:bg-[#ECAE36]/30 transition-colors"
                                                     >
                                                         Edit
                                                     </Link>
                                                     <button
                                                         onClick={() => handleDelete(item.id, item.author)}
-                                                        className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-50 text-rose-600 hover:bg-rose-100 transition-colors"
+                                                        className="inline-flex items-center px-3 py-1.5 rounded-xl text-xs font-semibold bg-rose-50 text-rose-600 hover:bg-rose-100 transition-colors"
                                                     >
                                                         Hapus
                                                     </button>
@@ -188,7 +196,11 @@ export default function Index({ testimonials, filters }) {
                                     ) : (
                                         <tr>
                                             <td colSpan="6" className="py-12 text-center text-slate-400">
-                                                <div className="text-3xl mb-2">💬</div>
+                                                <div className="w-12 h-12 rounded-2xl bg-[#1B544D]/10 text-[#1B544D] mx-auto mb-3 flex items-center justify-center">
+                                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                                    </svg>
+                                                </div>
                                                 <p className="font-medium text-sm">Belum ada testimoni yang ditemukan.</p>
                                             </td>
                                         </tr>
@@ -209,7 +221,7 @@ export default function Index({ testimonials, filters }) {
                                             key={idx}
                                             href={link.url || '#'}
                                             dangerouslySetInnerHTML={{ __html: link.label }}
-                                            className={`px-3 py-1.5 rounded-lg text-xs font-semibold ${
+                                            className={`px-3 py-1.5 rounded-xl text-xs font-semibold ${
                                                 link.active
                                                     ? 'bg-[#1B544D] text-white'
                                                     : 'bg-white text-slate-600 hover:bg-slate-100 border border-[#EAE6DF]'

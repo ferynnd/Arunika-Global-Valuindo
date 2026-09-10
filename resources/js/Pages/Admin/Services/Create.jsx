@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import RichTextEditor from '@/Components/RichTextEditor';
 import SeoPanel from '@/Components/SeoPanel';
+import InfoTooltip from '@/Components/InfoTooltip';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useState } from 'react';
 
@@ -22,7 +23,6 @@ export default function Create() {
     });
 
     const [previewUrl, setPreviewUrl] = useState(null);
-    const [activeTab, setActiveTab] = useState('content'); // 'content' | 'seo'
 
     const handleThumbnailChange = (e) => {
         const file = e.target.files[0];
@@ -56,34 +56,6 @@ export default function Create() {
         post(route('admin.services.store'));
     };
 
-    const hasSeoErrors = errors.seo_title || errors.seo_description || errors.seo_keywords || errors.og_image;
-
-    const tabs = [
-        {
-            key: 'content',
-            label: 'Konten Layanan',
-            icon: (
-                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                    <polyline points="14 2 14 8 20 8"/>
-                    <line x1="16" y1="13" x2="8" y2="13"/>
-                    <line x1="16" y1="17" x2="8" y2="17"/>
-                </svg>
-            ),
-        },
-        {
-            key: 'seo',
-            label: 'SEO & Meta',
-            icon: (
-                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="11" cy="11" r="8"/>
-                    <path d="m21 21-4.35-4.35"/>
-                </svg>
-            ),
-            hasError: !!hasSeoErrors,
-        },
-    ];
-
     return (
         <AuthenticatedLayout
             header={
@@ -98,9 +70,12 @@ export default function Create() {
                     </div>
                     <Link
                         href={route('admin.services.index')}
-                        className="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-200 text-slate-700 hover:bg-slate-300 transition-colors"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-200 text-slate-700 hover:bg-slate-300 transition-colors"
                     >
-                        ← Kembali ke Daftar
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        <span>Kembali ke Daftar</span>
                     </Link>
                 </div>
             }
@@ -109,186 +84,157 @@ export default function Create() {
 
             <div className="py-8 bg-[#FAF8F5]/60 min-h-[calc(100vh-8rem)]">
                 <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-                    <form onSubmit={submit}>
-                        {/* Tab Navigation */}
-                        <div className="flex gap-1 bg-white rounded-2xl border border-[#EAE6DF] p-1.5 shadow-sm mb-5">
-                            {tabs.map((tab) => (
-                                <button
-                                    key={tab.key}
-                                    type="button"
-                                    onClick={() => setActiveTab(tab.key)}
-                                    className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
-                                        activeTab === tab.key
-                                            ? 'bg-[#1B544D] text-white shadow-sm'
-                                            : 'text-slate-500 hover:text-[#1B544D] hover:bg-[#FAF8F5]'
-                                    }`}
-                                >
-                                    {tab.icon}
-                                    <span>{tab.label}</span>
-                                    {tab.hasError && (
-                                        <span className="w-2 h-2 rounded-full bg-rose-500 flex-shrink-0" />
-                                    )}
-                                </button>
-                            ))}
-                        </div>
+                    <form onSubmit={submit} className="space-y-6">
 
-                        <div className="bg-white rounded-3xl border border-[#EAE6DF] p-6 sm:p-8 shadow-sm">
+                        {/* Main Content Card */}
+                        <div className="bg-white rounded-2xl border border-[#EAE6DF] p-6 sm:p-8 space-y-6">
+                            <h3 className="text-base font-bold text-[#1B544D] pb-3 border-b border-[#EAE6DF]">
+                                Informasi Utama Layanan
+                            </h3>
 
-                            {/* ======== TAB: CONTENT ======== */}
-                            {activeTab === 'content' && (
-                                <div className="space-y-6">
-
-                                    {/* Nama / Judul Layanan */}
-                                    <div>
-                                        <label htmlFor="title" className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
-                                            Nama Layanan <span className="text-rose-500">*</span>
-                                        </label>
-                                        <input
-                                            id="title"
-                                            type="text"
-                                            value={data.title}
-                                            onChange={(e) => setData('title', e.target.value)}
-                                            placeholder="Contoh: Valuasi Aset Korporasi & Bisnis..."
-                                            className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-xs sm:text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D] placeholder-slate-400"
-                                            required
-                                        />
-                                        {errors.title && <p className="text-xs text-rose-500 mt-1">{errors.title}</p>}
-                                    </div>
-
-                                    {/* Grid Status & Urutan & Icon */}
-                                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                        <div>
-                                            <label htmlFor="status" className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
-                                                Status Layanan <span className="text-rose-500">*</span>
-                                            </label>
-                                            <select
-                                                id="status"
-                                                value={data.status}
-                                                onChange={(e) => setData('status', e.target.value)}
-                                                className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-xs sm:text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D]"
-                                            >
-                                                <option value="active">Aktif (Tampil)</option>
-                                                <option value="inactive">Non-Aktif (Sembunyikan)</option>
-                                            </select>
-                                            {errors.status && <p className="text-xs text-rose-500 mt-1">{errors.status}</p>}
-                                        </div>
-
-                                        <div>
-                                            <label htmlFor="sort_order" className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
-                                                Urutan Tampilan
-                                            </label>
-                                            <input
-                                                id="sort_order"
-                                                type="number"
-                                                min="0"
-                                                value={data.sort_order}
-                                                onChange={(e) => setData('sort_order', parseInt(e.target.value) || 0)}
-                                                className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-xs sm:text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D]"
-                                            />
-                                            {errors.sort_order && <p className="text-xs text-rose-500 mt-1">{errors.sort_order}</p>}
-                                        </div>
-
-                                        <div>
-                                            <label htmlFor="icon" className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
-                                                Kode / Nama Icon (Opsional)
-                                            </label>
-                                            <input
-                                                id="icon"
-                                                type="text"
-                                                value={data.icon}
-                                                onChange={(e) => setData('icon', e.target.value)}
-                                                placeholder="Contoh: chart-bar, shield-check"
-                                                className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-xs sm:text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D]"
-                                            />
-                                            {errors.icon && <p className="text-xs text-rose-500 mt-1">{errors.icon}</p>}
-                                        </div>
-                                    </div>
-
-                                    {/* Ringkasan Layanan */}
-                                    <div>
-                                        <label htmlFor="excerpt" className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
-                                            Deskripsi Singkat (Ringkasan)
-                                        </label>
-                                        <textarea
-                                            id="excerpt"
-                                            rows="3"
-                                            value={data.excerpt}
-                                            onChange={(e) => setData('excerpt', e.target.value)}
-                                            placeholder="Tuliskan 1-2 kalimat ringkasan layanan yang ditampilkan pada kartu landing page..."
-                                            className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-xs sm:text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D] placeholder-slate-400"
-                                        />
-                                        {errors.excerpt && <p className="text-xs text-rose-500 mt-1">{errors.excerpt}</p>}
-                                    </div>
-
-                                    {/* Upload Gambar / Thumbnail */}
-                                    <div>
-                                        <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
-                                            Gambar / Banner Layanan
-                                        </label>
-                                        <input
-                                            type="file"
-                                            accept="image/*"
-                                            onChange={handleThumbnailChange}
-                                            className="w-full text-xs sm:text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#1B544D]/10 file:text-[#1B544D] hover:file:bg-[#1B544D]/20 cursor-pointer"
-                                        />
-                                        {errors.thumbnail && <p className="text-xs text-rose-500 mt-1">{errors.thumbnail}</p>}
-
-                                        {previewUrl && (
-                                            <div className="mt-3">
-                                                <p className="text-xs text-slate-500 mb-1 font-semibold">Pratinjau Gambar:</p>
-                                                <img
-                                                    src={previewUrl}
-                                                    alt="Pratinjau"
-                                                    className="w-48 h-32 object-cover rounded-xl border border-[#EAE6DF]"
-                                                />
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    {/* Detail Content (RichTextEditor) */}
-                                    <div>
-                                        <label className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
-                                            Detail Konten & Penjelasan Lengkap Layanan
-                                        </label>
-                                        <RichTextEditor
-                                            value={data.content}
-                                            onChange={(html) => setData('content', html)}
-                                            placeholder="Tuliskan informasi lengkap mengenai cakupan layanan, metodologi, dan manfaat bagi klien..."
-                                        />
-                                        {errors.content && <p className="text-xs text-rose-500 mt-1">{errors.content}</p>}
-                                    </div>
-
-                                </div>
-                            )}
-
-                            {/* ======== TAB: SEO ======== */}
-                            {activeTab === 'seo' && (
-                                <SeoPanel
-                                    data={data}
-                                    setData={setData}
-                                    errors={errors}
-                                    slug=""
+                            {/* Nama / Judul Layanan */}
+                            <div>
+                                <label htmlFor="title" className="inline-flex items-center text-sm font-semibold text-slate-700 mb-1.5">
+                                    <span>Nama Layanan</span> <span className="text-rose-500 ml-1">*</span>
+                                    <InfoTooltip text="Nama layanan utama yang akan ditampilkan pada halaman publik situs web." />
+                                </label>
+                                <input
+                                    id="title"
+                                    type="text"
+                                    value={data.title}
+                                    onChange={(e) => setData('title', e.target.value)}
+                                    placeholder="Contoh: Valuasi Aset Korporasi & Bisnis..."
+                                    className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D] placeholder-slate-400 px-4 py-2.5"
+                                    required
                                 />
-                            )}
+                                {errors.title && <p className="text-xs text-rose-500 mt-1">{errors.title}</p>}
+                            </div>
 
-                            {/* Submit Buttons */}
-                            <div className="flex items-center justify-end gap-3 pt-6 mt-6 border-t border-[#EAE6DF]">
-                                <Link
-                                    href={route('admin.services.index')}
-                                    className="px-5 py-2.5 rounded-full border border-slate-300 text-slate-600 font-semibold text-xs sm:text-sm hover:bg-slate-50 transition-colors"
-                                >
-                                    Batal
-                                </Link>
-                                <button
-                                    type="submit"
-                                    disabled={processing}
-                                    className="px-6 py-2.5 rounded-full bg-[#1B544D] text-white font-semibold text-xs sm:text-sm hover:bg-[#15433E] transition-all shadow-md shadow-[#1B544D]/20 disabled:opacity-50"
-                                >
-                                    {processing ? 'Menyimpan...' : 'Simpan Layanan'}
-                                </button>
+                            {/* Grid Status & Urutan */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label htmlFor="status" className="inline-flex items-center text-sm font-semibold text-slate-700 mb-1.5">
+                                        <span>Status Layanan</span> <span className="text-rose-500 ml-1">*</span>
+                                        <InfoTooltip text="Aktif untuk menampilkan di situs web, Non-aktif untuk menyembunyikannya sementara." />
+                                    </label>
+                                    <select
+                                        id="status"
+                                        value={data.status}
+                                        onChange={(e) => setData('status', e.target.value)}
+                                        className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D] px-4 py-2.5"
+                                    >
+                                        <option value="active">Aktif (Tampil)</option>
+                                        <option value="inactive">Non-Aktif (Sembunyikan)</option>
+                                    </select>
+                                    {errors.status && <p className="text-xs text-rose-500 mt-1">{errors.status}</p>}
+                                </div>
+
+                                <div>
+                                    <label htmlFor="sort_order" className="inline-flex items-center text-sm font-semibold text-slate-700 mb-1.5">
+                                        <span>Urutan Tampilan</span>
+                                        <InfoTooltip text="Nomor urut posisi tampilan layanan di situs web (angka terkecil tampil lebih awal)." />
+                                    </label>
+                                    <input
+                                        id="sort_order"
+                                        type="number"
+                                        min="0"
+                                        value={data.sort_order}
+                                        onChange={(e) => setData('sort_order', parseInt(e.target.value) || 0)}
+                                        className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D] px-4 py-2.5"
+                                    />
+                                    {errors.sort_order && <p className="text-xs text-rose-500 mt-1">{errors.sort_order}</p>}
+                                </div>
+                            </div>
+
+                            {/* Ringkasan Layanan */}
+                            <div>
+                                <label htmlFor="excerpt" className="inline-flex items-center text-sm font-semibold text-slate-700 mb-1.5">
+                                    <span>Deskripsi Singkat (Ringkasan)</span>
+                                    <InfoTooltip text="Tuliskan 1-2 kalimat ringkasan layanan yang ditampilkan pada kartu di halaman beranda & daftar layanan." />
+                                </label>
+                                <textarea
+                                    id="excerpt"
+                                    rows="3"
+                                    value={data.excerpt}
+                                    onChange={(e) => setData('excerpt', e.target.value)}
+                                    placeholder="Tuliskan 1-2 kalimat ringkasan layanan..."
+                                    className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D] placeholder-slate-400 px-4 py-2.5"
+                                />
+                                {errors.excerpt && <p className="text-xs text-rose-500 mt-1">{errors.excerpt}</p>}
+                            </div>
+
+                            {/* Upload Gambar / Banner Layanan */}
+                            <div>
+                                <label className="inline-flex items-center text-sm font-semibold text-slate-700 mb-1.5">
+                                    <span>Gambar / Banner Layanan</span>
+                                    <InfoTooltip text="Ukuran ideal: 1200×630 px (rasio 16:9). Format JPG/PNG, maksimal 2 MB." />
+                                </label>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleThumbnailChange}
+                                    className="w-full text-xs sm:text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#1B544D]/10 file:text-[#1B544D] hover:file:bg-[#1B544D]/20 cursor-pointer"
+                                />
+                                {errors.thumbnail && <p className="text-xs text-rose-500 mt-1">{errors.thumbnail}</p>}
+
+                                {previewUrl && (
+                                    <div className="mt-3 space-y-1.5">
+                                        <p className="text-xs text-slate-500 font-semibold">Pratinjau Gambar:</p>
+                                        <div className="w-full overflow-hidden rounded-2xl border border-[#EAE6DF]">
+                                            <img
+                                                src={previewUrl}
+                                                alt="Pratinjau Layanan"
+                                                className="w-full h-52 sm:h-64 object-cover"
+                                            />
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Detail Content (RichTextEditor) */}
+                            <div>
+                                <label className="inline-flex items-center text-sm font-semibold text-slate-700 mb-1.5">
+                                    <span>Detail Konten & Penjelasan Lengkap Layanan</span>
+                                    <InfoTooltip text="Tuliskan informasi lengkap mengenai cakupan layanan, metodologi, dan manfaat bagi klien." />
+                                </label>
+                                <RichTextEditor
+                                    value={data.content}
+                                    onChange={(html) => setData('content', html)}
+                                    placeholder="Tuliskan informasi lengkap mengenai cakupan layanan, metodologi, dan manfaat bagi klien..."
+                                />
+                                {errors.content && <p className="text-xs text-rose-500 mt-1">{errors.content}</p>}
                             </div>
 
                         </div>
+
+                        {/* Section Card: SEO & Meta */}
+                        <div className="bg-white rounded-2xl border border-[#EAE6DF] p-6 sm:p-8">
+                            <SeoPanel
+                                data={data}
+                                setData={setData}
+                                errors={errors}
+                                fieldPrefix="seo"
+                                previewPath="services/nama-layanan"
+                            />
+                        </div>
+
+                        {/* Submit Buttons Bar */}
+                        <div className="bg-white rounded-2xl border border-[#EAE6DF] p-4 flex items-center justify-end gap-3">
+                            <Link
+                                href={route('admin.services.index')}
+                                className="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-600 font-semibold text-xs sm:text-sm hover:bg-slate-50 transition-colors"
+                            >
+                                Batal
+                            </Link>
+                            <button
+                                type="submit"
+                                disabled={processing}
+                                className="px-6 py-2.5 rounded-xl bg-[#1B544D] text-white font-semibold text-xs sm:text-sm hover:bg-[#15433E] transition-all disabled:opacity-50"
+                            >
+                                {processing ? 'Menyimpan...' : 'Simpan Layanan'}
+                            </button>
+                        </div>
+
                     </form>
                 </div>
             </div>

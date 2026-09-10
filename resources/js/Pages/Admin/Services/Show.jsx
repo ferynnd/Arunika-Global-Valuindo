@@ -18,8 +18,8 @@ export default function Show({ service }) {
                                 Detail Layanan #{service.id}
                             </span>
                             <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${service.status === 'active'
-                                    ? 'bg-emerald-100 text-emerald-800'
-                                    : 'bg-slate-100 text-slate-600'
+                                ? 'bg-emerald-100 text-emerald-800'
+                                : 'bg-slate-100 text-slate-600'
                                 }`}>
                                 {service.status === 'active' ? 'Aktif' : 'Non-Aktif'}
                             </span>
@@ -31,19 +31,25 @@ export default function Show({ service }) {
                     <div className="flex items-center gap-2">
                         <Link
                             href={route('admin.services.index')}
-                            className="px-4 py-2 rounded-full border border-slate-300 text-slate-600 font-semibold text-xs hover:bg-slate-50 transition-colors"
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl border border-slate-300 text-slate-600 font-semibold text-xs sm:text-sm hover:bg-slate-50 transition-colors"
                         >
-                            ← Kembali
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            </svg>
+                            <span>Kembali</span>
                         </Link>
                         <Link
                             href={route('admin.services.edit', service.id)}
-                            className="px-4 py-2 rounded-full bg-[#ECAE36] text-[#1B544D] font-bold text-xs hover:bg-[#d99b26] transition-colors shadow-xs"
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#ECAE36] text-[#1B544D] font-bold text-xs sm:text-sm hover:bg-[#d99b26] transition-colors"
                         >
-                            Edit Layanan
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                            </svg>
+                            <span>Edit Layanan</span>
                         </Link>
                         <button
                             onClick={handleDelete}
-                            className="px-4 py-2 rounded-full bg-rose-50 text-rose-600 border border-rose-200 font-semibold text-xs hover:bg-rose-100 transition-colors"
+                            className="px-4 py-2 rounded-xl bg-rose-50 text-rose-600 border border-rose-200 font-semibold text-xs sm:text-sm hover:bg-rose-100 transition-colors"
                         >
                             Hapus
                         </button>
@@ -57,7 +63,7 @@ export default function Show({ service }) {
                 <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-6">
 
                     {/* Main Card */}
-                    <div className="bg-white rounded-3xl border border-[#EAE6DF] p-6 sm:p-8 shadow-sm space-y-6">
+                    <div className="bg-white rounded-2xl border border-[#EAE6DF] p-6 sm:p-8 space-y-6">
 
                         {/* Header Banner / Image */}
                         {service.thumbnail && (
@@ -91,26 +97,6 @@ export default function Show({ service }) {
                                 </p>
                             </div>
                         )}
-
-                        {/* Fitur / Keunggulan
-                        {service.features && service.features.length > 0 && (
-                            <div>
-                                <h3 className="text-xs font-bold uppercase tracking-wider text-[#1B544D] mb-3">
-                                    Poin Keunggulan / Fitur Utama
-                                </h3>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    {service.features.map((feat, idx) => (
-                                        <div key={idx} className="flex items-center gap-2.5 p-3 rounded-xl bg-[#FAF8F5] border border-[#EAE6DF] text-xs font-semibold text-slate-800">
-                                            <span className="w-5 h-5 rounded-full bg-[#1B544D] text-[#ECAE36] flex items-center justify-center font-bold text-[10px] shrink-0">
-                                                ✓
-                                            </span>
-                                            <span>{feat}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )} */}
-
                         {/* Detail Konten */}
                         {service.content && (
                             <div>
