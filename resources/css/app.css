@@ -1,6 +1,79 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* 1. SEMUA @import HARUS DI PALING ATAS */
+@import "tailwindcss";
+
+/* 2. Directive konfigurasi Tailwind v4 lainnya */
+@source '../**/*.jsx';
+@source '../**/*.tsx';
+@source '../**/*.js';
+
+@theme {
+  /* ==========================================================================
+     FONT FAMILIES
+     ========================================================================== */
+  /* Font Utama Proyek */
+  --font-heading: "Work Sans", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+
+  /* Font Variabel Tambahan (Untuk kebutuhan UI khusus/spesifik) */
+  --font-sans: "DM Sans", sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-mono: "Fira Code", monospace;
+
+  /* ==========================================================================
+     COLOR PALETTE
+     ========================================================================== */
+  --color-primary: #457D78;
+  --color-primary-dark: #0F2921;
+  --color-secondary: #E1BE4F;
+  --color-accent: #FF5659;
+  --color-text: #1F2937;
+}
+
+/* ==========================================================================
+   BASE TYPOGRAPHY DEFAULTS
+   ========================================================================== */
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* ==========================================================================
+   CUSTOM UTILITIES
+   ========================================================================== */
+@utility scrollbar-hidden {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+@keyframes seamlessScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: seamlessScroll 30s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
 
 /* TipTap Editor Styles */
 .tiptap {

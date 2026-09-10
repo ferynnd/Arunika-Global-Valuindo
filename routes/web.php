@@ -46,7 +46,8 @@ Route::get('/services', [ServicesController::class, 'index'])->name('services.in
 Route::get('/services/{slug}', [ServicesController::class, 'show'])->name('services.show');
 
 // Public AboutUs Routes
-Route::get('/aboutus', [UserController::class, 'aboutus'])->name('aboutus');
+Route::get('/about', [UserController::class, 'aboutus'])->name('aboutus');
+Route::get('/contact', [UserController::class, 'contact'])->name('contact');
 
 // Public PrivacyPolicy Routes
 Route::get('/privacypolicy', [UserController::class, 'privacypolicy'])->name('privacypolicy');

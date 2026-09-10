@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class UserController extends Controller
 {
     public function aboutus()
     {
-        return Inertia::render('AboutUs');
+        return Inertia::render('About');
+    }
+
+    public function contact()
+    {
+        return Inertia::render('Contact');
     }
 
     public function privacypolicy()

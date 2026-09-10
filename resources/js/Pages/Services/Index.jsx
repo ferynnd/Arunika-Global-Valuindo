@@ -1,81 +1,61 @@
 import { Head, Link, router } from '@inertiajs/react';
-import { useState, useEffect } from 'react';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
+import PageHeader from '@/Components/PageHeader';
+import HeaderSection from '@/Components/HeaderSection';
+import CustomButton from '@/Components/CustomButton';
 
 export default function Index({ auth, services, filters }) {
-    const [scrolled, setScrolled] = useState(false);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [search, setSearch] = useState(filters.search || '');
-
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 20) {
-                setScrolled(true);
-            } else {
-                setScrolled(false);
-            }
-        };
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
     const handleSearchSubmit = (e) => {
         e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const searchVal = formData.get('search');
+
         router.get(
             route('services.index'),
-            { search },
+            { search: searchVal },
             { preserveState: true }
         );
     };
 
     return (
-        <div className="min-h-screen bg-[#FAF8F5] text-[#334155] font-sans antialiased selection:bg-[#ECAE36] selection:text-[#1B544D]">
+        <div className="min-h-screen bg-[#FAF8F5] text-[#334155] font-sans antialiased selection:bg-[#ECAE36] selection:text-primary">
+            <Head title="Layanan & Solusi Korporasi - Arunika Global Valuindo" />
+            
             <Header auth={auth} title="Layanan & Solusi Korporasi - Arunika Global Valuindo" activePage="services" />
+            
+            {/* Component Page Header Banner */}
+            <PageHeader 
+                title="Layanan Kami" 
+                breadcrumb={[
+                    { label: 'Home', href: '/' }, 
+                    { label: 'Layanan', href: '/layanan' }
+                ]} 
+            />
 
-            {/* HERO SECTION */}
-            <section className="pt-32 pb-16 sm:pt-40 sm:pb-20 bg-gradient-to-b from-white via-[#FAF8F5] to-[#FAF8F5] border-b border-[#EAE6DF]">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <span className="text-xs font-bold uppercase tracking-widest text-[#ECAE36] bg-[#1B544D] px-4 py-1.5 rounded-full inline-block mb-4 shadow-xs">
-                        Portofolio Layanan Terpercaya
-                    </span>
-                    <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#1B544D] tracking-tight leading-tight max-w-4xl mx-auto">
-                        Solusi Valuasi Aset & Konsultasi Strategi Korporasi
-                    </h1>
-                    <p className="text-xs sm:text-sm text-[#52605E] max-w-2xl mx-auto mt-4 leading-relaxed">
-                        Pendampingan profesional berstandar nasional dan internasional untuk kepastian investasi, kepatuhan regulasi, serta peningkatan nilai wajar aset korporasi.
-                    </p>
-
-                    {/* Search Bar */}
-                    <div className="mt-8 max-w-2xl mx-auto">
-                        <form onSubmit={handleSearchSubmit} className="flex items-center gap-2 bg-white p-2 rounded-full border border-[#EAE6DF] shadow-md shadow-slate-900/5">
-                            <input
-                                type="text"
-                                value={search}
-                                onChange={(e) => setSearch(e.target.value)}
-                                placeholder="Cari jenis layanan korporasi..."
-                                className="flex-1 border-0 bg-transparent text-xs sm:text-sm px-4 focus:ring-0 focus:outline-hidden text-slate-800 placeholder-slate-400"
+            {/* HEADER SERVICE SECTION */}
+            <section className="pt-12">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex items-center">
+                        <div className=" space-y-4">
+                            <HeaderSection
+                                tagline="Solusi & Layanan Korporasi"
+                                title="Lebih dari Satu Dekade Pengalaman Profesional Mendampingi Pertumbuhan Bisnis."
+                                showButton={false}
                             />
-                            <button
-                                type="submit"
-                                className="px-6 py-2.5 rounded-full bg-[#1B544D] text-white font-semibold text-xs hover:bg-[#15433E] transition-all shadow-sm shrink-0"
-                            >
-                                Cari
-                            </button>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* SERVICES GRID SECTION */}
-            <section className="py-16 sm:py-24">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <section className="py-12 sm:py-16">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
 
-                    <div className="flex items-center justify-between">
-                        <h2 className="text-2xl font-extrabold text-[#1B544D]">
-                            {search ? 'Hasil Pencarian Layanan' : 'Daftar Layanan Korporasi Kami'}
+                    <div className="flex items-center justify-between border-b border-[#EAE6DF] pb-4">
+                        <h2 className="text-xl sm:text-2xl font-extrabold text-primary">
+                            {filters.search ? `Hasil Pencarian: "${filters.search}"` : 'Daftar Layanan Korporasi Kami'}
                         </h2>
-                        <span className="text-xs text-[#718783]">
+                        <span className="text-xs font-semibold px-3 py-1 rounded-full bg-primary/10 text-primary">
                             Total {services.total || 0} Layanan
                         </span>
                     </div>
@@ -85,7 +65,7 @@ export default function Index({ auth, services, filters }) {
                             {services.data.map((service, idx) => (
                                 <div
                                     key={service.id}
-                                    className="group flex flex-col bg-white rounded-3xl overflow-hidden border border-[#EAE6DF] hover:shadow-xl hover:border-[#1B544D]/40 transition-all duration-300 justify-between"
+                                    className="group flex flex-col bg-white rounded-3xl overflow-hidden border border-[#EAE6DF] hover:shadow-xl hover:border-primary/40 transition-all duration-300 justify-between"
                                 >
                                     <div>
                                         {/* Thumbnail Banner */}
@@ -96,12 +76,12 @@ export default function Index({ auth, services, filters }) {
                                                     alt={service.title}
                                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                                 />
-                                                <span className="absolute top-3 right-3 px-3 py-1 rounded-full bg-[#1B544D]/90 backdrop-blur-md text-[#ECAE36] font-bold text-xs">
+                                                <span className="absolute top-3 right-3 px-3 py-1 rounded-full bg-primary/90 backdrop-blur-md text-[#ECAE36] font-bold text-xs">
                                                     #{service.sort_order || idx + 1}
                                                 </span>
                                             </div>
                                         ) : (
-                                            <div className="h-44 bg-gradient-to-br from-[#1B544D] to-[#143F39] p-6 flex items-center justify-between text-white relative">
+                                            <div className="h-44 bg-gradient-to-br from-primary to-[#143F39] p-6 flex items-center justify-between text-white relative">
                                                 <div className="w-12 h-12 rounded-2xl bg-[#ECAE36]/20 border border-[#ECAE36]/30 text-[#ECAE36] flex items-center justify-center font-bold text-xl">
                                                     ★
                                                 </div>
@@ -113,7 +93,7 @@ export default function Index({ auth, services, filters }) {
 
                                         {/* Content */}
                                         <div className="p-6 space-y-4">
-                                            <h3 className="text-lg sm:text-xl font-bold text-[#1B544D] group-hover:text-[#ECAE36] transition-colors leading-snug">
+                                            <h3 className="text-lg sm:text-xl font-bold text-primary group-hover:text-[#ECAE36] transition-colors leading-snug">
                                                 <Link href={route('services.show', service.slug)}>
                                                     {service.title}
                                                 </Link>
@@ -123,11 +103,11 @@ export default function Index({ auth, services, filters }) {
                                                 {service.excerpt || 'Penjelasan rinci mengenai cakupan metodologi dan manfaat layanan bagi perusahaan Anda.'}
                                             </p>
 
-                                            {/* Poin Keunggulan / Features Tags */}
+                                            {/* Features Tags */}
                                             {service.features && service.features.length > 0 && (
                                                 <div className="pt-2 flex flex-wrap gap-1.5">
                                                     {service.features.slice(0, 3).map((feat, fIdx) => (
-                                                        <span key={fIdx} className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] text-[11px] font-medium text-[#1B544D] border border-[#EAE6DF]">
+                                                        <span key={fIdx} className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] text-[11px] font-medium text-primary border border-[#EAE6DF]">
                                                             ✓ {feat}
                                                         </span>
                                                     ))}
@@ -145,7 +125,7 @@ export default function Index({ auth, services, filters }) {
                                     <div className="p-6 pt-0">
                                         <Link
                                             href={route('services.show', service.slug)}
-                                            className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-2xl bg-[#FAF8F5] group-hover:bg-[#1B544D] text-[#1B544D] group-hover:text-white font-semibold text-xs transition-all border border-[#EAE6DF] group-hover:border-[#1B544D]"
+                                            className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-2xl bg-[#FAF8F5] group-hover:bg-primary text-primary group-hover:text-white font-semibold text-xs transition-all border border-[#EAE6DF] group-hover:border-primary"
                                         >
                                             <span>Lihat Detail Layanan</span>
                                             <span>→</span>
@@ -176,7 +156,7 @@ export default function Index({ auth, services, filters }) {
                                             dangerouslySetInnerHTML={{ __html: link.label }}
                                             className={`px-4 py-2 rounded-full text-xs font-semibold transition-colors ${
                                                 link.active
-                                                    ? 'bg-[#1B544D] text-[#ECAE36] shadow-sm'
+                                                    ? 'bg-primary text-[#ECAE36] shadow-sm'
                                                     : 'bg-white text-slate-700 hover:bg-[#EFECE6] border border-[#EAE6DF]'
                                             }`}
                                         />
@@ -195,32 +175,35 @@ export default function Index({ auth, services, filters }) {
                 </div>
             </section>
 
-            {/* CTA BANNER */}
-            <section className="py-20 bg-[#1B544D] text-white relative overflow-hidden">
-                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-                    <span className="text-xs font-bold uppercase tracking-widest text-[#ECAE36] bg-white/10 px-4 py-1.5 rounded-full inline-block">
-                        Konsultasi Strategis
-                    </span>
-                    <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight">
-                        Butuh Penilaian Aset & Studi Kelayakan Bisnis?
+            <section className="py-24 relative overflow-hidden bg-primary">
+                <div className="absolute inset-0">
+                    <img
+                        src={'/assets/bgcta.webp'}
+                        alt="Background overlay"
+                        className="w-full h-full object-cover"
+                    />
+                </div>
+
+                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                    <h2 className="text-3xl md:text-5xl font-normal tracking-wide leading-tight">
+                        Ready to solve your problem with <br />
+                        <span className="text-secondary italic">Arunika Global Valuindo?</span>
                     </h2>
-                    <p className="text-xs sm:text-sm text-slate-200 max-w-xl mx-auto leading-relaxed">
-                        Tim konsultan ahli Arunika Global Valuindo siap memberikan solusi terpercaya untuk kebutuhan korporasi Anda.
-                    </p>
-                    <div className="pt-2">
-                        <Link
-                            href="/#contact"
-                            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#ECAE36] hover:bg-[#E0A12A] text-[#1B544D] font-bold text-sm transition-all shadow-lg shadow-[#ECAE36]/20"
-                        >
-                            <span>Jadwalkan Konsultasi Gratis</span>
-                            <span>→</span>
-                        </Link>
+
+                    <div className="mt-8 flex justify-center">
+                        <CustomButton
+                            href="#contact"
+                            text="Kosultasi Sekarang"
+                            bgColor="bg-accent hover:bg-accent/90"
+                            textColor="text-white"
+                            iconBgColor="bg-white/20"
+                            iconTextColor="text-white"
+                        />
                     </div>
                 </div>
             </section>
 
             <Footer />
-
         </div>
     );
 }
