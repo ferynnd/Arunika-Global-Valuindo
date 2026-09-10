@@ -17,11 +17,10 @@ export default function Show({ service }) {
                             <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#1B544D]/10 text-[#1B544D]">
                                 Detail Layanan #{service.id}
                             </span>
-                            <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${
-                                service.status === 'active'
+                            <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${service.status === 'active'
                                     ? 'bg-emerald-100 text-emerald-800'
                                     : 'bg-slate-100 text-slate-600'
-                            }`}>
+                                }`}>
                                 {service.status === 'active' ? 'Aktif' : 'Non-Aktif'}
                             </span>
                         </div>
@@ -59,7 +58,7 @@ export default function Show({ service }) {
 
                     {/* Main Card */}
                     <div className="bg-white rounded-3xl border border-[#EAE6DF] p-6 sm:p-8 shadow-sm space-y-6">
-                        
+
                         {/* Header Banner / Image */}
                         {service.thumbnail && (
                             <div className="rounded-2xl overflow-hidden border border-[#EAE6DF] max-h-80 bg-slate-100">
@@ -93,7 +92,7 @@ export default function Show({ service }) {
                             </div>
                         )}
 
-                        {/* Fitur / Keunggulan */}
+                        {/* Fitur / Keunggulan
                         {service.features && service.features.length > 0 && (
                             <div>
                                 <h3 className="text-xs font-bold uppercase tracking-wider text-[#1B544D] mb-3">
@@ -110,7 +109,7 @@ export default function Show({ service }) {
                                     ))}
                                 </div>
                             </div>
-                        )}
+                        )} */}
 
                         {/* Detail Konten */}
                         {service.content && (

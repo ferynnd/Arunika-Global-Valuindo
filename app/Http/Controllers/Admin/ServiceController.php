@@ -51,13 +51,22 @@ class ServiceController extends Controller
             'thumbnail' => ['nullable', 'image', 'max:2048'],
             'features' => ['nullable', 'array'],
             'features.*' => ['nullable', 'string', 'max:255'],
+            'seo_title' => ['nullable', 'string', 'max:60'],
+            'seo_description' => ['nullable', 'string', 'max:160'],
+            'seo_keywords' => ['nullable', 'string', 'max:255'],
+            'og_image' => ['nullable', 'image', 'max:2048'],
         ]);
 
         $slug = Str::slug($validated['title']) . '-' . Str::random(5);
         $thumbnailPath = null;
+        $ogImagePath = null;
 
         if ($request->hasFile('thumbnail')) {
             $thumbnailPath = $request->file('thumbnail')->store('services', 'public');
+        }
+
+        if ($request->hasFile('og_image')) {
+            $ogImagePath = $request->file('og_image')->store('services/og', 'public');
         }
 
         $features = isset($validated['features'])
@@ -74,6 +83,10 @@ class ServiceController extends Controller
             'sort_order' => $validated['sort_order'] ?? 0,
             'thumbnail' => $thumbnailPath,
             'features' => $features,
+            'seo_title' => $validated['seo_title'] ?? null,
+            'seo_description' => $validated['seo_description'] ?? null,
+            'seo_keywords' => $validated['seo_keywords'] ?? null,
+            'og_image' => $ogImagePath,
         ]);
 
         return redirect()->route('admin.services.index')->with('success', 'Layanan berhasil ditambahkan!');
@@ -105,6 +118,10 @@ class ServiceController extends Controller
             'thumbnail' => ['nullable', 'image', 'max:2048'],
             'features' => ['nullable', 'array'],
             'features.*' => ['nullable', 'string', 'max:255'],
+            'seo_title' => ['nullable', 'string', 'max:60'],
+            'seo_description' => ['nullable', 'string', 'max:160'],
+            'seo_keywords' => ['nullable', 'string', 'max:255'],
+            'og_image' => ['nullable', 'image', 'max:2048'],
         ]);
 
         $features = isset($validated['features'])
@@ -119,6 +136,9 @@ class ServiceController extends Controller
             'status' => $validated['status'],
             'sort_order' => $validated['sort_order'] ?? 0,
             'features' => $features,
+            'seo_title' => $validated['seo_title'] ?? null,
+            'seo_description' => $validated['seo_description'] ?? null,
+            'seo_keywords' => $validated['seo_keywords'] ?? null,
         ];
 
         if ($request->hasFile('thumbnail')) {
@@ -126,6 +146,13 @@ class ServiceController extends Controller
                 Storage::disk('public')->delete($service->thumbnail);
             }
             $data['thumbnail'] = $request->file('thumbnail')->store('services', 'public');
+        }
+
+        if ($request->hasFile('og_image')) {
+            if ($service->og_image) {
+                Storage::disk('public')->delete($service->og_image);
+            }
+            $data['og_image'] = $request->file('og_image')->store('services/og', 'public');
         }
 
         $service->update($data);

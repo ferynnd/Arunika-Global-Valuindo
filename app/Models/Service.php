@@ -20,6 +20,10 @@ class Service extends Model
         'features',
         'status',
         'sort_order',
+        'seo_title',
+        'seo_description',
+        'seo_keywords',
+        'og_image',
     ];
 
     protected $casts = [

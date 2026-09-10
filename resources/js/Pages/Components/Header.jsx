@@ -25,7 +25,7 @@ export default function Header({ auth, title, activePage = '' }) {
         <>
             {title && (
                 <Head title={title}>
-                    <link rel="icon" type="image/x-icon" href="/logo.ico" />
+                    <link rel="icon" type="image" href="images/favicon.ico" />
                     <link rel="preconnect" href="https://fonts.googleapis.com" />
                     <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                     <link
@@ -50,22 +50,20 @@ export default function Header({ auth, title, activePage = '' }) {
                         </Link>
 
                         {/* Desktop Navigation Pill */}
-                        <div className={`hidden md:flex items-center gap-1 lg:gap-2 rounded-full transition-all duration-300 ${
-                            scrolled
-                                ? 'bg-[#EBEBEB]/90 backdrop-blur-xl shadow-md px-2 py-2'
-                                : 'bg-[#EBEBEB] shadow-[0_4px_20px_rgba(0,0,0,0.05)] px-2 py-2'
-                        }`}>
+                        <div className={`hidden md:flex items-center gap-1 lg:gap-2 rounded-full transition-all duration-300 ${scrolled
+                            ? 'bg-[#EBEBEB]/90 backdrop-blur-xl shadow-md px-2 py-2'
+                            : 'bg-[#EBEBEB] shadow-[0_4px_20px_rgba(0,0,0,0.05)] px-2 py-2'
+                            }`}>
                             {navLinks.map((item) => {
                                 const isActive = activePage === item.id;
                                 return (
                                     <Link
                                         key={item.name}
                                         href={item.href}
-                                        className={`px-4 py-2 rounded-full text-xs lg:text-sm tracking-wide transition-colors ${
-                                            isActive
-                                                ? 'bg-[#1B544D] text-white font-medium shadow-sm'
-                                                : 'text-[#4A5D5A] font-normal hover:text-[#1B544D]'
-                                        }`}
+                                        className={`px-4 py-2 rounded-full text-xs lg:text-sm tracking-wide transition-colors ${isActive
+                                            ? 'bg-[#1B544D] text-white font-medium shadow-sm'
+                                            : 'text-[#4A5D5A] font-normal hover:text-[#1B544D]'
+                                            }`}
                                     >
                                         {item.name}
                                     </Link>
@@ -119,11 +117,10 @@ export default function Header({ auth, title, activePage = '' }) {
                                     key={item.name}
                                     href={item.href}
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className={`block px-4 py-2.5 rounded-2xl text-sm transition-colors ${
-                                        activePage === item.id
-                                            ? 'font-medium text-[#1B544D] bg-[#EFECE6]'
-                                            : 'font-normal text-[#4A5D5A] hover:bg-[#EFECE6]/60'
-                                    }`}
+                                    className={`block px-4 py-2.5 rounded-2xl text-sm transition-colors ${activePage === item.id
+                                        ? 'font-medium text-[#1B544D] bg-[#EFECE6]'
+                                        : 'font-normal text-[#4A5D5A] hover:bg-[#EFECE6]/60'
+                                        }`}
                                 >
                                     {item.name}
                                 </Link>
