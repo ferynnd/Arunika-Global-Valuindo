@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useRef, useState } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
@@ -13,6 +13,8 @@ export default function RichTextEditor({
     placeholder = 'Tulis isi artikel yang menarik di sini...',
     error = null,
 }) {
+    const imageInputRef = useRef(null);
+    const [isUploading, setIsUploading] = useState(false);
     const editor = useEditor({
         extensions: [
             StarterKit.configure({
@@ -84,7 +86,7 @@ export default function RichTextEditor({
         editor.chain().focus().extendMarkRange('link').setLink({ href: url.trim() }).run();
     }, [editor]);
 
-    const addImage = useCallback(() => {
+    const addImageFromUrl = useCallback(() => {
         if (!editor) return;
 
         const url = window.prompt('Masukkan URL gambar (contoh: https://images.unsplash.com/...):');
@@ -92,6 +94,65 @@ export default function RichTextEditor({
             editor.chain().focus().setImage({ src: url.trim() }).run();
         }
     }, [editor]);
+
+    const handleImageUpload = useCallback(async (file) => {
+        if (!editor || !file) return;
+
+        // Validate file type
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'image/webp'];
+        if (!allowedTypes.includes(file.type)) {
+            alert('Format file tidak didukung. Gunakan: JPG, PNG, GIF, atau WebP.');
+            return;
+        }
+
+        // Validate file size (5MB)
+        if (file.size > 5 * 1024 * 1024) {
+            alert('Ukuran file terlalu besar. Maksimal 5MB.');
+            return;
+        }
+
+        setIsUploading(true);
+
+        try {
+            const formData = new FormData();
+            formData.append('image', file);
+
+            // Get CSRF token from meta tag
+            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+
+            const response = await fetch(route('admin.upload-image'), {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Accept': 'application/json',
+                },
+                body: formData,
+            });
+
+            if (!response.ok) {
+                const errData = await response.json().catch(() => ({}));
+                throw new Error(errData.message || `HTTP ${response.status}`);
+            }
+
+            const data = await response.json();
+            editor.chain().focus().setImage({ src: data.url }).run();
+        } catch (err) {
+            console.error('Upload gambar gagal:', err);
+            alert('Gagal mengupload gambar: ' + err.message);
+        } finally {
+            setIsUploading(false);
+            // Reset input so same file can be selected again
+            if (imageInputRef.current) {
+                imageInputRef.current.value = '';
+            }
+        }
+    }, [editor]);
+
+    const openImageFilePicker = useCallback(() => {
+        if (imageInputRef.current) {
+            imageInputRef.current.click();
+        }
+    }, []);
 
     if (!editor) {
         return (
@@ -451,18 +512,58 @@ export default function RichTextEditor({
                             <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
                         </svg>
                     </button>
+
+                    {/* Upload Gambar dari Lokal */}
                     <button
                         type="button"
-                        onClick={addImage}
+                        onClick={openImageFilePicker}
+                        disabled={isUploading}
+                        title="Upload Gambar dari Komputer"
+                        className={`p-1.5 rounded-lg transition-colors ${
+                            isUploading
+                                ? 'opacity-60 cursor-not-allowed bg-indigo-50 text-indigo-400'
+                                : 'text-slate-600 hover:bg-slate-200'
+                        }`}
+                    >
+                        {isUploading ? (
+                            <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+                            </svg>
+                        ) : (
+                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                                <circle cx="9" cy="9" r="2"/>
+                                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+                            </svg>
+                        )}
+                    </button>
+
+                    {/* Sisipkan Gambar dari URL */}
+                    <button
+                        type="button"
+                        onClick={addImageFromUrl}
                         title="Sisipkan Gambar dari URL"
                         className="p-1.5 rounded-lg text-slate-600 hover:bg-slate-200 transition-colors"
                     >
                         <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
-                            <circle cx="9" cy="9" r="2"/>
-                            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                            <line x1="12" y1="8" x2="12" y2="16"/>
+                            <line x1="8" y1="12" x2="16" y2="12"/>
                         </svg>
                     </button>
+
+                    {/* Hidden file input */}
+                    <input
+                        ref={imageInputRef}
+                        type="file"
+                        accept="image/jpeg,image/png,image/jpg,image/gif,image/webp"
+                        className="hidden"
+                        onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) handleImageUpload(file);
+                        }}
+                    />
                 </div>
 
                 {/* Clear format */}
