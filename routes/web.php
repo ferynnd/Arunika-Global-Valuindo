@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProfileController;
@@ -23,9 +24,15 @@ Route::get('/', function () {
         ->latest()
         ->get();
 
+    $testimonials = \App\Models\Testimonial::active()
+        ->orderBy('sort_order', 'asc')
+        ->latest()
+        ->get();
+
     return Inertia::render('Welcome', [
         'latestArticles' => $latestArticles,
         'services' => $services,
+        'testimonials' => $testimonials,
     ]);
 });
 
@@ -78,6 +85,17 @@ Route::prefix($adminPrefix)->middleware(['auth', 'admin'])->group(function () {
         'edit' => 'admin.services.edit',
         'update' => 'admin.services.update',
         'destroy' => 'admin.services.destroy',
+    ]);
+
+    // Admin Testimonials CRUD (Protected)
+    Route::resource('testimonials', TestimonialController::class)->names([
+        'index' => 'admin.testimonials.index',
+        'create' => 'admin.testimonials.create',
+        'store' => 'admin.testimonials.store',
+        'show' => 'admin.testimonials.show',
+        'edit' => 'admin.testimonials.edit',
+        'update' => 'admin.testimonials.update',
+        'destroy' => 'admin.testimonials.destroy',
     ]);
 
     // Admin Profile Management

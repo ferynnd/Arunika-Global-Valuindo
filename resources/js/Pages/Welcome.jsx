@@ -4,7 +4,7 @@ import CustomButton from '@/Components/CustomButton';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 
-export default function Welcome({ auth, latestArticles = [], services = [] }) {
+export default function Welcome({ auth, latestArticles = [], services = [], testimonials = [] }) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [activeTestimonial, setActiveTestimonial] = useState(0);
@@ -24,23 +24,29 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const testimonials = [
+    const fallbackTestimonials = [
         {
             quote: "Layanan valuasi aset dan konsultasi strategi dari Arunika Global Valuindo memberikan kejelasan dan kepastian tinggi untuk keputusan investasi korporasi kami. Sangat profesional dan akurat.",
             author: "Ahmad Fauzi",
             role: "Chief Financial Officer, PT Indo Energi Lestari",
+            avatar: null,
         },
         {
             quote: "Pendampingan feasibility study yang komprehensif membuat proses audit dan ekspansi bisnis kami berjalan mulus sesuai timeline dan standar keberlanjutan.",
             author: "Siti Rahmawati",
             role: "Managing Director, Global Venture Capital",
+            avatar: null,
         },
         {
             quote: "Tim konsultan Arunika memiliki dedikasi dan metodologi riset yang mendalam, sangat direkomendasikan untuk analisis finansial korporasi.",
             author: "Budi Santoso",
             role: "VP Operations, Nusantara Infrastructure Group",
+            avatar: null,
         }
     ];
+
+    const displayTestimonials = testimonials && testimonials.length > 0 ? testimonials : fallbackTestimonials;
+    const currentTestimonial = displayTestimonials[activeTestimonial] || displayTestimonials[0];
 
     const fallbackServices = [
         {
@@ -148,27 +154,23 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
             {/* SECTION 1: HERO SECTION */}
             <section
                 id="home"
-                className="relative min-h-[90vh] lg:min-h-screen flex items-center justify-center bg-cover bg-center overflow-hidden"
+                className="relative min-h-[85vh] lg:min-h-screen bg-cover bg-center bg-no-repeat overflow-hidden"
                 style={{
-                    backgroundImage: `url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=2000&q=85')`,
+                    backgroundImage: `url('/images/hero.png')`,
                 }}
             >
-                <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F5]/85 via-[#FAF8F5]/75 to-[#FAF8F5]"></div>
-
-                <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-32 pb-20 sm:pt-40 sm:pb-28">
-                    <h1 className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-wide text-[#1B544D] max-w-4xl mx-auto leading-[1.15] sm:leading-[1.2]">
+                <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-28 sm:pt-36 lg:pt-40 pb-20">
+                    <h1 className="text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-[#497C73] max-w-5xl mx-auto leading-[1.15] sm:leading-[1.2]">
                         Strategic Growth Meets <br className="hidden sm:inline" />
                         Sustainable Impact
                     </h1>
 
-                    <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <div className="mt-8 sm:mt-10 flex items-center justify-center">
                         <CustomButton
                             href="#services"
                             text="Book Consultation"
-                            bgColor="bg-[#ECAE36] hover:bg-[#E0A12A]"
+                            bgColor="bg-[#E2BE43] hover:bg-[#D5B138]"
                             textColor="text-white"
-                            iconBgColor="bg-[#1B544D]"
-                            iconTextColor="text-white"
                         />
                     </div>
                 </div>
@@ -176,68 +178,26 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
 
             {/* SECTION 2: CLIENT / PARTNER LOGOS */}
             <section className="py-8 border-y border-[#EAE6DF] bg-white/50 overflow-hidden">
-                <div className="h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                <div className="relative overflow-hidden">
+                    <div className="flex w-max animate-logo-slider">
 
-                    <div className="relative overflow-hidden">
-                        <div className="flex w-max animate-logo-slider">
-
-                            {/* Set 1 */}
-                            <div className="flex items-center gap-16 sm:gap-24 pr-16 sm:pr-24">
-                                <img
-                                    src="/images/blibli.png"
-                                    alt="Blibli"
-                                    className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                                />
-
-                                <img
-                                    src="/images/lazada.png"
-                                    alt="Lazada"
-                                    className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                                />
-
-                                <img
-                                    src="/images/shopee.png"
-                                    alt="Shopee"
-                                    className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                                />
-
-                                <img
-                                    src="/images/blibli.png"
-                                    alt="Blibli"
-                                    className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                                />
-                            </div>
-
-                            {/* Set 2 - duplikat untuk seamless loop */}
-                            <div className="flex items-center gap-16 sm:gap-24 pr-16 sm:pr-24">
-                                <img
-                                    src="/images/blibli.png"
-                                    alt="Blibli"
-                                    className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                                />
-
-                                <img
-                                    src="/images/lazada.png"
-                                    alt="Lazada"
-                                    className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                                />
-
-                                <img
-                                    src="/images/shopee.png"
-                                    alt="Shopee"
-                                    className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                                />
-
-                                <img
-                                    src="/images/blibli.png"
-                                    alt="Blibli"
-                                    className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                                />
-                            </div>
-
+                        {/* SET 1 */}
+                        <div className="flex items-center gap-16 sm:gap-24 pr-16 sm:pr-24 shrink-0">
+                            <img src="/images/blibli.png" alt="Blibli" className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
+                            <img src="/images/lazada.png" alt="Lazada" className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
+                            <img src="/images/shopee.png" alt="Shopee" className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
+                            <img src="/images/blibli.png" alt="Blibli" className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
                         </div>
-                    </div>
 
+                        {/* SET 2 - DUPLIKAT */}
+                        <div className="flex items-center gap-16 sm:gap-24 pr-16 sm:pr-24 shrink-0">
+                            <img src="/images/blibli.png" alt="Blibli" className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
+                            <img src="/images/lazada.png" alt="Lazada" className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
+                            <img src="/images/shopee.png" alt="Shopee" className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
+                            <img src="/images/blibli.png" alt="Blibli" className="h-8 sm:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
+                        </div>
+
+                    </div>
                 </div>
             </section>
 
@@ -245,11 +205,11 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
             <section id="about" className="py-20 sm:py-28">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                    <div className="max-w-3xl">
-                        <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#1B544D] block mb-3">
+                    <div className="max-w-3xl space-y-6">
+                        <span className="text-sm sm:text-base font-semibold tracking-wide text-[#3D7068] block">
                             Tentang Kami
                         </span>
-                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-wide text-[#1B544D] leading-snug">
+                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-normal tracking-wide leading-snug">
                             PT Arunika Global Valuindo adalah perusahaan penilai independen dan penasihat strategi korporasi terpercaya di Indonesia.
                         </h2>
                     </div>
@@ -260,15 +220,15 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                             <div
                                 key={srv.id || idx}
                                 onClick={() => setSelectedService(srv)}
-                                className="p-6 rounded-2xl bg-[#EFECE6] border border-[#E3DFD7] hover:shadow-md cursor-pointer transition-all hover:border-[#1B544D]/30 group"
+                                className="p-6 rounded-2xl bg-[#EFECE6] border border-[#E3DFD7] cursor-pointer transition-all hover:border-[#1B544D]/30 group"
                             >
-                                <div className="w-12 h-12 rounded-full bg-[#1B544D] text-white flex items-center justify-center shrink-0 shadow-sm mb-4 group-hover:scale-105 transition-transform">
+                                <div className="w-12 h-12 rounded-full bg-[#1B544D] text-white flex items-center justify-center shrink-0 mb-4 group-hover:scale-105 transition-transform">
                                     {aboutIcons[idx % aboutIcons.length]}
                                 </div>
-                                <h3 className="text-base font-normal tracking-wide text-[#1B544D] group-hover:text-[#ECAE36] transition-colors">
+                                <h3 className="text-base font-semibold tracking-wide group-hover:text-[#ECAE36] transition-colors">
                                     {srv.title}
                                 </h3>
-                                <p className="text-xs font-light text-[#52605E] mt-2 leading-relaxed tracking-wide line-clamp-2">
+                                <p className="text-xs font-normal text-[#52605E] mt-2 leading-relaxed tracking-wide line-clamp-2">
                                     {srv.excerpt}
                                 </p>
                             </div>
@@ -279,7 +239,7 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
             </section>
 
             {/* SECTION: OUR MISSION */}
-            <section className="py-16 sm:py-24 bg-[#FAF8F5] border-t border-[#EAE6DF]/60">
+            <section className="py-16 sm:py-24 bg-[#FAF8F5]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
 
@@ -300,7 +260,7 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                                 Our Mission
                             </span>
 
-                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-wide text-[#1B544D] leading-[1.3]">
+                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-normal tracking-wide leading-[1.3]">
                                 Memberikan solusi valuasi dan strategi korporasi yang independen, akurat, dan terpercaya untuk mengakselerasi pertumbuhan bisnis di Indonesia.
                             </h2>
 
@@ -325,27 +285,44 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
             </section>
 
             {/* SECTION 5: WHY CHOOSE US */}
-            <section className="py-16 sm:py-24 border-t border-[#EAE6DF]/80">
+            <section className="py-16 sm:py-24">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
-                        {/* Left: Text & Checkmarks */}
-                        <div className="lg:col-span-6">
-                            <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#1B544D] block mb-3">
-                                Keunggulan Kami
+                        {/* Left: Text & Checklist */}
+                        <div className="lg:col-span-6 space-y-6">
+                            <span className="text-sm sm:text-base font-semibold tracking-wide text-[#3D7068] block">
+                                Why Choose us?
                             </span>
-                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-wide text-[#1B544D] leading-snug">
-                                Solusi Valuasi & Konsultasi Bisnis Terintegrasi Berstandar Global.
+                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-normal tracking-wide text-slate-800 leading-snug">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
                             </h2>
 
+                            {/* About Us Button with circular arrow */}
+                            <Link
+                                href={route('services.index')}
+                                className="mt-6 inline-flex items-center gap-0 group"
+                            >
+                                <span className="px-6 py-3 rounded-full bg-[#ECAE36] text-[#1B544D] text-xs font-medium tracking-wide group-hover:bg-[#E0A12A] transition-all shadow-md">
+                                    About Us
+                                </span>
+                                <span className="w-9 h-9 -ml-2 rounded-full bg-[#ECAE36] text-[#1B544D] flex items-center justify-center group-hover:bg-[#E0A12A] transition-all shadow-md">
+                                    →
+                                </span>
+                            </Link>
+
                             {/* 2-Column Checklist */}
-                            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
+                            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-8">
                                 {displayServices.map((srv, index) => (
                                     <div key={index} className="flex items-center gap-3">
-                                        <div className="w-6 h-6 rounded-full bg-[#1B544D] text-[#ECAE36] flex items-center justify-center shrink-0 text-xs">
-                                            ✓
+                                        <div className="w-9 h-9 rounded-full bg-[#1B544D] text-white flex items-center justify-center shrink-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                <rect x="3" y="4" width="18" height="14" rx="2" />
+                                                <circle cx="9" cy="10" r="2" />
+                                                <path d="M15 9h3M15 13h3M6 18v-1a3 3 0 0 1 6 0v1" />
+                                            </svg>
                                         </div>
-                                        <span className="text-xs sm:text-sm font-normal tracking-wide text-[#1B544D]">
+                                        <span className="text-sm sm:text-base font-semibold tracking-wide text-slate-800">
                                             {srv.title}
                                         </span>
                                     </div>
@@ -355,11 +332,11 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
 
                         {/* Right: Office / Team Photo */}
                         <div className="lg:col-span-6">
-                            <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white">
+                            <div className="relative rounded-3xl overflow-hidden">
                                 <img
                                     src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1000&q=80"
                                     alt="Kolaborasi tim profesional Arunika"
-                                    className="w-full h-80 sm:h-96 object-cover object-center"
+                                    className="w-full h-[420px] sm:h-[480px] object-cover object-center"
                                 />
                             </div>
                         </div>
@@ -372,52 +349,53 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
             <section id="services" className="py-20 sm:py-28 bg-[#205B53] text-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                    {/* Header */}
-                    <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-                        <div className="max-w-3xl">
-                            <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#ECAE36] block mb-2">
-                                Layanan Portofolio Kami
-                            </span>
-                            <h2 className="text-2xl sm:text-4xl font-light tracking-wide leading-snug">
-                                Layanan Valuasi & Konsultasi Strategi Korporasi
-                            </h2>
-                            <p className="text-xs sm:text-sm font-light tracking-wide text-slate-200 mt-2">
-                                Klik pada layanan untuk melihat perincian lengkap dan fitur keunggulannya.
-                            </p>
-                        </div>
+                    {/* Header - Centered */}
+                    <div className="max-w-3xl mx-auto text-center space-y-6">
+                        <span className="text-sm sm:text-base font-semibold tracking-wide text-[#ECAE36] block">
+                            Our Service
+                        </span>
+                        <h2 className="text-2xl sm:text-4xl font-normal tracking-wide leading-snug">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+                        </h2>
+
+                        {/* About Us Button with circular arrow */}
                         <Link
                             href={route('services.index')}
-                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#ECAE36] text-[#1B544D] text-xs font-medium tracking-wide hover:bg-[#E0A12A] transition-all shadow-md shrink-0"
+                            className="mt-6 inline-flex items-center gap-0 group"
                         >
-                            <span>Lihat Semua Layanan</span>
-                            <span>→</span>
+                            <span className="px-6 py-3 rounded-full bg-[#ECAE36] text-[#1B544D] text-xs font-medium tracking-wide group-hover:bg-[#E0A12A] transition-all">
+                                About Us
+                            </span>
+                            <span className="w-9 h-9 -ml-2 rounded-full bg-[#ECAE36] text-[#1B544D] flex items-center justify-center group-hover:bg-[#E0A12A] transition-all">
+                                →
+                            </span>
                         </Link>
                     </div>
 
-                    {/* Dynamic Services Grid */}
-                    <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {/* Dynamic Services Grid - 4 columns */}
+                    <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {displayServices.map((srv, idx) => (
                             <div
                                 key={srv.id}
                                 onClick={() => setSelectedService(srv)}
-                                className="relative rounded-3xl bg-[#143F39] border border-[#2C6B62] hover:border-[#ECAE36] transition-all cursor-pointer group hover:-translate-y-1 shadow-md min-h-[320px] flex flex-col justify-between p-6 overflow-hidden"
+                                className="relative rounded-3xl bg-[#0F2D28] border border-[#2C6B62] hover:border-[#ECAE36] transition-all cursor-pointer group hover:-translate-y-1 min-h-[240px] flex flex-col justify-between p-6 overflow-hidden"
                             >
                                 {srv.thumbnail ? (
                                     <img
                                         src={srv.thumbnail}
                                         alt={srv.title}
-                                        className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-40 transition-opacity"
+                                        className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity"
                                     />
                                 ) : null}
 
                                 {/* Top-right label */}
-                                <span className="relative z-10 self-end text-[10px] font-light text-slate-300 tracking-wide">
-                                    [{`Service ${idx + 1}`}]
+                                <span className="relative z-10 self-end text-[10px] font-light text-slate-400 tracking-wide">
+                                    {`[${idx === 0 ? 'First Service' : `Service ${idx + 1}`}]`}
                                 </span>
 
                                 {/* Bottom title + description */}
                                 <div className="relative z-10">
-                                    <h3 className="text-lg font-normal tracking-wide text-white mb-2 group-hover:text-[#ECAE36] transition-colors">
+                                    <h3 className="text-base sm:text-lg font-semibold tracking-wide text-white mb-2 group-hover:text-[#ECAE36] transition-colors">
                                         {srv.title}
                                     </h3>
                                     <p className="text-xs sm:text-sm font-light text-slate-300 leading-relaxed tracking-wide line-clamp-3">
@@ -447,56 +425,67 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
                         {/* Testimonial Quote & Slider Controls */}
-                        <div className="lg:col-span-6">
-                            <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#1B544D] block mb-3">
-                                Testimoni Klien
+                        <div className="lg:col-span-6 space-y-6">
+                            <span className="text-sm sm:text-base font-semibold tracking-wide text-[#3D7068] block">
+                                Testimoni
                             </span>
-                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-wide text-[#1B544D] leading-snug">
+                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-normal tracking-wide leading-snug">
                                 Kepercayaan Klien Adalah Prioritas Utama Kami.
                             </h2>
 
                             <div className="mt-8 bg-[#EFECE6] rounded-2xl p-6 border border-[#E3DFD7]">
                                 <p className="text-xs sm:text-sm font-light text-[#4A5D5A] leading-relaxed tracking-wide italic">
-                                    "{testimonials[activeTestimonial].quote}"
+                                    "{currentTestimonial?.quote}"
                                 </p>
-                                <div className="mt-4 pt-4 border-t border-[#E0DBD2]">
-                                    <div className="font-normal tracking-wide text-sm text-[#1B544D]">
-                                        {testimonials[activeTestimonial].author}
-                                    </div>
-                                    <div className="text-xs font-light tracking-wide text-[#718783]">
-                                        {testimonials[activeTestimonial].role}
+                                <div className="mt-4 pt-4 border-t border-[#E0DBD2] flex items-center gap-3">
+                                    {currentTestimonial?.avatar ? (
+                                        <img
+                                            src={`/storage/${currentTestimonial.avatar}`}
+                                            alt={currentTestimonial.author}
+                                            className="w-10 h-10 rounded-full object-cover border border-[#E3DFD7]"
+                                        />
+                                    ) : null}
+                                    <div>
+                                        <div className="font-normal tracking-wide text-sm text-[#1B544D]">
+                                            {currentTestimonial?.author}
+                                        </div>
+                                        <div className="text-xs font-light tracking-wide text-[#718783]">
+                                            {currentTestimonial?.role}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Prev / Next Buttons */}
-                            <div className="mt-6 flex items-center gap-3">
-                                <button
-                                    type="button"
-                                    onClick={() => setActiveTestimonial((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1))}
-                                    className="w-9 h-9 rounded-full bg-[#1B544D] text-white flex items-center justify-center hover:bg-[#15433E] transition-colors"
-                                    title="Sebelumnya"
-                                >
-                                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <path d="M15 18l-6-6 6-6" />
-                                    </svg>
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => setActiveTestimonial((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1))}
-                                    className="w-9 h-9 rounded-full bg-[#1B544D] text-white flex items-center justify-center hover:bg-[#15433E] transition-colors"
-                                    title="Berikutnya"
-                                >
-                                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <path d="M9 18l6-6-6-6" />
-                                    </svg>
-                                </button>
-                            </div>
+                            {displayTestimonials.length > 1 && (
+                                <div className="mt-6 flex items-center gap-3">
+                                    <button
+                                        type="button"
+                                        onClick={() => setActiveTestimonial((prev) => (prev === 0 ? displayTestimonials.length - 1 : prev - 1))}
+                                        className="w-9 h-9 rounded-full bg-[#1B544D] text-white flex items-center justify-center hover:bg-[#15433E] transition-colors"
+                                        title="Sebelumnya"
+                                    >
+                                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <path d="M15 18l-6-6 6-6" />
+                                        </svg>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setActiveTestimonial((prev) => (prev === displayTestimonials.length - 1 ? 0 : prev + 1))}
+                                        className="w-9 h-9 rounded-full bg-[#1B544D] text-white flex items-center justify-center hover:bg-[#15433E] transition-colors"
+                                        title="Berikutnya"
+                                    >
+                                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <path d="M9 18l6-6-6-6" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            )}
                         </div>
 
                         {/* Community Image */}
                         <div className="lg:col-span-6">
-                            <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white">
+                            <div className="relative rounded-3xl overflow-hidden">
                                 <img
                                     src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=80"
                                     alt="Mitra strategis Arunika"
@@ -510,21 +499,21 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
             </section>
 
             {/* SECTION 8: BLOG / LATEST ARTICLES (Data dari Admin) */}
-            <section id="blog" className="py-20 sm:py-28 border-t border-[#EAE6DF]/80">
+            <section id="blog" className="py-20 sm:py-28">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                     <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
-                        <div className="max-w-3xl">
-                            <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#1B544D] block mb-2">
+                        <div className="max-w-3xl space-y-6">
+                            <span className="text-sm sm:text-base font-semibold tracking-wide text-[#3D7068] block">
                                 Blog & wawasan terbaru
                             </span>
-                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-wide text-[#1B544D] leading-snug">
+                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-normal tracking-wide leading-snug">
                                 Wawasan Terkini dari Tim Ahli Arunika
                             </h2>
                         </div>
                         <Link
                             href={route('blog.index')}
-                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1B544D] text-white text-xs font-medium tracking-wide hover:bg-[#15433E] transition-all shadow-sm shrink-0"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1B544D] text-white text-xs font-medium tracking-wide hover:bg-[#15433E] transition-all shrink-0"
                         >
                             <span>Lihat Semua Artikel</span>
                             <span>→</span>
@@ -537,7 +526,7 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                             <div
                                 key={article.id}
                                 onClick={() => setSelectedArticle(article)}
-                                className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-[#EAE6DF] hover:shadow-xl cursor-pointer transition-all duration-300"
+                                className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-[#EAE6DF] cursor-pointer transition-all duration-300"
                             >
                                 <div className="relative h-48 sm:h-52 overflow-hidden bg-slate-100">
                                     <img
@@ -545,9 +534,6 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                                         alt={article.title}
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     />
-                                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#1B544D]/80 backdrop-blur-md text-white text-[10px] font-medium uppercase tracking-wider">
-                                        {article.category}
-                                    </span>
                                 </div>
                                 <div className="p-6 flex flex-col flex-grow justify-between">
                                     <div>
@@ -560,12 +546,12 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                                             </svg>
                                             <span>{article.date}</span>
                                         </div>
-                                        <h3 className="text-base font-normal tracking-wide text-[#1B544D] group-hover:text-[#ECAE36] transition-colors line-clamp-2">
+                                        <h3 className="text-base font-medium tracking-wide group-hover:text-[#1B544D] transition-colors line-clamp-2">
                                             {article.title}
                                         </h3>
                                     </div>
-                                    <div className="mt-6 pt-4 border-t border-[#F0EDE7] flex items-center justify-between">
-                                        <span className="text-xs font-medium tracking-wide text-[#1B544D] group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                                    <div className="pt-4 flex items-center justify-between">
+                                        <span className="text-xs font-medium tracking-wide group-hover:translate-x-1 transition-transform flex items-center gap-1">
                                             Baca Selengkapnya <span>→</span>
                                         </span>
                                     </div>
@@ -588,8 +574,8 @@ export default function Welcome({ auth, latestArticles = [], services = [] }) {
                 </div>
 
                 <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-                    <h2 className="text-2xl sm:text-4xl lg:text-5xl font-light tracking-wide leading-tight">
-                        Siap Mengakselerasi Keputusan Bisnis Anda Bersama <br />
+                    <h2 className="text-2xl sm:text-4xl lg:text-5xl font-normal tracking-wide leading-tight">
+                        Ready to solve your problem with <br />
                         <span className="text-[#ECAE36] italic">Arunika Global Valuindo?</span>
                     </h2>
 

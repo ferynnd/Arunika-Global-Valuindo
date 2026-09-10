@@ -117,7 +117,7 @@ export default function Dashboard() {
                     </div>
 
                     {/* Quick Access Action Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {/* Blog Management Card */}
                         <div className="bg-white rounded-3xl border border-[#EAE6DF] p-6 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
                             <div>
@@ -136,6 +136,29 @@ export default function Dashboard() {
                                     className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-[#1B544D] text-white hover:bg-[#15433E] transition-all shadow-sm"
                                 >
                                     <span>Kelola Artikel</span>
+                                    <span>→</span>
+                                </Link>
+                            </div>
+                        </div>
+
+                        {/* Testimonials Card */}
+                        <div className="bg-white rounded-3xl border border-[#EAE6DF] p-6 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+                            <div>
+                                <div className="h-12 w-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-xl font-bold mb-4">
+                                    💬
+                                </div>
+                                <h4 className="text-base font-bold text-[#1B544D]">Testimoni Klien</h4>
+                                <p className="text-xs text-[#52605E] mt-1 leading-relaxed">
+                                    Kelola daftar ulasan, masukan, foto profil, dan kutipan kepuasan klien yang ditampilkan di halaman utama website.
+                                </p>
+                            </div>
+                            <div className="mt-6 pt-4 border-t border-[#F0EDE7] flex items-center justify-between">
+                                <span className="text-[11px] text-[#718783] font-medium">Testimoni Publik</span>
+                                <Link
+                                    href={route('admin.testimonials.index')}
+                                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-[#1B544D] text-white hover:bg-[#15433E] transition-all shadow-sm"
+                                >
+                                    <span>Kelola Testimoni</span>
                                     <span>→</span>
                                 </Link>
                             </div>

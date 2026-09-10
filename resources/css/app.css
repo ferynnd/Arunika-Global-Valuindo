@@ -151,3 +151,21 @@
     margin-bottom: 1rem;
     border: 1px solid #e2e8f0;
 }
+
+@keyframes logo-slider {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-logo-slider {
+    animation: logo-slider 25s linear infinite;
+}
+
+.animate-logo-slider:hover {
+    animation-play-state: paused;
+}

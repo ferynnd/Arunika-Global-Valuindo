@@ -1,0 +1,181 @@
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { Head, Link, useForm } from '@inertiajs/react';
+import { useState } from 'react';
+
+export default function Create() {
+    const { data, setData, post, processing, errors } = useForm({
+        author: '',
+        role: '',
+        quote: '',
+        status: 'active',
+        sort_order: 0,
+        avatar: null,
+    });
+
+    const [previewAvatar, setPreviewAvatar] = useState(null);
+
+    const handleAvatarChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setData('avatar', file);
+            setPreviewAvatar(URL.createObjectURL(file));
+        }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        post(route('admin.testimonials.store'));
+    };
+
+    return (
+        <AuthenticatedLayout
+            header={
+                <div className="flex items-center justify-between">
+                    <div>
+                        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#1B544D]">
+                            Tambah Testimoni Baru
+                        </h2>
+                        <p className="text-xs sm:text-sm text-[#52605E] mt-0.5">
+                            Isi formulir berikut untuk menambahkan testimoni ulasan dari klien.
+                        </p>
+                    </div>
+                    <Link
+                        href={route('admin.testimonials.index')}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#E3DFD7] bg-white text-xs sm:text-sm font-semibold text-[#1B544D] hover:bg-[#FAF8F5] transition-colors"
+                    >
+                        ← Kembali
+                    </Link>
+                </div>
+            }
+        >
+            <Head title="Tambah Testimoni - Admin Arunika" />
+
+            <div className="py-8">
+                <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+                    <form onSubmit={handleSubmit} className="bg-white rounded-3xl border border-[#EAE6DF] p-6 sm:p-8 shadow-sm space-y-6">
+
+                        {/* Author Field */}
+                        <div>
+                            <label className="block text-xs font-bold uppercase tracking-wider text-[#1B544D] mb-2">
+                                Nama Klien / Pemberi Testimoni <span className="text-rose-500">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                value={data.author}
+                                onChange={(e) => setData('author', e.target.value)}
+                                placeholder="Contoh: Ahmad Fauzi"
+                                className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-xs sm:text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D]"
+                                required
+                            />
+                            {errors.author && <p className="text-rose-500 text-xs mt-1">{errors.author}</p>}
+                        </div>
+
+                        {/* Role Field */}
+                        <div>
+                            <label className="block text-xs font-bold uppercase tracking-wider text-[#1B544D] mb-2">
+                                Jabatan & Perusahaan
+                            </label>
+                            <input
+                                type="text"
+                                value={data.role}
+                                onChange={(e) => setData('role', e.target.value)}
+                                placeholder="Contoh: Chief Financial Officer, PT Indo Energi Lestari"
+                                className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-xs sm:text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D]"
+                            />
+                            {errors.role && <p className="text-rose-500 text-xs mt-1">{errors.role}</p>}
+                        </div>
+
+                        {/* Quote Field */}
+                        <div>
+                            <label className="block text-xs font-bold uppercase tracking-wider text-[#1B544D] mb-2">
+                                Isi Kutipan Testimoni <span className="text-rose-500">*</span>
+                            </label>
+                            <textarea
+                                rows="4"
+                                value={data.quote}
+                                onChange={(e) => setData('quote', e.target.value)}
+                                placeholder="Tuliskan apresiasi atau ulasan klien..."
+                                className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-xs sm:text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D]"
+                                required
+                            ></textarea>
+                            {errors.quote && <p className="text-rose-500 text-xs mt-1">{errors.quote}</p>}
+                        </div>
+
+                        {/* Avatar File Field */}
+                        <div>
+                            <label className="block text-xs font-bold uppercase tracking-wider text-[#1B544D] mb-2">
+                                Foto Profil / Avatar Klien (Opsional)
+                            </label>
+                            <div className="flex items-center gap-4">
+                                {previewAvatar && (
+                                    <img
+                                        src={previewAvatar}
+                                        alt="Preview"
+                                        className="w-14 h-14 rounded-full object-cover border-2 border-[#1B544D]"
+                                    />
+                                )}
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleAvatarChange}
+                                    className="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#1B544D]/10 file:text-[#1B544D] hover:file:bg-[#1B544D]/20 cursor-pointer"
+                                />
+                            </div>
+                            {errors.avatar && <p className="text-rose-500 text-xs mt-1">{errors.avatar}</p>}
+                        </div>
+
+                        {/* Options: Status & Sort Order */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 border-t border-[#EAE6DF]">
+                            <div>
+                                <label className="block text-xs font-bold uppercase tracking-wider text-[#1B544D] mb-2">
+                                    Status Publikasi <span className="text-rose-500">*</span>
+                                </label>
+                                <select
+                                    value={data.status}
+                                    onChange={(e) => setData('status', e.target.value)}
+                                    className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-xs sm:text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D]"
+                                >
+                                    <option value="active">Aktif (Tampil di Landing Page)</option>
+                                    <option value="inactive">Non-Aktif (Sembunyikan)</option>
+                                </select>
+                                {errors.status && <p className="text-rose-500 text-xs mt-1">{errors.status}</p>}
+                            </div>
+
+                            <div>
+                                <label className="block text-xs font-bold uppercase tracking-wider text-[#1B544D] mb-2">
+                                    Urutan Tampil (Sort Order)
+                                </label>
+                                <input
+                                    type="number"
+                                    min="0"
+                                    value={data.sort_order}
+                                    onChange={(e) => setData('sort_order', parseInt(e.target.value) || 0)}
+                                    className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-xs sm:text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D]"
+                                />
+                                {errors.sort_order && <p className="text-rose-500 text-xs mt-1">{errors.sort_order}</p>}
+                            </div>
+                        </div>
+
+                        {/* Submit Button */}
+                        <div className="pt-6 flex justify-end gap-3">
+                            <Link
+                                href={route('admin.testimonials.index')}
+                                className="px-5 py-2.5 rounded-xl border border-[#E3DFD7] bg-white text-xs sm:text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-colors"
+                            >
+                                Batal
+                            </Link>
+                            <button
+                                type="submit"
+                                disabled={processing}
+                                className="px-6 py-2.5 rounded-xl bg-[#1B544D] text-white text-xs sm:text-sm font-semibold hover:bg-[#15433E] transition-colors disabled:opacity-50 shadow-md shadow-[#1B544D]/20"
+                            >
+                                {processing ? 'Menyimpan...' : 'Simpan Testimoni'}
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </AuthenticatedLayout>
+    );
+}

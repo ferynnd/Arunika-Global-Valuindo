@@ -124,6 +124,22 @@ export default function AuthenticatedLayout({ header, children }) {
                             <span>Layanan</span>
                         </Link>
 
+                        {/* Testimoni */}
+                        <Link
+                            href={route('admin.testimonials.index')}
+                            onClick={() => setSidebarOpen(false)}
+                            className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
+                                isCurrentRoute('admin.testimonials.*')
+                                    ? 'bg-[#1B544D] text-[#ECAE36] shadow-sm border-l-4 border-[#ECAE36]'
+                                    : 'text-slate-300 hover:text-white hover:bg-white/5'
+                            }`}
+                        >
+                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                            <span>Testimoni Klien</span>
+                        </Link>
+
                         {/* Profil Akun */}
                         <Link
                             href={route('profile.edit')}

@@ -1,26 +1,30 @@
 const CustomButton = ({
     text = "About Us",
-    bgColor = "bg-[#E8C44F]",
+    bgColor = "bg-[#E2BE43]",
     textColor = "text-white",
     arrow = "→",
     onClick,
+    href,
 }) => {
+    const Component = href ? 'a' : 'button';
     return (
-        <button
+        <Component
+            href={href}
             onClick={onClick}
-            className="group flex items-center gap-1.5"
+            className="group inline-flex items-center gap-1.5 cursor-pointer"
         >
             {/* Text */}
             <span
                 className={`
                     flex items-center justify-center
-                    h-[50px] px-8
+                    h-[46px] sm:h-[50px] px-6 sm:px-8
                     rounded-full
                     ${bgColor}
                     ${textColor}
-                    text-[16px] font-normal
+                    text-[15px] sm:text-[16px] font-normal
                     transition-all duration-300
                     group-hover:brightness-95
+                    shadow-sm
                 `}
             >
                 {text}
@@ -30,18 +34,19 @@ const CustomButton = ({
             <span
                 className={`
                     flex items-center justify-center
-                    w-[43px] h-[43px]
+                    w-[40px] h-[40px] sm:w-[43px] sm:h-[43px]
                     rounded-full
                     ${bgColor}
                     ${textColor}
-                    text-[20px]
+                    text-[18px] sm:text-[20px]
                     transition-all duration-300
                     group-hover:translate-x-1
+                    shadow-sm
                 `}
             >
                 {arrow}
             </span>
-        </button>
+        </Component>
     );
 };
 
