@@ -9,21 +9,30 @@ use Illuminate\Support\Str;
 
 class ImageUploadController extends Controller
 {
-    /**
-     * Upload an image from the rich text editor.
-     */
     public function store(Request $request)
     {
         $request->validate([
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:5120'],
+            'image' => [
+                'required',
+                'image',
+                'mimes:jpeg,jpg,png,gif,webp',
+                'max:5120',
+            ],
         ]);
 
         $file = $request->file('image');
+
         $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
-        $path = $file->storeAs('editor-images', $filename, 'public');
+
+        $path = $file->storeAs(
+            'editor-images',
+            $filename,
+            'public'
+        );
 
         return response()->json([
-            'url' => Storage::disk('public')->url($path),
+            'success' => true,
+            'url' => asset('storage/' . $path),
         ]);
     }
 }
