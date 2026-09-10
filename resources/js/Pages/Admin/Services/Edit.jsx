@@ -69,10 +69,10 @@ export default function Edit({ service }) {
             label: 'Konten Layanan',
             icon: (
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                    <polyline points="14 2 14 8 20 8"/>
-                    <line x1="16" y1="13" x2="8" y2="13"/>
-                    <line x1="16" y1="17" x2="8" y2="17"/>
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
                 </svg>
             ),
         },
@@ -81,8 +81,8 @@ export default function Edit({ service }) {
             label: 'SEO & Meta',
             icon: (
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="11" cy="11" r="8"/>
-                    <path d="m21 21-4.35-4.35"/>
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.35-4.35" />
                 </svg>
             ),
             hasError: !!hasSeoErrors,
@@ -122,11 +122,10 @@ export default function Edit({ service }) {
                                     key={tab.key}
                                     type="button"
                                     onClick={() => setActiveTab(tab.key)}
-                                    className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
-                                        activeTab === tab.key
+                                    className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold transition-all ${activeTab === tab.key
                                             ? 'bg-[#1B544D] text-white shadow-sm'
                                             : 'text-slate-500 hover:text-[#1B544D] hover:bg-[#FAF8F5]'
-                                    }`}
+                                        }`}
                                 >
                                     {tab.icon}
                                     <span>{tab.label}</span>
@@ -191,21 +190,6 @@ export default function Edit({ service }) {
                                                 className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-xs sm:text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D]"
                                             />
                                             {errors.sort_order && <p className="text-xs text-rose-500 mt-1">{errors.sort_order}</p>}
-                                        </div>
-
-                                        <div>
-                                            <label htmlFor="icon" className="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
-                                                Kode / Nama Icon (Opsional)
-                                            </label>
-                                            <input
-                                                id="icon"
-                                                type="text"
-                                                value={data.icon}
-                                                onChange={(e) => setData('icon', e.target.value)}
-                                                placeholder="Contoh: chart-bar, shield-check"
-                                                className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-xs sm:text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D]"
-                                            />
-                                            {errors.icon && <p className="text-xs text-rose-500 mt-1">{errors.icon}</p>}
                                         </div>
                                     </div>
 

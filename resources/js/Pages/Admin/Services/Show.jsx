@@ -18,8 +18,8 @@ export default function Show({ service }) {
                                 Detail Layanan #{service.id}
                             </span>
                             <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${service.status === 'active'
-                                    ? 'bg-emerald-100 text-emerald-800'
-                                    : 'bg-slate-100 text-slate-600'
+                                ? 'bg-emerald-100 text-emerald-800'
+                                : 'bg-slate-100 text-slate-600'
                                 }`}>
                                 {service.status === 'active' ? 'Aktif' : 'Non-Aktif'}
                             </span>
@@ -91,26 +91,6 @@ export default function Show({ service }) {
                                 </p>
                             </div>
                         )}
-
-                        {/* Fitur / Keunggulan
-                        {service.features && service.features.length > 0 && (
-                            <div>
-                                <h3 className="text-xs font-bold uppercase tracking-wider text-[#1B544D] mb-3">
-                                    Poin Keunggulan / Fitur Utama
-                                </h3>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    {service.features.map((feat, idx) => (
-                                        <div key={idx} className="flex items-center gap-2.5 p-3 rounded-xl bg-[#FAF8F5] border border-[#EAE6DF] text-xs font-semibold text-slate-800">
-                                            <span className="w-5 h-5 rounded-full bg-[#1B544D] text-[#ECAE36] flex items-center justify-center font-bold text-[10px] shrink-0">
-                                                ✓
-                                            </span>
-                                            <span>{feat}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )} */}
-
                         {/* Detail Konten */}
                         {service.content && (
                             <div>
