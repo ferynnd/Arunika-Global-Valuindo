@@ -2,6 +2,9 @@ import { Head, Link, router } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
+import PageHeader from '@/Components/PageHeader';
+import HeaderSection from '@/Components/HeaderSection';
+import CustomButton from '@/Components/CustomButton';
 
 export default function Index({ auth, articles, featuredArticle, categories, filters }) {
     const [scrolled, setScrolled] = useState(false);
@@ -51,67 +54,27 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
     return (
         <div className="min-h-screen bg-[#FAF8F5] text-[#334155] font-sans antialiased selection:bg-[#ECAE36] selection:text-[#1B544D]">
             <Header auth={auth} title="Blog & Wawasan Korporasi - Arunika Global Valuindo" activePage="blog" />
+{/* Component Page Header Banner */}
+            <PageHeader 
+                title="Blog" 
+                breadcrumb={[
+                    { label: 'Home', href: '/' }, 
+                    { label: 'Blog', href: '/blog' }
+                ]} 
+            />
 
-            {/* HERO SECTION */}
-            <section className="pt-32 pb-16 sm:pt-40 sm:pb-20 bg-gradient-to-b from-white via-[#FAF8F5] to-[#FAF8F5] border-b border-[#EAE6DF]">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <span className="text-xs font-bold uppercase tracking-widest text-[#ECAE36] bg-[#1B544D] px-4 py-1.5 rounded-full inline-block mb-4 shadow-xs">
-                        Wawasan & Insight Korporasi
-                    </span>
-                    <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#1B544D] tracking-tight leading-tight max-w-4xl mx-auto">
-                        Kabar, Analisis & Publikasi Strategi Arunika
-                    </h1>
-                    <p className="text-xs sm:text-sm text-[#52605E] max-w-2xl mx-auto mt-4 leading-relaxed">
-                        Temukan artikel terkini seputar valuasi bisnis, studi kelayakan, strategi korporasi, serta perkembangan isu industri berkelanjutan.
-                    </p>
-
-                    {/* Search Bar & Filter */}
-                    <div className="mt-8 max-w-2xl mx-auto">
-                        <form onSubmit={handleSearchSubmit} className="flex items-center gap-2 bg-white p-2 rounded-full border border-[#EAE6DF] shadow-md shadow-slate-900/5">
-                            <input
-                                type="text"
-                                value={search}
-                                onChange={(e) => setSearch(e.target.value)}
-                                placeholder="Cari artikel, topik, atau kata kunci..."
-                                className="flex-1 border-0 bg-transparent text-xs sm:text-sm px-4 focus:ring-0 focus:outline-hidden text-slate-800 placeholder-slate-400"
+            {/* HEADER SERVICE SECTION */}
+            <section className="pt-12">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex items-center">
+                        <div className=" space-y-4">
+                            <HeaderSection
+                                tagline="Wawasan & Publikasi"
+                                title="Lebih dari Satu Dekade Pengalaman Profesional Mendampingi Pertumbuhan Bisnis."
+                                showButton={false}
                             />
-                            <button
-                                type="submit"
-                                className="px-6 py-2.5 rounded-full bg-[#1B544D] text-white font-semibold text-xs hover:bg-[#15433E] transition-all shadow-sm shrink-0"
-                            >
-                                Cari
-                            </button>
-                        </form>
-                    </div>
-
-                    {/* Category Filter Tabs */}
-                    {categories && categories.length > 0 && (
-                        <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
-                            <button
-                                onClick={() => handleCategoryClick('')}
-                                className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
-                                    !activeCategory
-                                        ? 'bg-[#1B544D] text-[#ECAE36] shadow-sm'
-                                        : 'bg-white text-slate-600 hover:bg-[#EFECE6] border border-[#EAE6DF]'
-                                }`}
-                            >
-                                Semua Artikel
-                            </button>
-                            {categories.map((cat) => (
-                                <button
-                                    key={cat.id}
-                                    onClick={() => handleCategoryClick(cat.slug)}
-                                    className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
-                                        activeCategory === cat.slug
-                                            ? 'bg-[#1B544D] text-[#ECAE36] shadow-sm'
-                                            : 'bg-white text-slate-600 hover:bg-[#EFECE6] border border-[#EAE6DF]'
-                                    }`}
-                                >
-                                    {cat.name} ({cat.articles_count ?? 0})
-                                </button>
-                            ))}
                         </div>
-                    )}
+                    </div>
                 </div>
             </section>
 
@@ -287,6 +250,34 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
                         )}
                     </div>
 
+                </div>
+            </section>
+
+            <section className="py-24 relative overflow-hidden bg-primary">
+                <div className="absolute inset-0">
+                    <img
+                        src={'/assets/bgcta.webp'}
+                        alt="Background overlay"
+                        className="w-full h-full object-cover"
+                    />
+                </div>
+
+                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                    <h2 className="text-3xl md:text-5xl font-normal tracking-wide leading-tight">
+                        Ready to solve your problem with <br />
+                        <span className="text-secondary italic">Arunika Global Valuindo?</span>
+                    </h2>
+
+                    <div className="mt-8 flex justify-center">
+                        <CustomButton
+                            href="#contact"
+                            text="Kosultasi Sekarang"
+                            bgColor="bg-accent hover:bg-accent/90"
+                            textColor="text-white"
+                            iconBgColor="bg-white/20"
+                            iconTextColor="text-white"
+                        />
+                    </div>
                 </div>
             </section>
 
