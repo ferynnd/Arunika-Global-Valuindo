@@ -20,7 +20,7 @@ export default function MissionSection({
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
 
-                    <div className="lg:col-span-5 flex justify-center lg:justify-start">
+                    <div className="lg:col-span-5 flex justify-center lg:justify-start" data-aos="fade-right" data-aos-duration="900">
                         <div className="relative overflow-hidden rounded-3xl md:rounded-2xl shadow-sm max-w-md w-full">
                             <img
                                 src={imageSrc}
@@ -31,7 +31,7 @@ export default function MissionSection({
                     </div>
 
                     {/* Right: Content using HeaderSection + Extra Description */}
-                    <div className="lg:col-span-7 space-y-6">
+                    <div className="lg:col-span-7 space-y-6" data-aos="fade-left" data-aos-duration="900">
                         <HeaderSection
                             tagline={tagline}
                             title={title}

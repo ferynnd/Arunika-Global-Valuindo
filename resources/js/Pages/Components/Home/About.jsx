@@ -40,22 +40,27 @@ export default function AboutSection({ displayServices = defaultServices }) {
         <section id="about" className="py-20 sm:py-28">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                <HeaderSection
-                    tagline="Tentang Kami"
-                    title="PT Arunika Global Valuindo adalah perusahaan penilai independen dan penasihat strategi korporasi terpercaya di Indonesia."
-                    buttonText="Ketahui Lebih Lanjut"
-                    buttonHref="/about"
-                    buttonBgColor="bg-secondary hover:bg-secondary/90"
-                    buttonTextColor="text-white font-medium"
-                    buttonSize="md"
-                    showButton={true}
-                />
+                <div data-aos="fade-up" data-aos-duration="800">
+                    <HeaderSection
+                        tagline="Tentang Kami"
+                        title="PT Arunika Global Valuindo adalah perusahaan penilai independen dan penasihat strategi korporasi terpercaya di Indonesia."
+                        buttonText="Ketahui Lebih Lanjut"
+                        buttonHref="/about"
+                        buttonBgColor="bg-secondary hover:bg-secondary/90"
+                        buttonTextColor="text-white font-medium"
+                        buttonSize="md"
+                        showButton={true}
+                    />
+                </div>
 
                 <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
                     {displayServices.slice(0, 3).map((srv, idx) => (
                         <div
                             key={srv.id || idx}
                             onClick={() => setSelectedService(srv)}
+                            data-aos="fade-up"
+                            data-aos-delay={idx * 150}
+                            data-aos-duration="800"
                             className="p-6 rounded-2xl bg-stone-100 border border-stone-200 cursor-pointer transition-all hover:border-primary/30 group"
                         >
                             <div className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center shrink-0 mb-4 group-hover:scale-105 transition-transform">

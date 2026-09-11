@@ -1,5 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import CustomButton from '@/Components/CustomButton';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
@@ -20,6 +22,13 @@ export default function Welcome({ auth, latestArticles = [], services = [], test
     const [selectedArticle, setSelectedArticle] = useState(null);
 
     useEffect(() => {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 60,
+        });
+
         const handleScroll = () => {
             if (window.scrollY > 20) {
                 setScrolled(true);
@@ -184,7 +193,7 @@ export default function Welcome({ auth, latestArticles = [], services = [], test
                     />
                 </div>
 
-                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white" data-aos="fade-up" data-aos-duration="900">
                     <h2 className="text-3xl md:text-5xl font-normal tracking-wide leading-tight">
                         Ready to solve your problem with <br />
                         <span className="text-secondary italic">Arunika Global Valuindo?</span>

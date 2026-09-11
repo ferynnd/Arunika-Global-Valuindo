@@ -1,5 +1,7 @@
 import { Head, Link, router } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import PageHeader from '@/Components/PageHeader';
@@ -13,6 +15,13 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
     const [activeCategory, setActiveCategory] = useState(filters.category || '');
 
     useEffect(() => {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 60,
+        });
+
         const handleScroll = () => {
             if (window.scrollY > 20) {
                 setScrolled(true);
@@ -65,7 +74,7 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
 
             {/* HEADER SERVICE SECTION */}
             <section className="pt-12">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up" data-aos-duration="800">
                     <div className="flex items-center">
                         <div className=" space-y-4">
                             <HeaderSection
@@ -84,7 +93,7 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
 
                     {/* FEATURED ARTICLE HERO CARD */}
                     {featuredArticle && (
-                        <div className="group relative bg-white rounded-3xl border border-[#EAE6DF] overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div className="group relative bg-white rounded-3xl border border-[#EAE6DF] overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-duration="900">
                             <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
                                 <div className="lg:col-span-7 relative h-64 sm:h-80 lg:h-[420px] overflow-hidden bg-slate-100">
                                     <img
@@ -140,7 +149,7 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
 
                     {/* ARTICLES GRID */}
                     <div>
-                        <div className="flex items-center justify-between mb-8">
+                        <div className="flex items-center justify-between mb-8" data-aos="fade-up">
                             <h3 className="text-xl font-extrabold text-[#1B544D]">
                                 {search || activeCategory ? 'Hasil Pencarian & Filter' : 'Semua Publikasi Artikel'}
                             </h3>
@@ -151,9 +160,12 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
 
                         {articles.data.length > 0 ? (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                {articles.data.map((article) => (
+                                {articles.data.map((article, idx) => (
                                     <div
                                         key={article.id}
+                                        data-aos="fade-up"
+                                        data-aos-delay={(idx % 3) * 100}
+                                        data-aos-duration="800"
                                         className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-[#EAE6DF] hover:shadow-xl transition-all duration-300"
                                     >
                                         <div className="relative h-48 sm:h-52 overflow-hidden bg-slate-100">
@@ -262,7 +274,7 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
                     />
                 </div>
 
-                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white" data-aos="fade-up" data-aos-duration="900">
                     <h2 className="text-3xl md:text-5xl font-normal tracking-wide leading-tight">
                         Ready to solve your problem with <br />
                         <span className="text-secondary italic">Arunika Global Valuindo?</span>

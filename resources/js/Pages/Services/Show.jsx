@@ -1,5 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 
@@ -8,6 +10,13 @@ export default function Show({ auth, service, otherServices = [] }) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     useEffect(() => {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 60,
+        });
+
         const handleScroll = () => {
             if (window.scrollY > 20) {
                 setScrolled(true);
@@ -28,7 +37,7 @@ export default function Show({ auth, service, otherServices = [] }) {
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
 
                     {/* Breadcrumb & Back */}
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between" data-aos="fade-up">
                         <div className="flex items-center gap-2 text-xs text-[#718783] font-medium">
                             <Link href="/" className="hover:text-[#1B544D]">Home</Link>
                             <span>/</span>
@@ -45,7 +54,7 @@ export default function Show({ auth, service, otherServices = [] }) {
                     </div>
 
                     {/* Service Header */}
-                    <div className="space-y-4">
+                    <div className="space-y-4" data-aos="fade-up" data-aos-delay="100">
                         <div className="flex items-center gap-2">
                             <span className="px-3.5 py-1 rounded-full bg-[#1B544D] text-[#ECAE36] text-xs font-bold uppercase tracking-wider shadow-xs">
                                 Layanan Korporasi
@@ -68,7 +77,7 @@ export default function Show({ auth, service, otherServices = [] }) {
 
                     {/* Thumbnail Banner */}
                     {service.thumbnail && (
-                        <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white max-h-[450px] bg-slate-100">
+                        <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white max-h-[450px] bg-slate-100" data-aos="fade-up" data-aos-delay="150">
                             <img
                                 src={`/storage/${service.thumbnail}`}
                                 alt={service.title}
@@ -79,7 +88,7 @@ export default function Show({ auth, service, otherServices = [] }) {
 
                     {/* Features Poin Keunggulan Card */}
                     {service.features && service.features.length > 0 && (
-                        <div className="bg-[#143F39] text-white rounded-3xl p-6 sm:p-8 space-y-4 border border-[#2C6B62] shadow-lg">
+                        <div className="bg-[#143F39] text-white rounded-3xl p-6 sm:p-8 space-y-4 border border-[#2C6B62] shadow-lg" data-aos="fade-up" data-aos-delay="200">
                             <div className="flex items-center gap-2">
                                 <span className="w-2.5 h-2.5 rounded-full bg-[#ECAE36]"></span>
                                 <h3 className="text-xs font-bold uppercase tracking-widest text-[#ECAE36]">
@@ -100,7 +109,7 @@ export default function Show({ auth, service, otherServices = [] }) {
                     )}
 
                     {/* Rich Content HTML Body */}
-                    <div className="bg-white rounded-3xl border border-[#EAE6DF] p-6 sm:p-10 shadow-sm space-y-6">
+                    <div className="bg-white rounded-3xl border border-[#EAE6DF] p-6 sm:p-10 shadow-sm space-y-6" data-aos="fade-up" data-aos-delay="250">
                         <h3 className="text-lg font-bold text-[#1B544D] border-b border-[#EAE6DF] pb-3">
                             Penjelasan Lengkap & Cakupan Metodologi
                         </h3>
@@ -111,7 +120,7 @@ export default function Show({ auth, service, otherServices = [] }) {
                     </div>
 
                     {/* CTA Box */}
-                    <div className="bg-gradient-to-br from-[#1B544D] to-[#143F39] text-white rounded-3xl p-8 sm:p-10 text-center space-y-4 shadow-xl border border-[#1B544D]">
+                    <div className="bg-gradient-to-br from-[#1B544D] to-[#143F39] text-white rounded-3xl p-8 sm:p-10 text-center space-y-4 shadow-xl border border-[#1B544D]" data-aos="fade-up" data-aos-delay="300">
                         <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
                             Tertarik Menggunakan Layanan {service.title}?
                         </h3>
@@ -136,7 +145,7 @@ export default function Show({ auth, service, otherServices = [] }) {
             {otherServices && otherServices.length > 0 && (
                 <section className="py-16 bg-[#EFECE6]/60 border-t border-[#EAE6DF]">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between" data-aos="fade-up">
                             <div>
                                 <span className="text-xs font-bold uppercase tracking-widest text-[#1B544D]">
                                     Eksplorasi Layanan
@@ -154,9 +163,12 @@ export default function Show({ auth, service, otherServices = [] }) {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {otherServices.map((other) => (
+                            {otherServices.map((other, idx) => (
                                 <div
                                     key={other.id}
+                                    data-aos="fade-up"
+                                    data-aos-delay={idx * 100}
+                                    data-aos-duration="800"
                                     className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-[#EAE6DF] hover:shadow-lg transition-all duration-300 p-6 justify-between"
                                 >
                                     <div className="space-y-3">

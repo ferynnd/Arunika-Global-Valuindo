@@ -1,4 +1,7 @@
 import { Head, Link, router } from '@inertiajs/react';
+import { useState, useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import PageHeader from '@/Components/PageHeader';
@@ -6,6 +9,15 @@ import HeaderSection from '@/Components/HeaderSection';
 import CustomButton from '@/Components/CustomButton';
 
 export default function Index({ auth, services, filters }) {
+    useEffect(() => {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 60,
+        });
+    }, []);
+
     const handleSearchSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -35,7 +47,7 @@ export default function Index({ auth, services, filters }) {
 
             {/* HEADER SERVICE SECTION */}
             <section className="pt-12">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up" data-aos-duration="800">
                     <div className="flex items-center">
                         <div className=" space-y-4">
                             <HeaderSection
@@ -51,7 +63,7 @@ export default function Index({ auth, services, filters }) {
             <section className="py-12 sm:py-16">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
 
-                    <div className="flex items-center justify-between border-b border-[#EAE6DF] pb-4">
+                    <div className="flex items-center justify-between border-b border-[#EAE6DF] pb-4" data-aos="fade-up">
                         <h2 className="text-xl sm:text-2xl font-extrabold text-primary">
                             {filters.search ? `Hasil Pencarian: "${filters.search}"` : 'Daftar Layanan Korporasi Kami'}
                         </h2>
@@ -65,6 +77,9 @@ export default function Index({ auth, services, filters }) {
                             {services.data.map((service, idx) => (
                                 <div
                                     key={service.id}
+                                    data-aos="fade-up"
+                                    data-aos-delay={(idx % 3) * 100}
+                                    data-aos-duration="800"
                                     className="group flex flex-col bg-white rounded-3xl overflow-hidden border border-[#EAE6DF] hover:shadow-xl hover:border-primary/40 transition-all duration-300 justify-between"
                                 >
                                     <div>
@@ -184,7 +199,7 @@ export default function Index({ auth, services, filters }) {
                     />
                 </div>
 
-                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white" data-aos="fade-up" data-aos-duration="900">
                     <h2 className="text-3xl md:text-5xl font-normal tracking-wide leading-tight">
                         Ready to solve your problem with <br />
                         <span className="text-secondary italic">Arunika Global Valuindo?</span>
