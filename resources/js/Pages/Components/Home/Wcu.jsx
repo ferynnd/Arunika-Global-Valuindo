@@ -48,7 +48,7 @@ export default function WhyChooseUs({
     title = "Character, Environment, & Organization — Fondasi Utama Arunika dalam Menghadirkan Layanan Advisory Terbaik.",
     showButton = false,
     buttonText = "Tentang Kami",
-    buttonHref = "/tentang",
+    buttonHref = "/layanan",
     buttonBgColor = "bg-secondary",
     buttonTextColor = "text-white font-medium",
     buttonSize = "md",

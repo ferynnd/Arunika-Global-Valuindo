@@ -26,6 +26,7 @@ export default function Hero({
             }}
         >
             <div className="absolute inset-0 bg-linear-to-b from-background to-background/50"></div>
+            <div className="absolute inset-0 bg-linear-to-b from-background to-background/50"></div>
 
             <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-12 translate-y-28">
                 <span 
@@ -41,16 +42,9 @@ export default function Hero({
                     data-aos="fade-up"
                     data-aos-duration="1000"
                 >
-                    {title}
+                    Jasa Konsultan Bisnis & Valuation <br className="hidden sm:inline" />
+                    Terpercaya di Indonesia
                 </h1>
-
-                <p 
-                    className="mt-4 text-sm sm:text-base text-slate-700 max-w-2xl mx-auto leading-relaxed"
-                    data-aos="fade-up"
-                    data-aos-delay="100"
-                >
-                    {description}
-                </p>
 
                 <div 
                     className="mt-8 sm:mt-10 flex items-center justify-center gap-4"
@@ -61,7 +55,7 @@ export default function Hero({
                     <CustomButton
                         href={"https://wa.me/6282331144447"}
                         text="Konsultasi Sekarang"
-                        bgColor="bg-secondary hover:bg-secondary/90"
+                        bgColor="bg-secondary"
                         textColor="text-white font-medium"
                     />
                 </div>
