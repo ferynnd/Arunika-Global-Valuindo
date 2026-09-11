@@ -1,18 +1,60 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import { Link } from '@inertiajs/react';
+import { useState, useEffect } from 'react';
+import Footer from '@/Pages/Components/Footer';
+import Header from '@/Pages/Components/Header';
 
-export default function GuestLayout({ children }) {
+export default function GuestLayout({ auth, title, activePage, children }) {
+    const [showButton, setShowButton] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 300) {
+                setShowButton(true);
+            } else {
+                setShowButton(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    };
+
     return (
-        <div className="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
-            <div>
-                <Link href="/">
-                    <ApplicationLogo className="h-20 w-20 fill-current text-gray-500" />
-                </Link>
+        <>
+            <Header auth={auth} title={title} activePage={activePage} />
+            
+            <div className="min-h-screen bg-white text-text font-normal tracking-wide antialiased selection:bg-[#ECAE36] selection:text-[#1B544D] relative">
+                {children}
+                {showButton && (
+                    <button
+                        type="button"
+                        onClick={scrollToTop}
+                        aria-label="Kembali ke atas"
+                        className="fixed bottom-8 left-8 z-50 p-3.5 rounded-xl bg-accent text-white shadow-xl border border-secondary/30 hover:bg-accent/90 hover:scale-110 transition-all duration-300 cursor-pointer flex items-center justify-center group"
+                    >
+                        <svg
+                            className="w-4 h-4 transform -rotate-90 group-hover:-translate-y-0.5 transition-transform"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        >
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </button>
+                )}
             </div>
 
-            <div className="mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg">
-                {children}
-            </div>
-        </div>
+            <Footer />
+        </>
     );
 }

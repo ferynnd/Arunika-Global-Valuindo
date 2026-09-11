@@ -41,7 +41,7 @@ export default function TestimonialSection({
                             showButton={showButton}
                         />
 
-                        <div className="mt-8 bg-stone-100 rounded-2xl md:rounded-xl p-6 border border-stone-200 ">
+                        <div className="mt-8 bg-background rounded-2xl md:rounded-xl p-6 border border-stone-200 ">
                             <p className="text-xs sm:text-sm font-light text-[#4A5D5A] leading-relaxed tracking-wide italic">
                                 "{currentTestimonial?.quote}"
                             </p>

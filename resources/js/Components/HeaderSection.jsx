@@ -5,7 +5,7 @@ export default function HeaderSection({
     tagline = "Tentang Kami",
     title = "PT Arunika Global Valuindo adalah perusahaan penilai independen dan penasihat strategi korporasi terpercaya di Indonesia.",
     buttonText = "Ketahui Lebih Lanjut",
-    buttonHref = "/about",
+    buttonHref = "",
     buttonBgColor = "bg-secondary hover:bg-secondary/90",
     buttonTextColor = "text-white font-medium",
     buttonSize = "md",

@@ -7,6 +7,7 @@ import Footer from '../Components/Footer';
 import PageHeader from '@/Components/PageHeader';
 import HeaderSection from '@/Components/HeaderSection';
 import CustomButton from '@/Components/CustomButton';
+import GuestLayout from '@/Layouts/GuestLayout';
 
 export default function Index({ auth, articles, featuredArticle, categories, filters }) {
     const [scrolled, setScrolled] = useState(false);
@@ -61,10 +62,8 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
     };
 
     return (
-        <div className="min-h-screen bg-[#FAF8F5] text-[#334155] font-sans antialiased selection:bg-[#ECAE36] selection:text-[#1B544D]">
-            <Header auth={auth} title="Blog & Wawasan Korporasi - Arunika Global Valuindo" activePage="blog" />
-{/* Component Page Header Banner */}
-            <PageHeader 
+        <GuestLayout auth={auth} title="Blog & Wawasan Korporasi - Arunika Global Valuindo" activePage="blog" >
+             <PageHeader 
                 title="Blog" 
                 breadcrumb={[
                     { label: 'Home', href: '/' }, 
@@ -72,11 +71,10 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
                 ]} 
             />
 
-            {/* HEADER SERVICE SECTION */}
             <section className="pt-12">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up" data-aos-duration="800">
                     <div className="flex items-center">
-                        <div className=" space-y-4">
+                        <div className="space-y-4">
                             <HeaderSection
                                 tagline="Wawasan & Publikasi"
                                 title="Lebih dari Satu Dekade Pengalaman Profesional Mendampingi Pertumbuhan Bisnis."
@@ -87,13 +85,12 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
                 </div>
             </section>
 
-            {/* MAIN CONTENT SECTION */}
             <section className="py-12 sm:py-16">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
 
                     {/* FEATURED ARTICLE HERO CARD */}
                     {featuredArticle && (
-                        <div className="group relative bg-white rounded-3xl border border-[#EAE6DF] overflow-hidden transition-all duration-300" data-aos="fade-up" data-aos-duration="900">
+                        <div className="group relative bg-white rounded-3xl border border-[#EAE6DF] overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
                             <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
                                 <div className="lg:col-span-7 relative h-64 sm:h-80 lg:h-[420px] overflow-hidden bg-slate-100">
                                     <img
@@ -101,34 +98,42 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
                                         alt={featuredArticle.title}
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     />
+                                    <span className="absolute top-4 left-4 px-3.5 py-1 rounded-full bg-[#1B544D] text-[#ECAE36] text-xs font-extrabold uppercase tracking-wider shadow-md">
+                                        Utama / Featured
+                                    </span>
                                 </div>
-                                <div className="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between">
-                                    <div className="space-y-4">
-                                        <div className="flex items-center gap-3 text-xs text-[#718783] font-semibold">
-                                            <span className="px-2.5 py-0.5 rounded-full bg-[#FAF8F5] border border-[#EAE6DF] text-[#1B544D]">
-                                                {featuredArticle.category ? featuredArticle.category.name : 'Artikel'}
-                                            </span>
-                                            <span>•</span>
-                                            <span>{formatDate(featuredArticle.published_at || featuredArticle.created_at)}</span>
-                                        </div>
-
-                                        <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#1B544D] group-hover:text-[#ECAE36] transition-colors leading-snug">
-                                            <Link href={route('blog.show', featuredArticle.slug)}>
-                                                {featuredArticle.title}
-                                            </Link>
-                                        </h2>
-
-                                        {featuredArticle.excerpt && (
-                                            <p className="text-sm text-gray-500 line-clamp-3">
-                                                {featuredArticle.excerpt}
-                                            </p>
-                                        )}
+                                <div className="lg:col-span-5 p-6 sm:p-10 space-y-4">
+                                    <div className="flex items-center gap-3 text-xs text-[#718783] font-semibold">
+                                        <span className="px-2.5 py-0.5 rounded-full bg-[#FAF8F5] border border-[#EAE6DF] text-[#1B544D]">
+                                            {featuredArticle.category ? featuredArticle.category.name : 'Artikel'}
+                                        </span>
+                                        <span>•</span>
+                                        <span>{formatDate(featuredArticle.published_at || featuredArticle.created_at)}</span>
                                     </div>
 
-                                    <div className="pt-6 flex items-start justify-between mt-auto">
+                                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#1B544D] group-hover:text-[#ECAE36] transition-colors leading-snug">
+                                        <Link href={route('blog.show', featuredArticle.slug)}>
+                                            {featuredArticle.title}
+                                        </Link>
+                                    </h2>
+
+                                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-3">
+                                        {featuredArticle.excerpt || 'Klik untuk membaca artikel lengkap dari pakar korporasi Arunika Global Valuindo.'}
+                                    </p>
+
+                                    <div className="pt-4 flex items-center justify-between">
+                                        <div className="flex items-center gap-2">
+                                            <div className="w-8 h-8 rounded-full bg-[#1B544D] text-[#ECAE36] flex items-center justify-center font-bold text-xs">
+                                                {featuredArticle.author?.name ? featuredArticle.author.name[0] : 'A'}
+                                            </div>
+                                            <span className="text-xs font-semibold text-slate-700">
+                                                {featuredArticle.author?.name || 'Redaksi Arunika'}
+                                            </span>
+                                        </div>
+
                                         <Link
                                             href={route('blog.show', featuredArticle.slug)}
-                                            className="inline-flex gap-2 px-4 py-2 rounded-full bg-[#1B544D] text-white font-semibold text-xs hover:bg-[#15433E] transition-all"
+                                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1B544D] text-white font-semibold text-xs hover:bg-[#15433E] transition-all shadow-sm"
                                         >
                                             <span>Baca Selengkapnya</span>
                                             <span>→</span>
@@ -141,13 +146,10 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
 
                     {/* ARTICLES GRID */}
                     <div>
-                        <div className="flex items-center justify-between mb-8" data-aos="fade-up">
+                        <div className="flex items-center justify-between mb-8">
                             <h3 className="text-xl font-extrabold text-[#1B544D]">
                                 {search || activeCategory ? 'Hasil Pencarian & Filter' : 'Semua Publikasi Artikel'}
                             </h3>
-                            <span className="text-xs text-[#718783]">
-                                Total {articles.total || 0} Artikel
-                            </span>
                         </div>
 
                         {articles.data.length > 0 ? (
@@ -160,13 +162,20 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
                                         data-aos-duration="800"
                                         className="group flex flex-col overflow-hidden cursor-pointer transition-all duration-300"
                                     >
-                                        <div className="relative aspect-video overflow-hidden rounded-3xl md:rounded-2xl">
-                                            <img
-                                                src={article.thumbnail ? `/storage/${article.thumbnail}` : 'https://images.unsplash.com/photo-1497440001374-f26997328c1b?auto=format&fit=crop&w=800&q=80'}
-                                                alt={article.title}
-                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                            />
-                                        </div>
+                                        <Link href={route('blog.show', article.slug)} className="block">
+                                            <div className="relative aspect-video overflow-hidden rounded-3xl md:rounded-2xl bg-slate-100">
+                                                <img
+                                                    src={article.thumbnail ? `/storage/${article.thumbnail}` : (article.image || 'https://images.unsplash.com/photo-1497440001374-f26997328c1b?auto=format&fit=crop&w=800&q=80')}
+                                                    alt={article.title}
+                                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                />
+                                                {/* Badge Kategori di Pojok Kanan Atas */}
+                                                <span className="absolute top-3 right-3 px-3 py-1 rounded-full bg-primary/90 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider z-10">
+                                                    {article.category?.name || 'Artikel'}
+                                                </span>
+                                            </div>
+                                        </Link>
+
                                         <div className="py-4 px-1.5 flex flex-col flex-grow justify-between">
                                             <div>
                                                 <div className="flex items-center gap-1.5 text-xs text-gray-600 mb-2 tracking-wide">
@@ -176,20 +185,22 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
                                                         <line x1="8" y1="2" x2="8" y2="6" />
                                                         <line x1="3" y1="10" x2="21" y2="10" />
                                                     </svg>
-                                                    <span>{formatDate(article.published_at || article.created_at)}</span>
+                                                    <span>{formatDate(article.published_at || article.created_at || article.date)}</span>
                                                 </div>
-                                                <h3 className="md:text-md text-lg font-body font-bold tracking-wide text-text mb-2 line-clamp-2">
-                                                    <Link href={route('blog.show', article.slug)} className="hover:text-primary transition-colors">
+
+                                                <h3 className="md:text-md text-lg font-body font-bold hover:underline tracking-wide text-primary group-hover:text-secondary transition-colors mb-2 line-clamp-2">
+                                                    <Link href={route('blog.show', article.slug)}>
                                                         {article.title}
                                                     </Link>
                                                 </h3>
                                             </div>
-                                            <div className="pt-4 flex items-center justify-between">
+
+                                            <div className="pt-4 flex items-center gap-2">
                                                 <Link 
                                                     href={route('blog.show', article.slug)}
                                                     className="text-sm font-medium tracking-wide group-hover:translate-x-1 transition-transform flex items-center gap-2 text-primary"
                                                 >
-                                                    Baca Selengkapnya 
+                                                    <span>Baca Selengkapnya</span> 
                                                     <span>
                                                         <svg className="w-4 h-4 fill-current stroke-current stroke-[1.5]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd">
                                                             <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"/>
@@ -202,7 +213,7 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
                                 ))}
                             </div>
                         ) : (
-                            <div className="bg-white rounded-3xl border border-[#EAE6DF] p-12 text-center text-slate-400">
+                            <div className="bg-white rounded-3xl border border-gray-200 p-12 text-center text-slate-400">
                                 <svg className="w-12 h-12 mx-auto text-slate-300 mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                                     <polyline points="14 2 14 8 20 8"/>
@@ -214,7 +225,6 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
                             </div>
                         )}
 
-                        {/* PAGINATION */}
                         {articles.links && articles.links.length > 3 && (
                             <div className="mt-12 flex justify-center">
                                 <div className="flex flex-wrap items-center gap-1.5">
@@ -224,17 +234,17 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
                                                 key={key}
                                                 href={link.url}
                                                 dangerouslySetInnerHTML={{ __html: link.label }}
-                                                className={`px-4 py-2 rounded-full text-xs font-semibold transition-colors ${
+                                                className={`px-4 py-2 rounded-md text-sm font-semibold transition-colors ${
                                                     link.active
-                                                        ? 'bg-[#1B544D] text-[#ECAE36]'
-                                                        : 'bg-white text-slate-700 hover:bg-[#EFECE6] border border-[#EAE6DF]'
+                                                        ? 'bg-primary text-secondary'
+                                                        : 'bg-white text-slate-700 hover:bg-stone-200 border border-stone-300'
                                                 }`}
                                             />
                                         ) : (
                                             <span
                                                 key={key}
                                                 dangerouslySetInnerHTML={{ __html: link.label }}
-                                                className="px-4 py-2 rounded-full text-xs text-slate-300 border border-[#EAE6DF]"
+                                                className="px-4 py-2 rounded-md text-sm text-stone-300 border border-stone-200"
                                             />
                                         )
                                     ))}
@@ -273,9 +283,6 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
                     </div>
                 </div>
             </section>
-
-            <Footer />
-
-        </div>
+        </GuestLayout>
     );
 }

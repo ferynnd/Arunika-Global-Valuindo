@@ -27,6 +27,7 @@
   --color-secondary: #E1BE4F;
   --color-accent: #FF5659;
   --color-text: #1F2937;
+  --color-background: #FAF8F5;
 }
 
 /* ==========================================================================
@@ -42,6 +43,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 400;
   font-style: normal;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 /* ==========================================================================

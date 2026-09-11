@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Spatie\OgImage\Facades\OgImage;
 
 class ServicesController extends Controller
 {
@@ -30,7 +31,7 @@ class ServicesController extends Controller
         ]);
     }
 
-    public function show($slug)
+    public function show(string $slug)
     {
         $service = Service::active()
             ->where('slug', $slug)
@@ -42,9 +43,15 @@ class ServicesController extends Controller
             ->take(3)
             ->get();
 
+        // Gunakan thumbnail service jika ada, jika tidak ada gunakan fallback image
+        $ogImageUrl = $service->thumbnail 
+            ? asset('storage/' . $service->thumbnail)
+            : asset('assets/bgcta.webp'); // Atau gambar default web Anda
+
         return Inertia::render('Services/Show', [
             'service' => $service,
             'otherServices' => $otherServices,
+            'ogImageUrl' => $ogImageUrl,
         ]);
     }
 }

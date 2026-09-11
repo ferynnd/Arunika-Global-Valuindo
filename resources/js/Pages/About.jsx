@@ -8,7 +8,8 @@ import HeaderSection from '@/Components/HeaderSection';
 import CustomButton from '@/Components/CustomButton';
 import JourneySection from './Components/About/Journey';
 import PageHeader from '@/Components/PageHeader';
-import VisionMisionSection from './Components/About/VisiMisi';
+import VisionMisionSection from './Components/About/VisiMisi'
+import GuestLayout from '@/Layouts/GuestLayout';
 
 export default function About({ auth }) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -69,10 +70,10 @@ export default function About({ auth }) {
     ];
 
     return (
-        <div className="min-h-screen bg-white text-gray-600 font-['Work_Sans'] font-normal tracking-wide antialiased selection:bg-secondary selection:text-primary">
-            <Header auth={auth} title="Tentang Kami - PT Arunika Global Valuindo" activePage="about" />
-            <PageHeader />
+        <GuestLayout auth={auth} title="Tentang Kami - PT Arunika Global Valuindo" activePage="about">
 
+            <PageHeader/>
+            
             <section className="py-16 sm:py-24">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -113,17 +114,15 @@ export default function About({ auth }) {
                     </div>
                     <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
                         {values.map((v, idx) => (
-                            <div
-                                key={idx}
+                            <div key={idx} 
                                 data-aos="fade-up"
-                                data-aos-delay={idx * 150}
-                                className="p-6 rounded-3xl md:rounded-2xl bg-stone-100 text-primary border border-stone-300 transition-all flex flex-col justify-between"
-                            >
+                                data-aos-delay={idx * 150} 
+                                className="p-6 rounded-3xl md:rounded-2xl bg-stone-100 text-primary border border-stone-300transition-all flex flex-col justify-between">
                                 <div>
                                     <div className="w-12 h-12 rounded-full bg-secondary text-primary flex items-center justify-center mb-4">
                                         {v.icon}
                                     </div>
-                                    <h3 className="text-lg font-normal tracking-wide text-primary">{v.title}</h3>
+                                    <h3 className="text-lg tracking-wide text-primary">{v.title}</h3>
                                     <p className="text-xs font-medium text-secondary mt-1 tracking-wide">{v.subtitle}</p>
                                     <p className="text-xs font-light text-gray-600 mt-3 leading-relaxed tracking-wide">{v.desc}</p>
                                 </div>
@@ -169,7 +168,7 @@ export default function About({ auth }) {
                 </div>
             </section>
 
-            <Footer />
-        </div>
+        </GuestLayout>
+
     );
 }
