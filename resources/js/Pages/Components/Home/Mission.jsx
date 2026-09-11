@@ -1,12 +1,20 @@
 import React from "react";
-import HeaderSection from "@/Components/HeaderSection"; // Sesuaikan path import HeaderSection Anda
+import HeaderSection from "@/Components/HeaderSection"; 
 
 export default function MissionSection({
+<<<<<<< HEAD
     tagline = "Visi & Misi Kami",
     title = "Menciptakan Nilai dan Perubahan Positif yang Berkelanjutan Bagi Perusahaan & Stakeholders.",
     description = "PT Arunika Global Valuindo berdedikasi membantu klien menghasilkan perbaikan yang sesuai dengan karakter bisnisnya, menghadirkan solusi menyeluruh dan berkelanjutan, serta membangun kemampuan organisasi untuk terus berkembang secara mandiri.",
     imageSrc = "/assets/speaking.webp",
     imageAlt = "Visi dan Misi - PT Arunika Global Valuindo",
+=======
+    tagline = "Misi Kami",
+    title = "Mendampingi organisasi mengambil keputusan strategis melalui analisis data teruji dan metodologi standar.",
+    description = "Kami tidak sekadar memberikan laporan rekomendasi. Arunika bekerja langsung bersama tim Anda untuk memperbaiki sistem keuangan, merapikan proses kerja internal, serta memastikan program sosial perusahaan memberikan dampak terukur.",
+    imageSrc = "/assets/speaking.webp",
+    imageAlt = "Misi PT Arunika Global Valuindo",
+>>>>>>> 137716532990af085e042fadc81c329882660451
     showButton = false,
     buttonText = "Tentang Kami",
     buttonHref = "/about",
@@ -30,7 +38,6 @@ export default function MissionSection({
                         </div>
                     </div>
 
-                    {/* Right: Content using HeaderSection + Extra Description */}
                     <div className="lg:col-span-7 space-y-6" data-aos="fade-left" data-aos-duration="900">
                         <HeaderSection
                             tagline={tagline}
@@ -44,7 +51,6 @@ export default function MissionSection({
                             onButtonClick={onButtonClick}
                         />
 
-                        {/* Additional Description Paragraph */}
                         {description && (
                             <p className="font-body text-sm font-normal text-gray-600 leading-relaxed tracking-wide pt-2 max-w-xl">
                                 {description}

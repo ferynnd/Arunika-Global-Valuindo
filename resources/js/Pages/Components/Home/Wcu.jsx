@@ -1,10 +1,13 @@
 import React from "react";
 import HeaderSection from "@/Components/HeaderSection";
-import CustomButton from "@/Components/CustomButton";
 
 const defaultWhyUsItems = [
     {
+<<<<<<< HEAD
         title: "C — Character: Integritas dalam Setiap Keputusan",
+=======
+        title: "Pengalaman Peningkatan Laba Bisnis",
+>>>>>>> 137716532990af085e042fadc81c329882660451
         icon: (
             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"></path>
@@ -12,6 +15,7 @@ const defaultWhyUsItems = [
         ),
     },
     {
+<<<<<<< HEAD
         title: "E — Environment: Dampak Positif Berkelanjutan",
         icon: (
             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -22,6 +26,9 @@ const defaultWhyUsItems = [
     },
     {
         title: "O — Organization: Organisasi Kolaboratif & Adaptif",
+=======
+        title: "Sistem Pemantauan Arus Kas Terintegrasi",
+>>>>>>> 137716532990af085e042fadc81c329882660451
         icon: (
             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -32,7 +39,21 @@ const defaultWhyUsItems = [
         ),
     },
     {
+<<<<<<< HEAD
         title: "Pengalaman Berdedikasi & Teruji Lebih Dari 10 Tahun",
+=======
+        title: "Metodologi Pengukuran SROI Teruji di BUMN",
+        icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+        ),
+    },
+    {
+        title: "Pendampingan Manajemen dan Studi Kelayakan",
+>>>>>>> 137716532990af085e042fadc81c329882660451
         icon: (
             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="18" y1="20" x2="18" y2="10"></line>
@@ -44,8 +65,13 @@ const defaultWhyUsItems = [
 ];
 
 export default function WhyChooseUs({
+<<<<<<< HEAD
     tagline = "Nilai Utama Perusahaan (CEO)",
     title = "Character, Environment, & Organization — Fondasi Utama Arunika dalam Menghadirkan Layanan Advisory Terbaik.",
+=======
+    tagline = "Keunggulan Kami",
+    title = "Solusi Penasihat Keuangan dan Manajemen yang Berfokus pada Hasil Nyata.",
+>>>>>>> 137716532990af085e042fadc81c329882660451
     showButton = false,
     buttonText = "Tentang Kami",
     buttonHref = "/about",
@@ -62,7 +88,6 @@ export default function WhyChooseUs({
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
-                    {/* Left: HeaderSection & 2-Column Checklist */}
                     <div className="lg:col-span-6 space-y-8" data-aos="fade-right" data-aos-duration="900">
                         <HeaderSection
                             tagline={tagline}
@@ -91,7 +116,7 @@ export default function WhyChooseUs({
                     </div>
 
                     <div className="lg:col-span-6" data-aos="fade-left" data-aos-duration="900">
-                        <div className="relative  rounded-3xl md:rounded-2xl  overflow-hidden shadow-sm">
+                        <div className="relative rounded-3xl md:rounded-2xl overflow-hidden shadow-sm">
                             <img
                                 src={imageSrc}
                                 alt={imageAlt}

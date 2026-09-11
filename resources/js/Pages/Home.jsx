@@ -1,8 +1,4 @@
-import { Head, Link } from '@inertiajs/react';
-import { useState, useEffect } from 'react';
 import CustomButton from '@/Components/CustomButton';
-import Header from './Components/Header';
-import Footer from './Components/Footer';
 import Hero from './Components/Home/Hero';
 import ClientMarquee from './Components/Home/MarqueClient';
 import About from './Components/Home/About';
@@ -27,6 +23,8 @@ export default function Welcome({ auth, services = [], latestArticles = [], test
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+
+export default function Home({ auth }) {
     return (
         <GuestLayout auth={auth} title="Arunika Global Valuindo" activePage="home" >
             <Hero/>
@@ -45,7 +43,7 @@ export default function Welcome({ auth, services = [], latestArticles = [], test
 
             <BlogSection articles={latestArticles} />
 
-            <section className="py-24 relative overflow-hidden bg-primary">
+            <section className="py-16 relative overflow-hidden bg-primary">
                 <div className="absolute inset-0">
                     <img
                         src={'/assets/bgcta.webp'}
@@ -64,6 +62,20 @@ export default function Welcome({ auth, services = [], latestArticles = [], test
                             href="https://wa.me/6282331144447"
                             text="Konsultasi Sekarang"
                             bgColor="bg-accent hover:bg-accent/90"
+                    <h2 className="text-3xl md:text-4xl font-normal tracking-wide leading-tight">
+                        Bersama Membangun Pertumbuhan <br />
+                        <span className="text-secondary italic">Bisnis yang Berkelanjutan</span>
+                    </h2>
+
+                    <p className="mt-4 text-base md:text-md text-white/80 max-w-2xl mx-auto leading-relaxed">
+                        Diskusikan kebutuhan strategi keuangan, perbaikan operasional, atau pengukuran dampak program perusahaan Anda.
+                    </p>
+
+                    <div className="mt-8 flex justify-center">
+                        <CustomButton
+                            href="https://wa.me/6282331144447"
+                            text="Mulai Konsultasi"
+                            bgColor="bg-accent"
                             textColor="text-white"
                             iconBgColor="bg-white/20"
                             iconTextColor="text-white"

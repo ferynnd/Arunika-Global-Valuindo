@@ -56,26 +56,23 @@ export default function Error({ status = 404 }) {
 
             <div className="min-h-screen bg-white text-text antialiased flex flex-col">
 
-                {/* Main */}
                 <main className="flex-1 flex items-center justify-center relative overflow-hidden mt-5">
 
                     <div className="absolute inset-0 bg-linear-to-b from-white via-white to-[#EFECE6]" />
 
-                    {/* Decorative circles */}
                     <div className="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-primaru/5 blur-3xl" />
 
                     <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-secondary/10 blur-3xl" />
 
                     <div className="relative z-10 max-w-2xl mx-auto px-4 sm:px-6 text-center py-16 sm:py-20">
 
-                        {/* Error number */}
                         <div className="flex items-center justify-center gap-4 sm:gap-6 mb-6">
 
                             <span className="text-7xl sm:text-9xl font-extrabold text-primaru tracking-tight leading-none">
                                 {String(status)[0]}
                             </span>
 
-                            <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-secondary to-[#D99B26] flex items-center justify-center shadow-lg shadow-secondary/30">
+                            <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-linear-to-br from-secondary to-[#D99B26] flex items-center justify-center shadow-lg shadow-secondary/30">
 
                                 {error.icon === 'lock' && (
                                     <svg
@@ -159,22 +156,18 @@ export default function Error({ status = 404 }) {
                             </span>
                         </div>
 
-                        {/* Label */}
                         <span className="text-xs font-bold uppercase tracking-widest text-primaru block mb-3">
                             {error.label}
                         </span>
 
-                        {/* Title */}
                         <h1 className="text-2xl sm:text-4xl font-bold text-primaru leading-snug">
                             {error.title}
                         </h1>
 
-                        {/* Description */}
                         <p className="mt-4 text-sm sm:text-base text-[#52605E] leading-relaxed max-w-lg mx-auto">
                             {error.description}
                         </p>
 
-                        {/* Actions */}
                         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
 
                             <Link
@@ -219,7 +212,7 @@ export default function Error({ status = 404 }) {
                                     <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                                 </svg>
 
-                                +62 (21) 555-0198
+                                +62 823 3114 4447
                             </span>
 
                             <span className="flex items-center gap-1.5">
@@ -233,7 +226,7 @@ export default function Error({ status = 404 }) {
                                     <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                 </svg>
 
-                                contact@arunika-valuindo.com
+                                info@arunikaglobalvaluindo.co.id
                             </span>
 
                         </div>

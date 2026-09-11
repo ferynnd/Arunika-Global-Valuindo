@@ -28,10 +28,17 @@ const defaultServices = [
 
 export default function ServicesShowcase({ 
     tagline = "Layanan Kami",
+<<<<<<< HEAD
     title = "Solusi Integratif Melalui Tiga Pilar Utama: Keuangan Strategis, Penasihat Bisnis, serta Keberlanjutan & Dampak Sosial.",
     showButton = true,
     buttonText = "Lihat Semua Layanan",
     buttonHref = "/layanan",
+=======
+    title = "Solusi terintegrasi untuk memperkuat keuangan, merapikan operasional, dan mengukur dampak keberlanjutan.",
+    showButton = true,
+    buttonText = "Lihat Semua Layanan",
+    buttonHref = "/services",
+>>>>>>> 137716532990af085e042fadc81c329882660451
     buttonBgColor = "bg-secondary hover:bg-secondary/90",
     buttonTextColor = "text-white font-medium",
     buttonSize = "md",
@@ -57,7 +64,7 @@ export default function ServicesShowcase({
     };
 
     return (
-        <section id="services" className="py-20 sm:py-28 bg-primary text-white">
+        <section id="services" className="py-20 md:py-18  bg-primary text-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="max-w-3xl mx-auto space-y-6 text-center" data-aos="fade-up" data-aos-duration="800">
                     <span className="text-sm sm:text-base font-medium tracking-wide text-secondary block">

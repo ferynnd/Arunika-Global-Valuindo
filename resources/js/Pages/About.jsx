@@ -12,19 +12,12 @@ import VisionMisionSection from './Components/About/VisiMisi'
 import GuestLayout from '@/Layouts/GuestLayout';
 
 export default function About({ auth }) {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
-
     useEffect(() => {
         AOS.init({
             once: true,
             duration: 800,
             easing: 'ease-out-cubic',
         });
-
-        const handleScroll = () => setScrolled(window.scrollY > 20);
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     const values = [
@@ -160,9 +153,15 @@ export default function About({ auth }) {
 
                     <div className="mt-8 flex justify-center">
                         <CustomButton
+<<<<<<< HEAD
                             href="https://wa.me/6282331144447"
                             text="Mulai Percakapan"
                             bgColor="bg-accent hover:bg-accent/90"
+=======
+                            href="/kontak"
+                            text="Kosultasi Sekarang"
+                            bgColor="bg-accent"
+>>>>>>> 137716532990af085e042fadc81c329882660451
                             textColor="text-white"
                             iconBgColor="bg-white/20"
                             iconTextColor="text-white"

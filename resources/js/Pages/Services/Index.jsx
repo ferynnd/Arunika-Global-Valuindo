@@ -183,7 +183,7 @@ export default function Index({ auth, services, filters }) {
                             <CustomButton
                                 href="#contact"
                                 text="Kosultasi Sekarang"
-                                bgColor="bg-accent hover:bg-accent/90"
+                                bgColor="bg-accent"
                                 textColor="text-white"
                                 iconBgColor="bg-white/20"
                                 iconTextColor="text-white"

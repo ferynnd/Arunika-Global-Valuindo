@@ -1,26 +1,10 @@
 import { Head, Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
-import Header from '../Components/Header';
-import Footer from '../Components/Footer';
 import PageHeader from '@/Components/PageHeader';
 import GuestLayout from '@/Layouts/GuestLayout';
 
 export default function Show({ auth, article, relatedArticles = [], ogImageUrl }) {
-    const [scrolled, setScrolled] = useState(false);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [copied, setCopied] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 20) {
-                setScrolled(true);
-            } else {
-                setScrolled(false);
-            }
-        };
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     const formatDate = (dateString) => {
         if (!dateString) return '';
