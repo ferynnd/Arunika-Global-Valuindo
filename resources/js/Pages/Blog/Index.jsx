@@ -9,9 +9,7 @@ import HeaderSection from '@/Components/HeaderSection';
 import CustomButton from '@/Components/CustomButton';
 import GuestLayout from '@/Layouts/GuestLayout';
 
-export default function Index({ auth, articles, featuredArticle, categories, filters }) {
-    const [scrolled, setScrolled] = useState(false);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+export default function Index({ auth, articles, filters }) {
     const [search, setSearch] = useState(filters.search || '');
     const [activeCategory, setActiveCategory] = useState(filters.category || '');
 
@@ -22,16 +20,6 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
             once: true,
             offset: 60,
         });
-
-        const handleScroll = () => {
-            if (window.scrollY > 20) {
-                setScrolled(true);
-            } else {
-                setScrolled(false);
-            }
-        };
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     const handleSearchSubmit = (e) => {
@@ -217,7 +205,7 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
                         <CustomButton
                             href="#contact"
                             text="Kosultasi Sekarang"
-                            bgColor="bg-accent hover:bg-accent/90"
+                            bgColor="bg-accent"
                             textColor="text-white"
                             iconBgColor="bg-white/20"
                             iconTextColor="text-white"

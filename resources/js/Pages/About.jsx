@@ -12,19 +12,12 @@ import VisionMisionSection from './Components/About/VisiMisi'
 import GuestLayout from '@/Layouts/GuestLayout';
 
 export default function About({ auth }) {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
-
     useEffect(() => {
         AOS.init({
             once: true,
             duration: 800,
             easing: 'ease-out-cubic',
         });
-
-        const handleScroll = () => setScrolled(window.scrollY > 20);
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     const values = [
@@ -157,9 +150,9 @@ export default function About({ auth }) {
 
                     <div className="mt-8 flex justify-center">
                         <CustomButton
-                            href="#contact"
+                            href="/kontak"
                             text="Kosultasi Sekarang"
-                            bgColor="bg-accent hover:bg-accent/90"
+                            bgColor="bg-accent"
                             textColor="text-white"
                             iconBgColor="bg-white/20"
                             iconTextColor="text-white"

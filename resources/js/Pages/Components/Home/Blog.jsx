@@ -1,8 +1,5 @@
 import React from "react";
-import { Link } from "@inertiajs/react";
-import HeaderSection from "@/Components/HeaderSection"; // Sesuaikan path import HeaderSection
-import CustomButton from "@/Components/CustomButton"; // Sesuaikan path import CustomButton
-
+import HeaderSection from "@/Components/HeaderSection"; 
 const defaultArticles = [
     {
         id: 1,
@@ -25,8 +22,8 @@ const defaultArticles = [
 ];
 
 export default function BlogSection({
-    tagline = "Blog Terbaru",
-    title = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
+    tagline = "Wawasan & Artikel",
+    title = "Catatan pemikiran seputar strategi keuangan, transformasi bisnis, dan efektivitas program CSR.",
     showButton = false,
     articles = defaultArticles,
     onSelectArticle,

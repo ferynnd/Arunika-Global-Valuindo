@@ -7,22 +7,7 @@ import CustomButton from '@/Components/CustomButton';
 import GuestLayout from '@/Layouts/GuestLayout';
 
 export default function Show({ auth, service, otherServices = [], ogImageUrl }) {
-    const [scrolled, setScrolled] = useState(false);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [copied, setCopied] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 20) {
-                setScrolled(true);
-            } else {
-                setScrolled(false);
-            }
-        };
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
     const handleCopyLink = () => {
         navigator.clipboard.writeText(window.location.href);
         setCopied(true);
@@ -174,7 +159,7 @@ export default function Show({ auth, service, otherServices = [], ogImageUrl }) 
                                     <CustomButton
                                         href="/layanan"
                                         text="Konsultasi Sekarang"
-                                        bgColor="bg-accent hover:bg-accent/90"
+                                        bgColor="bg-accent"
                                         textColor="text-white"
                                         iconBgColor="bg-white/20"
                                         iconTextColor="text-white"

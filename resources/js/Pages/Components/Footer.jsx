@@ -1,6 +1,4 @@
 import { Link } from '@inertiajs/react';
-import { useState, useEffect } from 'react';
-
 export default function Footer({ services = [] }) {
     const defaultServices = [
         { title: 'Valuasi Aset & Bisnis', slug: '' },
@@ -8,16 +6,6 @@ export default function Footer({ services = [] }) {
         { title: 'Strategic Advisory', slug: '' },
         { title: 'Restrukturisasi & Corporate Finance', slug: '' },
     ];
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setShowBackToTop(window.scrollY > 300);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
     const displayServices = services && services.length > 0 ? services : defaultServices;
 
     return (
@@ -37,7 +25,7 @@ export default function Footer({ services = [] }) {
                             />
                         </Link>
                         <p className="text-sm font-light text-slate-400 leading-relaxed tracking-wide max-w-sm">
-                            Layanan valuasi aset, studi kelayakan, dan konsultasi strategi korporasi berstandar global untuk mengakselerasi pertumbuhan bisnis yang berkelanjutan.
+                            Layanan analisis keuangan, pendampingan manajemen, dan pengukuran dampak sosial untuk mendukung keputusan bisnis yang tepat dan berkelanjutan.
                         </p>
 
                         <div className="pt-2 flex items-center gap-3">

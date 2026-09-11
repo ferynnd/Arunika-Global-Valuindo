@@ -1,24 +1,23 @@
 import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import CustomButton from '@/Components/CustomButton';
 import HeaderSection from "@/Components/HeaderSection";
 
 const defaultServices = [
     {
         id: 1,
-        title: "Penilaian Bisnis & Korporasi",
-        excerpt: "Layanan valuasi profesional untuk saham, entitas bisnis, aset tak berwujud, serta uji tuntas kelayakan investasi guna mendukung aksi korporasi strategis.",
+        title: "Strategic Finance",
+        excerpt: "Proyeksi arus kas, modeling keuangan, dan evaluasi kelayakan investasi untuk mendukung keputusan bisnis berbasis data.",
     },
     {
         id: 2,
-        title: "Penilaian Aset & Properti",
-        excerpt: "Penilaian independen untuk aset tetap, tanah, bangunan, mesin, instalasi, dan infrastruktur industri berstandar tinggi dan transparan.",
+        title: "Business Advisory",
+        excerpt: "Analisis proses bisnis, penataan struktur organisasi, dan pendampingan manajemen untuk efisiensi operasional.",
     },
     {
         id: 3,
-        title: "Penasihat Strategi Keuangan",
-        excerpt: "Solusi dan konsultasi strategis komprehensif bagi perusahaan dalam restrukturisasi, pembiayaan, merger, akuisisi, dan manajemen risiko korporasi.",
+        title: "Sustainability & Social Impact",
+        excerpt: "Pengukuran dampak program CSR dengan metode SROI dan riset sosial untuk menciptakan nilai jangka panjang.",
     },
 ];
 
@@ -52,9 +51,9 @@ export default function AboutSection({ displayServices = defaultServices }) {
                 <div data-aos="fade-up" data-aos-duration="1000">
                     <HeaderSection
                         tagline="Tentang Kami"
-                        title="PT Arunika Global Valuindo adalah perusahaan penilai independen dan penasihat strategi korporasi terpercaya di Indonesia."
-                        buttonText="Ketahui Lebih Lanjut"
-                        buttonHref={(route('aboutus'))}
+                        title="PT Arunika Global Valuindo membantu bisnis memperbaiki kinerja keuangan, merapikan operasional, dan mengukur dampak sosial secara terstruktur."
+                        buttonText="Lihat Profil Kami"
+                        buttonHref={route('aboutus')}
                         buttonBgColor="bg-secondary hover:bg-secondary/90"
                         buttonTextColor="text-white font-medium"
                         buttonSize="md"

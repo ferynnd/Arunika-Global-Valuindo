@@ -113,7 +113,7 @@ export default function Contact({ auth }) {
                                         <h3 className="text-xs font-bold uppercase tracking-wider text-primary">Alamat Kantor</h3>
                                         <p className="text-sm font-semibold text-slate-800 mt-0.5">PT Arunika Global Valuindo</p>
                                         <p className="text-xs text-slate-600 leading-relaxed mt-1">
-                                            Jl. Raya Solo - Madiun No. 123, Madiun, Jawa Timur 63125, Indonesia
+                                            Perum. Citra Puri Majapahit B25, Jl. Ringroad Barat, Kel. Winongo, Kec. Manguharjo, Kota Madiun, Jawa Timur, 63126
                                         </p>
                                     </div>
                                 </div>

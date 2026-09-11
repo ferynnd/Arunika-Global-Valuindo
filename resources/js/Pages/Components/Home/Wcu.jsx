@@ -1,10 +1,9 @@
 import React from "react";
 import HeaderSection from "@/Components/HeaderSection";
-import CustomButton from "@/Components/CustomButton";
 
 const defaultWhyUsItems = [
     {
-        title: "Penilaian Aset & Properti Akurat",
+        title: "Pengalaman Peningkatan Laba Bisnis",
         icon: (
             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
@@ -14,7 +13,7 @@ const defaultWhyUsItems = [
         ),
     },
     {
-        title: "Tim Penilai Independen & Bersertifikat",
+        title: "Sistem Pemantauan Arus Kas Terintegrasi",
         icon: (
             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -25,7 +24,7 @@ const defaultWhyUsItems = [
         ),
     },
     {
-        title: "Standar Valuasi & Regulasi Nasional/Global",
+        title: "Metodologi Pengukuran SROI Teruji di BUMN",
         icon: (
             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10"></circle>
@@ -35,7 +34,7 @@ const defaultWhyUsItems = [
         ),
     },
     {
-        title: "Analisis Strategi Korporasi Mendalam",
+        title: "Pendampingan Manajemen dan Studi Kelayakan",
         icon: (
             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="18" y1="20" x2="18" y2="10"></line>
@@ -48,7 +47,7 @@ const defaultWhyUsItems = [
 
 export default function WhyChooseUs({
     tagline = "Keunggulan Kami",
-    title = "Mitra Penilai Independen dan Strategi Korporasi Terpercaya untuk Pertumbuhan Bisnis Anda.",
+    title = "Solusi Penasihat Keuangan dan Manajemen yang Berfokus pada Hasil Nyata.",
     showButton = false,
     buttonText = "Tentang Kami",
     buttonHref = "#",
@@ -65,7 +64,6 @@ export default function WhyChooseUs({
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
-                    {/* Left: HeaderSection & 2-Column Checklist */}
                     <div className="lg:col-span-6 space-y-8" data-aos="fade-right" data-aos-duration="900">
                         <HeaderSection
                             tagline={tagline}
@@ -94,7 +92,7 @@ export default function WhyChooseUs({
                     </div>
 
                     <div className="lg:col-span-6" data-aos="fade-left" data-aos-duration="900">
-                        <div className="relative  rounded-3xl md:rounded-2xl  overflow-hidden shadow-sm">
+                        <div className="relative rounded-3xl md:rounded-2xl overflow-hidden shadow-sm">
                             <img
                                 src={imageSrc}
                                 alt={imageAlt}

@@ -1,14 +1,14 @@
 import React from "react";
-import HeaderSection from "@/Components/HeaderSection"; // Sesuaikan path import HeaderSection Anda
+import HeaderSection from "@/Components/HeaderSection"; 
 
 export default function MissionSection({
     tagline = "Misi Kami",
-    title = "Memberikan solusi valuasi dan strategi korporasi yang independen, akurat, dan terpercaya untuk mengakselerasi pertumbuhan bisnis di Indonesia.",
-    description = "PT Arunika Global Valuindo berkomitmen mendampingi setiap langkah strategis korporasi melalui pendekatan berbasis data, standar penilaian internasional, dan integritas tanpa kompromi.",
+    title = "Mendampingi organisasi mengambil keputusan strategis melalui analisis data teruji dan metodologi standar.",
+    description = "Kami tidak sekadar memberikan laporan rekomendasi. Arunika bekerja langsung bersama tim Anda untuk memperbaiki sistem keuangan, merapikan proses kerja internal, serta memastikan program sosial perusahaan memberikan dampak terukur.",
     imageSrc = "/assets/speaking.webp",
-    imageAlt = "Our Mission - Arunika Global Valuindo",
+    imageAlt = "Misi PT Arunika Global Valuindo",
     showButton = false,
-    buttonText = "About Us",
+    buttonText = "Tentang Kami",
     buttonHref = "/about",
     buttonBgColor = "bg-secondary hover:bg-secondary/90",
     buttonTextColor = "text-white",
@@ -30,7 +30,6 @@ export default function MissionSection({
                         </div>
                     </div>
 
-                    {/* Right: Content using HeaderSection + Extra Description */}
                     <div className="lg:col-span-7 space-y-6" data-aos="fade-left" data-aos-duration="900">
                         <HeaderSection
                             tagline={tagline}
@@ -44,7 +43,6 @@ export default function MissionSection({
                             onButtonClick={onButtonClick}
                         />
 
-                        {/* Additional Description Paragraph */}
                         {description && (
                             <p className="font-body text-sm font-normal text-gray-600 leading-relaxed tracking-wide pt-2 max-w-xl">
                                 {description}
