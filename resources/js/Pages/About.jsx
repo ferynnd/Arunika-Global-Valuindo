@@ -2,8 +2,6 @@ import { Head, Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import Header from './Components/Header';
-import Footer from './Components/Footer';
 import HeaderSection from '@/Components/HeaderSection';
 import CustomButton from '@/Components/CustomButton';
 import JourneySection from './Components/About/Journey';

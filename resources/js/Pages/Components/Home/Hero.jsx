@@ -25,7 +25,7 @@ export default function Hero({
                 backgroundImage: `url('${bgImage}')`,
             }}
         >
-            <div className="absolute inset-0 bg-linear-to-b from-white to-white/50"></div>
+            <div className="absolute inset-0 bg-linear-to-b from-background to-background/50"></div>
 
             <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-12 translate-y-28">
                 <span 

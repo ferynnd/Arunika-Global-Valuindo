@@ -48,13 +48,13 @@ export default function WhyChooseUs({
     title = "Character, Environment, & Organization — Fondasi Utama Arunika dalam Menghadirkan Layanan Advisory Terbaik.",
     showButton = false,
     buttonText = "Tentang Kami",
-    buttonHref = "/about",
-    buttonBgColor = "bg-secondary hover:bg-secondary/90",
+    buttonHref = "/tentang",
+    buttonBgColor = "bg-secondary",
     buttonTextColor = "text-white font-medium",
     buttonSize = "md",
     onButtonClick,
     items = defaultWhyUsItems,
-    imageSrc = "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1000&q=80",
+    imageSrc = "/assets/wcu.webp",
     imageAlt = "Kolaborasi tim profesional PT Arunika Global Valuindo",
 }) {
     return (
@@ -82,7 +82,7 @@ export default function WhyChooseUs({
                                     <div className="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center shrink-0">
                                         {srv.icon}
                                     </div>
-                                    <span className="font-body text-base md:text-sm font-medium tracking-wide text-gray-600">
+                                    <span className="font-body text-xs md:text-sm font-medium tracking-wide text-gray-600">
                                         {srv.title}
                                     </span>
                                 </div>
