@@ -2,6 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import InfoTooltip from '@/Components/InfoTooltip';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useState } from 'react';
+import { showErrorAlert } from '@/libs/sweetalert';
 
 export default function Create() {
     const { data, setData, post, processing, errors } = useForm({
@@ -25,7 +26,14 @@ export default function Create() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('admin.testimonials.store'));
+        post(route('admin.testimonials.store'), {
+            onError: () => {
+                showErrorAlert(
+                    'Gagal Menyimpan Testimoni!',
+                    'Silakan periksa kembali kolom isian yang wajib diisi dan format file avatar.'
+                );
+            },
+        });
     };
 
     return (

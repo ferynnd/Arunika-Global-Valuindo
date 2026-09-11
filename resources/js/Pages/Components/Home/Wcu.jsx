@@ -4,17 +4,24 @@ import CustomButton from "@/Components/CustomButton";
 
 const defaultWhyUsItems = [
     {
-        title: "Penilaian Aset & Properti Akurat",
+        title: "C — Character: Integritas dalam Setiap Keputusan",
         icon: (
             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"></path>
             </svg>
         ),
     },
     {
-        title: "Tim Penilai Independen & Bersertifikat",
+        title: "E — Environment: Dampak Positif Berkelanjutan",
+        icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                <polyline points="17 6 23 6 23 12"></polyline>
+            </svg>
+        ),
+    },
+    {
+        title: "O — Organization: Organisasi Kolaboratif & Adaptif",
         icon: (
             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -25,17 +32,7 @@ const defaultWhyUsItems = [
         ),
     },
     {
-        title: "Standar Valuasi & Regulasi Nasional/Global",
-        icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="2" y1="12" x2="22" y2="12"></line>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-            </svg>
-        ),
-    },
-    {
-        title: "Analisis Strategi Korporasi Mendalam",
+        title: "Pengalaman Berdedikasi & Teruji Lebih Dari 10 Tahun",
         icon: (
             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="18" y1="20" x2="18" y2="10"></line>
@@ -47,11 +44,11 @@ const defaultWhyUsItems = [
 ];
 
 export default function WhyChooseUs({
-    tagline = "Keunggulan Kami",
-    title = "Mitra Penilai Independen dan Strategi Korporasi Terpercaya untuk Pertumbuhan Bisnis Anda.",
+    tagline = "Nilai Utama Perusahaan (CEO)",
+    title = "Character, Environment, & Organization — Fondasi Utama Arunika dalam Menghadirkan Layanan Advisory Terbaik.",
     showButton = false,
     buttonText = "Tentang Kami",
-    buttonHref = "#",
+    buttonHref = "/about",
     buttonBgColor = "bg-secondary hover:bg-secondary/90",
     buttonTextColor = "text-white font-medium",
     buttonSize = "md",

@@ -5,6 +5,7 @@ import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
 import { useForm } from '@inertiajs/react';
 import { useRef } from 'react';
+import { showSuccessAlert, showErrorAlert } from '@/libs/sweetalert';
 
 export default function UpdatePasswordForm({ className = '' }) {
     const passwordInput = useRef();
@@ -29,8 +30,13 @@ export default function UpdatePasswordForm({ className = '' }) {
 
         put(route('password.update'), {
             preserveScroll: true,
-            onSuccess: () => reset(),
+            onSuccess: () => {
+                reset();
+                showSuccessAlert('Berhasil!', 'Password akun Anda telah berhasil diperbarui.');
+            },
             onError: (errors) => {
+                showErrorAlert('Gagal Perbarui Password!', 'Silakan periksa kembali password lama dan password baru Anda.');
+
                 if (errors.password) {
                     reset('password', 'password_confirmation');
                     passwordInput.current.focus();

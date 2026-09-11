@@ -7,18 +7,18 @@ import HeaderSection from "@/Components/HeaderSection";
 const defaultServices = [
     {
         id: 1,
-        title: "Penilaian Bisnis & Korporasi",
-        excerpt: "Layanan valuasi profesional untuk saham, entitas bisnis, aset tak berwujud, serta uji tuntas kelayakan investasi guna mendukung aksi korporasi strategis.",
+        title: "Strategic Finance",
+        excerpt: "Financial Advisory, Financial Modeling, Corporate Valuation, Feasibility Study, dan pendampingan finansial strategis untuk keputusan bisnis.",
     },
     {
         id: 2,
-        title: "Penilaian Aset & Properti",
-        excerpt: "Penilaian independen untuk aset tetap, tanah, bangunan, mesin, instalasi, dan infrastruktur industri berstandar tinggi dan transparan.",
+        title: "Business Advisory",
+        excerpt: "Business Transformation, Business Process Analysis, Management Advisory, serta perbaikan struktur & efisiensi organisasi.",
     },
     {
         id: 3,
-        title: "Penasihat Strategi Keuangan",
-        excerpt: "Solusi dan konsultasi strategis komprehensif bagi perusahaan dalam restrukturisasi, pembiayaan, merger, akuisisi, dan manajemen risiko korporasi.",
+        title: "Sustainability & Social Impact",
+        excerpt: "Sustainability Advisory, pengukuran dampak CSR dengan Social Return on Investment (SROI), Community Development, dan Social Research.",
     },
 ];
 
@@ -51,8 +51,8 @@ export default function AboutSection({ displayServices = defaultServices }) {
 
                 <div data-aos="fade-up" data-aos-duration="1000">
                     <HeaderSection
-                        tagline="Tentang Kami"
-                        title="PT Arunika Global Valuindo adalah perusahaan penilai independen dan penasihat strategi korporasi terpercaya di Indonesia."
+                        tagline="Tentang Perusahaan"
+                        title="PT Arunika Global Valuindo adalah perusahaan Business Transformation & Advisory yang hadir sebagai mitra strategis untuk mendorong pertumbuhan dan keberlanjutan bisnis."
                         buttonText="Ketahui Lebih Lanjut"
                         buttonHref={(route('aboutus'))}
                         buttonBgColor="bg-secondary hover:bg-secondary/90"

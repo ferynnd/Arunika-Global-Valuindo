@@ -4,6 +4,7 @@ import SeoPanel from '@/Components/SeoPanel';
 import InfoTooltip from '@/Components/InfoTooltip';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useState } from 'react';
+import { showErrorAlert } from '@/libs/sweetalert';
 
 export default function Create({ categories }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -30,7 +31,14 @@ export default function Create({ categories }) {
 
     const submit = (e) => {
         e.preventDefault();
-        post(route('admin.articles.store'));
+        post(route('admin.articles.store'), {
+            onError: () => {
+                showErrorAlert(
+                    'Gagal Menyimpan Artikel!',
+                    'Silakan periksa kembali kolom isian yang wajib diisi dan format file yang diunggah.'
+                );
+            },
+        });
     };
 
     return (

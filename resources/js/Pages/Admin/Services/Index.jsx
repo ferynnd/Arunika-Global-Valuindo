@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
+import { showConfirmDialog } from '@/libs/sweetalert';
 
 export default function Index({ services, filters }) {
     const { flash } = usePage().props;
@@ -16,8 +17,14 @@ export default function Index({ services, filters }) {
         );
     };
 
-    const handleDelete = (id, title) => {
-        if (confirm(`Apakah Anda yakin ingin menghapus layanan "${title}"?`)) {
+    const handleDelete = async (id, title) => {
+        const confirmed = await showConfirmDialog({
+            title: 'Hapus Layanan?',
+            text: `Apakah Anda yakin ingin menghapus layanan "${title}"? Data tidak dapat dikembalikan.`,
+            confirmButtonText: 'Ya, Hapus Layanan',
+        });
+
+        if (confirmed) {
             router.delete(route('admin.services.destroy', id));
         }
     };

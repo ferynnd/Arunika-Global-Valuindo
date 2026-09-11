@@ -13,7 +13,7 @@ import TestimonialSection from './Components/Home/Testimonial';
 import BlogSection from './Components/Home/Blog';
 import GuestLayout from '@/Layouts/GuestLayout';
 
-export default function Welcome({ auth, services = [] }) {
+export default function Welcome({ auth, services = [], latestArticles = [], testimonials = [] }) {
  
     useEffect(() => {
         const handleScroll = () => {
@@ -39,11 +39,11 @@ export default function Welcome({ auth, services = [] }) {
 
             <WhyChooseUs/>
             
-            <ServicesShowcase/>
+            <ServicesShowcase services={services} />
 
-            <TestimonialSection/>
+            <TestimonialSection testimonials={testimonials} />
 
-            <BlogSection/>
+            <BlogSection articles={latestArticles} />
 
             <section className="py-24 relative overflow-hidden bg-primary">
                 <div className="absolute inset-0">
@@ -56,14 +56,13 @@ export default function Welcome({ auth, services = [] }) {
 
                 <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
                     <h2 className="text-3xl md:text-5xl font-normal tracking-wide leading-tight">
-                        Ready to solve your problem with <br />
-                        <span className="text-secondary italic">Arunika Global Valuindo?</span>
+                        Bersama Membangun Pertumbuhan <br />
+                        <span className="text-secondary italic">yang Berkelanjutan</span>
                     </h2>
-
                     <div className="mt-8 flex justify-center">
                         <CustomButton
-                            href="/layanan"
-                            text="Consultation Now"
+                            href="https://wa.me/6282331144447"
+                            text="Konsultasi Sekarang"
                             bgColor="bg-accent hover:bg-accent/90"
                             textColor="text-white"
                             iconBgColor="bg-white/20"

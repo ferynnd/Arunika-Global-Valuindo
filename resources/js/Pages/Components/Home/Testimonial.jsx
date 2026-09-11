@@ -3,22 +3,22 @@ import HeaderSection from "@/Components/HeaderSection"; // Sesuaikan path import
 
 const defaultTestimonials = [
     {
-        quote: "PT Arunika Global Valuindo memberikan layanan penilaian aset yang sangat profesional, transparan, dan sangat membantu kelancaran aksi korporasi perusahaan kami.",
+        quote: "PT Arunika Global Valuindo memberikan analisis keuangan strategis dan evaluasi kelayakan bisnis yang sangat tajam, terstruktur, serta berbasis data valid untuk mendukung keputusan investasi kami.",
         author: "Budi Santoso",
-        role: "Direktur Keuangan PT Nusantara Jaya",
+        role: "Direktur Keuangan & Strategi Korporasi",
         avatar: "",
     },
     {
-        quote: "Analisis strategi korporasi dan valuasi bisnis yang disajikan sangat mendalam serta berbasis data yang valid. Mitra terpercaya untuk jangka panjang.",
+        quote: "Pengukuran dampak program CSR dengan metodologi Social Return on Investment (SROI) dari Arunika sangat mendalam dan membantu kami membuktikan penciptaan nilai sosial yang nyata bagi masyarakat.",
         author: "Siti Rahmawati",
-        role: "CEO Solusi Finansial Utama",
+        role: "Head of CSR & Community Development",
         avatar: "",
     },
 ];
 
 export default function TestimonialSection({
-    tagline = "Testimoni",
-    title = "Kepercayaan Klien Adalah Prioritas Utama Kami.",
+    tagline = "Testimoni & Pengalaman Klien",
+    title = "Kepercayaan Klien Adalah Bukti Komitmen Kami Terhadap Hasil Nyata.",
     showButton = false,
     testimonials = defaultTestimonials,
     imageSrc = "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=80",

@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
+import { showConfirmDialog } from '@/libs/sweetalert';
 
 export default function Index({ articles, categories, filters }) {
     const { flash } = usePage().props;
@@ -17,8 +18,14 @@ export default function Index({ articles, categories, filters }) {
         );
     };
 
-    const handleDelete = (id, title) => {
-        if (confirm(`Apakah Anda yakin ingin menghapus artikel "${title}"?`)) {
+    const handleDelete = async (id, title) => {
+        const confirmed = await showConfirmDialog({
+            title: 'Hapus Artikel?',
+            text: `Apakah Anda yakin ingin menghapus artikel "${title}"? Data tidak dapat dikembalikan.`,
+            confirmButtonText: 'Ya, Hapus Artikel',
+        });
+
+        if (confirmed) {
             router.delete(route('admin.articles.destroy', id));
         }
     };

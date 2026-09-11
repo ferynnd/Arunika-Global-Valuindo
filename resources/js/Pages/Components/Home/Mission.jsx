@@ -2,13 +2,13 @@ import React from "react";
 import HeaderSection from "@/Components/HeaderSection"; // Sesuaikan path import HeaderSection Anda
 
 export default function MissionSection({
-    tagline = "Misi Kami",
-    title = "Memberikan solusi valuasi dan strategi korporasi yang independen, akurat, dan terpercaya untuk mengakselerasi pertumbuhan bisnis di Indonesia.",
-    description = "PT Arunika Global Valuindo berkomitmen mendampingi setiap langkah strategis korporasi melalui pendekatan berbasis data, standar penilaian internasional, dan integritas tanpa kompromi.",
+    tagline = "Visi & Misi Kami",
+    title = "Menciptakan Nilai dan Perubahan Positif yang Berkelanjutan Bagi Perusahaan & Stakeholders.",
+    description = "PT Arunika Global Valuindo berdedikasi membantu klien menghasilkan perbaikan yang sesuai dengan karakter bisnisnya, menghadirkan solusi menyeluruh dan berkelanjutan, serta membangun kemampuan organisasi untuk terus berkembang secara mandiri.",
     imageSrc = "/assets/speaking.webp",
-    imageAlt = "Our Mission - Arunika Global Valuindo",
+    imageAlt = "Visi dan Misi - PT Arunika Global Valuindo",
     showButton = false,
-    buttonText = "About Us",
+    buttonText = "Tentang Kami",
     buttonHref = "/about",
     buttonBgColor = "bg-secondary hover:bg-secondary/90",
     buttonTextColor = "text-white",

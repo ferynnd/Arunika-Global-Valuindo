@@ -2,6 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import InfoTooltip from '@/Components/InfoTooltip';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useState } from 'react';
+import { showErrorAlert } from '@/libs/sweetalert';
 
 export default function Edit({ testimonial }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -28,7 +29,14 @@ export default function Edit({ testimonial }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('admin.testimonials.update', testimonial.id));
+        post(route('admin.testimonials.update', testimonial.id), {
+            onError: () => {
+                showErrorAlert(
+                    'Gagal Perbarui Testimoni!',
+                    'Silakan periksa kembali kolom isian yang wajib diisi dan format file avatar.'
+                );
+            },
+        });
     };
 
     return (

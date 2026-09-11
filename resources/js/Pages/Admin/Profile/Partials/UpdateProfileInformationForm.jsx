@@ -4,6 +4,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
+import { showSuccessAlert, showErrorAlert } from '@/libs/sweetalert';
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
@@ -21,7 +22,14 @@ export default function UpdateProfileInformation({
     const submit = (e) => {
         e.preventDefault();
 
-        patch(route('profile.update'));
+        patch(route('profile.update'), {
+            onSuccess: () => {
+                showSuccessAlert('Berhasil!', 'Profil akun berhasil diperbarui.');
+            },
+            onError: () => {
+                showErrorAlert('Gagal Perbarui Profil!', 'Silakan periksa kembali kelengkapan data profil.');
+            },
+        });
     };
 
     return (

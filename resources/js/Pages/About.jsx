@@ -151,14 +151,17 @@ export default function About({ auth }) {
 
                 <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
                     <h2 className="text-3xl md:text-5xl font-normal tracking-wide leading-tight">
-                        Ready to solve your problem with <br />
-                        <span className="text-secondary italic">Arunika Global Valuindo?</span>
+                        Bersama Membangun Pertumbuhan <br />
+                        <span className="text-secondary italic">yang Berkelanjutan</span>
                     </h2>
+                    <p className="mt-4 text-sm sm:text-base text-slate-200 max-w-3xl mx-auto leading-relaxed">
+                        Apabila Anda ingin memperkuat kinerja keuangan, melakukan transformasi bisnis, maupun meningkatkan dampak sosial dan lingkungan, Arunika siap menjadi mitra strategis Anda.
+                    </p>
 
                     <div className="mt-8 flex justify-center">
                         <CustomButton
-                            href="#contact"
-                            text="Kosultasi Sekarang"
+                            href="https://wa.me/6282331144447"
+                            text="Mulai Percakapan"
                             bgColor="bg-accent hover:bg-accent/90"
                             textColor="text-white"
                             iconBgColor="bg-white/20"

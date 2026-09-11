@@ -17,8 +17,8 @@ export default function Contact({ auth }) {
         });
     }, []);
 
-    // Nomor WhatsApp Tujuan (Ganti dengan nomor WhatsApp kantor Anda, gunakan format 62)
-    const targetWhatsappNumber = "6281234567890";
+    // Nomor WhatsApp Tujuan (dari info.md)
+    const targetWhatsappNumber = "6282331144447";
 
     const [formData, setFormData] = useState({
         name: '',
@@ -52,7 +52,7 @@ export default function Contact({ auth }) {
 
     return (
         <GuestLayout auth={auth} activePage="contact">
-            <Head title="Hubungi Kami - Arunika Global Valuindo" />
+            <Head title="Hubungi Kami - PT Arunika Global Valuindo" />
 
             <PageHeader 
                 title="Hubungi Kami" 
@@ -84,7 +84,7 @@ export default function Contact({ auth }) {
                                     </div>
                                     <div>
                                         <h3 className="text-xs font-bold uppercase tracking-wider text-primary">WhatsApp</h3>
-                                        <p className="text-sm font-semibold text-slate-800 mt-0.5">+62 812-3456-7890</p>
+                                        <p className="text-sm font-semibold text-slate-800 mt-0.5">082331144447</p>
                                         <p className="text-xs text-slate-500 mt-1">Senin - Jumat (08.00 - 17.00 WIB)</p>
                                     </div>
                                 </div>
@@ -97,8 +97,8 @@ export default function Contact({ auth }) {
                                     </div>
                                     <div>
                                         <h3 className="text-xs font-bold uppercase tracking-wider text-primary">Email</h3>
-                                        <p className="text-sm font-semibold text-slate-800 mt-0.5">info@arunikaglobal.com</p>
-                                        <p className="text-xs text-slate-500 mt-1">Kirimkan pertanyaan atau tawaran kerjasama</p>
+                                        <p className="text-sm font-semibold text-slate-800 mt-0.5">info@arunikaglobalvaluindo.co.id</p>
+                                        <p className="text-xs text-slate-500 mt-1">arunikaglobalvaluindo@gmail.com</p>
                                     </div>
                                 </div>
 
@@ -113,7 +113,7 @@ export default function Contact({ auth }) {
                                         <h3 className="text-xs font-bold uppercase tracking-wider text-primary">Alamat Kantor</h3>
                                         <p className="text-sm font-semibold text-slate-800 mt-0.5">PT Arunika Global Valuindo</p>
                                         <p className="text-xs text-slate-600 leading-relaxed mt-1">
-                                            Jl. Raya Solo - Madiun No. 123, Madiun, Jawa Timur 63125, Indonesia
+                                            Perum. Citra Puri Majapahit B25, Jl. Ringroad Barat, Kel. Winongo, Kec. Manguharjo, Kota Madiun, Jawa Timur, 63126
                                         </p>
                                     </div>
                                 </div>

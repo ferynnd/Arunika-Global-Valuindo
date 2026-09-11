@@ -4,7 +4,9 @@ import 'aos/dist/aos.css';
 import CustomButton from '@/Components/CustomButton';
 
 export default function Hero({ 
-    title = "Strategic Growth Meets Sustainable Impact", 
+    title = "Mitra Strategis Transformasi Bisnis & Keuangan Berkelanjutan", 
+    subtitle = "Together for Sustainable Growth.",
+    description = "Membangun fondasi yang kuat, meningkatkan kinerja, mendorong pertumbuhan, dan menciptakan keberlanjutan bagi bisnis Anda.",
     bgImage = "/assets/conference.webp",
 }) {
     useEffect(() => {
@@ -26,24 +28,24 @@ export default function Hero({
             <div className="absolute inset-0 bg-linear-to-b from-white to-white/40"></div>
 
             <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-12 translate-y-28">
+
                 <h1 
-                    className="text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-primary max-w-5xl mx-auto leading-[1.15] sm:leading-[1.2]"
+                    className="text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-primary max-w-5xl mx-auto leading-[1.15] sm:leading-[1.2]"
                     data-aos="fade-up"
                     data-aos-duration="1000"
                 >
-                    Strategic Growth Meets <br className="hidden sm:inline" />
-                    Sustainable Impact
+                    {title}
                 </h1>
 
                 <div 
-                    className="mt-8 sm:mt-10 flex items-center justify-center"
+                    className="mt-8 sm:mt-10 flex items-center justify-center gap-4"
                     data-aos="fade-up"
                     data-aos-duration="1000"
                     data-aos-delay="200"
                 >
                     <CustomButton
-                        href={"https://wa.me"}
-                        text="Book Consultation"
+                        href={"https://wa.me/6282331144447"}
+                        text="Konsultasi Sekarang"
                         bgColor="bg-secondary hover:bg-secondary/90"
                         textColor="text-white font-medium"
                     />

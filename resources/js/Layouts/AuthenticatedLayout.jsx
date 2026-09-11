@@ -1,10 +1,22 @@
 import Dropdown from '@/Components/Dropdown';
 import { Link, usePage } from '@inertiajs/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { showSuccessAlert, showErrorAlert } from '@/libs/sweetalert';
 
 export default function AuthenticatedLayout({ header, children }) {
-    const user = usePage().props.auth.user;
+    const { auth, flash } = usePage().props;
+    const user = auth?.user || {};
     const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    useEffect(() => {
+        if (flash?.success) {
+            showSuccessAlert('Berhasil!', flash.success);
+        } else if (flash?.error) {
+            showErrorAlert('Gagal!', flash.error);
+        } else if (flash?.message) {
+            showSuccessAlert('Informasi', flash.message);
+        }
+    }, [flash]);
 
     const isCurrentRoute = (routeName) => {
         try {
@@ -55,10 +67,6 @@ export default function AuthenticatedLayout({ header, children }) {
 
                     {/* Navigation Menu Links */}
                     <nav className="p-4 space-y-1.5">
-                        <div className="px-3 pt-2 pb-1 text-xs font-bold uppercase tracking-widest text-[#718783]">
-                            Menu Utama
-                        </div>
-
                         {/* Dashboard */}
                         <Link
                             href={route('admin.dashboard')}
@@ -143,10 +151,6 @@ export default function AuthenticatedLayout({ header, children }) {
                             </svg>
                             <span>Profil Akun</span>
                         </Link>
-
-                        <div className="px-3 pt-4 pb-1 text-xs font-bold uppercase tracking-widest text-[#718783]">
-                            Situs Publik
-                        </div>
 
                         {/* Lihat Website */}
                         <Link

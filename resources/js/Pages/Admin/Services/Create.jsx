@@ -4,6 +4,7 @@ import SeoPanel from '@/Components/SeoPanel';
 import InfoTooltip from '@/Components/InfoTooltip';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useState } from 'react';
+import { showErrorAlert } from '@/libs/sweetalert';
 
 export default function Create() {
     const { data, setData, post, processing, errors } = useForm({
@@ -53,7 +54,14 @@ export default function Create() {
 
     const submit = (e) => {
         e.preventDefault();
-        post(route('admin.services.store'));
+        post(route('admin.services.store'), {
+            onError: () => {
+                showErrorAlert(
+                    'Gagal Menyimpan Layanan!',
+                    'Silakan periksa kembali kolom isian yang wajib diisi dan format file yang diunggah.'
+                );
+            },
+        });
     };
 
     return (

@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
+import { showConfirmDialog } from '@/libs/sweetalert';
 
 export default function Index({ testimonials, filters }) {
     const { flash } = usePage().props;
@@ -16,8 +17,14 @@ export default function Index({ testimonials, filters }) {
         );
     };
 
-    const handleDelete = (id, author) => {
-        if (confirm(`Apakah Anda yakin ingin menghapus testimoni dari "${author}"?`)) {
+    const handleDelete = async (id, author) => {
+        const confirmed = await showConfirmDialog({
+            title: 'Hapus Testimoni?',
+            text: `Apakah Anda yakin ingin menghapus testimoni dari "${author}"? Data tidak dapat dikembalikan.`,
+            confirmButtonText: 'Ya, Hapus Testimoni',
+        });
+
+        if (confirmed) {
             router.delete(route('admin.testimonials.destroy', id));
         }
     };
@@ -179,16 +186,6 @@ export default function Index({ testimonials, filters }) {
                                                 </td>
                                                 <td className="py-4 px-6 text-right">
                                                     <div className="flex items-center justify-end gap-2">
-                                                        <Link
-                                                            href={route('admin.testimonials.show', item.id)}
-                                                            className="p-2 rounded-xl text-slate-500 hover:text-[#1B544D] hover:bg-[#1B544D]/10 transition-colors"
-                                                            title="Detail"
-                                                        >
-                                                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                                                                <circle cx="12" cy="12" r="3" />
-                                                            </svg>
-                                                        </Link>
                                                         <Link
                                                             href={route('admin.testimonials.edit', item.id)}
                                                             className="p-2 rounded-xl text-slate-500 hover:text-[#ECAE36] hover:bg-[#ECAE36]/10 transition-colors"

@@ -4,6 +4,7 @@ import SeoPanel from '@/Components/SeoPanel';
 import InfoTooltip from '@/Components/InfoTooltip';
 import { Head, Link, useForm, router } from '@inertiajs/react';
 import { useState } from 'react';
+import { showErrorAlert } from '@/libs/sweetalert';
 
 export default function Edit({ service }) {
     const { data, setData, processing, errors } = useForm({
@@ -55,7 +56,14 @@ export default function Edit({ service }) {
             formData.append('og_image', data.og_image);
         }
 
-        router.post(route('admin.services.update', service.id), formData);
+        router.post(route('admin.services.update', service.id), formData, {
+            onError: () => {
+                showErrorAlert(
+                    'Gagal Perbarui Layanan!',
+                    'Silakan periksa kembali kolom isian yang wajib diisi dan format file yang diunggah.'
+                );
+            },
+        });
     };
 
     return (
