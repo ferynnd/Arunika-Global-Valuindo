@@ -1,5 +1,6 @@
 import React from "react";
-import HeaderSection from "@/Components/HeaderSection"; 
+import { Link } from "@inertiajs/react";
+import HeaderSection from "@/Components/HeaderSection";
 const defaultArticles = [
     {
         id: 1,
@@ -22,13 +23,8 @@ const defaultArticles = [
 ];
 
 export default function BlogSection({
-<<<<<<< HEAD
     tagline = "Wawasan & Artikel Terbaru",
     title = "Artikel & Insight Mengenai Keuangan Strategis, Transformasi Bisnis, dan Keberlanjutan Korporasi.",
-=======
-    tagline = "Wawasan & Artikel",
-    title = "Catatan pemikiran seputar strategi keuangan, transformasi bisnis, dan efektivitas program CSR.",
->>>>>>> 137716532990af085e042fadc81c329882660451
     showButton = false,
     articles = [],
     onSelectArticle,

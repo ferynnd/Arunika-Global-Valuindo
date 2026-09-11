@@ -153,15 +153,9 @@ export default function About({ auth }) {
 
                     <div className="mt-8 flex justify-center">
                         <CustomButton
-<<<<<<< HEAD
                             href="https://wa.me/6282331144447"
                             text="Mulai Percakapan"
                             bgColor="bg-accent hover:bg-accent/90"
-=======
-                            href="/kontak"
-                            text="Kosultasi Sekarang"
-                            bgColor="bg-accent"
->>>>>>> 137716532990af085e042fadc81c329882660451
                             textColor="text-white"
                             iconBgColor="bg-white/20"
                             iconTextColor="text-white"

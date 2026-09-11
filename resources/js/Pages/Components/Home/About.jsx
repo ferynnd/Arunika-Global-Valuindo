@@ -7,29 +7,17 @@ const defaultServices = [
     {
         id: 1,
         title: "Strategic Finance",
-<<<<<<< HEAD
         excerpt: "Financial Advisory, Financial Modeling, Corporate Valuation, Feasibility Study, dan pendampingan finansial strategis untuk keputusan bisnis.",
-=======
-        excerpt: "Proyeksi arus kas, modeling keuangan, dan evaluasi kelayakan investasi untuk mendukung keputusan bisnis berbasis data.",
->>>>>>> 137716532990af085e042fadc81c329882660451
     },
     {
         id: 2,
         title: "Business Advisory",
-<<<<<<< HEAD
         excerpt: "Business Transformation, Business Process Analysis, Management Advisory, serta perbaikan struktur & efisiensi organisasi.",
-=======
-        excerpt: "Analisis proses bisnis, penataan struktur organisasi, dan pendampingan manajemen untuk efisiensi operasional.",
->>>>>>> 137716532990af085e042fadc81c329882660451
     },
     {
         id: 3,
         title: "Sustainability & Social Impact",
-<<<<<<< HEAD
         excerpt: "Sustainability Advisory, pengukuran dampak CSR dengan Social Return on Investment (SROI), Community Development, dan Social Research.",
-=======
-        excerpt: "Pengukuran dampak program CSR dengan metode SROI dan riset sosial untuk menciptakan nilai jangka panjang.",
->>>>>>> 137716532990af085e042fadc81c329882660451
     },
 ];
 
@@ -62,17 +50,10 @@ export default function AboutSection({ displayServices = defaultServices }) {
 
                 <div data-aos="fade-up" data-aos-duration="1000">
                     <HeaderSection
-<<<<<<< HEAD
                         tagline="Tentang Perusahaan"
                         title="PT Arunika Global Valuindo adalah perusahaan Business Transformation & Advisory yang hadir sebagai mitra strategis untuk mendorong pertumbuhan dan keberlanjutan bisnis."
                         buttonText="Ketahui Lebih Lanjut"
-                        buttonHref={(route('aboutus'))}
-=======
-                        tagline="Tentang Kami"
-                        title="PT Arunika Global Valuindo membantu bisnis memperbaiki kinerja keuangan, merapikan operasional, dan mengukur dampak sosial secara terstruktur."
-                        buttonText="Lihat Profil Kami"
                         buttonHref={route('aboutus')}
->>>>>>> 137716532990af085e042fadc81c329882660451
                         buttonBgColor="bg-secondary hover:bg-secondary/90"
                         buttonTextColor="text-white font-medium"
                         buttonSize="md"

@@ -24,11 +24,7 @@ export default function Footer({ services = [] }) {
                             />
                         </Link>
                         <p className="text-sm font-light text-slate-400 leading-relaxed tracking-wide max-w-sm">
-<<<<<<< HEAD
                             PT Arunika Global Valuindo adalah perusahaan Business Transformation & Advisory mitra strategis bagi bisnis dan organisasi dalam membangun fondasi kuat, meningkatkan kinerja, dan menciptakan keberlanjutan.
-=======
-                            Layanan analisis keuangan, pendampingan manajemen, dan pengukuran dampak sosial untuk mendukung keputusan bisnis yang tepat dan berkelanjutan.
->>>>>>> 137716532990af085e042fadc81c329882660451
                         </p>
 
                         <div className="pt-2 flex items-center gap-3">

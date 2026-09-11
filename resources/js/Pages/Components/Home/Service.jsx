@@ -28,17 +28,10 @@ const defaultServices = [
 
 export default function ServicesShowcase({ 
     tagline = "Layanan Kami",
-<<<<<<< HEAD
     title = "Solusi Integratif Melalui Tiga Pilar Utama: Keuangan Strategis, Penasihat Bisnis, serta Keberlanjutan & Dampak Sosial.",
     showButton = true,
     buttonText = "Lihat Semua Layanan",
     buttonHref = "/layanan",
-=======
-    title = "Solusi terintegrasi untuk memperkuat keuangan, merapikan operasional, dan mengukur dampak keberlanjutan.",
-    showButton = true,
-    buttonText = "Lihat Semua Layanan",
-    buttonHref = "/services",
->>>>>>> 137716532990af085e042fadc81c329882660451
     buttonBgColor = "bg-secondary hover:bg-secondary/90",
     buttonTextColor = "text-white font-medium",
     buttonSize = "md",
