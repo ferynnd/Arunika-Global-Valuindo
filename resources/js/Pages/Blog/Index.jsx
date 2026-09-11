@@ -93,7 +93,7 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
 
                     {/* FEATURED ARTICLE HERO CARD */}
                     {featuredArticle && (
-                        <div className="group relative bg-white rounded-3xl border border-[#EAE6DF] overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-duration="900">
+                        <div className="group relative bg-white rounded-3xl border border-[#EAE6DF] overflow-hidden transition-all duration-300" data-aos="fade-up" data-aos-duration="900">
                             <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
                                 <div className="lg:col-span-7 relative h-64 sm:h-80 lg:h-[420px] overflow-hidden bg-slate-100">
                                     <img
@@ -101,42 +101,34 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
                                         alt={featuredArticle.title}
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     />
-                                    <span className="absolute top-4 left-4 px-3.5 py-1 rounded-full bg-[#1B544D] text-[#ECAE36] text-xs font-extrabold uppercase tracking-wider shadow-md">
-                                        Utama / Featured
-                                    </span>
                                 </div>
-                                <div className="lg:col-span-5 p-6 sm:p-10 space-y-4">
-                                    <div className="flex items-center gap-3 text-xs text-[#718783] font-semibold">
-                                        <span className="px-2.5 py-0.5 rounded-full bg-[#FAF8F5] border border-[#EAE6DF] text-[#1B544D]">
-                                            {featuredArticle.category ? featuredArticle.category.name : 'Artikel'}
-                                        </span>
-                                        <span>•</span>
-                                        <span>{formatDate(featuredArticle.published_at || featuredArticle.created_at)}</span>
-                                    </div>
-
-                                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#1B544D] group-hover:text-[#ECAE36] transition-colors leading-snug">
-                                        <Link href={route('blog.show', featuredArticle.slug)}>
-                                            {featuredArticle.title}
-                                        </Link>
-                                    </h2>
-
-                                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-3">
-                                        {featuredArticle.excerpt || 'Klik untuk membaca artikel lengkap dari pakar korporasi Arunika Global Valuindo.'}
-                                    </p>
-
-                                    <div className="pt-4 flex items-center justify-between">
-                                        <div className="flex items-center gap-2">
-                                            <div className="w-8 h-8 rounded-full bg-[#1B544D] text-[#ECAE36] flex items-center justify-center font-bold text-xs">
-                                                {featuredArticle.author?.name ? featuredArticle.author.name[0] : 'A'}
-                                            </div>
-                                            <span className="text-xs font-semibold text-slate-700">
-                                                {featuredArticle.author?.name || 'Redaksi Arunika'}
+                                <div className="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between">
+                                    <div className="space-y-4">
+                                        <div className="flex items-center gap-3 text-xs text-[#718783] font-semibold">
+                                            <span className="px-2.5 py-0.5 rounded-full bg-[#FAF8F5] border border-[#EAE6DF] text-[#1B544D]">
+                                                {featuredArticle.category ? featuredArticle.category.name : 'Artikel'}
                                             </span>
+                                            <span>•</span>
+                                            <span>{formatDate(featuredArticle.published_at || featuredArticle.created_at)}</span>
                                         </div>
 
+                                        <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#1B544D] group-hover:text-[#ECAE36] transition-colors leading-snug">
+                                            <Link href={route('blog.show', featuredArticle.slug)}>
+                                                {featuredArticle.title}
+                                            </Link>
+                                        </h2>
+
+                                        {featuredArticle.excerpt && (
+                                            <p className="text-sm text-gray-500 line-clamp-3">
+                                                {featuredArticle.excerpt}
+                                            </p>
+                                        )}
+                                    </div>
+
+                                    <div className="pt-6 flex items-start justify-between mt-auto">
                                         <Link
                                             href={route('blog.show', featuredArticle.slug)}
-                                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1B544D] text-white font-semibold text-xs hover:bg-[#15433E] transition-all shadow-sm"
+                                            className="inline-flex gap-2 px-4 py-2 rounded-full bg-[#1B544D] text-white font-semibold text-xs hover:bg-[#15433E] transition-all"
                                         >
                                             <span>Baca Selengkapnya</span>
                                             <span>→</span>
@@ -159,29 +151,25 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
                         </div>
 
                         {articles.data.length > 0 ? (
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                                 {articles.data.map((article, idx) => (
                                     <div
                                         key={article.id}
                                         data-aos="fade-up"
-                                        data-aos-delay={(idx % 3) * 100}
+                                        data-aos-delay={(idx % 3) * 150}
                                         data-aos-duration="800"
-                                        className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-[#EAE6DF] hover:shadow-xl transition-all duration-300"
+                                        className="group flex flex-col overflow-hidden cursor-pointer transition-all duration-300"
                                     >
-                                        <div className="relative h-48 sm:h-52 overflow-hidden bg-slate-100">
+                                        <div className="relative aspect-video overflow-hidden rounded-3xl md:rounded-2xl">
                                             <img
                                                 src={article.thumbnail ? `/storage/${article.thumbnail}` : 'https://images.unsplash.com/photo-1497440001374-f26997328c1b?auto=format&fit=crop&w=800&q=80'}
                                                 alt={article.title}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                             />
-                                            <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#1B544D]/85 backdrop-blur-md text-[#ECAE36] text-[10px] font-bold uppercase tracking-wider">
-                                                {article.category ? article.category.name : 'Artikel'}
-                                            </span>
                                         </div>
-
-                                        <div className="p-6 flex flex-col flex-grow justify-between space-y-4">
+                                        <div className="py-4 px-1.5 flex flex-col flex-grow justify-between">
                                             <div>
-                                                <div className="flex items-center gap-2 text-xs text-[#718783] mb-2 font-medium">
+                                                <div className="flex items-center gap-1.5 text-xs text-gray-600 mb-2 tracking-wide">
                                                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                                                         <line x1="16" y1="2" x2="16" y2="6" />
@@ -190,30 +178,23 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
                                                     </svg>
                                                     <span>{formatDate(article.published_at || article.created_at)}</span>
                                                 </div>
-
-                                                <h4 className="text-base font-bold text-[#1B544D] group-hover:text-[#ECAE36] transition-colors line-clamp-2 leading-snug">
-                                                    <Link href={route('blog.show', article.slug)}>
+                                                <h3 className="md:text-md text-lg font-body font-bold tracking-wide text-text mb-2 line-clamp-2">
+                                                    <Link href={route('blog.show', article.slug)} className="hover:text-primary transition-colors">
                                                         {article.title}
                                                     </Link>
-                                                </h4>
-
-                                                {article.excerpt && (
-                                                    <p className="text-xs text-slate-500 mt-2 line-clamp-2 leading-relaxed">
-                                                        {article.excerpt}
-                                                    </p>
-                                                )}
+                                                </h3>
                                             </div>
-
-                                            <div className="pt-4 border-t border-[#F0EDE7] flex items-center justify-between">
-                                                <span className="text-[11px] font-semibold text-slate-600">
-                                                    Oleh {article.author?.name || 'Redaksi'}
-                                                </span>
-                                                <Link
+                                            <div className="pt-4 flex items-center justify-between">
+                                                <Link 
                                                     href={route('blog.show', article.slug)}
-                                                    className="text-xs font-bold text-[#1B544D] group-hover:translate-x-1 transition-transform flex items-center gap-1"
+                                                    className="text-sm font-medium tracking-wide group-hover:translate-x-1 transition-transform flex items-center gap-2 text-primary"
                                                 >
-                                                    <span>Baca Artikel</span>
-                                                    <span>→</span>
+                                                    Baca Selengkapnya 
+                                                    <span>
+                                                        <svg className="w-4 h-4 fill-current stroke-current stroke-[1.5]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd">
+                                                            <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"/>
+                                                        </svg>
+                                                    </span>
                                                 </Link>
                                             </div>
                                         </div>
@@ -245,7 +226,7 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
                                                 dangerouslySetInnerHTML={{ __html: link.label }}
                                                 className={`px-4 py-2 rounded-full text-xs font-semibold transition-colors ${
                                                     link.active
-                                                        ? 'bg-[#1B544D] text-[#ECAE36] shadow-sm'
+                                                        ? 'bg-[#1B544D] text-[#ECAE36]'
                                                         : 'bg-white text-slate-700 hover:bg-[#EFECE6] border border-[#EAE6DF]'
                                                 }`}
                                             />
