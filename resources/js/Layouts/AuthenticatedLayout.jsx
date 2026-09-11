@@ -15,6 +15,7 @@ export default function AuthenticatedLayout({ header, children }) {
     };
 
     return (
+
         <div className="min-h-screen bg-[#FAF8F5] text-slate-800 font-sans flex selection:bg-[#ECAE36] selection:text-[#1B544D]">
 
             {/* Mobile Sidebar Backdrop */}
