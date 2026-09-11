@@ -4,7 +4,6 @@ import CustomButton from '@/Components/CustomButton'; // Sesuaikan jalur import 
 export default function Hero({ 
     title = "Strategic Growth Meets Sustainable Impact", 
     bgImage = "/assets/conference.webp",
-    consultationHref = "#services" 
 }) {
     return (
         <section
@@ -24,7 +23,7 @@ export default function Hero({
 
                 <div className="mt-8 sm:mt-10 flex items-center justify-center">
                     <CustomButton
-                        href={consultationHref}
+                        href={"https://wa.me"}
                         text="Book Consultation"
                         bgColor="bg-secondary hover:bg-secondary/90"
                         textColor="text-white font-medium"

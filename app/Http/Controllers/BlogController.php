@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\ArticleCategory;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Spatie\OgImage\Facades\OgImage; // <-- Import Facade ini
 
 class BlogController extends Controller
 {
@@ -18,8 +19,8 @@ class BlogController extends Controller
         if ($search = $request->input('search')) {
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('excerpt', 'like', "%{$search}%")
-                  ->orWhere('content', 'like', "%{$search}%");
+                    ->orWhere('excerpt', 'like', "%{$search}%")
+                    ->orWhere('content', 'like', "%{$search}%");
             });
         }
 
@@ -47,7 +48,7 @@ class BlogController extends Controller
         ]);
     }
 
-    public function show($slug)
+    public function show(String $slug)
     {
         $article = Article::with(['category', 'author'])
             ->where('slug', $slug)
@@ -79,9 +80,18 @@ class BlogController extends Controller
             $relatedArticles = $relatedArticles->concat($additional);
         }
 
+        // --- CARA AMAN & CEPAT UNTUK OG IMAGE ---
+        // Gunakan thumbnail artikel jika ada, jika tidak ada gunakan default fallback image
+        $ogImageUrl = $article->thumbnail 
+            ? asset('storage/' . $article->thumbnail) 
+            : asset('assets/bgcta.webp'); // Atau gambar default web Anda
+
         return Inertia::render('Blog/Show', [
             'article' => $article,
             'relatedArticles' => $relatedArticles,
+            'ogImageUrl' => $ogImageUrl,
         ]);
     }
+
+    
 }

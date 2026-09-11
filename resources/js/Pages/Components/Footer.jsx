@@ -9,8 +9,6 @@ export default function Footer({ services = [] }) {
         { title: 'Restrukturisasi & Corporate Finance', slug: '' },
     ];
 
-    const [showBackToTop, setShowBackToTop] = useState(false);
-
     useEffect(() => {
         const handleScroll = () => {
             setShowBackToTop(window.scrollY > 300);
@@ -19,13 +17,6 @@ export default function Footer({ services = [] }) {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-
-    const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        });
-    };
 
     const displayServices = services && services.length > 0 ? services : defaultServices;
 
@@ -191,7 +182,6 @@ export default function Footer({ services = [] }) {
 
                 </div>
 
-                {/* Sub Footer */}
                 <div className="mt-8 px-3 md:px-7 text-xs md:text-sm py-4 rounded-lg bg-primary/10 border border-primary/20 flex flex-col sm:flex-row items-center justify-between font-light tracking-wide text-slate-400 gap-4">
                     <span>
                         Copyright © {new Date().getFullYear()} Arunika - Powered by WorkForWorks
@@ -202,27 +192,6 @@ export default function Footer({ services = [] }) {
                 </div>
 
             </div>
-
-            {/* Back To Top Button */}
-            {showBackToTop && (
-                <button
-                    onClick={scrollToTop}
-                    className="fixed bottom-6 right-6 z-50 w-11 h-11 rounded-full bg-secondary text-[#0A1F1B] hover:bg-secondary/90 flex items-center justify-center shadow-lg transition-all duration-300 cursor-pointer"
-                    aria-label="Back to top"
-                >
-                    <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        viewBox="0 0 24 24"
-                    >
-                        <path d="M5 15l7-7 7 7" />
-                    </svg>
-                </button>
-            )}
         </footer>
     );
 }

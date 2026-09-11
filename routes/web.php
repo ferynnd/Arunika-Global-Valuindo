@@ -30,7 +30,7 @@ Route::get('/', function () {
         ->latest()
         ->get();
 
-    return Inertia::render('Welcome', [
+    return Inertia::render('Home', [
         'latestArticles' => $latestArticles,
         'services' => $services,
         'testimonials' => $testimonials,
@@ -42,15 +42,15 @@ Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
 // Public Services Routes
-Route::get('/services', [ServicesController::class, 'index'])->name('services.index');
-Route::get('/services/{slug}', [ServicesController::class, 'show'])->name('services.show');
+Route::get('/layanan', [ServicesController::class, 'index'])->name('services.index');
+Route::get('/layanan/{slug}', [ServicesController::class, 'show'])->name('services.show');
 
 // Public AboutUs Routes
-Route::get('/about', [UserController::class, 'aboutus'])->name('aboutus');
-Route::get('/contact', [UserController::class, 'contact'])->name('contact');
+Route::get('/tentang', [UserController::class, 'aboutus'])->name('aboutus');
+Route::get('/kontak', [UserController::class, 'contact'])->name('contact');
 
 // Public PrivacyPolicy Routes
-Route::get('/privacypolicy', [UserController::class, 'privacypolicy'])->name('privacypolicy');
+Route::get('/kebijakan-privasi', [UserController::class, 'privacypolicy'])->name('privacypolicy');
 
 // PRIVATE ADMIN PORTAL ROUTES
 $adminPrefix = env('ADMIN_PATH', 'secure-panel-arunika');

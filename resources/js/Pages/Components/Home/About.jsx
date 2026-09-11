@@ -44,7 +44,7 @@ export default function AboutSection({ displayServices = defaultServices }) {
                     tagline="Tentang Kami"
                     title="PT Arunika Global Valuindo adalah perusahaan penilai independen dan penasihat strategi korporasi terpercaya di Indonesia."
                     buttonText="Ketahui Lebih Lanjut"
-                    buttonHref="/about"
+                    buttonHref={(route('aboutus'))}
                     buttonBgColor="bg-secondary hover:bg-secondary/90"
                     buttonTextColor="text-white font-medium"
                     buttonSize="md"
@@ -56,7 +56,7 @@ export default function AboutSection({ displayServices = defaultServices }) {
                         <div
                             key={srv.id || idx}
                             onClick={() => setSelectedService(srv)}
-                            className="p-6 rounded-2xl bg-stone-100 border border-stone-200 cursor-pointer transition-all hover:border-primary/30 group"
+                            className="p-6 rounded-2xl bg-background border border-stone-200 cursor-pointer transition-all hover:border-primary/30 group"
                         >
                             <div className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center shrink-0 mb-4 group-hover:scale-105 transition-transform">
                                 {aboutIcons[idx % aboutIcons.length]}

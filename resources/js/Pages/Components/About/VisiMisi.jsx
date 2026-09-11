@@ -48,7 +48,7 @@ export default function VisionMissionSection() {
             </div>
           </div>
 
-          <div className="lg:col-span-7 bg-stone-100 p-8 sm:p-10 rounded-3xl border border-stone-200 flex flex-col justify-between space-y-6">
+          <div className="lg:col-span-7 bg-background p-8 sm:p-10 rounded-3xl border border-stone-200 flex flex-col justify-between space-y-6">
             <div className="space-y-6">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">

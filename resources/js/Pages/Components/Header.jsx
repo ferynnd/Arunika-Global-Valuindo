@@ -15,10 +15,10 @@ export default function Header({ auth, title, activePage = '' }) {
 
     const navLinks = [
         { name: 'Home', href: '/', id: 'home' },
-        { name: 'About Us', href: route('aboutus'), id: 'about' },
-        { name: 'Services', href: route('services.index'), id: 'services' },
+        { name: 'Tentang Kami', href: route('aboutus'), id: 'about' },
+        { name: 'Layanan', href: route('services.index'), id: 'services' },
         { name: 'Blog', href: route('blog.index'), id: 'blog' },
-        { name: 'Contact Us', href: route('contact'), id: 'contact' },
+        { name: 'Kontak', href: route('contact'), id: 'contact' },
     ];
 
     return (
@@ -71,7 +71,7 @@ export default function Header({ auth, title, activePage = '' }) {
                                 href="/#contact"
                                 className="px-6 py-3 rounded-xl bg-primary text-white font-medium text-xs lg:text-sm tracking-wide hover:bg-primary/90 transition-all "
                             >
-                                Get In Touch
+                                Hubungi kami
                             </a>
                         </div>
 
@@ -117,7 +117,7 @@ export default function Header({ auth, title, activePage = '' }) {
                                     onClick={() => setMobileMenuOpen(false)}
                                     className="block w-full text-center px-5 py-2.5 rounded-xl bg-primary text-white font-medium tracking-wide text-xs "
                                 >
-                                    Get In Touch
+                                    Hubungi kami
                                 </a>
                             </div>
                         </div>

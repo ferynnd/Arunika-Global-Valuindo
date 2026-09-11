@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "@inertiajs/react"; // Dipakai untuk navigasi SPA Inertia.js
 
 const ArrowIcon = ({ className = "w-4 h-4" }) => (
   <svg
@@ -17,6 +18,7 @@ const ArrowIcon = ({ className = "w-4 h-4" }) => (
 
 const CustomButton = ({
   text = "Consultation Now",
+  href, // Prop href sekarang ditangkap di sini
   bgColor = "bg-accent",
   textColor = "text-white",
   arrow = <ArrowIcon />,
@@ -54,23 +56,23 @@ const CustomButton = ({
 
   const currentSize = sizeStyles[size] || sizeStyles.md;
 
-  return (
-    <button
-      onClick={onClick}
-      className="
-        group
-        relative
-        inline-flex
-        items-center
-        gap-1
-        hover:gap-1.5 sm:hover:gap-2
-        transition-all
-        overflow-hidden
-        rounded-xl sm:rounded-[1.1rem]
-        isolate
-        cursor-pointer
-      "
-    >
+  const commonClasses = `
+    group
+    relative
+    inline-flex
+    items-center
+    gap-1
+    hover:gap-1.5 sm:hover:gap-2
+    transition-all
+    overflow-hidden
+    rounded-xl sm:rounded-[1.1rem]
+    isolate
+    cursor-pointer
+  `;
+
+  // Inner Content dari tombol
+  const buttonContent = (
+    <>
       {/* SHINE EFFECT */}
       {shine && (
         <span
@@ -147,6 +149,31 @@ const CustomButton = ({
           className: currentSize.iconSize,
         })}
       </span>
+    </>
+  );
+
+  // Jika href diawali `#` atau `http` (Link External / Anchor)
+  if (href && (href.startsWith("#") || href.startsWith("http"))) {
+    return (
+      <a href={href} onClick={onClick} className={commonClasses}>
+        {buttonContent}
+      </a>
+    );
+  }
+
+  // Jika href dikirim (Halaman Internal / Route Inertia)
+  if (href) {
+    return (
+      <Link href={href} onClick={onClick} className={commonClasses}>
+        {buttonContent}
+      </Link>
+    );
+  }
+
+  // Jika tidak ada href, panggil sebagai <button> biasa
+  return (
+    <button type="button" onClick={onClick} className={commonClasses}>
+      {buttonContent}
     </button>
   );
 };

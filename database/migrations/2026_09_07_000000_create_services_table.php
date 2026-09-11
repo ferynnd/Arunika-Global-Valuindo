@@ -22,6 +22,10 @@ return new class extends Migration
             $table->json('features')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->integer('sort_order')->default(0);
+            $table->string('seo_title')->nullable();
+            $table->text('seo_description')->nullable();
+            $table->string('seo_keywords')->nullable();
+            $table->string('og_image')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
