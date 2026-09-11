@@ -47,6 +47,8 @@ export default function JourneySection({ milestones = [] }) {
                         return (
                             <div 
                                 key={idx} 
+                                data-aos="fade-up"
+                                data-aos-delay={idx * 200}
                                 className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center"
                             >
                                 <div className={`lg:col-span-6 space-y-4 ${!isOdd ? 'lg:order-2' : 'lg:order-1'}`}>

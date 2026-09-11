@@ -1,3 +1,4 @@
+import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link } from '@inertiajs/react';
 
 export default function Error({ status = 404 }) {
@@ -50,76 +51,35 @@ export default function Error({ status = 404 }) {
 
     return (
         <>
+        <GuestLayout>
             <Head title={`${status} - ${error.label} | Arunika Global Valuindo`} />
 
-            <div className="min-h-screen bg-[#FAF8F5] text-[#334155] antialiased flex flex-col">
-
-                {/* Header */}
-                <header className="w-full pointer-events-none py-5 sm:py-6">
-                    <div className="max-w-6xl mx-auto px-4 sm:px-6">
-                        <div className="pointer-events-auto rounded-full bg-white/70 backdrop-blur-md border border-white/50 shadow-[0_4px_25px_rgba(0,0,0,0.04)] px-5 sm:px-6 py-3 flex items-center justify-between">
-
-                            <Link
-                                href="/"
-                                className="flex items-center gap-2.5 group"
-                            >
-                                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#ECAE36] to-[#D99B26] flex items-center justify-center shadow-md shadow-[#ECAE36]/30">
-                                    <svg
-                                        className="w-5 h-5 text-[#1B544D]"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2.5"
-                                    >
-                                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                                    </svg>
-                                </div>
-
-                                <div className="leading-tight">
-                                    <span className="font-extrabold text-sm tracking-wider text-[#1B544D] block uppercase">
-                                        ARUNIKA
-                                    </span>
-
-                                    <span className="text-[8px] font-semibold tracking-widest text-[#718783] block uppercase">
-                                        GLOBAL VALUINDO
-                                    </span>
-                                </div>
-                            </Link>
-
-                            <Link
-                                href="/"
-                                className="hidden sm:inline-flex px-5 py-2 rounded-full bg-[#1B544D] text-white font-semibold text-xs hover:bg-[#15433E] transition-all shadow-sm"
-                            >
-                                Kembali ke Beranda
-                            </Link>
-                        </div>
-                    </div>
-                </header>
+            <div className="min-h-screen bg-white text-text antialiased flex flex-col">
 
                 {/* Main */}
-                <main className="flex-1 flex items-center justify-center relative overflow-hidden">
+                <main className="flex-1 flex items-center justify-center relative overflow-hidden mt-5">
 
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F5] via-[#FAF8F5] to-[#EFECE6]" />
+                    <div className="absolute inset-0 bg-linear-to-b from-white via-white to-[#EFECE6]" />
 
                     {/* Decorative circles */}
-                    <div className="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-[#1B544D]/5 blur-3xl" />
+                    <div className="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-primaru/5 blur-3xl" />
 
-                    <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-[#ECAE36]/10 blur-3xl" />
+                    <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-secondary/10 blur-3xl" />
 
                     <div className="relative z-10 max-w-2xl mx-auto px-4 sm:px-6 text-center py-16 sm:py-20">
 
                         {/* Error number */}
                         <div className="flex items-center justify-center gap-4 sm:gap-6 mb-6">
 
-                            <span className="text-7xl sm:text-9xl font-extrabold text-[#1B544D] tracking-tight leading-none">
+                            <span className="text-7xl sm:text-9xl font-extrabold text-primaru tracking-tight leading-none">
                                 {String(status)[0]}
                             </span>
 
-                            <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-[#ECAE36] to-[#D99B26] flex items-center justify-center shadow-lg shadow-[#ECAE36]/30">
+                            <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-secondary to-[#D99B26] flex items-center justify-center shadow-lg shadow-secondary/30">
 
                                 {error.icon === 'lock' && (
                                     <svg
-                                        className="w-8 h-8 sm:w-12 sm:h-12 text-[#1B544D]"
+                                        className="w-8 h-8 sm:w-12 sm:h-12 text-primaru"
                                         viewBox="0 0 24 24"
                                         fill="none"
                                         stroke="currentColor"
@@ -141,7 +101,7 @@ export default function Error({ status = 404 }) {
 
                                 {error.icon === 'search' && (
                                     <svg
-                                        className="w-8 h-8 sm:w-12 sm:h-12 text-[#1B544D]"
+                                        className="w-8 h-8 sm:w-12 sm:h-12 text-primaru"
                                         viewBox="0 0 24 24"
                                         fill="none"
                                         stroke="currentColor"
@@ -157,7 +117,7 @@ export default function Error({ status = 404 }) {
 
                                 {error.icon === 'refresh' && (
                                     <svg
-                                        className="w-8 h-8 sm:w-12 sm:h-12 text-[#1B544D]"
+                                        className="w-8 h-8 sm:w-12 sm:h-12 text-primaru"
                                         viewBox="0 0 24 24"
                                         fill="none"
                                         stroke="currentColor"
@@ -178,7 +138,7 @@ export default function Error({ status = 404 }) {
 
                                 {(error.icon === 'clock' || error.icon === 'server') && (
                                     <svg
-                                        className="w-8 h-8 sm:w-12 sm:h-12 text-[#1B544D]"
+                                        className="w-8 h-8 sm:w-12 sm:h-12 text-primaru"
                                         viewBox="0 0 24 24"
                                         fill="none"
                                         stroke="currentColor"
@@ -194,18 +154,18 @@ export default function Error({ status = 404 }) {
 
                             </div>
 
-                            <span className="text-7xl sm:text-9xl font-extrabold text-[#1B544D] tracking-tight leading-none">
+                            <span className="text-7xl sm:text-9xl font-extrabold text-primaru tracking-tight leading-none">
                                 {String(status).slice(-1)}
                             </span>
                         </div>
 
                         {/* Label */}
-                        <span className="text-xs font-bold uppercase tracking-widest text-[#1B544D] block mb-3">
+                        <span className="text-xs font-bold uppercase tracking-widest text-primaru block mb-3">
                             {error.label}
                         </span>
 
                         {/* Title */}
-                        <h1 className="text-2xl sm:text-4xl font-bold text-[#1B544D] leading-snug">
+                        <h1 className="text-2xl sm:text-4xl font-bold text-primaru leading-snug">
                             {error.title}
                         </h1>
 
@@ -219,11 +179,11 @@ export default function Error({ status = 404 }) {
 
                             <Link
                                 href="/"
-                                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 pl-6 pr-2.5 py-2.5 rounded-full bg-[#ECAE36] hover:bg-[#E0A12A] text-white font-semibold text-sm sm:text-base transition-all shadow-md shadow-[#ECAE36]/30 group"
+                                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 pl-6 pr-2.5 py-2.5 rounded-full bg-secondary hover:bg-[#E0A12A] text-white font-semibold text-sm sm:text-base transition-all shadow-md shadow-secondary/30 group"
                             >
                                 <span>Kembali ke Beranda</span>
 
-                                <span className="w-8 h-8 rounded-full bg-[#1B544D] text-white flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                                <span className="w-8 h-8 rounded-full bg-primaru text-white flex items-center justify-center group-hover:translate-x-1 transition-transform">
                                     <svg
                                         className="w-4 h-4"
                                         viewBox="0 0 24 24"
@@ -238,7 +198,7 @@ export default function Error({ status = 404 }) {
 
                             <Link
                                 href="/contact"
-                                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-2.5 rounded-full border border-[#1B544D]/20 text-[#1B544D] font-semibold text-sm sm:text-base hover:bg-[#1B544D]/5 transition-all"
+                                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-2.5 rounded-full border border-primaru/20 text-primaru font-semibold text-sm sm:text-base hover:bg-primaru/5 transition-all"
                             >
                                 Hubungi Kami
                             </Link>
@@ -279,15 +239,8 @@ export default function Error({ status = 404 }) {
                         </div>
                     </div>
                 </main>
-
-                {/* Footer */}
-                <footer className="bg-[#0A1F1B] text-slate-400 py-6">
-                    <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center text-xs">
-                        Copyright © {new Date().getFullYear()} PT Arunika Global Valuindo. All rights reserved.
-                    </div>
-                </footer>
-
             </div>
+        </GuestLayout>
         </>
     );
 }

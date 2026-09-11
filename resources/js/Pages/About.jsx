@@ -136,7 +136,7 @@ export default function About({ auth }) {
                 <VisionMisionSection />
             </div>
 
-            <div data-aos="fade-up">
+            <div>
                 <JourneySection milestones={milestones} />
             </div>
 
@@ -149,7 +149,7 @@ export default function About({ auth }) {
                     />
                 </div>
 
-                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white" data-aos="zoom-in">
+                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
                     <h2 className="text-3xl md:text-5xl font-normal tracking-wide leading-tight">
                         Ready to solve your problem with <br />
                         <span className="text-secondary italic">Arunika Global Valuindo?</span>

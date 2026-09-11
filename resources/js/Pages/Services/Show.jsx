@@ -1,7 +1,5 @@
 import { Head, Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import PageHeader from '@/Components/PageHeader';
@@ -14,13 +12,6 @@ export default function Show({ auth, service, otherServices = [], ogImageUrl }) 
     const [copied, setCopied] = useState(false);
 
     useEffect(() => {
-        AOS.init({
-            duration: 800,
-            easing: 'ease-out-cubic',
-            once: true,
-            offset: 60,
-        });
-
         const handleScroll = () => {
             if (window.scrollY > 20) {
                 setScrolled(true);
@@ -124,7 +115,7 @@ export default function Show({ auth, service, otherServices = [], ogImageUrl }) 
                             </button>
                         </div>
 
-                        <div className="space-y-4" data-aos="fade-up" data-aos-delay="100">
+                        <div className="space-y-4">
                             <div className="flex items-center gap-2">
                                 <span className="px-3.5 py-1 rounded-full bg-primary text-white text-sm font-bold uppercase tracking-wider shadow-xs">
                                     Layanan
@@ -143,7 +134,7 @@ export default function Show({ auth, service, otherServices = [], ogImageUrl }) 
                         </div>
 
                         {service.thumbnail && (
-                            <div className="rounded-3xl overflow-hidden shadow-md border border-stone-200 aspect-video bg-slate-100" data-aos="fade-up" data-aos-delay="150">
+                            <div className="rounded-3xl overflow-hidden shadow-md border border-stone-200 aspect-video bg-slate-100">
                                 <img
                                     src={service.thumbnail.startsWith('http') ? service.thumbnail : `/storage/${service.thumbnail}`}
                                     alt={service.title}
@@ -152,7 +143,7 @@ export default function Show({ auth, service, otherServices = [], ogImageUrl }) 
                             </div>
                         )}
 
-                        <div className="bg-white rounded-2xl border border-stone-200 p-6 sm:p-10" data-aos="fade-up" data-aos-delay="200">
+                        <div className="bg-white rounded-2xl border border-stone-200 p-6 sm:p-10">
                             <h3 className="text-lg font-bold text-primary border-b border-stone-300 pb-3 mb-5">
                                 Penjelasan Lengkap 
                             </h3>
@@ -162,34 +153,34 @@ export default function Show({ auth, service, otherServices = [], ogImageUrl }) 
                             />
                         </div>
 
-                        <div className="bg-linear-to-br from-primary to-primary-dark relative text-white rounded-xl md:rounded-2xl p-8 sm:p-10 text-center ">
+                        <div className="bg-linear-to-br from-primary to-primary-dark relative text-white rounded-xl md:rounded-2xl p-8 sm:p-10 text-center">
                             <div className="absolute inset-0">
-                                    <img
-                                        src={'/assets/bgcta.webp'}
-                                        alt="Background overlay"
-                                        className="w-full h-full object-cover rounded-xl md:rounded-2xl"
+                                <img
+                                    src={'/assets/bgcta.webp'}
+                                    alt="Background overlay"
+                                    className="w-full h-full object-cover rounded-xl md:rounded-2xl"
+                                />
+                            </div>
+
+                            <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                                <h2 className="text-2xl md:text-3xl font-normal tracking-wide leading-tight">
+                                    Tertarik Menggunakan Layanan 
+                                    <span className="text-secondary italic"> {service.title}?</span>
+                                </h2>
+                                <p className="text-sm mt-2 text-slate-200 max-w-xl mx-auto leading-relaxed">
+                                    Hubungi tim ahli konsultan kami untuk diskusi kebutuhan spesifik perusahaan Anda dan penjadwalan presentasi.
+                                </p>
+                                <div className="mt-8 flex justify-center">
+                                    <CustomButton
+                                        href="/layanan"
+                                        text="Konsultasi Sekarang"
+                                        bgColor="bg-accent hover:bg-accent/90"
+                                        textColor="text-white"
+                                        iconBgColor="bg-white/20"
+                                        iconTextColor="text-white"
                                     />
                                 </div>
-
-                                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-                                    <h2 className="text-2xl md:text-3xl font-normal tracking-wide leading-tight">
-                                        Tertarik Menggunakan Layanan 
-                                        <span className="text-secondary italic">{service.title}?</span>
-                                    </h2>
-                                    <p className="text-sm mt-2 text-slate-200 max-w-xl mx-auto leading-relaxed">
-                                        Hubungi tim ahli konsultan kami untuk diskusi kebutuhan spesifik perusahaan Anda dan penjadwalan presentasi.
-                                    </p>
-                                    <div className="mt-8 flex justify-center">
-                                        <CustomButton
-                                            href="/layanan"
-                                            text="Konsultasi Sekarang"
-                                            bgColor="bg-accent hover:bg-accent/90"
-                                            textColor="text-white"
-                                            iconBgColor="bg-white/20"
-                                            iconTextColor="text-white"
-                                        />
-                                    </div>
-                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -214,14 +205,11 @@ export default function Show({ auth, service, otherServices = [], ogImageUrl }) 
                                 </a>
                             </div>
 
-                            {/* Service Card Grid Baru Sesuai Request */}
+                            {/* Service Card Grid */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                                 {otherServices.map((srv, idx) => (
                                     <Link
                                         key={srv.id || idx}
-                                         data-aos="fade-up"
-                                    data-aos-delay={idx * 100}
-                                    data-aos-duration="800"
                                         href={route('services.show', srv.slug)}
                                         className="relative rounded-2xl bg-primary border border-primary/60 transition-all cursor-pointer group hover:-translate-y-1 aspect-4/5 flex flex-col justify-between p-6 overflow-hidden shadow-md hover:shadow-xl"
                                     >

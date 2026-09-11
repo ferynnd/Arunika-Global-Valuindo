@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import CustomButton from '@/Components/CustomButton'; // Sesuaikan jalur import CustomButton Anda
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import CustomButton from '@/Components/CustomButton';
 import HeaderSection from "@/Components/HeaderSection";
 
 const defaultServices = [
@@ -20,7 +22,6 @@ const defaultServices = [
     },
 ];
 
-// Ikon SVG sederhana untuk card (bisa diganti dengan Lucide/Heroicons jika ada)
 const aboutIcons = [
     <svg key="1" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -34,22 +35,32 @@ const aboutIcons = [
 ];
 
 export default function AboutSection({ displayServices = defaultServices }) {
-    const [selectedService, setSelectedService] = useState(null);
+    const [selectedService, setSelectedService] = React.useState(null);
+
+    useEffect(() => {
+        AOS.init({
+            once: true,
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+    }, []);
 
     return (
         <section id="about" className="py-20 sm:py-28">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                <HeaderSection
-                    tagline="Tentang Kami"
-                    title="PT Arunika Global Valuindo adalah perusahaan penilai independen dan penasihat strategi korporasi terpercaya di Indonesia."
-                    buttonText="Ketahui Lebih Lanjut"
-                    buttonHref={(route('aboutus'))}
-                    buttonBgColor="bg-secondary hover:bg-secondary/90"
-                    buttonTextColor="text-white font-medium"
-                    buttonSize="md"
-                    showButton={true}
-                />
+                <div data-aos="fade-up" data-aos-duration="1000">
+                    <HeaderSection
+                        tagline="Tentang Kami"
+                        title="PT Arunika Global Valuindo adalah perusahaan penilai independen dan penasihat strategi korporasi terpercaya di Indonesia."
+                        buttonText="Ketahui Lebih Lanjut"
+                        buttonHref={(route('aboutus'))}
+                        buttonBgColor="bg-secondary hover:bg-secondary/90"
+                        buttonTextColor="text-white font-medium"
+                        buttonSize="md"
+                        showButton={true}
+                    />
+                </div>
 
                 <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
                     {displayServices.slice(0, 3).map((srv, idx) => (
