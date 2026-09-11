@@ -34,7 +34,7 @@ export default function TestimonialSection({
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
                     {/* Testimonial Quote & Slider Controls */}
-                    <div className="lg:col-span-6 space-y-6">
+                    <div className="lg:col-span-6 space-y-6" data-aos="fade-right" data-aos-duration="900">
                         <HeaderSection
                             tagline={tagline}
                             title={title}
@@ -91,7 +91,7 @@ export default function TestimonialSection({
                     </div>
 
                     {/* Community Image */}
-                    <div className="lg:col-span-6">
+                    <div className="lg:col-span-6" data-aos="fade-left" data-aos-duration="900">
                         <div className="relative rounded-3xl md:rounded-2xl overflow-hidden shadow-sm">
                             <img
                                 src={imageSrc}

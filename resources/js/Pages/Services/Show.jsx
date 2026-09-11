@@ -1,5 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import PageHeader from '@/Components/PageHeader';
@@ -12,6 +14,13 @@ export default function Show({ auth, service, otherServices = [], ogImageUrl }) 
     const [copied, setCopied] = useState(false);
 
     useEffect(() => {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 60,
+        });
+
         const handleScroll = () => {
             if (window.scrollY > 20) {
                 setScrolled(true);
@@ -115,7 +124,7 @@ export default function Show({ auth, service, otherServices = [], ogImageUrl }) 
                             </button>
                         </div>
 
-                        <div className="space-y-4">
+                        <div className="space-y-4" data-aos="fade-up" data-aos-delay="100">
                             <div className="flex items-center gap-2">
                                 <span className="px-3.5 py-1 rounded-full bg-primary text-white text-sm font-bold uppercase tracking-wider shadow-xs">
                                     Layanan
@@ -134,7 +143,7 @@ export default function Show({ auth, service, otherServices = [], ogImageUrl }) 
                         </div>
 
                         {service.thumbnail && (
-                            <div className="rounded-3xl overflow-hidden shadow-md border border-stone-200 aspect-video bg-slate-100">
+                            <div className="rounded-3xl overflow-hidden shadow-md border border-stone-200 aspect-video bg-slate-100" data-aos="fade-up" data-aos-delay="150">
                                 <img
                                     src={service.thumbnail.startsWith('http') ? service.thumbnail : `/storage/${service.thumbnail}`}
                                     alt={service.title}
@@ -143,7 +152,7 @@ export default function Show({ auth, service, otherServices = [], ogImageUrl }) 
                             </div>
                         )}
 
-                        <div className="bg-white rounded-2xl border border-stone-200 p-6 sm:p-10">
+                        <div className="bg-white rounded-2xl border border-stone-200 p-6 sm:p-10" data-aos="fade-up" data-aos-delay="200">
                             <h3 className="text-lg font-bold text-primary border-b border-stone-300 pb-3 mb-5">
                                 Penjelasan Lengkap 
                             </h3>
@@ -210,6 +219,9 @@ export default function Show({ auth, service, otherServices = [], ogImageUrl }) 
                                 {otherServices.map((srv, idx) => (
                                     <Link
                                         key={srv.id || idx}
+                                         data-aos="fade-up"
+                                    data-aos-delay={idx * 100}
+                                    data-aos-duration="800"
                                         href={route('services.show', srv.slug)}
                                         className="relative rounded-2xl bg-primary border border-primary/60 transition-all cursor-pointer group hover:-translate-y-1 aspect-4/5 flex flex-col justify-between p-6 overflow-hidden shadow-md hover:shadow-xl"
                                     >

@@ -1,5 +1,7 @@
 import { Head, Link, router } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import PageHeader from '@/Components/PageHeader';
@@ -14,6 +16,13 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
     const [activeCategory, setActiveCategory] = useState(filters.category || '');
 
     useEffect(() => {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 60,
+        });
+
         const handleScroll = () => {
             if (window.scrollY > 20) {
                 setScrolled(true);
@@ -63,7 +72,7 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
             />
 
             <section className="pt-12">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up" data-aos-duration="800">
                     <div className="flex items-center">
                         <div className="space-y-4">
                             <HeaderSection
@@ -78,18 +87,79 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
 
             <section className="py-12 sm:py-16">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+
+                    {/* FEATURED ARTICLE HERO CARD */}
+                    {featuredArticle && (
+                        <div className="group relative bg-white rounded-3xl border border-[#EAE6DF] overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
+                                <div className="lg:col-span-7 relative h-64 sm:h-80 lg:h-[420px] overflow-hidden bg-slate-100">
+                                    <img
+                                        src={featuredArticle.thumbnail ? `/storage/${featuredArticle.thumbnail}` : 'https://images.unsplash.com/photo-1497440001374-f26997328c1b?auto=format&fit=crop&w=1200&q=80'}
+                                        alt={featuredArticle.title}
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                    />
+                                    <span className="absolute top-4 left-4 px-3.5 py-1 rounded-full bg-[#1B544D] text-[#ECAE36] text-xs font-extrabold uppercase tracking-wider shadow-md">
+                                        Utama / Featured
+                                    </span>
+                                </div>
+                                <div className="lg:col-span-5 p-6 sm:p-10 space-y-4">
+                                    <div className="flex items-center gap-3 text-xs text-[#718783] font-semibold">
+                                        <span className="px-2.5 py-0.5 rounded-full bg-[#FAF8F5] border border-[#EAE6DF] text-[#1B544D]">
+                                            {featuredArticle.category ? featuredArticle.category.name : 'Artikel'}
+                                        </span>
+                                        <span>•</span>
+                                        <span>{formatDate(featuredArticle.published_at || featuredArticle.created_at)}</span>
+                                    </div>
+
+                                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#1B544D] group-hover:text-[#ECAE36] transition-colors leading-snug">
+                                        <Link href={route('blog.show', featuredArticle.slug)}>
+                                            {featuredArticle.title}
+                                        </Link>
+                                    </h2>
+
+                                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-3">
+                                        {featuredArticle.excerpt || 'Klik untuk membaca artikel lengkap dari pakar korporasi Arunika Global Valuindo.'}
+                                    </p>
+
+                                    <div className="pt-4 flex items-center justify-between">
+                                        <div className="flex items-center gap-2">
+                                            <div className="w-8 h-8 rounded-full bg-[#1B544D] text-[#ECAE36] flex items-center justify-center font-bold text-xs">
+                                                {featuredArticle.author?.name ? featuredArticle.author.name[0] : 'A'}
+                                            </div>
+                                            <span className="text-xs font-semibold text-slate-700">
+                                                {featuredArticle.author?.name || 'Redaksi Arunika'}
+                                            </span>
+                                        </div>
+
+                                        <Link
+                                            href={route('blog.show', featuredArticle.slug)}
+                                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1B544D] text-white font-semibold text-xs hover:bg-[#15433E] transition-all shadow-sm"
+                                        >
+                                            <span>Baca Selengkapnya</span>
+                                            <span>→</span>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* ARTICLES GRID */}
                     <div>
                         <div className="flex items-center justify-between mb-8">
-                            <h3 className="text-xl font-extrabold text-primary">
+                            <h3 className="text-xl font-extrabold text-[#1B544D]">
                                 {search || activeCategory ? 'Hasil Pencarian & Filter' : 'Semua Publikasi Artikel'}
                             </h3>
                         </div>
 
                         {articles.data.length > 0 ? (
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                {articles.data.map((article) => (
-                                   <div
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                {articles.data.map((article, idx) => (
+                                    <div
                                         key={article.id}
+                                        data-aos="fade-up"
+                                        data-aos-delay={(idx % 3) * 150}
+                                        data-aos-duration="800"
                                         className="group flex flex-col overflow-hidden cursor-pointer transition-all duration-300"
                                     >
                                         <Link href={route('blog.show', article.slug)} className="block">
@@ -195,7 +265,7 @@ export default function Index({ auth, articles, featuredArticle, categories, fil
                     />
                 </div>
 
-                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white" data-aos="fade-up" data-aos-duration="900">
                     <h2 className="text-3xl md:text-5xl font-normal tracking-wide leading-tight">
                         Ready to solve your problem with <br />
                         <span className="text-secondary italic">Arunika Global Valuindo?</span>

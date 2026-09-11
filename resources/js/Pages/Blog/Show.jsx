@@ -1,5 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import PageHeader from '@/Components/PageHeader';
@@ -11,6 +13,13 @@ export default function Show({ auth, article, relatedArticles = [], ogImageUrl }
     const [copied, setCopied] = useState(false);
 
     useEffect(() => {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 60,
+        });
+
         const handleScroll = () => {
             if (window.scrollY > 20) {
                 setScrolled(true);
@@ -67,7 +76,7 @@ export default function Show({ auth, article, relatedArticles = [], ogImageUrl }
                 <article className="py-12 sm:py-16">
                     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
 
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between" data-aos="fade-up">
                             <a
                                 href={route('blog.index')}
                                 className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline transition-all group"
@@ -123,23 +132,18 @@ export default function Show({ auth, article, relatedArticles = [], ogImageUrl }
                             </button>
                         </div>
 
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-3">
-                                {article.category && (
-                                    <span className="px-3.5 py-1 rounded-full bg-primary text-white text-xs font-bold uppercase tracking-wider shadow-xs">
-                                        {article.category.name}
-                                    </span>
-                                )}
-                                <span className="text-xs text-[#718783] font-semibold flex items-center gap-1.5">
-                                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                                        <line x1="16" y1="2" x2="16" y2="6" />
-                                        <line x1="8" y1="2" x2="8" y2="6" />
-                                        <line x1="3" y1="10" x2="21" y2="10" />
-                                    </svg>
-                                    {formatDate(article.published_at || article.created_at)}
+                    {/* Title & Metadata */}
+                    <div className="space-y-4">
+                        <div className="flex items-center gap-3">
+                            {article.category && (
+                                <span className="px-3.5 py-1 rounded-full bg-[#1B544D] text-[#ECAE36] text-xs font-bold uppercase tracking-wider shadow-xs">
+                                    {article.category.name}
                                 </span>
-                            </div>
+                            )}
+                            <span className="text-xs text-[#718783] font-semibold">
+                                {formatDate(article.published_at || article.created_at)}
+                            </span>
+                        </div>
 
                             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary tracking-tight leading-tight">
                                 {article.title}
@@ -168,7 +172,7 @@ export default function Show({ auth, article, relatedArticles = [], ogImageUrl }
 
                         {/* Main Featured Thumbnail */}
                         {article.thumbnail && (
-                            <div className="rounded-2xl overflow-hidden shadow-md border border-stone-200 aspect-video bg-slate-100">
+                            <div className="rounded-2xl overflow-hidden shadow-md border border-stone-200 aspect-video bg-slate-100" data-aos="fade-up" data-aos-delay="150">
                                 <img
                                     src={`/storage/${article.thumbnail}`}
                                     alt={article.title}
@@ -177,7 +181,7 @@ export default function Show({ auth, article, relatedArticles = [], ogImageUrl }
                             </div>
                         )}
 
-                        <div className="bg-white rounded-2xl border border-stone-200 p-6 sm:p-10">
+                        <div className="bg-white rounded-2xl border border-stone-200 p-6 sm:p-10" data-aos="fade-up" data-aos-delay="200">
                             <div
                                 className="prose prose-slate max-w-none text-slate-700 leading-relaxed text-sm sm:text-base font-sans prose-headings:text-primary prose-headings:font-bold prose-a:text-primary prose-a:font-semibold hover:prose-a:text-secondary"
                                 dangerouslySetInnerHTML={{ __html: article.content || article.excerpt || '<p>Tidak ada konten artikel.</p>' }}
@@ -191,7 +195,7 @@ export default function Show({ auth, article, relatedArticles = [], ogImageUrl }
                     <section className="py-16 bg-background/60 border-t border-stone-200">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
                             
-                            <div className="flex items-center justify-between border-b border-stone-200 pb-4">
+                            <div className="flex items-center justify-between border-b border-stone-200 pb-4" data-aos="fade-up">
                                 <div>
                                     <h3 className="text-2xl font-extrabold text-primary mt-0.5">
                                         Artikel Terkait
@@ -211,6 +215,9 @@ export default function Show({ auth, article, relatedArticles = [], ogImageUrl }
                                 {relatedArticles.map((rel) => (
                                     <div
                                         key={rel.id}
+                                        data-aos="fade-up"
+                                        data-aos-delay={idx * 100}
+                                        data-aos-duration="800"
                                         className="group flex flex-col overflow-hidden cursor-pointer transition-all duration-300"
                                     >
                                         <Link href={route('blog.show', rel.slug)} className="block">

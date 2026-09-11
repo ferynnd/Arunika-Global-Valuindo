@@ -56,6 +56,9 @@ export default function AboutSection({ displayServices = defaultServices }) {
                         <div
                             key={srv.id || idx}
                             onClick={() => setSelectedService(srv)}
+                            data-aos="fade-up"
+                            data-aos-delay={idx * 150}
+                            data-aos-duration="800"
                             className="p-6 rounded-2xl bg-background border border-stone-200 cursor-pointer transition-all hover:border-primary/30 group"
                         >
                             <div className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center shrink-0 mb-4 group-hover:scale-105 transition-transform">

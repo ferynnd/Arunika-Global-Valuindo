@@ -138,7 +138,7 @@ export default function Index({ testimonials, filters }) {
                                         <th className="py-4 px-6">Kutipan Testimoni</th>
                                         <th className="py-4 px-6 text-center">Urutan</th>
                                         <th className="py-4 px-6 text-center">Status</th>
-                                        <th className="py-4 px-6 text-right">Aksi</th>
+                                        <th className="py-4 px-6 text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-[#EAE6DF]">
@@ -177,19 +177,39 @@ export default function Index({ testimonials, filters }) {
                                                 <td className="py-4 px-6 text-center">
                                                     {getStatusBadge(item.status)}
                                                 </td>
-                                                <td className="py-4 px-6 text-right space-x-2 whitespace-nowrap">
-                                                    <Link
-                                                        href={route('admin.testimonials.edit', item.id)}
-                                                        className="inline-flex items-center px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#ECAE36]/15 text-[#B8811A] hover:bg-[#ECAE36]/30 transition-colors"
-                                                    >
-                                                        Edit
-                                                    </Link>
-                                                    <button
-                                                        onClick={() => handleDelete(item.id, item.author)}
-                                                        className="inline-flex items-center px-3 py-1.5 rounded-xl text-xs font-semibold bg-rose-50 text-rose-600 hover:bg-rose-100 transition-colors"
-                                                    >
-                                                        Hapus
-                                                    </button>
+                                                <td className="py-4 px-6 text-right">
+                                                    <div className="flex items-center justify-end gap-2">
+                                                        <Link
+                                                            href={route('admin.testimonials.show', item.id)}
+                                                            className="p-2 rounded-xl text-slate-500 hover:text-[#1B544D] hover:bg-[#1B544D]/10 transition-colors"
+                                                            title="Detail"
+                                                        >
+                                                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                                                <circle cx="12" cy="12" r="3" />
+                                                            </svg>
+                                                        </Link>
+                                                        <Link
+                                                            href={route('admin.testimonials.edit', item.id)}
+                                                            className="p-2 rounded-xl text-slate-500 hover:text-[#ECAE36] hover:bg-[#ECAE36]/10 transition-colors"
+                                                            title="Edit"
+                                                        >
+                                                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                                            </svg>
+                                                        </Link>
+                                                        <button
+                                                            onClick={() => handleDelete(item.id, item.author)}
+                                                            className="p-2 rounded-xl text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition-colors"
+                                                            title="Hapus"
+                                                        >
+                                                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                                <polyline points="3 6 5 6 21 6" />
+                                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                                            </svg>
+                                                        </button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         ))
@@ -221,11 +241,10 @@ export default function Index({ testimonials, filters }) {
                                             key={idx}
                                             href={link.url || '#'}
                                             dangerouslySetInnerHTML={{ __html: link.label }}
-                                            className={`px-3 py-1.5 rounded-xl text-xs font-semibold ${
-                                                link.active
-                                                    ? 'bg-[#1B544D] text-white'
-                                                    : 'bg-white text-slate-600 hover:bg-slate-100 border border-[#EAE6DF]'
-                                            } ${!link.url ? 'opacity-50 pointer-events-none' : ''}`}
+                                            className={`px-3 py-1.5 rounded-xl text-xs font-semibold ${link.active
+                                                ? 'bg-[#1B544D] text-white'
+                                                : 'bg-white text-slate-600 hover:bg-slate-100 border border-[#EAE6DF]'
+                                                } ${!link.url ? 'opacity-50 pointer-events-none' : ''}`}
                                         />
                                     ))}
                                 </div>

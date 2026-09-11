@@ -1,4 +1,7 @@
 import { Head, Link, router } from '@inertiajs/react';
+import { useState, useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import PageHeader from '@/Components/PageHeader';
@@ -7,6 +10,15 @@ import CustomButton from '@/Components/CustomButton';
 import GuestLayout from '@/Layouts/GuestLayout';
 
 export default function Index({ auth, services, filters }) {
+    useEffect(() => {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 60,
+        });
+    }, []);
+
     const handleSearchSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -48,7 +60,7 @@ export default function Index({ auth, services, filters }) {
                 <section className="py-12 sm:py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
 
-                        <div className="flex items-center justify-between border-b border-stone-200 pb-4">
+                        <div className="flex items-center justify-between border-b border-stone-200 pb-4"  data-aos="fade-up">
                             <h2 className="text-xl sm:text-2xl font-extrabold text-primary">
                                 {filters.search ? `Hasil Pencarian: "${filters.search}"` : 'Daftar Layanan '}
                             </h2>
@@ -59,6 +71,9 @@ export default function Index({ auth, services, filters }) {
                                 {services.data.map((srv, idx) => (
                                     <Link
                                         key={srv.id || idx}
+                                        data-aos="fade-up"
+                                    data-aos-delay={(idx % 3) * 100}
+                                    data-aos-duration="800"
                                         href={route('services.show', srv.slug)}
                                         className="relative rounded-2xl bg-primary border border-primary/60 transition-all cursor-pointer group hover:-translate-y-1 aspect-4/5 flex flex-col justify-between p-6 overflow-hidden "
                                     >
@@ -158,7 +173,7 @@ export default function Index({ auth, services, filters }) {
                         />
                     </div>
 
-                    <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                    <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white" data-aos="fade-up" data-aos-duration="900">
                         <h2 className="text-3xl md:text-5xl font-normal tracking-wide leading-tight">
                             Ready to solve your problem with <br />
                             <span className="text-secondary italic">Arunika Global Valuindo?</span>

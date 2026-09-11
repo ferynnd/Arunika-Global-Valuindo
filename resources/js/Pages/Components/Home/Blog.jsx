@@ -35,7 +35,7 @@ export default function BlogSection({
         <section id="blog" className="py-20 sm:py-28">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
+                <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12" data-aos="fade-up" data-aos-duration="800">
                     <HeaderSection
                         tagline={tagline}
                         title={title}
@@ -54,10 +54,13 @@ export default function BlogSection({
 
                 {/* Articles Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {articles.map((article) => (
+                    {articles.map((article, idx) => (
                         <div
                             key={article.id}
                             onClick={() => onSelectArticle ? onSelectArticle(article) : null}
+                            data-aos="fade-up"
+                            data-aos-delay={idx * 150}
+                            data-aos-duration="800"
                             className="group flex flex-col overflow-hidden cursor-pointer transition-all duration-300"
                         >
                             <div className="relative aspect-video overflow-hidden rounded-3xl md:rounded-2xl ">

@@ -11,7 +11,7 @@ const defaultLogos = [
 
 export default function ClientMarquee({ logos = defaultLogos }) {
     return (
-        <section className="py-8 border-y border-stone-200 bg-stone-100 overflow-hidden">
+        <section className="py-8 border-y border-stone-200 bg-stone-100 overflow-hidden" data-aos="fade-in" data-aos-duration="800">
             {/* Wrapper luar sebagai pembatas area (masking) */}
             <div className="relative w-full overflow-hidden flex">
                 

@@ -1,5 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import HeaderSection from '@/Components/HeaderSection';
@@ -14,6 +16,12 @@ export default function About({ auth }) {
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
+        AOS.init({
+            once: true,
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+
         const handleScroll = () => setScrolled(window.scrollY > 20);
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
@@ -61,12 +69,6 @@ export default function About({ auth }) {
         { year: '20 Juli 2024', text: 'Arunika Didirikan: PT Arunika Global Valuindo resmi berdiri sebagai financial & business management consulting and research firm.' },
     ];
 
-    const team = [
-        { name: 'Dr. Ir. Bambang Wijaya', role: 'Managing Partner', img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80' },
-        { name: 'Ratna Kusuma, CFA', role: 'Head of Valuation', img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80' },
-        { name: 'Dimas Prasetyo', role: 'Head of Strategy Advisory', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80' },
-    ];
-
     return (
         <GuestLayout auth={auth} title="Tentang Kami - PT Arunika Global Valuindo" activePage="about">
 
@@ -75,21 +77,21 @@ export default function About({ auth }) {
             <section className="py-16 sm:py-24">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-                        <div className="lg:col-span-6 space-y-6">
+                        <div className="lg:col-span-6 space-y-6" data-aos="fade-right">
                             <HeaderSection
                                 tagline="Cerita Kami"
                                 title="Lebih dari Satu Dekade Pengalaman Profesional Mendampingi Pertumbuhan Bisnis."
                                 showButton={false}
                             />
-                            <p className="text-sm  text-gray-600 leading-relaxed tracking-wide">
+                            <p className="text-sm text-gray-600 leading-relaxed tracking-wide">
                                 Arunika berangkat dari pengalaman profesional di bidang akuntansi, keuangan, manajemen bisnis, Corporate Social Responsibility (CSR), dan social research. Arunika didirikan pada 20 Juli 2024, setelah lebih dari satu dekade pengalaman profesional founder yang dimulai sejak 2010.
                             </p>
-                            <p className="text-sm  text-gray-600 leading-relaxed tracking-wide">
+                            <p className="text-sm text-gray-600 leading-relaxed tracking-wide">
                                 Kami memadukan analytical thinking, strategic perspective, relevant methodologies, dan collaborative approach untuk membantu klien memahami persoalan secara lebih mendalam, menentukan solusi yang tepat, serta membangun kemampuan organisasi untuk melakukan perbaikan secara berkelanjutan.
                             </p>
                         </div>
-                        <div className="lg:col-span-6">
-                            <div className="relative rounded-3xl md:rounded-2xl overflow-hidden ">
+                        <div className="lg:col-span-6" data-aos="fade-left">
+                            <div className="relative rounded-3xl md:rounded-2xl overflow-hidden shadow-lg">
                                 <img src={'/assets/team.webp'} alt="Tim Arunika" className="w-full h-80 sm:h-96 object-cover object-center" />
                             </div>
                         </div>
@@ -99,7 +101,7 @@ export default function About({ auth }) {
 
             <section className="py-16 sm:py-24 bg-primary text-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="max-w-3xl mx-auto text-center">
+                    <div className="max-w-3xl mx-auto text-center" data-aos="fade-up">
                         <span className="text-sm sm:text-base font-medium tracking-wide text-secondary block">
                             NILAI KAMI
                         </span>
@@ -112,9 +114,12 @@ export default function About({ auth }) {
                     </div>
                     <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
                         {values.map((v, idx) => (
-                            <div key={idx} className="p-6 rounded-3xl md:rounded-2xl bg-background text-primary border border-stone-300transition-all flex flex-col justify-between">
+                            <div key={idx} 
+                                data-aos="fade-up"
+                                data-aos-delay={idx * 150} 
+                                className="p-6 rounded-3xl md:rounded-2xl bg-stone-100 text-primary border border-stone-300transition-all flex flex-col justify-between">
                                 <div>
-                                    <div className="w-12 h-12 rounded-full bg-secondary text-primary flex items-center justify-center  mb-4">
+                                    <div className="w-12 h-12 rounded-full bg-secondary text-primary flex items-center justify-center mb-4">
                                         {v.icon}
                                     </div>
                                     <h3 className="text-lg tracking-wide text-primary">{v.title}</h3>
@@ -126,11 +131,15 @@ export default function About({ auth }) {
                     </div>
                 </div>
             </section>
-            
-            <VisionMisionSection/>
 
-            <JourneySection milestones={milestones} />
-            
+            <div data-aos="fade-up">
+                <VisionMisionSection />
+            </div>
+
+            <div data-aos="fade-up">
+                <JourneySection milestones={milestones} />
+            </div>
+
             <section className="py-24 relative overflow-hidden bg-primary">
                 <div className="absolute inset-0">
                     <img
@@ -140,7 +149,7 @@ export default function About({ auth }) {
                     />
                 </div>
 
-                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white" data-aos="zoom-in">
                     <h2 className="text-3xl md:text-5xl font-normal tracking-wide leading-tight">
                         Ready to solve your problem with <br />
                         <span className="text-secondary italic">Arunika Global Valuindo?</span>

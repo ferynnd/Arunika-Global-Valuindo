@@ -58,7 +58,7 @@ export default function ServicesShowcase({
     return (
         <section id="services" className="py-20 sm:py-28 bg-primary text-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="max-w-3xl mx-auto space-y-6 text-center">
+                <div className="max-w-3xl mx-auto space-y-6 text-center" data-aos="fade-up" data-aos-duration="800">
                     <span className="text-sm sm:text-base font-medium tracking-wide text-secondary block">
                         {tagline}
                     </span>
@@ -82,6 +82,9 @@ export default function ServicesShowcase({
                         <div
                             key={srv.id || idx}
                             onClick={() => handleServiceClick(srv)}
+                            data-aos="fade-up"
+                            data-aos-delay={idx * 100}
+                            data-aos-duration="800"
                             className="relative rounded-2xl bg-primary-dark border border-primary transition-all cursor-pointer group hover:-translate-y-1 aspect-4/5 flex flex-col justify-between p-6 overflow-hidden"
                         >
                             {srv.thumbnail ? (
