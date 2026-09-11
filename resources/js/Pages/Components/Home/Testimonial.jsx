@@ -21,7 +21,7 @@ export default function TestimonialSection({
     title = "Kepercayaan Klien Adalah Bukti Komitmen Kami Terhadap Hasil Nyata.",
     showButton = false,
     testimonials = defaultTestimonials,
-    imageSrc = "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=80",
+    imageSrc = "/assets/testi.webp",
     imageAlt = "Mitra strategis Arunika",
 }) {
     const [activeTestimonial, setActiveTestimonial] = useState(0);
@@ -29,7 +29,7 @@ export default function TestimonialSection({
     const currentTestimonial = testimonials[activeTestimonial] || testimonials[0];
 
     return (
-        <section className="py-20 sm:py-28">
+        <section className="py-16 sm:py-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
@@ -92,7 +92,7 @@ export default function TestimonialSection({
 
                     {/* Community Image */}
                     <div className="lg:col-span-6" data-aos="fade-left" data-aos-duration="900">
-                        <div className="relative rounded-3xl md:rounded-2xl overflow-hidden shadow-sm">
+                        <div className="relative rounded-2xl md:rounded-2xl overflow-hidden shadow-sm">
                             <img
                                 src={imageSrc}
                                 alt={imageAlt}

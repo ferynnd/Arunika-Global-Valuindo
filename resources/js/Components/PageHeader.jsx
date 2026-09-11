@@ -7,7 +7,7 @@ export default function PageHeader({
 }) {
   return (
     <div 
-      className="w-full min-h-[250px] md:min-h-[300px] bg-cover bg-center bg-no-repeat pt-36 pb-10 md:pt-44 md:pb-12 text-white relative flex flex-col justify-end"
+      className="w-full min-h-[150px] md:min-h-[240px] bg-cover bg-center bg-no-repeat pt-36 pb-10 md:pt-44 md:pb-12 text-white relative flex flex-col justify-end"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
       <div className="absolute inset-0 bg-primary-dark/70"></div>
