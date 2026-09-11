@@ -39,7 +39,7 @@ export default function ServicesShowcase({
     showButton = true,
     buttonText = "Lihat Semua Layanan",
     buttonHref = "/services",
-    buttonBgColor = "bg-secondary hover:bg-secondary/90",
+    buttonBgColor = "bg-secondary",
     buttonTextColor = "text-white font-medium",
     buttonSize = "md",
     onButtonClick,

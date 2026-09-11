@@ -10,7 +10,7 @@ export default function MissionSection({
     showButton = false,
     buttonText = "Tentang Kami",
     buttonHref = "/about",
-    buttonBgColor = "bg-secondary hover:bg-secondary/90",
+    buttonBgColor = "bg-secondary",
     buttonTextColor = "text-white",
     buttonSize = "md",
     onButtonClick,

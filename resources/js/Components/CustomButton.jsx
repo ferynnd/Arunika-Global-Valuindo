@@ -65,7 +65,7 @@ const CustomButton = ({
     hover:gap-1.5 sm:hover:gap-2
     transition-all
     overflow-hidden
-    rounded-xl sm:rounded-[1.1rem]
+    md:rounded-xl rounded-lg
     isolate
     cursor-pointer
   `;
@@ -84,7 +84,7 @@ const CustomButton = ({
             z-20
             w-[60%]
             skew-x-[-20deg]
-            bg-gradient-to-r
+            bg-linear-to-r
             from-transparent
             via-white/20
             to-transparent
@@ -104,7 +104,7 @@ const CustomButton = ({
           justify-center
           ${currentSize.height}
           ${currentSize.padding}
-          rounded-xl sm:rounded-[1.1rem]
+          md:rounded-xl rounded-lg
           ${bgColor}
           ${textColor}
           ${currentSize.text}
@@ -137,7 +137,7 @@ const CustomButton = ({
           items-center
           justify-center
           ${currentSize.iconBox}
-          rounded-xl sm:rounded-[1.1rem]
+          md:rounded-xl rounded-lg
           ${bgColor}
           ${textColor}
           transition-transform

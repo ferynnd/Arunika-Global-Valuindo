@@ -23,11 +23,11 @@ export default function Hero({
                 backgroundImage: `url('${bgImage}')`,
             }}
         >
-            <div className="absolute inset-0 bg-linear-to-b from-white to-white/50"></div>
+            <div className="absolute inset-0 bg-linear-to-b from-background to-background/50"></div>
 
             <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-12 translate-y-36 md:translate-y-46">
                 <span 
-                    className="text-xs font-semibold text-gray-500 tracking-widest uppercase mb-5 block"
+                    className="text-[10px] md:text-xs font-semibold text-gray-500 tracking-widest uppercase mb-5 block"
                     data-aos="fade-up"
                     data-aos-duration="1000"
                 >
@@ -37,13 +37,13 @@ export default function Hero({
                     Business Transformation & Advisory
                 </span>
                 <h1 
-                    className="text-4xl sm:text-5xl md:text-6xl font-normal tracking-tight text-primary max-w-5xl mx-auto leading-[1.15] sm:leading-[1.2]"
+                    className="text-3xl md:text-6xl font-normal tracking-tight text-primary max-w-5xl mx-auto leading-[1.15] sm:leading-[1.2]"
                     data-aos="fade-up"
                     data-aos-duration="1000"
                     data-aos-delay="100"
                 >
-                    Membangun Fondasi Bisnis Kuat <br className="hidden sm:inline" />
-                    dan Berkelanjutan
+                    Jasa Konsultan Bisnis & Valuation <br className="hidden sm:inline" />
+                    Terpercaya di Indonesia
                 </h1>
 
                 <div 
@@ -55,7 +55,7 @@ export default function Hero({
                     <CustomButton
                         href={"https://wa.me"}
                         text="Konsultasi Bisnis"
-                        bgColor="bg-secondary hover:bg-secondary/90"
+                        bgColor="bg-secondary"
                         textColor="text-white font-medium"
                     />
                 </div>
