@@ -58,7 +58,7 @@ export default function Header({ auth, title, activePage = '' }) {
                                         href={item.href}
                                         className={`px-4 py-2 rounded-xl text-xs lg:text-sm tracking-wide transition-colors ${isActive
                                             ? 'bg-primary text-white font-medium '
-                                            : 'text-primary/75 font-normal hover:text-primary'
+                                            : 'text-primary-dark font-normal hover:text-primary'
                                             }`}
                                     >
                                         {item.name}
@@ -68,7 +68,7 @@ export default function Header({ auth, title, activePage = '' }) {
                         </div>
                         <div className="hidden md:flex items-center gap-3 shrink-0">
                             <a
-                                href="/#contact"
+                                href={(route('contact'))}
                                 className="px-6 py-3 rounded-xl bg-primary text-white font-medium text-xs lg:text-sm tracking-wide hover:bg-primary/90 transition-all "
                             >
                                 Hubungi kami
@@ -113,7 +113,7 @@ export default function Header({ auth, title, activePage = '' }) {
 
                             <div className="pt-3 border-t border-[#EAE6DF]/80">
                                 <a
-                                    href="/#contact"
+                                    href={(route('contact'))}
                                     onClick={() => setMobileMenuOpen(false)}
                                     className="block w-full text-center px-5 py-2.5 rounded-xl bg-primary text-white font-medium tracking-wide text-xs "
                                 >

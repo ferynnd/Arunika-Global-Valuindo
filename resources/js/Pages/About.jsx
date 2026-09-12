@@ -2,13 +2,12 @@ import { Head, Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import Header from './Components/Header';
-import Footer from './Components/Footer';
 import HeaderSection from '@/Components/HeaderSection';
 import CustomButton from '@/Components/CustomButton';
 import JourneySection from './Components/About/Journey';
 import PageHeader from '@/Components/PageHeader';
 import VisionMisionSection from './Components/About/VisiMisi'
+import ProjectExperienceSection from './Components/About/ProjectExperienceSection'
 import GuestLayout from '@/Layouts/GuestLayout';
 
 export default function About({ auth }) {
@@ -92,7 +91,7 @@ export default function About({ auth }) {
                 </div>
             </section>
 
-            <section className="py-16 sm:py-24 bg-primary text-white">
+            {/* <section className="py-16 sm:py-24 bg-primary text-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-3xl mx-auto text-center" data-aos="fade-up">
                         <span className="text-sm sm:text-base font-medium tracking-wide text-secondary block">
@@ -123,10 +122,15 @@ export default function About({ auth }) {
                         ))}
                     </div>
                 </div>
-            </section>
-
+            </section> */}
+            
             <div data-aos="fade-up">
                 <VisionMisionSection />
+            </div>
+
+
+            <div data-aos="fade-up">
+                <ProjectExperienceSection/>
             </div>
 
             <div>
