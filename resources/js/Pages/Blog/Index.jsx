@@ -8,6 +8,7 @@ import PageHeader from '@/Components/PageHeader';
 import HeaderSection from '@/Components/HeaderSection';
 import CustomButton from '@/Components/CustomButton';
 import GuestLayout from '@/Layouts/GuestLayout';
+import CtaSection from '../Components/Cta';
 
 export default function Index({ auth, articles, filters }) {
     const [search, setSearch] = useState(filters.search || '');
@@ -186,37 +187,7 @@ export default function Index({ auth, articles, filters }) {
                 </div>
             </section>
 
-             <section className="py-20 relative overflow-hidden bg-primary">
-                <div className="absolute inset-0">
-                    <img
-                        src="/assets/bgcta.webp"
-                        alt="Background overlay"
-                        className="w-full h-full object-cover opacity-30"
-                    />
-                </div>
-
-                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-                    <h2 className="text-3xl md:text-5xl font-normal tracking-wide leading-tight">
-                        Bersama Membangun Pertumbuhan <br />
-                        <span className="text-secondary italic">Bisnis yang Berkelanjutan</span>
-                    </h2>
-
-                    <p className="mt-4 text-sm sm:text-base text-slate-200 max-w-2xl mx-auto leading-relaxed">
-                        Kami siap berjalan bersama Anda dalam membangun bisnis yang lebih kuat, meningkatkan kinerja, dan menciptakan nilai yang berdampak positif bagi perusahaan dan lingkungan.
-                    </p>
-
-                    <div className="mt-8 flex justify-center">
-                        <CustomButton
-                            href="https://wa.me/6282331144447"
-                            text="Mulai Konsultasi"
-                            bgColor="bg-accent hover:bg-accent/90"
-                            textColor="text-white font-medium"
-                            iconBgColor="bg-white/20"
-                            iconTextColor="text-white"
-                        />
-                    </div>
-                </div>
-            </section>
+            <CtaSection/>
         </GuestLayout>
     );
 }

@@ -157,7 +157,7 @@ export default function Show({ auth, service, otherServices = [], ogImageUrl }) 
                                 </p>
                                 <div className="mt-8 flex justify-center">
                                     <CustomButton
-                                        href="/layanan"
+                                        href="https://wa.me/6282331144447"
                                         text="Konsultasi Sekarang"
                                         bgColor="bg-accent"
                                         textColor="text-white"
@@ -184,7 +184,7 @@ export default function Show({ auth, service, otherServices = [], ogImageUrl }) 
                                 <a
                                     href={route('services.index')}
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="self-start md:self-center justify-center items-center px-4 py-3 rounded-lg bg-primary hover:bg-primary/90 text-white font-medium tracking-wide text-sm"
+                                    className="self-start md:self-center justify-center items-center px-4 py-3 rounded-lg bg-primary hover:bg-primary/90 text-white font-medium tracking-wide text-xs md:text-sm"
                                 >
                                     Lihat Semua Layanan
                                 </a>

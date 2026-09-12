@@ -179,7 +179,7 @@ export default function Show({ auth, article, relatedArticles = [], ogImageUrl }
                                 <a
                                     href={route('blog.index')}
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="self-start md:self-center justify-center items-center px-4 py-3 rounded-lg bg-primary hover:bg-primary/90 text-white font-medium tracking-wide text-sm"
+                                    className="self-start md:self-center justify-center items-center px-4 py-3 rounded-lg bg-primary hover:bg-primary/90 text-white font-medium tracking-wide text-xs md:text-sm"
                                 >
                                     Lihat Semua Artikel
                                 </a>

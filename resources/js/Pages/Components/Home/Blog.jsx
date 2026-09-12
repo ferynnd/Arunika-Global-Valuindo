@@ -105,7 +105,7 @@ export default function BlogSection({
                                 <div className="py-4 px-1.5 flex flex-col flex-grow justify-between">
                                     <div>
                                         <div className="flex items-center gap-1.5 text-xs text-gray-600 mb-2 tracking-wide">
-                                            <svg className="w-3.5 h-3.5 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg className="w-3.5 h-3.5 text-text/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                                                 <line x1="16" y1="2" x2="16" y2="6" />
                                                 <line x1="8" y1="2" x2="8" y2="6" />

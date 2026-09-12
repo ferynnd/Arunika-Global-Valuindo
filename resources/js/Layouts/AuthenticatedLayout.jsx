@@ -1,7 +1,8 @@
 import Dropdown from '@/Components/Dropdown';
-import { Link, usePage } from '@inertiajs/react';
+import { Link, usePage, router } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
-import { showSuccessAlert, showErrorAlert } from '@/libs/sweetalert';
+import { showSuccessAlert, showErrorAlert, showConfirmDialog } from '@/libs/sweetalert';
+import Swal from 'sweetalert2';
 
 export default function AuthenticatedLayout({ header, children }) {
     const { auth, flash } = usePage().props;
@@ -26,8 +27,41 @@ export default function AuthenticatedLayout({ header, children }) {
         }
     };
 
-    return (
+    // Handler Konfirmasi Logout dengan SweetAlert
+    const handleLogout = (e) => {
+        if (e) e.preventDefault();
 
+        // Jika Anda punya helper showConfirmAlert khusus di `@/libs/sweetalert`:
+        if (typeof showConfirmAlert === 'function') {
+            showConfirmAlert(
+                'Konfirmasi Logout',
+                'Apakah Anda yakin ingin keluar dari sistem?',
+                'Ya, Keluar'
+            ).then((result) => {
+                if (result.isConfirmed) {
+                    router.post(route('admin.logout'));
+                }
+            });
+        } else {
+            // Fallback standar SweetAlert2 jika helper kustom tidak mengembalikan Promise
+            Swal.fire({
+                title: 'Konfirmasi Logout',
+                text: 'Apakah Anda yakin ingin keluar dari aplikasi?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ef4444',
+                cancelButtonColor: '#64748b',
+                confirmButtonText: 'Ya, Keluar',
+                cancelButtonText: 'Batal',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    router.post(route('admin.logout'));
+                }
+            });
+        }
+    };
+
+    return (
         <div className="min-h-screen bg-[#FAF8F5] text-slate-800 font-sans flex selection:bg-[#ECAE36] selection:text-[#1B544D]">
 
             {/* Mobile Sidebar Backdrop */}
@@ -183,11 +217,11 @@ export default function AuthenticatedLayout({ header, children }) {
                         </div>
                     </div>
 
-                    <Link
-                        href={route('admin.logout')}
-                        method="post"
-                        as="button"
-                        className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 transition-colors"
+                    {/* Tombol Logout Sidebar */}
+                    <button
+                        type="button"
+                        onClick={handleLogout}
+                        className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 transition-colors cursor-pointer"
                     >
                         <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
@@ -195,7 +229,7 @@ export default function AuthenticatedLayout({ header, children }) {
                             <line x1="21" y1="12" x2="9" y2="12" />
                         </svg>
                         <span>Log Out</span>
-                    </Link>
+                    </button>
                 </div>
             </aside>
 
@@ -243,9 +277,14 @@ export default function AuthenticatedLayout({ header, children }) {
                                 <Dropdown.Link href={route('profile.edit')}>
                                     Profil Akun
                                 </Dropdown.Link>
-                                <Dropdown.Link href={route('admin.logout')} method="post" as="button">
+                                {/* Tombol Logout Dropdown */}
+                                <button
+                                    type="button"
+                                    onClick={handleLogout}
+                                    className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out cursor-pointer"
+                                >
                                     Log Out
-                                </Dropdown.Link>
+                                </button>
                             </Dropdown.Content>
                         </Dropdown>
                     </div>

@@ -68,7 +68,7 @@ export default function Header({ auth, title, activePage = '' }) {
                         </div>
                         <div className="hidden md:flex items-center gap-3 shrink-0">
                             <a
-                                href={(route('contact'))}
+                                href={"https://wa.me/6282331144447"}
                                 className="px-6 py-3 rounded-xl bg-primary text-white font-medium text-xs lg:text-sm tracking-wide hover:bg-primary/90 transition-all "
                             >
                                 Hubungi kami

@@ -1,41 +1,87 @@
-import { Link } from '@inertiajs/react';
-import React from 'react';
-import HeaderSection from '@/Components/HeaderSection'; // Sesuaikan path import HeaderSection
+import React, { useState, useEffect } from 'react';
+import HeaderSection from '@/Components/HeaderSection';
+
+// Sub-Component Native Slider berbasis Transform
+function NativeImageSlider({ images = [] }) {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const validImages = Array.isArray(images) && images.length > 0 
+        ? images 
+        : ['https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80'];
+
+    useEffect(() => {
+        if (validImages.length <= 1) return;
+
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % validImages.length);
+        }, 3500);
+
+        return () => clearInterval(interval);
+    }, [validImages.length]);
+
+    return (
+        <div className="relative w-full aspect-video rounded-3xl md:rounded-2xl overflow-hidden shadow-md bg-stone-200">
+            {/* Slider Track menggunakan TranslateX */}
+            <div 
+                className="flex w-full h-full transition-transform duration-500 ease-out"
+                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
+                {validImages.map((imgUrl, idx) => (
+                    <div key={idx} className="w-full h-full flex-shrink-0 relative">
+                        <img
+                            src={imgUrl}
+                            alt={`Slide ${idx + 1}`}
+                            className="w-full h-full object-cover object-center block"
+                            onError={(e) => {
+                                e.target.src = 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80';
+                            }}
+                        />
+                    </div>
+                ))}
+            </div>
+
+            {/* Dots Pagination */}
+            {validImages.length > 1 && (
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10 bg-black/30 px-3 py-1.5 rounded-full backdrop-blur-xs">
+                    {validImages.map((_, idx) => (
+                        <button
+                            key={idx}
+                            type="button"
+                            onClick={() => setCurrentIndex(idx)}
+                            className={`h-2 rounded-full transition-all duration-300 ${
+                                idx === currentIndex ? 'bg-white w-5' : 'bg-white/50 w-2'
+                            }`}
+                        />
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+}
 
 export default function JourneySection({ milestones = [] }) {
     const defaultMilestones = [
         {
             year: '2024',
             title: 'Pendirian PT Arunika Global Valuindo',
-            text: 'Arunika didirikan pada 20 Juli 2024 sebagai financial & business management consulting and research firm yang berfokus pada business transformation & advisory[cite: 1].',
-            img: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80',
+            text: 'Arunika didirikan pada 20 Juli 2024 sebagai financial & business management consulting and research firm yang berfokus pada business transformation & advisory.',
+            imgs: [
+                'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80',
+                'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80',
+            ],
         },
         {
             year: '2018–Sekarang',
             title: 'Akademik & Strategic Finance',
-            text: 'Founder aktif sebagai akademisi di bidang akuntansi dan keuangan sekaligus mengembangkan kompetensi dalam financial modeling, corporate valuation, financial analysis, dan strategic finance[cite: 1].',
-            img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80',
-        },
-        {
-            year: '2015–2018',
-            title: 'Ekspansi ke CSR & Social Impact',
-            text: 'Memperluas pengalaman ke bidang CSR impact measurement, termasuk pengukuran dampak program CSR menggunakan metodologi Social Return on Investment (SROI) pada beberapa perusahaan BUMN[cite: 1].',
-            img: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1000&q=80',
-        },
-        {
-            year: '2010',
-            title: 'Fondasi Profesional & Awal Perjalanan',
-            text: 'Founder Arunika mulai aktif dalam bidang akuntansi, keuangan, dan manajemen, serta kemudian berkembang ke bidang CSR dan social research[cite: 1].',
-            img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=80',
+            text: 'Founder aktif sebagai akademisi di bidang akuntansi dan keuangan sekaligus mengembangkan kompetensi dalam financial modeling, corporate valuation, financial analysis, dan strategic finance.',
+            imgs: [
+                'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80',
+            ],
         },
     ];
 
-    const displayMilestones = [...(milestones?.length ? milestones : defaultMilestones)].sort((a, b) => {
-        const yearA = parseInt(String(a.year).match(/\d{4}/)?.[0] || 0);
-        const yearB = parseInt(String(b.year).match(/\d{4}/)?.[0] || 0);
+    const displayMilestones = [...(milestones?.length ? milestones : defaultMilestones)];
 
-        return yearB - yearA;
-    });
     return (
         <section className="py-20 sm:py-28 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,35 +93,27 @@ export default function JourneySection({ milestones = [] }) {
 
                 <div className="space-y-16 mt-5 sm:space-y-24">
                     {displayMilestones.map((m, idx) => {
-                        const isOdd = idx % 2 === 0; // Ganjil (index 0, 2, dst) -> Gambar di Kanan, Genap (index 1, 3, dst) -> Gambar di Kiri
+                        const isOdd = idx % 2 === 0;
+                        const imageList = Array.isArray(m.imgs) 
+                            ? m.imgs 
+                            : [m.img || m.imgs].filter(Boolean);
+
                         return (
-                            <div 
-                                key={idx} 
-                                data-aos="fade-up"
-                                data-aos-delay={idx * 200}
-                                className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center"
-                            >
+                            <div key={idx} className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
                                 <div className={`lg:col-span-6 space-y-4 ${!isOdd ? 'lg:order-2' : 'lg:order-1'}`}>
                                     <div className="inline-block px-3 py-1 rounded-md bg-primary text-white text-xs font-semibold tracking-wider">
                                         {m.year}
                                     </div>
                                     <h3 className="text-xl sm:text-2xl tracking-wide text-primary leading-snug">
-                                        {m.title || `Tonggak Pencapaian ${m.year}`}
+                                        {m.title}
                                     </h3>
                                     <p className="text-sm font-normal text-gray-600 leading-relaxed tracking-wide">
                                         {m.text}
                                     </p>
                                 </div>
 
-                                {/* Image Column */}
                                 <div className={`lg:col-span-6 ${!isOdd ? 'lg:order-1' : 'lg:order-2'}`}>
-                                    <div className="relative rounded-3xl md:rounded-2xl overflow-hidden aspect-video">
-                                        <img 
-                                            src={m.img || "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80"} 
-                                            alt={`Milestone ${m.year}`} 
-                                            className="w-full h-full object-cover object-center" 
-                                        />
-                                    </div>
+                                    <NativeImageSlider images={imageList} />
                                 </div>
                             </div>
                         );

@@ -67,7 +67,7 @@ export default function ProjectExperienceSection() {
                 {/* Section Header */}
                 <div className="max-w-3xl mx-auto text-center" data-aos="fade-up">
                     <span className="text-sm sm:text-base font-medium tracking-wide text-secondary block uppercase">
-                        PORTTOFOLIO KAMI
+                        PORTOFOLIO KAMI
                     </span>
                     <h2 className="text-2xl sm:text-3xl lg:text-4xl font-normal tracking-wide leading-tight mt-2">
                         Professional Achievements & Project Experience

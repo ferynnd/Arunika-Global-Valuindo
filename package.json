@@ -32,6 +32,7 @@
         "@tiptap/starter-kit": "^3.31.3",
         "aos": "^2.3.4",
         "lucide-react": "^1.43.0",
-        "sweetalert2": "^11.26.25"
+        "sweetalert2": "^11.26.25",
+        "swiper": "^14.2.0"
     }
 }

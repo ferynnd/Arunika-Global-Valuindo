@@ -60,7 +60,7 @@ export default function AboutSection({ displayServices = defaultServices }) {
                         showButton={true}
                     />
                 </div>
-
+{/* 
                 <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
                     {displayServices.slice(0, 3).map((srv, idx) => (
                         <div
@@ -84,10 +84,10 @@ export default function AboutSection({ displayServices = defaultServices }) {
                             </p>
                         </div>
                     ))}
-                </div>
+                </div> */}
 
             </div>
-
+{/* 
             {selectedService && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
                     <div className="bg-white rounded-2xl max-w-lg w-full p-6 relative shadow-xl">
@@ -101,7 +101,7 @@ export default function AboutSection({ displayServices = defaultServices }) {
                         </button>
                     </div>
                 </div>
-            )}
+            )} */}
         </section>
     );
 }

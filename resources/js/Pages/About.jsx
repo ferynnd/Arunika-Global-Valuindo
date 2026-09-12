@@ -9,6 +9,7 @@ import PageHeader from '@/Components/PageHeader';
 import VisionMisionSection from './Components/About/VisiMisi'
 import ProjectExperienceSection from './Components/About/ProjectExperienceSection'
 import GuestLayout from '@/Layouts/GuestLayout';
+import CtaSection from './Components/Cta';
 
 export default function About({ auth }) {
     useEffect(() => {
@@ -55,10 +56,40 @@ export default function About({ auth }) {
     ];
 
     const milestones = [
-        { year: '2010', text: 'Fondasi Profesional: Founder Arunika mulai aktif dalam bidang akuntansi, keuangan, manajemen, serta berkembang ke bidang CSR dan social research.' },
-        { year: '2015–2018', text: 'CSR & Social Impact: Memperluas pengalaman ke bidang CSR impact measurement menggunakan metodologi Social Return on Investment (SROI) pada beberapa perusahaan BUMN.' },
-        { year: '2018–Sekarang', text: 'Akademik & Strategic Finance: Aktif sebagai akademisi sekaligus mengembangkan kompetensi dalam financial modeling, corporate valuation, dan strategic finance.' },
-        { year: '20 Juli 2024', text: 'Arunika Didirikan: PT Arunika Global Valuindo resmi berdiri sebagai financial & business management consulting and research firm.' },
+        { 
+            year: '2024', 
+            title: 'Arunika Didirikan',
+            text: 'PT Arunika Global Valuindo resmi berdiri sebagai financial & business management consulting and research firm yang berfokus pada business transformation & advisory.',
+            imgs: [
+                'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80',
+                'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80',
+            ]
+        },
+        { 
+            year: '2018–Sekarang', 
+            title: 'Akademik & Strategic Finance',
+            text: 'Founder aktif sebagai akademisi di bidang akuntansi dan keuangan sekaligus mengembangkan kompetensi dalam financial modeling, corporate valuation, financial analysis, dan strategic finance.',
+            imgs: [
+                'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80',
+            ]
+        },
+        { 
+            year: '2015–2018', 
+            title: 'CSR & Social Impact',
+            text: 'Memperluas pengalaman ke bidang CSR impact measurement menggunakan metodologi Social Return on Investment (SROI) pada beberapa perusahaan BUMN.',
+            imgs: [
+                'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1000&q=80',
+                'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80',
+            ]
+        },
+        { 
+            year: '2010', 
+            title: 'Fondasi Profesional',
+            text: 'Founder Arunika mulai aktif dalam bidang akuntansi, keuangan, dan manajemen, serta kemudian berkembang ke bidang CSR dan social research.',
+            imgs: [
+                'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=80',
+            ]
+        },
     ];
 
     return (
@@ -137,36 +168,7 @@ export default function About({ auth }) {
                 <JourneySection milestones={milestones} />
             </div>
 
-            <section className="py-24 relative overflow-hidden bg-primary">
-                <div className="absolute inset-0">
-                    <img
-                        src={'/assets/bgcta.webp'}
-                        alt="Background overlay"
-                        className="w-full h-full object-cover"
-                    />
-                </div>
-
-                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-                    <h2 className="text-3xl md:text-5xl font-normal tracking-wide leading-tight">
-                        Bersama Membangun Pertumbuhan <br />
-                        <span className="text-secondary italic">yang Berkelanjutan</span>
-                    </h2>
-                    <p className="mt-4 text-sm sm:text-base text-slate-200 max-w-3xl mx-auto leading-relaxed">
-                        Apabila Anda ingin memperkuat kinerja keuangan, melakukan transformasi bisnis, maupun meningkatkan dampak sosial dan lingkungan, Arunika siap menjadi mitra strategis Anda.
-                    </p>
-
-                    <div className="mt-8 flex justify-center">
-                        <CustomButton
-                            href="https://wa.me/6282331144447"
-                            text="Mulai Percakapan"
-                            bgColor="bg-accent hover:bg-accent/90"
-                            textColor="text-white"
-                            iconBgColor="bg-white/20"
-                            iconTextColor="text-white"
-                        />
-                    </div>
-                </div>
-            </section>
+            <CtaSection/>
 
         </GuestLayout>
 
