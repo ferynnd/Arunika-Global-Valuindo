@@ -198,7 +198,7 @@ export default function Contact({ auth }) {
                     <div className="w-full aspect-video rounded-3xl md:rounded-2xl overflow-hidden border border-stone-200 relative bg-slate-100 shadow-sm" data-aos="fade-up">
                         <iframe
                             title="Google Maps Lokasi Kantor"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126507.01407338543!2d111.4582845!3d-7.6298319!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e79be01662fbdd7%3A0x3027a76e352bea0!2sMadiun%2C%20East%20Java!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d247.16707452772235!2d111.51052062740021!3d-7.610495752841818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e79bfb20858737d%3A0x7de0ce8e07628d84!2sCitra%20Puri%20Majapahit%2C%20Winongo%2C%20Kec.%20Manguharjo%2C%20Kota%20Madiun%2C%20Jawa%20Timur%2063126!5e0!3m2!1sid!2sid!4v1789191796445!5m2!1sid!2sid"
                             width="100%"
                             height="100%"
                             style={{ border: 0 }}
@@ -213,3 +213,4 @@ export default function Contact({ auth }) {
         </GuestLayout>
     );
 }
+

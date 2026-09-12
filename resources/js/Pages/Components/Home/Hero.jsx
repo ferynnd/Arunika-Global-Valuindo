@@ -42,8 +42,7 @@ export default function Hero({
                     data-aos="fade-up"
                     data-aos-duration="1000"
                 >
-                    Jasa Konsultan Bisnis & Valuation <br className="hidden sm:inline" />
-                    Terpercaya di Indonesia
+                    Konsultan Manajemen & Penasihat Bisnis
                 </h1>
 
                 <div 

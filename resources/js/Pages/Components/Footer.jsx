@@ -3,7 +3,7 @@ export default function Footer({ services = [] }) {
     const defaultServices = [
         { title: 'Strategic Finance', slug: '' },
         { title: 'Business Advisory', slug: '' },
-        { title: 'Sustainability & Social Impact', slug: '' },
+        { title: 'Sustainability, Community Development & Social Impact', slug: '' },
     ];
     const displayServices = services && services.length > 0 ? services : defaultServices;
 
@@ -120,14 +120,14 @@ export default function Footer({ services = [] }) {
                                 <li key={idx}>
                                     <Link
                                         href={srv.slug ? route('services.show', srv.slug) : route('services.index')}
-                                        className="group flex items-center gap-2 hover:text-secondary transition-colors"
+                                        className="group flex items-start gap-2 hover:text-secondary transition-colors"
                                     >
-                                        <span className="text-secondary flex items-center transition-transform group-hover:translate-x-1">
+                                        <span className="text-secondary shrink-0 pt-0.5 transition-transform group-hover:translate-x-1">
                                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M9 5L16 12L9 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
                                         </span>
-                                        <span className="line-clamp-1">{srv.title}</span>
+                                        <span className="leading-relaxed">{srv.title}</span>
                                     </Link>
                                 </li>
                             ))}

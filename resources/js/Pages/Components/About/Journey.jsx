@@ -5,16 +5,10 @@ import HeaderSection from '@/Components/HeaderSection'; // Sesuaikan path import
 export default function JourneySection({ milestones = [] }) {
     const defaultMilestones = [
         {
-            year: '2010',
-            title: 'Fondasi Profesional & Awal Perjalanan',
-            text: 'Founder Arunika mulai aktif dalam bidang akuntansi, keuangan, dan manajemen, serta kemudian berkembang ke bidang CSR dan social research[cite: 1].',
-            img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=80',
-        },
-        {
-            year: '2015–2018',
-            title: 'Ekspansi ke CSR & Social Impact',
-            text: 'Memperluas pengalaman ke bidang CSR impact measurement, termasuk pengukuran dampak program CSR menggunakan metodologi Social Return on Investment (SROI) pada beberapa perusahaan BUMN[cite: 1].',
-            img: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1000&q=80',
+            year: '2024',
+            title: 'Pendirian PT Arunika Global Valuindo',
+            text: 'Arunika didirikan pada 20 Juli 2024 sebagai financial & business management consulting and research firm yang berfokus pada business transformation & advisory[cite: 1].',
+            img: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80',
         },
         {
             year: '2018–Sekarang',
@@ -23,15 +17,25 @@ export default function JourneySection({ milestones = [] }) {
             img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80',
         },
         {
-            year: '2024',
-            title: 'Pendirian PT Arunika Global Valuindo',
-            text: 'Arunika didirikan pada 20 Juli 2024 sebagai financial & business management consulting and research firm yang berfokus pada business transformation & advisory[cite: 1].',
-            img: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80',
+            year: '2015–2018',
+            title: 'Ekspansi ke CSR & Social Impact',
+            text: 'Memperluas pengalaman ke bidang CSR impact measurement, termasuk pengukuran dampak program CSR menggunakan metodologi Social Return on Investment (SROI) pada beberapa perusahaan BUMN[cite: 1].',
+            img: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1000&q=80',
+        },
+        {
+            year: '2010',
+            title: 'Fondasi Profesional & Awal Perjalanan',
+            text: 'Founder Arunika mulai aktif dalam bidang akuntansi, keuangan, dan manajemen, serta kemudian berkembang ke bidang CSR dan social research[cite: 1].',
+            img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=80',
         },
     ];
 
-    const displayMilestones = milestones && milestones.length > 0 ? milestones : defaultMilestones;
+    const displayMilestones = [...(milestones?.length ? milestones : defaultMilestones)].sort((a, b) => {
+        const yearA = parseInt(String(a.year).match(/\d{4}/)?.[0] || 0);
+        const yearB = parseInt(String(b.year).match(/\d{4}/)?.[0] || 0);
 
+        return yearB - yearA;
+    });
     return (
         <section className="py-20 sm:py-28 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -137,7 +137,7 @@ const defaultWhyUsItems = [
 
 export default function WhyChooseUs({
     tagline = "MENGAPA MEMILIH KAMI",
-    title = "Character, Environment, & Organization — Fondasi Utama Arunika",
+    title = "Character, Environment, & Organization (CEO) — Fondasi Utama Arunika",
     showButton = false,
     buttonText = "Tentang Kami",
     buttonHref = "/layanan",
