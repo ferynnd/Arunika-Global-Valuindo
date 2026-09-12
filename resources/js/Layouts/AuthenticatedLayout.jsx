@@ -194,7 +194,7 @@ export default function AuthenticatedLayout({ header, children }) {
                             <polyline points="16 17 21 12 16 7" />
                             <line x1="21" y1="12" x2="9" y2="12" />
                         </svg>
-                        <span>Keluar (Log Out)</span>
+                        <span>Log Out</span>
                     </Link>
                 </div>
             </aside>
