@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import HeaderSection from '@/Components/HeaderSection';
 
-// Sub-Component Native Slider berbasis Transform
 function NativeImageSlider({ images = [] }) {
     const [currentIndex, setCurrentIndex] = useState(0);
 

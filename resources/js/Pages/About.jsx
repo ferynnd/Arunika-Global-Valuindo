@@ -57,12 +57,19 @@ export default function About({ auth }) {
 
     const milestones = [
         { 
-            year: '2024', 
-            title: 'Arunika Didirikan',
-            text: 'PT Arunika Global Valuindo resmi berdiri sebagai financial & business management consulting and research firm yang berfokus pada business transformation & advisory.',
+            year: '2024–Sekarang ', 
+            title: 'Business Transformation & Advisory',
+            text: 'Arunika berkembang dengan fokus pada advisory keuangan korporasi, financial modeling, corporate valuation, business management, dan pengembangan kemitraan strategis.',
             imgs: [
                 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80',
-                'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80',
+            ]
+        },
+        { 
+            year: '20 Juli 2024', 
+            title: 'Arunika Didirikan',
+            text: 'Arunika didirikan sebagai financial & business management consulting and research firm.',
+            imgs: [
+                'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80',
             ]
         },
         { 
@@ -70,22 +77,27 @@ export default function About({ auth }) {
             title: 'Akademik & Strategic Finance',
             text: 'Founder aktif sebagai akademisi di bidang akuntansi dan keuangan sekaligus mengembangkan kompetensi dalam financial modeling, corporate valuation, financial analysis, dan strategic finance.',
             imgs: [
-                'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80',
+                '/assets/2024/20241.webp',
+                '/assets/2024/20242.webp',
+                '/assets/2024/20243.webp',
+                '/assets/2024/20244.webp',
             ]
         },
         { 
             year: '2015–2018', 
             title: 'CSR & Social Impact',
-            text: 'Memperluas pengalaman ke bidang CSR impact measurement menggunakan metodologi Social Return on Investment (SROI) pada beberapa perusahaan BUMN.',
+            text: 'Memperluas pengalaman ke bidang CSR impact measurement, termasuk pengukuran dampak program CSR menggunakan metodologi Social Return on Investment (SROI) pada beberapa perusahaan BUMN.',
             imgs: [
-                'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1000&q=80',
-                'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80',
+                '/assets/2018/20181.jpg',
+                '/assets/2018/20182.jpg',
+                '/assets/2018/20183.webp',
+                '/assets/2018/20184.webp',
             ]
         },
         { 
             year: '2010', 
             title: 'Fondasi Profesional',
-            text: 'Founder Arunika mulai aktif dalam bidang akuntansi, keuangan, dan manajemen, serta kemudian berkembang ke bidang CSR dan social research.',
+            text: 'Founder Arunika mulai aktif dalam bidang akuntansi, keuangan, dan manajemen, serta kemudian berkembang ke bidang CSR dan social research. Founder memiliki pengalaman profesional sejak 2010, termasuk pengalaman di bidang finance, project finance, dan financial management.',
             imgs: [
                 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=80',
             ]
