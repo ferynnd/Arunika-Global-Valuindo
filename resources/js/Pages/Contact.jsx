@@ -124,7 +124,7 @@ export default function Contact({ auth }) {
                         <div className="lg:col-span-7 bg-background p-8 sm:p-10 rounded-3xl md:rounded-2xl border border-stone-200" data-aos="fade-left">
                             <div className="mb-6 space-y-1">
                                 <h3 className="text-xl sm:text-2xl font-bold text-primary">
-                                    Kirim Pesan Directly
+                                    Kirim Pesan
                                 </h3>
                                 <p className="text-xs sm:text-sm text-slate-500">
                                     Isi formulir di bawah ini untuk terhubung langsung dengan admin kami via WhatsApp.
