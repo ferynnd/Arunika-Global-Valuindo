@@ -20,7 +20,7 @@ export default function Hero({
     return (
         <section
             id="home"
-            className="relative min-h-[75vh] md:min-h-screen bg-cover bg-center bg-no-repeat overflow-hidden flex items-start justify-center"
+            className="relative min-h-[75vh] md:min-h-screen overflow-x-hidden bg-cover bg-center bg-no-repeat overflow-hidden flex items-start justify-center"
             style={{
                 backgroundImage: `url('${bgImage}')`,
             }}

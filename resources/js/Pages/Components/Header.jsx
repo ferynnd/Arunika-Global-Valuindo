@@ -35,14 +35,14 @@ export default function Header({ auth, title, activePage = '' }) {
                 </Head>
             )}
 
-            <header className={`fixed top-0 inset-x-0 z-50 pointer-events-none transition-all duration-300 ${scrolled ? 'py-3 bg-gray-300/40 backdrop-blur' : 'py-3 sm:py-4'}`}>
-                <div className="max-w-7xl mx-auto px-4 sm:px-10">
-                    <nav className="pointer-events-auto flex items-center justify-between gap-4">
+            <header className={`fixed top-0 inset-x-0 z-50 pointer-events-none transition-all duration-300 w-full overflow-x-hidden ${scrolled ? 'py-3 bg-gray-300/40 backdrop-blur' : 'py-3 sm:py-4'}`}>
+                <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-10 w-full">
+                    <nav className="pointer-events-auto flex items-center justify-between gap-2 sm:gap-4">
                         <Link href="/" className="flex items-center group shrink-0">
                             <img
                                 src="/images/logo.png"
                                 alt="Arunika Global Valuindo"
-                                className="md:h-14 h-12 w-auto object-contain"
+                                className="md:h-14 h-10 sm:h-12 w-auto object-contain"
                             />
                         </Link>
 
@@ -79,7 +79,7 @@ export default function Header({ auth, title, activePage = '' }) {
                         <div className="flex md:hidden ml-auto">
                             <button
                                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                                className="p-3 rounded-xl bg-gray-50/40 backdrop-blur-xl text-primary hover:text-white hover:bg-primary/70 transition-colors"
+                                className="p-2.5 sm:p-3 rounded-xl bg-gray-50/40 backdrop-blur-xl text-primary hover:text-white hover:bg-primary/70 transition-colors"
                                 aria-label="Toggle navigation menu"
                             >
                                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -96,7 +96,7 @@ export default function Header({ auth, title, activePage = '' }) {
 
                     {/* Mobile Menu Dropdown Card */}
                     {mobileMenuOpen && (
-                        <div className="pointer-events-auto md:hidden mt-3 rounded-3xl bg-white/95 backdrop-blur-2xl border border-white/60 p-5 space-y-1.5 transition-all">
+                        <div className="pointer-events-auto md:hidden mt-3 rounded-3xl bg-white/95 backdrop-blur-2xl border border-white/60 p-5 space-y-1.5 transition-all shadow-xl">
                             {navLinks.map((item) => (
                                 <Link
                                     key={item.name}
@@ -113,9 +113,9 @@ export default function Header({ auth, title, activePage = '' }) {
 
                             <div className="pt-3 border-t border-[#EAE6DF]/80">
                                 <a
-                                    href={(route('contact'))}
+                                    href={route('contact')}
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="block w-full text-center px-5 py-2.5 rounded-xl bg-primary text-white font-medium tracking-wide text-xs "
+                                    className="block w-full text-center px-5 py-2.5 rounded-xl bg-primary text-white font-medium tracking-wide text-xs"
                                 >
                                     Hubungi kami
                                 </a>
