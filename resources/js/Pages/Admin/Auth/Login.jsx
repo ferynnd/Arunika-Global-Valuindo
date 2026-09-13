@@ -1,8 +1,9 @@
 import { Head, useForm } from '@inertiajs/react';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 export default function Login() {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, processing, reset } = useForm({
         email: '',
         password: '',
         remember: false,
@@ -13,7 +14,18 @@ export default function Login() {
     const submit = (e) => {
         e.preventDefault();
         post(route('admin.login.store'), {
-            onFinish: () => reset('password'),
+            onError: (errors) => {
+                reset('password');
+                // Mengambil pesan error pertama yang dikirim dari backend
+                const errorMessage = errors.email || errors.password || 'Terjadi kesalahan saat masuk.';
+                
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal Masuk',
+                    text: errorMessage,
+                    confirmButtonColor: '#1B544D', // Sesuaikan dengan warna primary Anda
+                });
+            },
         });
     };
 
@@ -38,55 +50,47 @@ export default function Login() {
                         Masukkan email dan kata sandi Anda
                     </p>
 
-                    {errors.email && (
-                        <div className="mb-5 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 text-xs font-medium">
-                            {errors.email}
-                        </div>
-                    )}
-
                     <form onSubmit={submit} className="space-y-4">
-                        <div>
-                            <label htmlFor="email" className="block text-xs font-semibold text-primary-dark mb-1.5">
-                                Email
-                            </label>
-                            <input
-                                id="email"
-                                type="email"
-                                name="email"
-                                value={data.email}
-                                autoComplete="username"
-                                onChange={(e) => setData('email', e.target.value)}
-                                placeholder="admin@domain.com"
-                                className="w-full rounded-xl py-2.5 px-4 border border-primary/15 bg-white text-sm text-primary-dark placeholder-primary-dartext-primary-dark/30 focus:border-secondary focus:ring-secondary"
-                                required
-                            />
-                        </div>
+    <div>
+        <label htmlFor="email" className="block text-xs font-semibold text-primary-dark mb-1.5">
+            Email
+        </label>
+        <input
+            id="email"
+            type="email"
+            name="email"
+            value={data.email}
+            autoComplete="username"
+            onChange={(e) => setData('email', e.target.value)}
+            placeholder="admin@domain.com"
+            className="w-full rounded-xl py-2.5 px-4 border border-primary/15 bg-white text-sm text-primary-dark placeholder-primary-dark/30 focus:border-secondary focus:ring-secondary focus:outline-none focus:ring-2"
+        />
+    </div>
 
-                        <div>
-                            <label htmlFor="password" className="block text-xs font-semibold text-primary-dark mb-1.5">
-                                Kata Sandi
-                            </label>
-                            <div className="relative">
-                                <input
-                                    id="password"
-                                    type={showPassword ? 'text' : 'password'}
-                                    name="password"
-                                    value={data.password}
-                                    autoComplete="current-password"
-                                    onChange={(e) => setData('password', e.target.value)}
-                                    placeholder="••••••••"
-                                    className="w-full rounded-xl py-2.5 px-4 border border-primary/15 bg-white text-sm text-primary-dark placeholder-primary-dartext-primary-dark/30 focus:border-secondary focus:ring-secondary pr-14"
-                                    required
-                                />
-                                <button
-                                    type="button"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-primary-dark/40 hover:text-primary-dark text-xs font-semibold"
-                                >
-                                    {showPassword ? 'Sembunyi' : 'Lihat'}
-                                </button>
-                            </div>
-                        </div>
+    <div>
+        <label htmlFor="password" className="block text-xs font-semibold text-primary-dark mb-1.5">
+            Kata Sandi
+        </label>
+        <div className="relative">
+            <input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                value={data.password}
+                autoComplete="current-password"
+                onChange={(e) => setData('password', e.target.value)}
+                placeholder="••••••••"
+                className="w-full rounded-xl py-2.5 px-4 border border-primary/15 bg-white text-sm text-primary-dark placeholder-primary-dark/30 focus:border-secondary focus:ring-secondary focus:outline-none focus:ring-2 pr-14"
+            />
+            <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-primary-dark/40 hover:text-primary-dark text-xs font-semibold"
+            >
+                {showPassword ? 'Sembunyi' : 'Lihat'}
+            </button>
+        </div>
+    </div>
 
                         <label className="flex items-center gap-2 cursor-pointer pt-1">
                             <input

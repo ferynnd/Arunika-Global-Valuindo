@@ -8,21 +8,24 @@ export default function Edit({ mustVerifyEmail, status }) {
     return (
         <AuthenticatedLayout
             header={
-                <div>
-                    <h2 className="text-2xl font-bold tracking-tight text-slate-800">
-                        Pengaturan Profil
-                    </h2>
-                    <p className="text-sm text-slate-500 mt-1">
-                        Kelola informasi akun, kata sandi, dan keamanan profil Anda.
-                    </p>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div>
+                        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-primary-dark">
+                            Pengaturan Profil Akun
+                        </h2>
+                        <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+                            Kelola informasi identitas, alamat email, dan keamanan kata sandi akun Anda.
+                        </p>
+                    </div>
                 </div>
             }
         >
-            <Head title="Pengaturan Profil - Admin" />
+            <Head title="Pengaturan Profil - Admin Arunika" />
 
-            <div className="py-8 bg-[#FAF8F5]/60 min-h-[calc(100vh-8rem)]">
-                <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-6">
-                    <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80">
+            <div className="py-8 w-full min-h-[calc(100vh-8rem)]">
+                <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+                    
+                    <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-xs w-full">
                         <UpdateProfileInformationForm
                             mustVerifyEmail={mustVerifyEmail}
                             status={status}
@@ -30,16 +33,17 @@ export default function Edit({ mustVerifyEmail, status }) {
                         />
                     </div>
 
-                    <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80">
+                    <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-xs w-full">
                         <UpdatePasswordForm className="max-w-xl" />
                     </div>
 
-                    {/* <div className="bg-white p-6 sm:p-8 rounded-2xl border border-rose-100">
+                    {/* Hapus komentar atau aktifkan jika diperlukan form hapus akun */}
+                    {/* <div className="bg-white p-6 sm:p-8 rounded-2xl border border-rose-200/80 shadow-xs w-full">
                         <DeleteUserForm className="max-w-xl" />
                     </div> */}
+
                 </div>
             </div>
         </AuthenticatedLayout>
     );
 }
-

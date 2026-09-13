@@ -3,7 +3,7 @@ import { Head, Link, router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 import { showConfirmDialog } from '@/libs/sweetalert';
 
-export default function Index({ services, filters }) {
+export default function Index({ admins, filters }) {
     const { flash } = usePage().props;
     const [search, setSearch] = useState(filters?.search || '');
     const [statusFilter, setStatusFilter] = useState(filters?.status || '');
@@ -11,26 +11,26 @@ export default function Index({ services, filters }) {
     const handleSearch = (e) => {
         e.preventDefault();
         router.get(
-            route('admin.services.index'),
+            route('admin.users.index'),
             { search, status: statusFilter },
             { preserveState: true }
         );
     };
 
-    const handleDelete = async (id, title) => {
+    const handleDelete = async (id, name) => {
         const confirmed = await showConfirmDialog({
-            title: 'Hapus Layanan?',
-            text: `Apakah Anda yakin ingin menghapus layanan "${title}"? Data tidak dapat dikembalikan.`,
-            confirmButtonText: 'Ya, Hapus Layanan',
+            title: 'Hapus Pengguna?',
+            text: `Apakah Anda yakin ingin menghapus akun "${name}"? Tindakan ini tidak dapat dibatalkan.`,
+            confirmButtonText: 'Ya, Hapus Pengguna',
         });
 
         if (confirmed) {
-            router.delete(route('admin.services.destroy', id));
+            router.delete(route('admin.users.destroy', id));
         }
     };
 
-    const getStatusBadge = (status) => {
-        if (status === 'active') {
+    const getStatusBadge = (isActive) => {
+        if (isActive) {
             return (
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -52,30 +52,29 @@ export default function Index({ services, filters }) {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>
                         <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-primary-dark">
-                            Manajemen Layanan
+                            Manajemen Pengguna & Hak Akses
                         </h2>
                         <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-                            Kelola daftar layanan korporasi, deskripsi, dan fitur keunggulan Arunika.
+                            Kelola daftar administrator sistem, kredensial masuk, dan peran (role) akses menu.
                         </p>
                     </div>
                     <Link
-                        href={route('admin.services.create')}
+                        href={route('admin.users.create')}
                         className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white font-semibold text-xs sm:text-sm hover:bg-primary-dark transition-all shadow-2xs"
                     >
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                         </svg>
-                        <span>Tambah Layanan</span>
+                        <span>Tambah Pengguna</span>
                     </Link>
                 </div>
             }
         >
-            <Head title="Manajemen Layanan - Admin Arunika" />
+            <Head title="Manajemen Pengguna - Admin Arunika" />
 
             <div className="py-8 w-full min-h-[calc(100vh-10rem)]">
                 <div className="w-full px-4 sm:px-6 lg:px-8 space-y-6">
 
-                    {/* Alert Flash Message */}
                     {flash?.success && (
                         <div className="rounded-2xl bg-emerald-50 border border-emerald-200 p-4 text-xs sm:text-sm font-medium text-emerald-800 flex items-center justify-between">
                             <div className="flex items-center gap-2.5">
@@ -87,13 +86,24 @@ export default function Index({ services, filters }) {
                         </div>
                     )}
 
-                    {/* Filter & Search Bar */}
+                    {flash?.error && (
+                        <div className="rounded-2xl bg-rose-50 border border-rose-200 p-4 text-xs sm:text-sm font-medium text-rose-800 flex items-center justify-between">
+                            <div className="flex items-center gap-2.5">
+                                <svg className="w-5 h-5 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                                <span>{flash.error}</span>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Filter & Search */}
                     <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs w-full">
                         <form onSubmit={handleSearch} className="grid grid-cols-1 sm:grid-cols-4 gap-4">
                             <div className="sm:col-span-2">
                                 <input
                                     type="text"
-                                    placeholder="Cari nama layanan atau deskripsi..."
+                                    placeholder="Cari nama, username, atau email..."
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
                                     className="w-full rounded-xl border-slate-200 bg-background text-sm text-text focus:border-primary focus:ring-primary placeholder-slate-400 px-4 py-2.5 shadow-2xs"
@@ -117,14 +127,11 @@ export default function Index({ services, filters }) {
                                     type="submit"
                                     className="flex-1 rounded-xl bg-primary text-white font-semibold text-sm px-4 py-2.5 hover:bg-primary-dark transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-2xs"
                                 >
-                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                    </svg>
                                     <span>Cari</span>
                                 </button>
                                 {(search || statusFilter) && (
                                     <Link
-                                        href={route('admin.services.index')}
+                                        href={route('admin.users.index')}
                                         className="rounded-xl bg-slate-100 text-slate-600 font-semibold text-sm px-4 py-2.5 hover:bg-slate-200 transition-colors flex items-center justify-center"
                                     >
                                         Reset
@@ -134,72 +141,42 @@ export default function Index({ services, filters }) {
                         </form>
                     </div>
 
-                    {/* Service Table / List */}
+                    {/* Table */}
                     <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xs w-full">
                         <div className="overflow-x-auto w-full">
                             <table className="w-full text-left border-collapse text-sm text-slate-600">
                                 <thead>
                                     <tr className="bg-slate-50 border-b border-slate-200 text-primary-dark font-bold uppercase tracking-wider text-xs">
-                                        <th className="py-4 px-6">Layanan</th>
-                                        <th className="py-4 px-6">Urutan</th>
-                                        <th className="py-4 px-6">Status</th>
+                                        <th className="py-4 px-6">Nama & Username</th>
+                                        <th className="py-4 px-6">Email</th>
+                                        <th className="py-4 px-6">Hak Akses (Role)</th>
+                                        <th className="py-4 px-6 text-center">Status</th>
                                         <th className="py-4 px-6 text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-slate-100">
-                                    {services?.data && services.data.length > 0 ? (
-                                        services.data.map((service) => (
-                                            <tr key={service.id} className="hover:bg-slate-50/60 transition-colors">
+                                    {admins?.data && admins.data.length > 0 ? (
+                                        admins.data.map((admin) => (
+                                            <tr key={admin.id} className="hover:bg-slate-50/60 transition-colors">
                                                 <td className="py-4 px-6">
-                                                    <div className="flex items-center gap-4">
-                                                        {service.thumbnail ? (
-                                                            <img
-                                                                src={`/storage/${service.thumbnail}`}
-                                                                alt={service.title}
-                                                                className="w-12 h-12 rounded-xl object-cover border border-slate-200 shrink-0 shadow-2xs"
-                                                            />
-                                                        ) : (
-                                                            <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-bold shrink-0 border border-primary/20">
-                                                                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                                                                </svg>
-                                                            </div>
-                                                        )}
-                                                        <div>
-                                                            <Link
-                                                                href={route('admin.services.show', service.id)}
-                                                                className="font-bold text-primary-dark hover:text-primary transition-colors text-sm sm:text-base line-clamp-1"
-                                                            >
-                                                                {service.title}
-                                                            </Link>
-                                                            <div className="text-xs text-slate-400 mt-0.5 line-clamp-1">
-                                                                {service.excerpt || 'Tidak ada ringkasan'}
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <div className="font-bold text-primary-dark">{admin.name}</div>
+                                                    <div className="text-xs text-slate-400">@{admin.username}</div>
                                                 </td>
-                                                <td className="py-4 px-6 font-semibold text-slate-600">
-                                                    <span className="px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-xs">
-                                                        #{service.sort_order}
+                                                <td className="py-4 px-6 text-slate-600 text-sm">
+                                                    {admin.email}
+                                                </td>
+                                                <td className="py-4 px-6">
+                                                    <span className="px-3 py-1 rounded-lg bg-primary/10 text-primary border border-primary/20 text-xs font-semibold uppercase">
+                                                        {admin.role || 'Admin'}
                                                     </span>
                                                 </td>
-                                                <td className="py-4 px-6">
-                                                    {getStatusBadge(service.status)}
+                                                <td className="py-4 px-6 text-center">
+                                                    {getStatusBadge(admin.is_active)}
                                                 </td>
                                                 <td className="py-4 px-6 text-right">
                                                     <div className="flex items-center justify-end gap-2">
                                                         <Link
-                                                            href={route('admin.services.show', service.id)}
-                                                            className="p-2 rounded-xl text-slate-400 hover:text-primary hover:bg-primary/10 transition-colors"
-                                                            title="Detail"
-                                                        >
-                                                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                                                                <circle cx="12" cy="12" r="3" />
-                                                            </svg>
-                                                        </Link>
-                                                        <Link
-                                                            href={route('admin.services.edit', service.id)}
+                                                            href={route('admin.users.edit', admin.id)}
                                                             className="p-2 rounded-xl text-slate-400 hover:text-secondary hover:bg-secondary/10 transition-colors"
                                                             title="Edit"
                                                         >
@@ -209,7 +186,7 @@ export default function Index({ services, filters }) {
                                                             </svg>
                                                         </Link>
                                                         <button
-                                                            onClick={() => handleDelete(service.id, service.title)}
+                                                            onClick={() => handleDelete(admin.id, admin.name)}
                                                             className="p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
                                                             title="Hapus"
                                                         >
@@ -224,8 +201,8 @@ export default function Index({ services, filters }) {
                                         ))
                                     ) : (
                                         <tr>
-                                            <td colSpan="4" className="py-12 text-center text-slate-400 text-sm">
-                                                Belum ada data layanan yang tersedia.
+                                            <td colSpan="5" className="py-12 text-center text-slate-400 text-sm">
+                                                Belum ada data pengguna yang tersedia.
                                             </td>
                                         </tr>
                                     )}
@@ -234,13 +211,13 @@ export default function Index({ services, filters }) {
                         </div>
 
                         {/* Pagination */}
-                        {services?.links && services.links.length > 3 && (
+                        {admins?.links && admins.links.length > 3 && (
                             <div className="p-4 bg-slate-50/50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 w-full">
                                 <div className="text-xs text-slate-500">
-                                    Menampilkan {services.from || 0} - {services.to || 0} dari {services.total} layanan
+                                    Menampilkan {admins.from || 0} - {admins.to || 0} dari {admins.total} pengguna
                                 </div>
                                 <div className="flex gap-1 flex-wrap">
-                                    {services.links.map((link, key) => (
+                                    {admins.links.map((link, key) => (
                                         link.url ? (
                                             <Link
                                                 key={key}

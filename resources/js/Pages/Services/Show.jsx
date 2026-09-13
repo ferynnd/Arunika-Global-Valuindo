@@ -119,7 +119,7 @@ export default function Show({ auth, service, otherServices = [], ogImageUrl }) 
                         </div>
 
                         {service.thumbnail && (
-                            <div className="rounded-3xl overflow-hidden shadow-md border border-stone-200 aspect-video bg-slate-100">
+                            <div className="rounded-3xl overflow-hidden border border-stone-200 aspect-video bg-slate-100">
                                 <img
                                     src={service.thumbnail.startsWith('http') ? service.thumbnail : `/storage/${service.thumbnail}`}
                                     alt={service.title}

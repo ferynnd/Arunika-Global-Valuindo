@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
@@ -52,7 +51,7 @@ class AdminAuthController extends Controller
         $user = Auth::user();
 
         // Verify if user is an authorized admin
-        if ($user->role !== 'admin') {
+        if (!in_array($user->role, ['admin', 'superadmin'])) {
             Auth::logout();
             RateLimiter::hit($throttleKey, 60);
             throw ValidationException::withMessages([

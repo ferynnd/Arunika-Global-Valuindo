@@ -5,8 +5,8 @@ import { showConfirmDialog } from '@/libs/sweetalert';
 
 export default function Index({ testimonials, filters }) {
     const { flash } = usePage().props;
-    const [search, setSearch] = useState(filters.search || '');
-    const [statusFilter, setStatusFilter] = useState(filters.status || '');
+    const [search, setSearch] = useState(filters?.search || '');
+    const [statusFilter, setStatusFilter] = useState(filters?.status || '');
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -51,16 +51,16 @@ export default function Index({ testimonials, filters }) {
             header={
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>
-                        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#1B544D]">
+                        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-primary-dark">
                             Manajemen Testimoni Klien
                         </h2>
-                        <p className="text-xs sm:text-sm text-[#52605E] mt-0.5">
+                        <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
                             Kelola daftar ulasan, masukan, dan testimoni apresiasi dari klien Arunika.
                         </p>
                     </div>
                     <Link
                         href={route('admin.testimonials.create')}
-                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#1B544D] text-white font-semibold text-xs sm:text-sm hover:bg-[#15433E] transition-all"
+                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white font-semibold text-xs sm:text-sm hover:bg-primary-dark transition-all shadow-2xs"
                     >
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -72,8 +72,8 @@ export default function Index({ testimonials, filters }) {
         >
             <Head title="Manajemen Testimoni - Admin Arunika" />
 
-            <div className="py-8 min-h-[calc(100vh-10rem)]">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6">
+            <div className="py-8 w-full min-h-[calc(100vh-10rem)]">
+                <div className="w-full px-4 sm:px-6 lg:px-8 space-y-6">
 
                     {/* Alert Flash Message */}
                     {flash?.success && (
@@ -88,7 +88,7 @@ export default function Index({ testimonials, filters }) {
                     )}
 
                     {/* Filter & Search Bar */}
-                    <div className="bg-white rounded-2xl border border-[#EAE6DF] p-5">
+                    <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs w-full">
                         <form onSubmit={handleSearch} className="grid grid-cols-1 sm:grid-cols-4 gap-4">
                             <div className="sm:col-span-2">
                                 <input
@@ -96,7 +96,7 @@ export default function Index({ testimonials, filters }) {
                                     placeholder="Cari nama klien, jabatan, atau isi kutipan..."
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
-                                    className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-sm text-slate-800 focus:border-[#1B544D] focus:ring-[#1B544D] placeholder-slate-400 px-4 py-2.5"
+                                    className="w-full rounded-xl border-slate-200 bg-background text-sm text-text focus:border-primary focus:ring-primary placeholder-slate-400 px-4 py-2.5 shadow-2xs"
                                 />
                             </div>
 
@@ -104,7 +104,7 @@ export default function Index({ testimonials, filters }) {
                                 <select
                                     value={statusFilter}
                                     onChange={(e) => setStatusFilter(e.target.value)}
-                                    className="w-full rounded-xl border-[#E3DFD7] bg-[#FBF9F6] text-sm focus:border-[#1B544D] focus:ring-[#1B544D] text-slate-700 px-4 py-2.5"
+                                    className="w-full rounded-xl border-slate-200 bg-background text-sm focus:border-primary focus:ring-primary text-slate-700 px-4 py-2.5 shadow-2xs"
                                 >
                                     <option value="">Semua Status</option>
                                     <option value="active">Aktif</option>
@@ -112,20 +112,20 @@ export default function Index({ testimonials, filters }) {
                                 </select>
                             </div>
 
-                            <div className="flex items-center gap-2">
+                            <div className="flex gap-2">
                                 <button
                                     type="submit"
-                                    className="w-full py-2.5 px-4 bg-[#1B544D] text-white rounded-xl text-sm font-semibold hover:bg-[#15433E] transition-colors flex items-center justify-center gap-2"
+                                    className="flex-1 rounded-xl bg-primary text-white font-semibold text-sm px-4 py-2.5 hover:bg-primary-dark transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-2xs"
                                 >
                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                     </svg>
-                                    <span>Filter</span>
+                                    <span>Cari</span>
                                 </button>
                                 {(search || statusFilter) && (
                                     <Link
                                         href={route('admin.testimonials.index')}
-                                        className="py-2.5 px-4 bg-slate-100 text-slate-600 rounded-xl text-sm font-semibold hover:bg-slate-200 transition-colors flex items-center justify-center"
+                                        className="rounded-xl bg-slate-100 text-slate-600 font-semibold text-sm px-4 py-2.5 hover:bg-slate-200 transition-colors flex items-center justify-center"
                                     >
                                         Reset
                                     </Link>
@@ -135,11 +135,11 @@ export default function Index({ testimonials, filters }) {
                     </div>
 
                     {/* Table Container */}
-                    <div className="bg-white rounded-2xl border border-[#EAE6DF] overflow-hidden">
-                        <div className="overflow-x-auto">
-                            <table className="w-full text-left text-sm">
-                                <thead className="bg-[#FAF8F5] border-b border-[#EAE6DF] text-[#1B544D] font-bold uppercase tracking-wider text-xs">
-                                    <tr>
+                    <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xs w-full">
+                        <div className="overflow-x-auto w-full">
+                            <table className="w-full text-left border-collapse text-sm text-slate-600">
+                                <thead>
+                                    <tr className="bg-slate-50 border-b border-slate-200 text-primary-dark font-bold uppercase tracking-wider text-xs">
                                         <th className="py-4 px-6">Klien</th>
                                         <th className="py-4 px-6">Jabatan & Perusahaan</th>
                                         <th className="py-4 px-6">Kutipan Testimoni</th>
@@ -148,25 +148,25 @@ export default function Index({ testimonials, filters }) {
                                         <th className="py-4 px-6 text-center">Aksi</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-[#EAE6DF]">
-                                    {testimonials?.data?.length > 0 ? (
+                                <tbody className="divide-y divide-slate-100">
+                                    {testimonials?.data && testimonials.data.length > 0 ? (
                                         testimonials.data.map((item) => (
-                                            <tr key={item.id} className="hover:bg-[#FAF8F5]/60 transition-colors">
+                                            <tr key={item.id} className="hover:bg-slate-50/60 transition-colors">
                                                 <td className="py-4 px-6">
                                                     <div className="flex items-center gap-3">
                                                         {item.avatar ? (
                                                             <img
                                                                 src={`/storage/${item.avatar}`}
                                                                 alt={item.author}
-                                                                className="w-10 h-10 rounded-full object-cover border border-[#E3DFD7]"
+                                                                className="w-10 h-10 rounded-full object-cover border border-slate-200 shrink-0 shadow-2xs"
                                                             />
                                                         ) : (
-                                                            <div className="w-10 h-10 rounded-full bg-[#1B544D]/10 text-[#1B544D] font-bold flex items-center justify-center border border-[#1B544D]/20 text-xs">
-                                                                {item.author[0]?.toUpperCase()}
+                                                            <div className="w-10 h-10 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center border border-primary/20 text-xs shrink-0">
+                                                                {item.author?.[0]?.toUpperCase() || 'T'}
                                                             </div>
                                                         )}
                                                         <div>
-                                                            <div className="font-bold text-[#1B544D] text-sm">{item.author}</div>
+                                                            <div className="font-bold text-primary-dark text-sm">{item.author}</div>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -179,7 +179,9 @@ export default function Index({ testimonials, filters }) {
                                                     </p>
                                                 </td>
                                                 <td className="py-4 px-6 text-center font-mono font-semibold text-slate-600 text-sm">
-                                                    {item.sort_order ?? 0}
+                                                    <span className="px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-xs">
+                                                        #{item.sort_order ?? 0}
+                                                    </span>
                                                 </td>
                                                 <td className="py-4 px-6 text-center">
                                                     {getStatusBadge(item.status)}
@@ -188,7 +190,7 @@ export default function Index({ testimonials, filters }) {
                                                     <div className="flex items-center justify-end gap-2">
                                                         <Link
                                                             href={route('admin.testimonials.edit', item.id)}
-                                                            className="p-2 rounded-xl text-slate-500 hover:text-[#ECAE36] hover:bg-[#ECAE36]/10 transition-colors"
+                                                            className="p-2 rounded-xl text-slate-400 hover:text-secondary hover:bg-secondary/10 transition-colors"
                                                             title="Edit"
                                                         >
                                                             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -198,7 +200,7 @@ export default function Index({ testimonials, filters }) {
                                                         </Link>
                                                         <button
                                                             onClick={() => handleDelete(item.id, item.author)}
-                                                            className="p-2 rounded-xl text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition-colors"
+                                                            className="p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
                                                             title="Hapus"
                                                         >
                                                             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -212,13 +214,8 @@ export default function Index({ testimonials, filters }) {
                                         ))
                                     ) : (
                                         <tr>
-                                            <td colSpan="6" className="py-12 text-center text-slate-400">
-                                                <div className="w-12 h-12 rounded-2xl bg-[#1B544D]/10 text-[#1B544D] mx-auto mb-3 flex items-center justify-center">
-                                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                                                    </svg>
-                                                </div>
-                                                <p className="font-medium text-sm">Belum ada testimoni yang ditemukan.</p>
+                                            <td colSpan="6" className="py-12 text-center text-slate-400 text-sm">
+                                                Belum ada data testimoni yang tersedia.
                                             </td>
                                         </tr>
                                     )}
@@ -227,28 +224,36 @@ export default function Index({ testimonials, filters }) {
                         </div>
 
                         {/* Pagination */}
-                        {testimonials?.links?.length > 3 && (
-                            <div className="p-4 border-t border-[#EAE6DF] bg-[#FAF8F5] flex items-center justify-between">
+                        {testimonials?.links && testimonials.links.length > 3 && (
+                            <div className="p-4 bg-slate-50/50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 w-full">
                                 <div className="text-xs text-slate-500">
                                     Menampilkan {testimonials.from || 0} - {testimonials.to || 0} dari {testimonials.total} testimoni
                                 </div>
-                                <div className="flex gap-1">
-                                    {testimonials.links.map((link, idx) => (
-                                        <Link
-                                            key={idx}
-                                            href={link.url || '#'}
-                                            dangerouslySetInnerHTML={{ __html: link.label }}
-                                            className={`px-3 py-1.5 rounded-xl text-xs font-semibold ${link.active
-                                                ? 'bg-[#1B544D] text-white'
-                                                : 'bg-white text-slate-600 hover:bg-slate-100 border border-[#EAE6DF]'
-                                                } ${!link.url ? 'opacity-50 pointer-events-none' : ''}`}
-                                        />
+                                <div className="flex gap-1 flex-wrap">
+                                    {testimonials.links.map((link, key) => (
+                                        link.url ? (
+                                            <Link
+                                                key={key}
+                                                href={link.url}
+                                                dangerouslySetInnerHTML={{ __html: link.label }}
+                                                className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-colors ${
+                                                    link.active
+                                                        ? 'bg-primary text-white'
+                                                        : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                                                }`}
+                                            />
+                                        ) : (
+                                            <span
+                                                key={key}
+                                                dangerouslySetInnerHTML={{ __html: link.label }}
+                                                className="px-3 py-1.5 rounded-xl text-xs text-slate-300 border border-slate-200 opacity-50 cursor-not-allowed"
+                                            />
+                                        )
                                     ))}
                                 </div>
                             </div>
                         )}
                     </div>
-
                 </div>
             </div>
         </AuthenticatedLayout>

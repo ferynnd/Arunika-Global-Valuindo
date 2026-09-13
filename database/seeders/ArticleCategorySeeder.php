@@ -13,14 +13,6 @@ class ArticleCategorySeeder extends Seeder
         $categories = [
             'Keuangan & Akuntansi',
             'Manajemen Bisnis',
-            'Studi Kelayakan',
-            'Penilaian Aset',
-            'Corporate Social Responsibility',
-            'Riset & Analisis Pasar',
-            'Regulasi & Pajak',
-            'Investasi Korporasi',
-            'Strategi Pertumbuhan',
-            'Teknologi & Digitalisasi',
         ];
 
         foreach ($categories as $category) {

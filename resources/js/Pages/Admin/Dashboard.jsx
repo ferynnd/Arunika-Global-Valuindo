@@ -12,18 +12,14 @@ export default function Dashboard() {
             header={
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>
-                        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1B544D]">
+                        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-primary-dark">
                             Dashboard Admin
                         </h2>
                         <p className="text-sm text-[#52605E] mt-1">
-                            Selamat datang kembali, <span className="font-semibold text-[#1B544D]">{user.name}</span>!
+                            Selamat datang kembali, <span className="font-semibold text-primary">{user.name}!</span>
                         </p>
                     </div>
                     <div className="flex items-center gap-2.5">
-                        <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-[#1B544D]/10 text-[#1B544D] border border-[#1B544D]/20 uppercase tracking-wider">
-                            <span className="h-2 w-2 rounded-full bg-[#ECAE36] animate-pulse"></span>
-                            {mainRole}
-                        </span>
                         <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
                             <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
                             Online
@@ -38,7 +34,7 @@ export default function Dashboard() {
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6">
 
                     {/* Welcome Hero Banner */}
-                    <div className="relative overflow-hidden rounded-2xl bg-[#1B544D] p-8 sm:p-10 text-white border border-[#1B544D]">
+                    <div className="relative overflow-hidden rounded-2xl bg-linear-to-b from-primary to-primary-dark/90 p-8 sm:p-10 text-white border border-primary">
                         <div className="relative z-10 max-w-2xl">
                             <span className="inline-flex items-center gap-1.5 rounded-xl bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#ECAE36] backdrop-blur-md border border-white/10">
                                 Arunika Global Valuindo
@@ -57,14 +53,14 @@ export default function Dashboard() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
                         {/* Blog Management Card */}
-                        <div className="bg-white rounded-2xl border border-[#EAE6DF] p-6 flex flex-col justify-between hover:border-[#1B544D]/40 transition-colors">
+                        <div className="bg-white rounded-2xl border border-[#EAE6DF] p-6 flex flex-col justify-between hover:border-primary/40 transition-colors">
                             <div>
-                                <div className="h-12 w-12 rounded-xl bg-[#1B544D]/10 text-[#1B544D] flex items-center justify-center mb-4">
+                                <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4">
                                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                     </svg>
                                 </div>
-                                <h4 className="text-lg font-bold text-[#1B544D]">Manajemen Artikel Blog</h4>
+                                <h4 className="text-lg font-bold text-primary">Manajemen Artikel Blog</h4>
                                 <p className="text-sm text-[#52605E] mt-2 leading-relaxed">
                                     Buat artikel dengan Rich Text Editor (TipTap), publikasikan berita baru, atau perbarui konten artikel untuk halaman landing page.
                                 </p>
@@ -73,7 +69,7 @@ export default function Dashboard() {
                                 <span className="text-xs text-[#718783] font-medium">TipTap Editor Siap</span>
                                 <Link
                                     href={route('admin.articles.index')}
-                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-[#1B544D] text-white hover:bg-[#15433E] transition-colors"
+                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-primary text-white hover:bg-[#15433E] transition-colors"
                                 >
                                     <span>Kelola Artikel</span>
                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -84,14 +80,14 @@ export default function Dashboard() {
                         </div>
 
                         {/* Testimonials Card */}
-                        <div className="bg-white rounded-2xl border border-[#EAE6DF] p-6 flex flex-col justify-between hover:border-[#1B544D]/40 transition-colors">
+                        <div className="bg-white rounded-2xl border border-[#EAE6DF] p-6 flex flex-col justify-between hover:border-primary/40 transition-colors">
                             <div>
                                 <div className="h-12 w-12 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center mb-4">
                                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                                     </svg>
                                 </div>
-                                <h4 className="text-lg font-bold text-[#1B544D]">Testimoni Klien</h4>
+                                <h4 className="text-lg font-bold text-primary">Testimoni Klien</h4>
                                 <p className="text-sm text-[#52605E] mt-2 leading-relaxed">
                                     Kelola daftar ulasan, masukan, foto profil, dan kutipan kepuasan klien yang ditampilkan di halaman utama website.
                                 </p>
@@ -100,7 +96,7 @@ export default function Dashboard() {
                                 <span className="text-xs text-[#718783] font-medium">Testimoni Publik</span>
                                 <Link
                                     href={route('admin.testimonials.index')}
-                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-[#1B544D] text-white hover:bg-[#15433E] transition-colors"
+                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-primary text-white hover:bg-[#15433E] transition-colors"
                                 >
                                     <span>Kelola Testimoni</span>
                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -111,7 +107,7 @@ export default function Dashboard() {
                         </div>
 
                         {/* Profile Settings Card */}
-                        <div className="bg-white rounded-2xl border border-[#EAE6DF] p-6 flex flex-col justify-between hover:border-[#1B544D]/40 transition-colors">
+                        <div className="bg-white rounded-2xl border border-[#EAE6DF] p-6 flex flex-col justify-between hover:border-primary/40 transition-colors">
                             <div>
                                 <div className="h-12 w-12 rounded-xl bg-[#ECAE36]/20 text-[#D99B26] flex items-center justify-center mb-4">
                                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -119,7 +115,7 @@ export default function Dashboard() {
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                 </div>
-                                <h4 className="text-lg font-bold text-[#1B544D]">Pengaturan Profil Akun</h4>
+                                <h4 className="text-lg font-bold text-primary">Pengaturan Profil Akun</h4>
                                 <p className="text-sm text-[#52605E] mt-2 leading-relaxed">
                                     Perbarui nama lengkap, alamat email, atau ganti kata sandi akun Anda untuk menjaga keamanan akses.
                                 </p>
@@ -128,7 +124,7 @@ export default function Dashboard() {
                                 <span className="text-xs text-[#718783] font-medium">Status Terverifikasi</span>
                                 <Link
                                     href={route('profile.edit')}
-                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-[#FAF8F5] text-[#1B544D] border border-[#E3DFD7] hover:bg-[#EFECE6] transition-colors"
+                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-[#FAF8F5] text-primary border border-[#E3DFD7] hover:bg-[#EFECE6] transition-colors"
                                 >
                                     <span>Edit Profil</span>
                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">

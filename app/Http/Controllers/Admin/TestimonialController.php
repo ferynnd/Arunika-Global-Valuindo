@@ -47,7 +47,7 @@ class TestimonialController extends Controller
             'quote' => ['required', 'string'],
             'status' => ['required', 'in:active,inactive'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
-            'avatar' => ['nullable', 'image', 'max:2048'],
+            'avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
 
         $avatarPath = null;
@@ -67,12 +67,6 @@ class TestimonialController extends Controller
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimoni berhasil ditambahkan!');
     }
 
-    public function show(Testimonial $testimonial)
-    {
-        return Inertia::render('Admin/Testimonials/Show', [
-            'testimonial' => $testimonial,
-        ]);
-    }
 
     public function edit(Testimonial $testimonial)
     {
@@ -89,7 +83,7 @@ class TestimonialController extends Controller
             'quote' => ['required', 'string'],
             'status' => ['required', 'in:active,inactive'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
-            'avatar' => ['nullable', 'image', 'max:2048'],
+            'avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
 
         $data = [
@@ -100,8 +94,9 @@ class TestimonialController extends Controller
             'sort_order' => $validated['sort_order'] ?? 0,
         ];
 
+        // Handle Avatar Update & Clean Up Old File
         if ($request->hasFile('avatar')) {
-            if ($testimonial->avatar) {
+            if ($testimonial->avatar && Storage::disk('public')->exists($testimonial->avatar)) {
                 Storage::disk('public')->delete($testimonial->avatar);
             }
             $data['avatar'] = $request->file('avatar')->store('testimonials', 'public');
@@ -114,7 +109,8 @@ class TestimonialController extends Controller
 
     public function destroy(Testimonial $testimonial)
     {
-        if ($testimonial->avatar) {
+        // Delete physical avatar file from storage
+        if ($testimonial->avatar && Storage::disk('public')->exists($testimonial->avatar)) {
             Storage::disk('public')->delete($testimonial->avatar);
         }
 

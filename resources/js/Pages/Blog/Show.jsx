@@ -147,7 +147,7 @@ export default function Show({ auth, article, relatedArticles = [], ogImageUrl }
 
                         {/* Main Featured Thumbnail */}
                         {article.thumbnail && (
-                            <div className="rounded-2xl overflow-hidden shadow-md border border-stone-200 aspect-video bg-slate-100">
+                            <div className="rounded-2xl overflow-hidden border border-stone-200 aspect-video bg-slate-100">
                                 <img
                                     src={`/storage/${article.thumbnail}`}
                                     alt={article.title}

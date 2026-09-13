@@ -89,17 +89,7 @@ export default function Footer({ services = [] }) {
                                 </Link>
                             </li>
                             <li>
-                                <Link href={route('privacypolicy')} className="group flex items-center gap-2 hover:text-secondary transition-colors">
-                                    <span className="text-secondary flex items-center transition-transform group-hover:translate-x-1">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M9 5L16 12L9 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                        </svg>
-                                    </span>
-                                    <span>Privacy Policy</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <a href="/#contact" className="group flex items-center gap-2 hover:text-secondary transition-colors">
+                                <a href={route('contact')} className="group flex items-center gap-2 hover:text-secondary transition-colors">
                                     <span className="text-secondary flex items-center transition-transform group-hover:translate-x-1">
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M9 5L16 12L9 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

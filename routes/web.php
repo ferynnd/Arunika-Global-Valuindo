@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\ImageUploadController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -9,8 +10,9 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+
 
 // Public Website Routes
 Route::get('/', function () {
@@ -45,7 +47,7 @@ Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('/layanan', [ServicesController::class, 'index'])->name('services.index');
 Route::get('/layanan/{slug}', [ServicesController::class, 'show'])->name('services.show');
 
-// Public AboutUs Routes
+// Public AboutUs & Contact Routes
 Route::get('/tentang', [UserController::class, 'aboutus'])->name('aboutus');
 Route::get('/kontak', [UserController::class, 'contact'])->name('contact');
 
@@ -57,20 +59,30 @@ $adminPrefix = env('ADMIN_PATH', 'secure-panel-arunika');
 
 // Private Admin Guest Routes (Unauthenticated only)
 Route::prefix($adminPrefix)->group(function () {
-    Route::get('/', function () {
-        return redirect()->route('admin.login');
-    });
+    Route::get('/', fn () => redirect()->route('admin.login'));
     Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
     Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login.store');
 });
 
 // Private Admin Protected Routes (Requires Authentication & Admin Role Server-Side)
 Route::prefix($adminPrefix)->middleware(['auth', 'admin'])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Admin/Dashboard');
-    })->name('admin.dashboard');
+    Route::get('/dashboard', fn () => Inertia::render('Admin/Dashboard'))->name('admin.dashboard');
 
-    // Admin Articles CRUD (Protected)
+    // Admin Users CRUD (Super Admin Only)
+    Route::resource('users', AdminController::class)
+        ->names([
+            'index' => 'admin.users.index',
+            'create' => 'admin.users.create',
+            'store' => 'admin.users.store',
+            'show' => 'admin.users.show',
+            'edit' => 'admin.users.edit',
+            'update' => 'admin.users.update',
+            'destroy' => 'admin.users.destroy',
+        ])
+        ->except(['show'])
+        ->middleware(['superadmin']);
+
+    // Admin Articles CRUD
     Route::resource('articles', ArticleController::class)->names([
         'index' => 'admin.articles.index',
         'create' => 'admin.articles.create',
@@ -81,7 +93,7 @@ Route::prefix($adminPrefix)->middleware(['auth', 'admin'])->group(function () {
         'destroy' => 'admin.articles.destroy',
     ]);
 
-    // Admin Services CRUD (Protected)
+    // Admin Services CRUD
     Route::resource('services', ServiceController::class)->names([
         'index' => 'admin.services.index',
         'create' => 'admin.services.create',
@@ -92,7 +104,7 @@ Route::prefix($adminPrefix)->middleware(['auth', 'admin'])->group(function () {
         'destroy' => 'admin.services.destroy',
     ]);
 
-    // Admin Testimonials CRUD (Protected)
+    // Admin Testimonials CRUD
     Route::resource('testimonials', TestimonialController::class)->names([
         'index' => 'admin.testimonials.index',
         'create' => 'admin.testimonials.create',

@@ -28,31 +28,27 @@ export default function Show({ service }) {
                             {service.title}
                         </h2>
                     </div>
-                    <div className="flex items-center gap-2">
-                        <Link
-                            href={route('admin.services.index')}
-                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl border border-slate-300 text-slate-600 font-semibold text-xs sm:text-sm hover:bg-slate-50 transition-colors"
-                        >
-                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                            </svg>
-                            <span>Kembali</span>
-                        </Link>
+                    
+                    <div className="flex items-center gap-3">
                         <Link
                             href={route('admin.services.edit', service.id)}
-                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#ECAE36] text-[#1B544D] font-bold text-xs sm:text-sm hover:bg-[#d99b26] transition-colors"
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-primary text-white hover:bg-primary/90 transition-colors"
                         >
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                             </svg>
                             <span>Edit Layanan</span>
                         </Link>
-                        <button
-                            onClick={handleDelete}
-                            className="px-4 py-2 rounded-xl bg-rose-50 text-rose-600 border border-rose-200 font-semibold text-xs sm:text-sm hover:bg-rose-100 transition-colors"
+                        <Link
+                            href={route('admin.services.index')}
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-200 text-slate-700 hover:bg-slate-300 transition-colors"
                         >
-                            Hapus
-                        </button>
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            </svg>
+                            <span>Kembali</span>
+                        </Link>
+                       
                     </div>
                 </div>
             }

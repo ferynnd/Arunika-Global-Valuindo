@@ -45,16 +45,15 @@ class ServiceController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'excerpt' => ['nullable', 'string', 'max:500'],
             'content' => ['nullable', 'string'],
-            'icon' => ['nullable', 'string', 'max:100'],
             'status' => ['required', 'in:active,inactive'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
-            'thumbnail' => ['nullable', 'image', 'max:2048'],
+            'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'features' => ['nullable', 'array'],
             'features.*' => ['nullable', 'string', 'max:255'],
             'seo_title' => ['nullable', 'string', 'max:60'],
             'seo_description' => ['nullable', 'string', 'max:160'],
             'seo_keywords' => ['nullable', 'string', 'max:255'],
-            'og_image' => ['nullable', 'image', 'max:2048'],
+            'og_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
 
         $slug = Str::slug($validated['title']) . '-' . Str::random(5);
@@ -69,14 +68,13 @@ class ServiceController extends Controller
             $ogImagePath = $request->file('og_image')->store('services/og', 'public');
         }
 
-        $features = isset($validated['features'])
+        $features = isset($validated['features']) && is_array($validated['features'])
             ? array_values(array_filter($validated['features'], fn($f) => !empty(trim($f))))
             : [];
 
         Service::create([
             'title' => $validated['title'],
             'slug' => $slug,
-            'icon' => $validated['icon'] ?? null,
             'excerpt' => $validated['excerpt'] ?? null,
             'content' => $validated['content'] ?? null,
             'status' => $validated['status'],
@@ -112,25 +110,23 @@ class ServiceController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'excerpt' => ['nullable', 'string', 'max:500'],
             'content' => ['nullable', 'string'],
-            'icon' => ['nullable', 'string', 'max:100'],
             'status' => ['required', 'in:active,inactive'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
-            'thumbnail' => ['nullable', 'image', 'max:2048'],
+            'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'features' => ['nullable', 'array'],
             'features.*' => ['nullable', 'string', 'max:255'],
             'seo_title' => ['nullable', 'string', 'max:60'],
             'seo_description' => ['nullable', 'string', 'max:160'],
             'seo_keywords' => ['nullable', 'string', 'max:255'],
-            'og_image' => ['nullable', 'image', 'max:2048'],
+            'og_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
 
-        $features = isset($validated['features'])
+        $features = isset($validated['features']) && is_array($validated['features'])
             ? array_values(array_filter($validated['features'], fn($f) => !empty(trim($f))))
             : [];
 
         $data = [
             'title' => $validated['title'],
-            'icon' => $validated['icon'] ?? null,
             'excerpt' => $validated['excerpt'] ?? null,
             'content' => $validated['content'] ?? null,
             'status' => $validated['status'],
@@ -141,15 +137,17 @@ class ServiceController extends Controller
             'seo_keywords' => $validated['seo_keywords'] ?? null,
         ];
 
+        // Handle Thumbnail Update & Old File Cleanup
         if ($request->hasFile('thumbnail')) {
-            if ($service->thumbnail) {
+            if ($service->thumbnail && Storage::disk('public')->exists($service->thumbnail)) {
                 Storage::disk('public')->delete($service->thumbnail);
             }
             $data['thumbnail'] = $request->file('thumbnail')->store('services', 'public');
         }
 
+        // Handle OG Image Update & Old File Cleanup
         if ($request->hasFile('og_image')) {
-            if ($service->og_image) {
+            if ($service->og_image && Storage::disk('public')->exists($service->og_image)) {
                 Storage::disk('public')->delete($service->og_image);
             }
             $data['og_image'] = $request->file('og_image')->store('services/og', 'public');
@@ -162,8 +160,12 @@ class ServiceController extends Controller
 
     public function destroy(Service $service)
     {
-        if ($service->thumbnail) {
+        if ($service->thumbnail && Storage::disk('public')->exists($service->thumbnail)) {
             Storage::disk('public')->delete($service->thumbnail);
+        }
+
+        if ($service->og_image && Storage::disk('public')->exists($service->og_image)) {
+            Storage::disk('public')->delete($service->og_image);
         }
 
         $service->delete();

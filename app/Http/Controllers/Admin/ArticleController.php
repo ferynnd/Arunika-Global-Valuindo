@@ -56,14 +56,25 @@ class ArticleController extends Controller
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'category_id' => ['nullable', 'exists:article_categories,id'],
+            'new_category' => ['nullable', 'string', 'max:255'], // Validasi kategori baru
             'excerpt' => ['nullable', 'string', 'max:500'],
             'content' => ['nullable', 'string'],
             'status' => ['required', 'in:draft,published,archived'],
-            'thumbnail' => ['nullable', 'image', 'max:2048'],
+            'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'meta_title' => ['nullable', 'string', 'max:60'],
             'meta_description' => ['nullable', 'string', 'max:160'],
             'meta_keywords' => ['nullable', 'string', 'max:255'],
         ]);
+
+        // Logika Kategori: Jika user mengetik kategori baru
+        $categoryId = $validated['category_id'] ?? null;
+        if (!empty($validated['new_category'])) {
+            $newCategory = ArticleCategory::firstOrCreate(
+                ['name' => trim($validated['new_category'])],
+                ['slug' => Str::slug($validated['new_category'])]
+            );
+            $categoryId = $newCategory->id;
+        }
 
         $slug = Str::slug($validated['title']) . '-' . Str::random(5);
         $thumbnailPath = null;
@@ -72,16 +83,21 @@ class ArticleController extends Controller
             $thumbnailPath = $request->file('thumbnail')->store('articles', 'public');
         }
 
+        $publishedAt = null;
+        if ($validated['status'] === 'published') {
+            $publishedAt = now();
+        }
+
         Article::create([
             'title' => $validated['title'],
             'slug' => $slug,
-            'category_id' => $validated['category_id'] ?? null,
+            'category_id' => $categoryId,
             'excerpt' => $validated['excerpt'] ?? null,
             'content' => $validated['content'] ?? null,
             'status' => $validated['status'],
             'thumbnail' => $thumbnailPath,
             'author_id' => $request->user()->id,
-            'published_at' => $validated['status'] === 'published' ? now() : null,
+            'published_at' => $publishedAt,
             'meta_title' => $validated['meta_title'] ?? null,
             'meta_description' => $validated['meta_description'] ?? null,
             'meta_keywords' => $validated['meta_keywords'] ?? null,
@@ -117,7 +133,7 @@ class ArticleController extends Controller
             'excerpt' => ['nullable', 'string', 'max:500'],
             'content' => ['nullable', 'string'],
             'status' => ['required', 'in:draft,published,archived'],
-            'thumbnail' => ['nullable', 'image', 'max:2048'],
+            'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'meta_title' => ['nullable', 'string', 'max:60'],
             'meta_description' => ['nullable', 'string', 'max:160'],
             'meta_keywords' => ['nullable', 'string', 'max:255'],
@@ -134,12 +150,19 @@ class ArticleController extends Controller
             'meta_keywords' => $validated['meta_keywords'] ?? null,
         ];
 
-        if ($validated['status'] === 'published' && !$article->published_at) {
-            $data['published_at'] = now();
+        // Logika tanggal publikasi (Isi tanggal jika baru pertama kali dipublikasikan)
+        if ($validated['status'] === 'published') {
+            if (!$article->published_at) {
+                $data['published_at'] = now();
+            }
+        } else {
+            // Opsional: Kosongkan published_at jika status diubah kembali menjadi draft/archived
+            // $data['published_at'] = null; 
         }
 
+        // Handle Upload Thumbnail Baru & Hapus File Lama
         if ($request->hasFile('thumbnail')) {
-            if ($article->thumbnail) {
+            if ($article->thumbnail && Storage::disk('public')->exists($article->thumbnail)) {
                 Storage::disk('public')->delete($article->thumbnail);
             }
             $data['thumbnail'] = $request->file('thumbnail')->store('articles', 'public');
@@ -152,6 +175,11 @@ class ArticleController extends Controller
 
     public function destroy(Article $article)
     {
+        // Hapus file thumbnail fisik dari storage agar tidak menjadi sampah server
+        if ($article->thumbnail && Storage::disk('public')->exists($article->thumbnail)) {
+            Storage::disk('public')->delete($article->thumbnail);
+        }
+
         $article->delete();
 
         return redirect()->route('admin.articles.index')->with('success', 'Artikel berhasil dihapus!');
