@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import Footer from '@/Pages/Components/Footer';
 import Header from '@/Pages/Components/Header';
+import { Head } from '@inertiajs/react'; // 1. Import Head
 
-export default function GuestLayout({ auth, title, activePage, children }) {
+export default function GuestLayout({ auth, title, description, activePage, children }) {
     const [showButton, setShowButton] = useState(false);
 
     useEffect(() => {
@@ -28,6 +29,11 @@ export default function GuestLayout({ auth, title, activePage, children }) {
     return (
         /* Tambahkan w-full dan overflow-x-hidden di sini */
         <div className="flex flex-col min-h-screen w-full overflow-x-hidden bg-white text-text font-normal tracking-wide antialiased selection:bg-[#ECAE36] selection:text-[#1B544D] relative">
+            <Head>
+                <title>{title ? `${title}` : 'Konsultan Manajemen & Penasihat Bisnis'}</title>
+                <meta name="description" content={description || 'Arunika Global Valuindo - Konsultan Manajemen & Penasihat Bisnis'} />
+            </Head>
+
             <Header auth={auth} title={title} activePage={activePage} />
             
             {/* Bungkus children dengan w-full dan overflow-hidden */}

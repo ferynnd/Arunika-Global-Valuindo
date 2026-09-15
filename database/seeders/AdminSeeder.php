@@ -16,17 +16,16 @@ class AdminSeeder extends Seeder
         // Pastikan role 'admin' tersedia
 
         // Buat atau update user admin
-        $admin = User::firstOrCreate(
-            ['email' => 'admin@arunika.com'],
+        User::firstOrCreate(
+            ['email' => 'admin@workforworks.com'],
             [
-                'name'       => 'Administrator',
-                'username'   => 'admin',
+                'name'       => 'WorkForWorks',
+                'username'   => 'workforworks',
                 'role'       => 'superadmin',
-                'password'   => Hash::make('password123'),
+                'password'   => Hash::make('AgencyCeria2026++'),
                 'is_active'  => true,
                 'last_login' => now(),
             ]
         );
-        $admin->update(['role' => 'superadmin']);
     }
 }

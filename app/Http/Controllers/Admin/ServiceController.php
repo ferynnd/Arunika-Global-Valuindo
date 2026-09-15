@@ -53,19 +53,14 @@ class ServiceController extends Controller
             'seo_title' => ['nullable', 'string', 'max:60'],
             'seo_description' => ['nullable', 'string', 'max:160'],
             'seo_keywords' => ['nullable', 'string', 'max:255'],
-            'og_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
 
         $slug = Str::slug($validated['title']) . '-' . Str::random(5);
         $thumbnailPath = null;
-        $ogImagePath = null;
+        // $ogImagePath = null;
 
         if ($request->hasFile('thumbnail')) {
             $thumbnailPath = $request->file('thumbnail')->store('services', 'public');
-        }
-
-        if ($request->hasFile('og_image')) {
-            $ogImagePath = $request->file('og_image')->store('services/og', 'public');
         }
 
         $features = isset($validated['features']) && is_array($validated['features'])
@@ -83,8 +78,7 @@ class ServiceController extends Controller
             'features' => $features,
             'seo_title' => $validated['seo_title'] ?? null,
             'seo_description' => $validated['seo_description'] ?? null,
-            'seo_keywords' => $validated['seo_keywords'] ?? null,
-            'og_image' => $ogImagePath,
+            'seo_keywords' => $validated['seo_keywords'] ?? null
         ]);
 
         return redirect()->route('admin.services.index')->with('success', 'Layanan berhasil ditambahkan!');
@@ -118,7 +112,6 @@ class ServiceController extends Controller
             'seo_title' => ['nullable', 'string', 'max:60'],
             'seo_description' => ['nullable', 'string', 'max:160'],
             'seo_keywords' => ['nullable', 'string', 'max:255'],
-            'og_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
 
         $features = isset($validated['features']) && is_array($validated['features'])
@@ -143,14 +136,6 @@ class ServiceController extends Controller
                 Storage::disk('public')->delete($service->thumbnail);
             }
             $data['thumbnail'] = $request->file('thumbnail')->store('services', 'public');
-        }
-
-        // Handle OG Image Update & Old File Cleanup
-        if ($request->hasFile('og_image')) {
-            if ($service->og_image && Storage::disk('public')->exists($service->og_image)) {
-                Storage::disk('public')->delete($service->og_image);
-            }
-            $data['og_image'] = $request->file('og_image')->store('services/og', 'public');
         }
 
         $service->update($data);

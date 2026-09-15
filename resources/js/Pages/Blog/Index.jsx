@@ -51,7 +51,7 @@ export default function Index({ auth, articles, filters }) {
     };
 
     return (
-        <GuestLayout auth={auth} title="Blog & Wawasan Korporasi - Arunika Global Valuindo" activePage="blog" >
+        <GuestLayout auth={auth} title="Blog - PT Arunika Global Valuindo" activePage="blog" >
              <PageHeader 
                 title="Blog" 
                 breadcrumb={[

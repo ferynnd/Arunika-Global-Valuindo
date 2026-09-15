@@ -61,7 +61,8 @@ export default function About({ auth }) {
             title: 'Business Transformation & Advisory',
             text: 'Arunika berkembang dengan fokus pada advisory keuangan korporasi, financial modeling, corporate valuation, business management, dan pengembangan kemitraan strategis.',
             imgs: [
-                'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80',
+                '/assets/2024/2024-now1.webp',
+                '/assets/2024/2024-now2.webp',
             ]
         },
         { 
@@ -69,7 +70,8 @@ export default function About({ auth }) {
             title: 'Arunika Didirikan',
             text: 'Arunika didirikan sebagai financial & business management consulting and research firm.',
             imgs: [
-                'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80',
+                '/assets/2024/2024.jpg',
+                '/assets/2024/20245.jpg',
             ]
         },
         { 
@@ -99,13 +101,16 @@ export default function About({ auth }) {
             title: 'Fondasi Profesional',
             text: 'Founder Arunika mulai aktif dalam bidang akuntansi, keuangan, dan manajemen, serta kemudian berkembang ke bidang CSR dan social research. Founder memiliki pengalaman profesional sejak 2010, termasuk pengalaman di bidang finance, project finance, dan financial management.',
             imgs: [
-                'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=80',
+                '/assets/arunika-journey.jpeg',
             ]
         },
     ];
 
     return (
-        <GuestLayout auth={auth} title="Tentang Kami - PT Arunika Global Valuindo" activePage="about">
+        <GuestLayout auth={auth} 
+        title="Tentang Kami - PT Arunika Global Valuindo" 
+        description="Kenali PT Arunika Global Valuindo, firma konsultan manajemen dan penasihat bisnis terkemuka. Ketahui visi, misi, dan komitmen kami untuk memajukan bisnis Anda."
+        activePage="about">
 
             <PageHeader/>
             
@@ -127,7 +132,11 @@ export default function About({ auth }) {
                         </div>
                         <div className="lg:col-span-6" data-aos="fade-left">
                             <div className="relative rounded-3xl md:rounded-2xl overflow-hidden shadow-lg">
-                                <img src={'/assets/team.webp'} alt="Tim Arunika" className="w-full h-80 sm:h-96 object-cover object-center" />
+                                <img src={'/assets/team.webp'} alt="Tim Arunika"
+                                loading="lazy"
+                                width="800"
+                                height="600"
+                                className="w-full h-80 sm:h-96 object-cover object-center" />
                             </div>
                         </div>
                     </div>

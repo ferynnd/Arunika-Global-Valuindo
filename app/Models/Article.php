@@ -26,6 +26,7 @@ class Article extends Model
         'meta_title',
         'meta_description',
         'meta_keywords',
+        'og_image',
     ];
 
     protected $casts = [

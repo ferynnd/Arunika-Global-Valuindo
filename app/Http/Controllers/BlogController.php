@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Spatie\OgImage\Facades\OgImage; // <-- Import Facade ini
 
+
 class BlogController extends Controller
 {
     public function index(Request $request)
@@ -80,11 +81,19 @@ class BlogController extends Controller
             $relatedArticles = $relatedArticles->concat($additional);
         }
 
-        // --- CARA AMAN & CEPAT UNTUK OG IMAGE ---
-        // Gunakan thumbnail artikel jika ada, jika tidak ada gunakan default fallback image
+        // --- INTEGRASI SPATIE OG IMAGE ---
+        // Opsi 1: Otomatis generate dari template HTML (resources/views/og/article.blade.php)
+        $ogImageUrl = OgImage::make('og-image.blog')
+            ->with(['article' => $article])
+            ->getUrl();
+
+        // Opsi 2 (Alternatif): Kalau artikel punya thumbnail asli pakai thumbnail-nya, 
+        // tapi kalau kosong baru generate pakai Spatie OG Image:
+        /*
         $ogImageUrl = $article->thumbnail 
             ? asset('storage/' . $article->thumbnail) 
-            : asset('assets/bgcta.webp'); // Atau gambar default web Anda
+            : OgImage::make('og.article')->with(['article' => $article])->getUrl();
+        */
 
         return Inertia::render('Blog/Show', [
             'article' => $article,

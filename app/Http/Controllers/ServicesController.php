@@ -43,10 +43,9 @@ class ServicesController extends Controller
             ->take(3)
             ->get();
 
-        // Gunakan thumbnail service jika ada, jika tidak ada gunakan fallback image
-        $ogImageUrl = $service->thumbnail 
-            ? asset('storage/' . $service->thumbnail)
-            : asset('assets/bgcta.webp'); // Atau gambar default web Anda
+        $ogImageUrl = OgImage::make('og-image.service')
+            ->with(['service' => $service])
+            ->getUrl();
 
         return Inertia::render('Services/Show', [
             'service' => $service,

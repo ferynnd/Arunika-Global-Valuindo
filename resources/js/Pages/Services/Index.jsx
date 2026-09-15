@@ -33,9 +33,7 @@ export default function Index({ auth, services, filters }) {
     };
 
     return (
-        <GuestLayout auth={auth} title="Layanan & Solusi Korporasi - Arunika Global Valuindo" activePage="services" >
-
-                <Head title="Layanan & Solusi Korporasi - Arunika Global Valuindo" />
+        <GuestLayout auth={auth} title="Layanan - PT Arunika Global Valuindo" activePage="services" >
                 <PageHeader 
                     title="Layanan Kami" 
                     breadcrumb={[

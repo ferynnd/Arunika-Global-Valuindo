@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Head } from '@inertiajs/react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import Header from './Components/Header';
-import Footer from './Components/Footer';
 import PageHeader from '@/Components/PageHeader';
 import HeaderSection from '@/Components/HeaderSection';
 import GuestLayout from '@/Layouts/GuestLayout';
@@ -36,7 +33,6 @@ export default function Contact({ auth }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Format pesan WhatsApp
         const text = `Halo Admin, perkenalkan saya:\n\n` +
             `*Nama:* ${formData.name}\n` +
             `*No. WA:* ${formData.phone}\n\n` +
@@ -51,9 +47,7 @@ export default function Contact({ auth }) {
     };
 
     return (
-        <GuestLayout auth={auth} activePage="contact">
-            <Head title="Hubungi Kami - PT Arunika Global Valuindo" />
-
+        <GuestLayout auth={auth} title="Hubungi Kami - PT Arunika Global Valuindo"  activePage="contact">
             <PageHeader 
                 title="Hubungi Kami" 
                 breadcrumb={[

@@ -38,6 +38,7 @@ return new class extends Migration
             $table->string('meta_title')->nullable(); // biasanya <= 60 karakter
             $table->string('meta_description', 160)->nullable(); // biasanya <= 160 karakter
             $table->string('meta_keywords')->nullable(); // bisa dipisahkan dengan koma
+            $table->string('og_image')->nullable();
 
             $table->timestamp('deleted_at')->nullable();
 

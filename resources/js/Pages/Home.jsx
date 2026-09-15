@@ -14,7 +14,10 @@ import CtaSection from './Components/Cta';
 
 export default function Home({ auth, services = [], latestArticles = [], testimonials = [] }) {
     return (
-        <GuestLayout auth={auth} title="PT Arunika Global Valuindo - Business Transformation & Advisory" activePage="home">
+        <GuestLayout auth={auth} 
+        title="PT Arunika Global Valuindo - Konsultan Manajemen & Penasihat Bisnis" 
+        description="Arunika Global Valuindo menyediakan layanan konsultan manajemen dan penasihat bisnis terpercaya untuk membantu pertumbuhan, efisiensi, dan strategi berkelanjutan perusahaan Anda."
+        activePage="home">
             <Hero />
 
             <ClientMarquee />

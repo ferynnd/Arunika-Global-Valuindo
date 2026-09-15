@@ -4,9 +4,6 @@ import 'aos/dist/aos.css';
 import CustomButton from '@/Components/CustomButton';
 
 export default function Hero({ 
-    title = "Mitra Strategis Transformasi Bisnis & Keuangan Berkelanjutan", 
-    subtitle = "Together for Sustainable Growth.",
-    description = "Membangun fondasi yang kuat, meningkatkan kinerja, mendorong pertumbuhan, dan menciptakan keberlanjutan bagi bisnis Anda.",
     bgImage = "/assets/conference.webp",
 }) {
     useEffect(() => {
