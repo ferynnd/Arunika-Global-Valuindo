@@ -3,8 +3,16 @@ import Footer from '@/Pages/Components/Footer';
 import Header from '@/Pages/Components/Header';
 import { Head } from '@inertiajs/react'; // 1. Import Head
 
-export default function GuestLayout({ auth, title, description, activePage, children }) {
+export default function GuestLayout({ auth, title, description, activePage, ogImage, children }) {
     const [showButton, setShowButton] = useState(false);
+
+    // 1. Ambil URL halaman aktif secara otomatis
+    const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+
+    // 2. Olah path dari folder assets menjadi full URL (misal: https://domain.com/assets/team.webp)
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    const imagePath = ogImage || '/images/ogimage.webp'; 
+    const shareImage = imagePath.startsWith('http') ? imagePath : `${origin}${imagePath}`;
 
     useEffect(() => {
         const handleScroll = () => {
@@ -27,11 +35,24 @@ export default function GuestLayout({ auth, title, description, activePage, chil
     };
 
     return (
-        /* Tambahkan w-full dan overflow-x-hidden di sini */
         <div className="flex flex-col min-h-screen w-full overflow-x-hidden bg-white text-text font-normal tracking-wide antialiased selection:bg-[#ECAE36] selection:text-[#1B544D] relative">
             <Head>
                 <title>{title ? `${title}` : 'Konsultan Manajemen & Penasihat Bisnis'}</title>
                 <meta name="description" content={description || 'Arunika Global Valuindo - Konsultan Manajemen & Penasihat Bisnis'} />
+
+                {/* Open Graph / WhatsApp / Facebook / LinkedIn */}
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={currentUrl} />
+                <meta property="og:title" content={title} />
+                <meta property="og:description" content={description} />
+                <meta property="og:image" content={shareImage} />
+
+                {/* Twitter (X) Card */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:url" content={currentUrl} />
+                <meta name="twitter:title" content={title} />
+                <meta name="twitter:description" content={description} />
+                <meta name="twitter:image" content={shareImage} />
             </Head>
 
             <Header auth={auth} title={title} activePage={activePage} />
